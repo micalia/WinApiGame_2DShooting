@@ -1,0 +1,7 @@
+﻿  Game.cpp
+C:\ProgramingWorks\WinApiGame\WinApiGameStudy\GameCoding\GameCoding\Game.cpp(1,10): fatal error C1083: 미리 컴파일된 헤더 파일을 열 수 없습니다. 'Debug\GameCoding.pch': No such file or directory
+  GameCoding.cpp
+C:\ProgramingWorks\WinApiGame\WinApiGameStudy\GameCoding\GameCoding\GameCoding.cpp(1,10): fatal error C1083: 미리 컴파일된 헤더 파일을 열 수 없습니다. 'Debug\GameCoding.pch': No such file or directory
+  pch.cpp
+C:\ProgramingWorks\WinApiGame\WinApiGameStudy\GameCoding\GameCoding\pch.cpp(1,10): fatal error C1083: 미리 컴파일된 헤더 파일을 열 수 없습니다. 'Debug\GameCoding.pch': No such file or directory
+  코드를 생성하고 있습니다...
