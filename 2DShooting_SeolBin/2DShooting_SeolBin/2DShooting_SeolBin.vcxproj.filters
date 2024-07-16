@@ -39,6 +39,9 @@
     <Filter Include="소스 파일\04.Resources\Sound">
       <UniqueIdentifier>{28064bc1-33aa-4bc7-8a10-a3a04bb0c3d8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\06.UI">
+      <UniqueIdentifier>{278f1008-c888-4717-8905-5e26f33e1c6d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -137,6 +140,8 @@
     <ClInclude Include="TileMap.h">
       <Filter>소스 파일\04.Resources</Filter>
     </ClInclude>
+    <ClInclude Include="SpriteActor.h" />
+    <ClInclude Include="UI.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="2DShooting_SeolBin.cpp">
@@ -213,6 +218,12 @@
     </ClCompile>
     <ClCompile Include="TileMap.cpp">
       <Filter>소스 파일\04.Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteActor.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
