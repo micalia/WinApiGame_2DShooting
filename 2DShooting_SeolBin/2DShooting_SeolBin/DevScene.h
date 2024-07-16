@@ -1,8 +1,13 @@
 #pragma once
 #include "Scene.h"
-class DevScene :
-    public Scene
+
+class Actor;
+class GameObject;
+class UI;
+
+class DevScene : public Scene
 {
+	using Super = Scene;
 public:
 	DevScene();
 	virtual ~DevScene() override;
@@ -11,9 +16,9 @@ public:
 	virtual void Update() override;
 	virtual void Render(HDC hdc) override;
 
-public:
-	// TEST
-	Pos _playerPos = { 300, 300 };
-	float _speed = 1000;
+	bool CanGo(Vec2Int cellPos);
+	Vec2 ConvertPos(Vec2Int cellPos);
+
+	class TilemapActor* _tilemapActor = nullptr;
 };
 

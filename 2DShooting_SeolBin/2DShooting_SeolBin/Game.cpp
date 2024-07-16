@@ -3,6 +3,8 @@
 #include "TimeManager.h"
 #include "InputManager.h"
 #include "SceneManager.h"
+#include "ResourceManager.h"
+#include "SoundManager.h"
 
 Game::Game()
 {
@@ -19,19 +21,20 @@ Game::~Game()
 void Game::Init(HWND hwnd)
 {
 	_hwnd = hwnd;
-	_hdc = ::GetDC(hwnd);
+	hdc = ::GetDC(hwnd);
 
 	::GetClientRect(hwnd, &_rect);
 
-	_hdcBack = ::CreateCompatibleDC(_hdc); // _hdc와 호환되는 DC를 생성
-	_bmpBack = ::CreateCompatibleBitmap(_hdc, _rect.right, _rect.bottom); // _hdc와 호환되는 비트맵 생성
-	HBITMAP prev = (HBITMAP)::SelectObject(_hdcBack, _bmpBack); // DC와 BMP를 연결
+	hdcBack = ::CreateCompatibleDC(hdc); // _hdc와 호환되는 DC를 생성
+	_bmpBack = ::CreateCompatibleBitmap(hdc, _rect.right, _rect.bottom); // _hdc와 호환되는 비트맵 생성
+	HBITMAP prev = (HBITMAP)::SelectObject(hdcBack, _bmpBack); // DC와 BMP를 연결
 	::DeleteObject(prev);
 
 	GET_SINGLE(TimeManager)->Init();
 	GET_SINGLE(InputManager)->Init(hwnd);
 	GET_SINGLE(SceneManager)->Init();
-
+	GET_SINGLE(ResourceManager)->Init(hwnd, fs::path(L"C:\\ProgramingWorks\\WinApiGame\\WinApiGame_2DShooting\\2DShooting_SeolBin\\Resources"));
+	GET_SINGLE(SoundManager)->Init(hwnd);
 	GET_SINGLE(SceneManager)->ChangeScene(SceneType::DevScene);
 }
 
@@ -44,36 +47,23 @@ void Game::Update()
 
 void Game::Render()
 {
+	GET_SINGLE(SceneManager)->Render(hdcBack);
+
 	uint32 fps = GET_SINGLE(TimeManager)->GetFps();
 	float deltaTime = GET_SINGLE(TimeManager)->GetDeltaTime();
 
 	{
 		POINT mousePos = GET_SINGLE(InputManager)->GetMousePos();
 		wstring str = std::format(L"Mouse({0}, {1})", mousePos.x, mousePos.y);
-		::TextOut(_hdc, 20, 10, str.c_str(), static_cast<int32>(str.size()));
+		::TextOut(hdcBack, 20, 10, str.c_str(), static_cast<int32>(str.size()));
 	}
 
-	wstring str = std::format(L"FPS({0}), DT({1} ms)", fps, static_cast<int32>(deltaTime * 1000));
-	::TextOut(_hdc, 650, 10, str.c_str(), static_cast<int32>(str.size()));
-	::Rectangle(_hdc, 200, 200, 400, 400);
-	//uint32 fps = GET_SINGLE(TimeManager)->GetFps();
-	//float deltaTime = GET_SINGLE(TimeManager)->GetDeltaTime();
-	///*Pos _pos;
-	//_pos.x = 300;
-	//_pos.y = 300;
-	//Utils::DrawCircle(_hdc, _pos, 50);*/
-	//{
-	//	POINT mousePos = GET_SINGLE(InputManager)->GetMousePos();
-	//	wstring str = std::format(L"Mouse({0}, {1})", mousePos.x, mousePos.y);
-	//	::TextOut(_hdcBack, 20, 10, str.c_str(), static_cast<int32>(str.size()));
-	//}
+	{
+		wstring str = std::format(L"FPS({0}), DT({1})", fps, deltaTime);
+		::TextOut(hdcBack, 550, 10, str.c_str(), static_cast<int32>(str.size()));
+	}
 
-	//wstring str = std::format(L"FPS({0}), DT({1} ms)", fps, static_cast<int32>(deltaTime * 1000));
-	//::TextOut(_hdcBack, 650, 10, str.c_str(), static_cast<int32>(str.size()));
-
-	//GET_SINGLE(SceneManager)->Render(_hdcBack);
-
-	//// Double Buffering
-	//::BitBlt(_hdc, 0, 0, _rect.right, _rect.bottom, _hdcBack, 0, 0, SRCCOPY); // 비트 블릿 : 고속 복사
-	//::PatBlt(_hdcBack, 0, 0, _rect.right, _rect.bottom, WHITENESS);
+	// Double Buffering
+	::BitBlt(hdc, 0, 0, _rect.right, _rect.bottom, hdcBack, 0, 0, SRCCOPY); // 비트 블릿 : 고속 복사
+	::PatBlt(hdcBack, 0, 0, _rect.right, _rect.bottom, WHITENESS);
 }
