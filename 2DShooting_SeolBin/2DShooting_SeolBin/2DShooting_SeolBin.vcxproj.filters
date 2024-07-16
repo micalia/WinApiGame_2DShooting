@@ -140,8 +140,12 @@
     <ClInclude Include="TileMap.h">
       <Filter>소스 파일\04.Resources</Filter>
     </ClInclude>
-    <ClInclude Include="SpriteActor.h" />
-    <ClInclude Include="UI.h" />
+    <ClInclude Include="UI.h">
+      <Filter>소스 파일\06.UI</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteActor.h">
+      <Filter>소스 파일\03.Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="2DShooting_SeolBin.cpp">
@@ -219,11 +223,11 @@
     <ClCompile Include="TileMap.cpp">
       <Filter>소스 파일\04.Resources</Filter>
     </ClCompile>
-    <ClCompile Include="SpriteActor.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="UI.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\06.UI</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteActor.cpp">
+      <Filter>소스 파일\03.Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

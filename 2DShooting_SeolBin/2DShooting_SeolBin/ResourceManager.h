@@ -24,6 +24,7 @@ public:
 	Texture* LoadTexture(const wstring& key, const wstring& path, uint32 transparent = RGB(255, 0, 255));
 
 	Sprite* GetSprite(const wstring& key) { return _sprites[key]; }
+	//cx, cy는 영역을 잘라서 사용하고 싶다.
 	Sprite* CreateSprite(const wstring& key, Texture* texture, int32 x = 0, int32 y = 0, int32 cx = 0, int32 cy = 0);
 
 	Flipbook* GetFlipbook(const wstring& key) { return _flipbooks[key]; }

@@ -17,9 +17,9 @@ DevScene::~DevScene()
 void DevScene::Init()
 {
 	GET_SINGLE(ResourceManager)->LoadTexture(L"Background", L"Sprite\\Map\\Background.bmp");
-
-	/*GET_SINGLE(ResourceManager)->CreateSprite(L"Background", GET_SINGLE(ResourceManager)->GetTexture(L"Background"), 0, 0, 0, 0);
-
+	
+	GET_SINGLE(ResourceManager)->CreateSprite(L"Background", GET_SINGLE(ResourceManager)->GetTexture(L"Background"));
+	
 	{
 		Sprite* sprite = GET_SINGLE(ResourceManager)->GetSprite(L"Background");
 
@@ -30,7 +30,7 @@ void DevScene::Init()
 		background->SetPos(Vec2(size.x / 2, size.y / 2));
 
 		AddActor(background);
-	}*/
+	}
 
 	Super::Init();
 }
@@ -45,7 +45,15 @@ void DevScene::Render(HDC hdc)
 {
 	Super::Render(hdc);
 
-	Texture* tex = GET_SINGLE(ResourceManager)->GetTexture(L"Background");
+	/*Sprite* sprite = GET_SINGLE(ResourceManager)->GetSprite(L"Background");
 
-	::BitBlt(hdc, 200, 0, 1500, 1000, tex->GetDC(), 0, 0, SRCCOPY);
+	::BitBlt(hdc,
+		0,
+		0,
+		GWinSizeX,
+		GWinSizeY,
+		sprite->GetDC(),
+		sprite->GetPos().x,
+		sprite->GetPos().y,
+		SRCCOPY);*/
 }

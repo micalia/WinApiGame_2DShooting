@@ -13,6 +13,7 @@ public:
 	virtual void Tick();
 	virtual void Render(HDC hdc);
 
+	//액터의 정중앙
 	void SetPos(Vec2 pos) { _pos = pos; }
 	Vec2 GetPos() { return _pos; }
 
