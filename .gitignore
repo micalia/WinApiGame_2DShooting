@@ -2,3 +2,13 @@
 *.VC.db
 *.VC.opendb
 *project.lock.json
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
