@@ -41,9 +41,9 @@ void Scene::Update()
 	//GET_SINGLE(CollisionManager)->Update();
 
 	//// 거리 = 시간 * 속도
-	//for (const vector<Actor*>& actors : _actors)
-	//	for (Actor* actor : actors)
-	//		actor->Tick();
+	for (const vector<Actor*>& actors : _actors)
+		for (Actor* actor : actors)
+			actor->Tick();
 
 	//for (UI* ui : _uis)
 	//	ui->Tick();

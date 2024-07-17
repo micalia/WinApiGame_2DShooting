@@ -42,6 +42,9 @@
     <Filter Include="소스 파일\06.UI">
       <UniqueIdentifier>{278f1008-c888-4717-8905-5e26f33e1c6d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\05.Component\Camera">
+      <UniqueIdentifier>{c0bc6e0b-b85f-4fba-9eb1-5594072c42b9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resource.h">
@@ -146,6 +149,15 @@
     <ClInclude Include="SpriteActor.h">
       <Filter>소스 파일\03.Objects</Filter>
     </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>소스 파일\03.Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="TilemapActor.h">
+      <Filter>소스 파일\03.Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraComponent.h">
+      <Filter>소스 파일\05.Component\Camera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="2DShooting_SeolBin.cpp">
@@ -228,6 +240,15 @@
     </ClCompile>
     <ClCompile Include="SpriteActor.cpp">
       <Filter>소스 파일\03.Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>소스 파일\03.Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="TilemapActor.cpp">
+      <Filter>소스 파일\03.Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraComponent.cpp">
+      <Filter>소스 파일\05.Component\Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

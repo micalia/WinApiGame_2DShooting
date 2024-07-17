@@ -26,6 +26,6 @@ public:
 	void SetCameraPos(Vec2 pos) { _cameraPos = pos; }
 
 private:
-	Vec2 _cameraPos = { 250, 750 };
+	Vec2 _cameraPos = { 250, 375 };
 };
 

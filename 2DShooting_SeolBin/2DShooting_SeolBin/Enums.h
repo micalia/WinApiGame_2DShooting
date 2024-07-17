@@ -31,3 +31,11 @@ enum class ColliderType
 	Box,
 	Sphere,
 };
+
+enum Dir 
+{
+	DIR_UP,
+	DIR_DOWN,
+	DIR_LEFT,
+	DIR_RIGHT,
+};
