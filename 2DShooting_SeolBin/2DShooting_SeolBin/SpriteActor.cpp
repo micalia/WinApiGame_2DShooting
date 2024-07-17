@@ -23,8 +23,6 @@ void SpriteActor::BeginPlay()
 void SpriteActor::Tick()
 {
 	Super::Tick();
-	auto ps = GetPos();
-	int a = 1;
 
 }
 

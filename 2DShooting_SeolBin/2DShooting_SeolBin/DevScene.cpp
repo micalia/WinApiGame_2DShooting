@@ -22,14 +22,24 @@ DevScene::~DevScene()
 void DevScene::Init()
 {
 	GET_SINGLE(ResourceManager)->LoadTexture(L"Background", L"Sprite\\Map\\Background.bmp");
-	GET_SINGLE(ResourceManager)->LoadTexture(L"BluePlayer", L"Sprite\\Player\\BluePlayer.bmp");
+	GET_SINGLE(ResourceManager)->LoadTexture(L"BluePlayer", L"Sprite\\Player\\BluePlayer.bmp", RGB(255, 255, 255));
 	GET_SINGLE(ResourceManager)->CreateSprite(L"Background", GET_SINGLE(ResourceManager)->GetTexture(L"Background"));
 
 	// BluePlayer
 	{
 		Texture* texture = GET_SINGLE(ResourceManager)->GetTexture(L"BluePlayer");
-		Flipbook* fb = GET_SINGLE(ResourceManager)->CreateFlipbook(L"FB_BluePlayer");
-		fb->SetInfo({ texture, L"FB_BluePlayer", {70, 70}, 2, 2, 0, 0.5f });
+		Flipbook* fb = GET_SINGLE(ResourceManager)->CreateFlipbook(L"FB_BluePlayerUP");
+		fb->SetInfo({ texture, L"FB_BluePlayer", {80, 80}, 2, 2, 0, 0.5f });
+	}
+	{
+		Texture* texture = GET_SINGLE(ResourceManager)->GetTexture(L"BluePlayer");
+		Flipbook* fb = GET_SINGLE(ResourceManager)->CreateFlipbook(L"FB_BluePlayerLeft");
+		fb->SetInfo({ texture, L"FB_BluePlayer", {80, 80}, 1, 1, 0, 0.5f });
+	}
+	{
+		Texture* texture = GET_SINGLE(ResourceManager)->GetTexture(L"BluePlayer");
+		Flipbook* fb = GET_SINGLE(ResourceManager)->CreateFlipbook(L"FB_BluePlayerRight");
+		fb->SetInfo({ texture, L"FB_BluePlayer", {80, 80}, 3, 3, 0, 0.5f });
 	}
 
 	{
@@ -47,19 +57,9 @@ void DevScene::Init()
 	GET_SINGLE(ResourceManager)->CreateSprite(L"TileO", GET_SINGLE(ResourceManager)->GetTexture(L"Tile"), 0, 0, 50, 50);
 	GET_SINGLE(ResourceManager)->CreateSprite(L"TileX", GET_SINGLE(ResourceManager)->GetTexture(L"Tile"), 50, 0, 50, 50);
 	
-	/*GET_SINGLE(ResourceManager)->LoadTexture(L"PlayerUp", L"Sprite\\Player\\PlayerUp.bmp", RGB(255, 255, 255));
-	{
-		Texture* texture = GET_SINGLE(ResourceManager)->GetTexture(L"PlayerUp");
-		Flipbook* fb = GET_SINGLE(ResourceManager)->CreateFlipbook(L"FB_IdleUp");
-		fb->SetInfo({ texture, L"FB_MoveUp", {200, 200}, 0, 9, 0, 0.5f });
-	}*/
-
 	{ 
 		Player* player = new Player();
 		AddActor(player);
-		auto Ppos = player->GetPos();
-		int a = 1;
-
 	}
 
 	{

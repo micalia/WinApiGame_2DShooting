@@ -9,10 +9,10 @@
 
 Player::Player()
 {
-	BluePlayerMove[DIR_UP] = GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_BluePlayer");
-	BluePlayerMove[DIR_DOWN] = GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_BluePlayer");
-	BluePlayerMove[DIR_LEFT] = GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_BluePlayer");
-	BluePlayerMove[DIR_RIGHT] = GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_BluePlayer");
+	BluePlayerMove[DIR_UP] = GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_BluePlayerUP");
+	BluePlayerMove[DIR_DOWN] = GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_BluePlayerUP");
+	BluePlayerMove[DIR_LEFT] = GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_BluePlayerLeft");
+	BluePlayerMove[DIR_RIGHT] = GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_BluePlayerRight");
 
 	CameraComponent* camera = new CameraComponent();
 	AddComponent(camera);
@@ -36,8 +36,6 @@ void Player::BeginPlay()
 void Player::Tick()
 {
 	Super::Tick();
-	auto ps = GetPos();
-	int a = 1;
 	
 	switch (_state)
 	{
@@ -57,7 +55,6 @@ void Player::Render(HDC hdc)
 {
 	Super::Render(hdc);
 	
-	Utils::DrawCircle(hdc, Pos(_cellPos.x, _cellPos.y), 10);
 }
 
 void Player::TickIdle()
@@ -110,6 +107,7 @@ void Player::TickIdle()
 	else
 	{
 		_keyPressed = false;
+		SetDir(DIR_UP);
 		if (_state == PlayerState::Idle)
 			UpdateAnimation();
 	}
