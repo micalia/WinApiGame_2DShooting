@@ -9,6 +9,10 @@
 #include "TileMap.h"
 #include "TilemapActor.h"
 #include "InputManager.h"
+#include "CollisionManager.h"
+#include "BoxCollider.h"
+#include "SceneManager.h"
+#include "Missile.h"
 
 DevScene::DevScene()
 {
@@ -23,24 +27,39 @@ void DevScene::Init()
 {
 	GET_SINGLE(ResourceManager)->LoadTexture(L"Background", L"Sprite\\Map\\Background.bmp");
 	GET_SINGLE(ResourceManager)->LoadTexture(L"BluePlayer", L"Sprite\\Player\\BluePlayer.bmp", RGB(255, 255, 255));
+	auto asdf = GET_SINGLE(ResourceManager)->LoadTexture(L"BlueMissile", L"Sprite\\Projectile\\BlueMissile.bmp", RGB(255, 255, 255));
 	GET_SINGLE(ResourceManager)->CreateSprite(L"Background", GET_SINGLE(ResourceManager)->GetTexture(L"Background"));
 
-	// BluePlayer
+	if (asdf != nullptr) {
+		int a = 3;
+	}
+
 	{
 		Texture* texture = GET_SINGLE(ResourceManager)->GetTexture(L"BluePlayer");
-		Flipbook* fb = GET_SINGLE(ResourceManager)->CreateFlipbook(L"FB_BluePlayerUP");
-		fb->SetInfo({ texture, L"FB_BluePlayer", {80, 80}, 2, 2, 0, 0.5f });
+		Flipbook* fb = GET_SINGLE(ResourceManager)->CreateFlipbook(L"FB_BluePlayer");
+		fb->SetInfo({ texture, L"FB_BluePlayer", {50, 55}, 0, 0, 0, 0.5f });
 	}
 	{
-		Texture* texture = GET_SINGLE(ResourceManager)->GetTexture(L"BluePlayer");
-		Flipbook* fb = GET_SINGLE(ResourceManager)->CreateFlipbook(L"FB_BluePlayerLeft");
-		fb->SetInfo({ texture, L"FB_BluePlayer", {80, 80}, 1, 1, 0, 0.5f });
+		Texture* texture = GET_SINGLE(ResourceManager)->GetTexture(L"BlueMissile");
+		Flipbook* fb = GET_SINGLE(ResourceManager)->CreateFlipbook(L"FB_BlueMissile");
+		fb->SetInfo({ texture, L"FB_BlueMissile", {100, 214}, 0, 0, 0, 0.5f });
 	}
-	{
-		Texture* texture = GET_SINGLE(ResourceManager)->GetTexture(L"BluePlayer");
-		Flipbook* fb = GET_SINGLE(ResourceManager)->CreateFlipbook(L"FB_BluePlayerRight");
-		fb->SetInfo({ texture, L"FB_BluePlayer", {80, 80}, 3, 3, 0, 0.5f });
-	}
+	//// BluePlayer
+	//{
+	//	Texture* texture = GET_SINGLE(ResourceManager)->GetTexture(L"BluePlayer");
+	//	Flipbook* fb = GET_SINGLE(ResourceManager)->CreateFlipbook(L"FB_BluePlayerUP");
+	//	fb->SetInfo({ texture, L"FB_BluePlayer", {80, 80}, 2, 2, 0, 0.5f });
+	//}
+	//{
+	//	Texture* texture = GET_SINGLE(ResourceManager)->GetTexture(L"BluePlayer");
+	//	Flipbook* fb = GET_SINGLE(ResourceManager)->CreateFlipbook(L"FB_BluePlayerLeft");
+	//	fb->SetInfo({ texture, L"FB_BluePlayer", {80, 80}, 1, 1, 0, 0.5f });
+	//}
+	//{
+	//	Texture* texture = GET_SINGLE(ResourceManager)->GetTexture(L"BluePlayer");
+	//	Flipbook* fb = GET_SINGLE(ResourceManager)->CreateFlipbook(L"FB_BluePlayerRight");
+	//	fb->SetInfo({ texture, L"FB_BluePlayer", {80, 80}, 3, 3, 0, 0.5f });
+	//}
 
 	{
 		Sprite* sprite = GET_SINGLE(ResourceManager)->GetSprite(L"Background");
@@ -51,7 +70,7 @@ void DevScene::Init()
 		const Vec2Int size = sprite->GetSize();
 		background->SetPos(Vec2(size.x / 2, size.y / 2));
 		auto Val = background->GetPos();
-		AddActor(background);
+		//AddActor(background);
 	}
 	GET_SINGLE(ResourceManager)->LoadTexture(L"Tile", L"Sprite\\Map\\Tile.bmp", RGB(128, 128, 128));
 	GET_SINGLE(ResourceManager)->CreateSprite(L"TileO", GET_SINGLE(ResourceManager)->GetTexture(L"Tile"), 0, 0, 50, 50);
@@ -59,9 +78,27 @@ void DevScene::Init()
 	
 	{ 
 		Player* player = new Player();
-		AddActor(player);
-	}
+		Missile* missile = new Missile();
+		{
+			BoxCollider* collider = new BoxCollider();
+			/*collider->ResetCollisionFlag();
+			collider->AddCollisionFlagLayer(CLT_GROUND);
+			collider->AddCollisionFlagLayer(CLT_WALL);
+			collider->AddCollisionFlagLayer(CLT_OBJECT);*/
+			collider->SetShowDebug(true);
+			collider->SetSize({ 80, 80 });
+			player->AddComponent(collider);
+			GET_SINGLE(CollisionManager)->AddCollider(collider);
+			auto posd = player->GetPos();
+			missile->SetPos(posd);
+			//GET_SINGLE(SceneManager)->GetCurrentScene()->AddActor(missile);
+		}
 
+		AddActor(player);
+		AddActor(missile);
+	}
+	{
+	}
 	{
 		TilemapActor* actor = new TilemapActor();
 		AddActor(actor);

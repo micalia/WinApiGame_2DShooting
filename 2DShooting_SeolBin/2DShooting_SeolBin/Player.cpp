@@ -6,16 +6,11 @@
 #include "SceneManager.h"
 #include "InputManager.h"
 #include "CameraComponent.h"
+#include "Missile.h"
 
 Player::Player()
 {
-	BluePlayerMove[DIR_UP] = GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_BluePlayerUP");
-	BluePlayerMove[DIR_DOWN] = GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_BluePlayerUP");
-	BluePlayerMove[DIR_LEFT] = GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_BluePlayerLeft");
-	BluePlayerMove[DIR_RIGHT] = GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_BluePlayerRight");
-
-	CameraComponent* camera = new CameraComponent();
-	AddComponent(camera);
+	FB_BluePlayer = GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_BluePlayer");
 }
 
 Player::~Player()
@@ -31,12 +26,24 @@ void Player::BeginPlay()
 	SetState(PlayerState::Idle);
 
 	SetCellPos({ 5, 5 }, true);
+	SetFlipbook(FB_BluePlayer);
 }
 
 void Player::Tick()
 {
 	Super::Tick();
-	
+	return;
+	MoveAction();
+	auto asdf = GetPos();
+	if (GET_SINGLE(InputManager)->GetButtonDown(KeyType::SpaceBar))
+	{
+		// TODO : 미사일 발사
+		Missile* missile = new Missile();
+		missile->SetPos(_pos);
+		GET_SINGLE(SceneManager)->GetCurrentScene()->AddActor(missile);
+	}
+
+	return;
 	switch (_state)
 	{
 	case PlayerState::Idle:
@@ -54,7 +61,43 @@ void Player::Tick()
 void Player::Render(HDC hdc)
 {
 	Super::Render(hdc);
-	
+	Utils::DrawCircle(hdc, _pos, 15);
+}
+
+void Player::MoveAction()
+{
+	float deltaTime = GET_SINGLE(TimeManager)->GetDeltaTime();
+	// 거리 = 시간 * 속도
+
+	Horizontal = 0;
+	Vertical = 0;
+
+	if (GET_SINGLE(InputManager)->GetButton(KeyType::A))
+	{
+		Horizontal = -1;
+	}
+
+	if (GET_SINGLE(InputManager)->GetButton(KeyType::D))
+	{
+		Horizontal = 1;
+	}
+
+	if (GET_SINGLE(InputManager)->GetButton(KeyType::W))
+	{
+		Vertical = -1;
+	}
+
+	if (GET_SINGLE(InputManager)->GetButton(KeyType::S))
+	{
+		Vertical = 1;
+	}
+
+	Vec2 dir = Vec2(Horizontal, Vertical);
+	dir.Normalize();
+
+	Vec2 moveDir = dir * speed* deltaTime;
+	_pos += moveDir;
+
 }
 
 void Player::TickIdle()
@@ -69,7 +112,7 @@ void Player::TickIdle()
 		Vec2Int nextPos = _cellPos + deltaXY[_dir];
 		/*if (CanGo(nextPos))
 		{*/
-			SetCellPos(nextPos);
+			//SetCellPos(nextPos);
 			SetState(PlayerState::Move);
 		//}
 	}
@@ -80,7 +123,7 @@ void Player::TickIdle()
 		Vec2Int nextPos = _cellPos + deltaXY[_dir];
 		/*if (CanGo(nextPos))
 		{*/
-			SetCellPos(nextPos);
+			//SetCellPos(nextPos);
 			SetState(PlayerState::Move);
 		//}
 	}
@@ -90,7 +133,7 @@ void Player::TickIdle()
 		Vec2Int nextPos = _cellPos + deltaXY[_dir];
 		/*if (CanGo(nextPos))
 		{*/
-			SetCellPos(nextPos);
+			//SetCellPos(nextPos);
 			SetState(PlayerState::Move);
 		//}
 	}
@@ -100,7 +143,7 @@ void Player::TickIdle()
 		Vec2Int nextPos = _cellPos + deltaXY[_dir];
 		/*if (CanGo(nextPos))
 		{*/
-			SetCellPos(nextPos);
+			//SetCellPos(nextPos);
 			SetState(PlayerState::Move);
 		//}
 	}
@@ -117,14 +160,14 @@ void Player::TickMove()
 {
 	float deltaTime = GET_SINGLE(TimeManager)->GetDeltaTime();
 	
-	Vec2 dir = (_destPos - _pos);
+	/*Vec2 dir = (_destPos - _pos);
 	if (dir.Length() < 10.f)
 	{
 		SetState(PlayerState::Idle);
 		_pos = _destPos;
 	}
 	else
-	{
+	{*/
 		switch (_dir)
 		{
 		case DIR_UP:
@@ -140,7 +183,7 @@ void Player::TickMove()
 			_pos.x += 200 * deltaTime;
 			break;
 		}
-	}
+	//}
 }
 
 void Player::TickSkill()
@@ -199,7 +242,7 @@ void Player::SetPlayerColor(PlayerColor color)
 
 void Player::UpdateAnimation()
 {
-	switch (_state)
+	/*switch (_state)
 	{
 	case PlayerState::Idle:
 		if (_keyPressed)
@@ -213,5 +256,5 @@ void Player::UpdateAnimation()
 	case PlayerState::Skill:
 		SetFlipbook(BluePlayerMove[_dir]);
 		break;
-	}
+	}*/
 }

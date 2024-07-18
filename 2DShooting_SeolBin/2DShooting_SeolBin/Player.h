@@ -25,6 +25,8 @@ public:
 	virtual void Tick() override;
 	virtual void Render(HDC hdc) override;
 
+	void MoveAction();
+
 	virtual void TickIdle();
 	virtual void TickMove();
 	virtual void TickSkill();
@@ -39,9 +41,8 @@ private:
 	void SetPlayerColor(PlayerColor color);
 
 private:
-	Flipbook* BluePlayerMove[4] = {};
+	Flipbook* FB_BluePlayer = nullptr;
 	Flipbook* PupplePlayerMove[4] = {};
-	Flipbook* BP_DefaultAnim = nullptr;
 
 	void UpdateAnimation();
 	Vec2Int _cellPos = {};
@@ -49,5 +50,9 @@ private:
 	Dir _dir = DIR_UP;
 	PlayerState _state = PlayerState::Idle;
 	bool _keyPressed = false;
+
+	float speed = 600;
+	float Horizontal = 0;
+	float Vertical = 0;
 };
 
