@@ -32,7 +32,7 @@ void Player::BeginPlay()
 void Player::Tick()
 {
 	Super::Tick();
-	return;
+	
 	MoveAction();
 	auto asdf = GetPos();
 	if (GET_SINGLE(InputManager)->GetButtonDown(KeyType::SpaceBar))

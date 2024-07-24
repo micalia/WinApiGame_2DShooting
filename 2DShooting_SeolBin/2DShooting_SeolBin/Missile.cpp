@@ -20,14 +20,16 @@ Missile::~Missile()
 void Missile::BeginPlay()
 {
 	Super::BeginPlay();
+	
 	SetCellPos({ 5, 5 }, true);
-	SetFlipbook(FB_BlueMissile);
+	//SetFlipbook(FB_BlueMissile);
+	
 }
 
 void Missile::Tick()
 {
 	Super::Tick();
-	return;
+	
 	Pos p1 = GetPos();
 	float deltaTime = GET_SINGLE(TimeManager)->GetDeltaTime();
 	if (deltaTime > 0.1f) return;
