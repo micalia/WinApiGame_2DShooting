@@ -1,10 +1,10 @@
 #pragma once
-#include "FlipbookActor.h"
+#include "SpriteActor.h"
 
 enum class PlayerColor
 {
 	Blue,
-	Pupple
+	Red
 };
 
 enum class PlayerState
@@ -14,9 +14,9 @@ enum class PlayerState
 	Skill
 };
 
-class Player : public FlipbookActor
+class Player : public SpriteActor
 {
-	using Super = FlipbookActor;
+	using Super = SpriteActor;
 public:
 	Player();
 	virtual ~Player() override;
@@ -41,8 +41,8 @@ private:
 	void SetPlayerColor(PlayerColor color);
 
 private:
-	Flipbook* FB_BluePlayer = nullptr;
-	Flipbook* PupplePlayerMove[4] = {};
+	/*Flipbook* FB_BluePlayer = nullptr;
+	Flipbook* PupplePlayerMove[4] = {};*/
 
 	void UpdateAnimation();
 	Vec2Int _cellPos = {};

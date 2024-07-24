@@ -1,2 +1,8 @@
-﻿  Player.cpp
+﻿  DevScene.cpp
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\2DShooting_SeolBin\2DShooting_SeolBin\DevScene.cpp(42,46): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\2DShooting_SeolBin\2DShooting_SeolBin\DevScene.cpp(42,34): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\2DShooting_SeolBin\2DShooting_SeolBin\DevScene.cpp(53,46): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\2DShooting_SeolBin\2DShooting_SeolBin\DevScene.cpp(53,34): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  Missile.cpp
+  Player.cpp
   2DShooting_SeolBin.vcxproj -> C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\2DShooting_SeolBin\x64\Debug\2DShooting_SeolBin.exe

@@ -7,10 +7,13 @@
 #include "InputManager.h"
 #include "CameraComponent.h"
 #include "Missile.h"
+#include "Sprite.h"
 
 Player::Player()
 {
-	FB_BluePlayer = GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_BluePlayer");
+//	FB_BluePlayer = GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_BluePlayer");
+	GET_SINGLE(ResourceManager)->LoadTexture(L"BlueMissile", L"Sprite\\Projectile\\BlueMissile.bmp", RGB(255, 255, 255));
+	GET_SINGLE(ResourceManager)->CreateSprite(L"BlueMissile", GET_SINGLE(ResourceManager)->GetTexture(L"BlueMissile"));
 }
 
 Player::~Player()
@@ -25,8 +28,8 @@ void Player::BeginPlay()
 	SetState(PlayerState::Move);
 	SetState(PlayerState::Idle);
 
-	SetCellPos({ 5, 5 }, true);
-	SetFlipbook(FB_BluePlayer);
+	/*SetCellPos({ 5, 5 }, true);
+	SetFlipbook(FB_BluePlayer);*/
 }
 
 void Player::Tick()
@@ -34,13 +37,24 @@ void Player::Tick()
 	Super::Tick();
 	
 	MoveAction();
-	auto asdf = GetPos();
+	
 	if (GET_SINGLE(InputManager)->GetButtonDown(KeyType::SpaceBar))
 	{
 		// TODO : 미사일 발사
-		Missile* missile = new Missile();
-		missile->SetPos(_pos);
-		GET_SINGLE(SceneManager)->GetCurrentScene()->AddActor(missile);
+
+		Sprite* BlueMissileSprite = GET_SINGLE(ResourceManager)->GetSprite(L"BlueMissile");
+
+		Missile* BlueMissile = new Missile();
+		BlueMissile->SetPos(_pos);
+		BlueMissile->SetSprite(BlueMissileSprite);
+		BlueMissile->SetLayer(LAYER_OBJECT); 
+		/*const Vec2Int size = BlueMissileSprite->GetSize();
+		BlueMissile->SetPos(Vec2(size.x / 2, size.y / 2));*/
+		GET_SINGLE(SceneManager)->GetCurrentScene()->AddActor(BlueMissile);
+
+
+		/*Missile* missile = new Missile();
+		GET_SINGLE(SceneManager)->GetCurrentScene()->AddActor(missile);*/
 	}
 
 	return;
@@ -61,7 +75,6 @@ void Player::Tick()
 void Player::Render(HDC hdc)
 {
 	Super::Render(hdc);
-	Utils::DrawCircle(hdc, _pos, 15);
 }
 
 void Player::MoveAction()
@@ -98,6 +111,9 @@ void Player::MoveAction()
 	Vec2 moveDir = dir * speed* deltaTime;
 	_pos += moveDir;
 
+	auto Val = _sprite;
+	auto pos = Val->GetPos();
+	auto a = pos;
 }
 
 void Player::TickIdle()

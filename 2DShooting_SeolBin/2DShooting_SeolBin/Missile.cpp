@@ -4,12 +4,11 @@
 #include "ResourceManager.h"
 #include "DevScene.h"
 #include "SceneManager.h"
+#include "Sprite.h"
 
 Missile::Missile()
 {
-	FB_BlueMissile = GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_BlueMissile");
 
-	//BeginPlay();
 }
 
 Missile::~Missile()
@@ -20,21 +19,23 @@ Missile::~Missile()
 void Missile::BeginPlay()
 {
 	Super::BeginPlay();
-	
-	SetCellPos({ 5, 5 }, true);
-	//SetFlipbook(FB_BlueMissile);
-	
+
 }
 
 void Missile::Tick()
 {
 	Super::Tick();
 	
-	Pos p1 = GetPos();
 	float deltaTime = GET_SINGLE(TimeManager)->GetDeltaTime();
 	if (deltaTime > 0.1f) return;
 	_pos.y -= deltaTime * speed;
-
+	
+	if (_sprite != nullptr) {
+		auto Val = _sprite;
+		auto pos = Val->GetPos();
+		auto a = pos;
+	}
+	//_sprite->SetPos
 	//// Ãæµ¹
 	//const vector<Object*> objects = GET_SINGLE(ObjectManager)->GetObjects();
 	//for (Object* object : objects)
@@ -70,7 +71,7 @@ void Missile::Tick()
 
 void Missile::Render(HDC hdc)
 {
-	Utils::DrawCircle(hdc, _pos, 5);
+	Super::Render(hdc);
 }
 
 void Missile::SetCellPos(Vec2Int cellPos, bool teleport /*= false*/)
