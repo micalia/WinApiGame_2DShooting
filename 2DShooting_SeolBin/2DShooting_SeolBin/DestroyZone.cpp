@@ -1,5 +1,8 @@
 #include "pch.h"
 #include "DestroyZone.h"
+#include "SceneManager.h"
+#include "Collider.h"
+#include "Scene.h"
 
 DestroyZone::DestroyZone()
 {
@@ -24,5 +27,13 @@ void DestroyZone::Tick(float deltaTime)
 void DestroyZone::Render(HDC hdc)
 {
 	Super::Render(hdc);
-	Utils::DrawRect(hdc, _pos, 5, 5);
+}
+
+void DestroyZone::OnComponentBeginOverlap(Collider* collider, Collider* other)
+{
+	Super::OnComponentBeginOverlap(collider, other);
+	
+	if (other != nullptr) {
+		GET_SINGLE(SceneManager)->GetCurrentScene()->RemoveActor(other->GetOwner());
+	}
 }

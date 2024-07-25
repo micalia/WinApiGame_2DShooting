@@ -10,5 +10,6 @@ public:
 	virtual void BeginPlay() override;
 	virtual void Tick(float deltaTime) override;
 	virtual void Render(HDC hdc) override;
+	virtual void OnComponentBeginOverlap(Collider* collider, Collider* other) override;
 };
 

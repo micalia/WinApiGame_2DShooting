@@ -24,9 +24,6 @@ DevScene::DevScene()
 	
 	GET_SINGLE(ResourceManager)->CreateSprite(L"Background", GET_SINGLE(ResourceManager)->GetTexture(L"Background"));
 	GET_SINGLE(ResourceManager)->CreateSprite(L"BluePlayer", GET_SINGLE(ResourceManager)->GetTexture(L"BluePlayer"));
-
-
-
 }
 
 DevScene::~DevScene()
@@ -42,11 +39,11 @@ void DevScene::Init()
 		BluePlayer->SetSprite(BluePlayerSprite);
 		BluePlayer->SetLayer(LAYER_OBJECT);
 		const Vec2Int size = BluePlayerSprite->GetSize();
-		BluePlayer->SetPos(Vec2(size.x / 2, size.y / 2));
+		BluePlayer->SetPos(Vec2(242, 588));
 		AddActor(BluePlayer);
 	}
 
-	Sprite* sprite = GET_SINGLE(ResourceManager)->GetSprite(L"Background");
+	/*Sprite* sprite = GET_SINGLE(ResourceManager)->GetSprite(L"Background");
 	{
 
 		Background* background = new Background();
@@ -77,11 +74,17 @@ void DevScene::Init()
 		background3->SetPos(Vec2(size.x / 2, Ysize));
 		AddActor(background3);
 	}
-
+	*/
 	{
 		DestroyZone* destroyZone = new DestroyZone();
 		destroyZone->SetLayer(LAYER_OBJECT);
-		//destroyZone->SetPos();
+		destroyZone->SetPos(Vec2(250.f, 200.f));
+
+		BoxCollider* collider = new BoxCollider();
+		collider->SetShowDebug(true);
+		collider->SetSize(Vec2(200, 100));
+		GET_SINGLE(CollisionManager)->AddCollider(collider);
+		destroyZone->AddComponent(collider);
 		AddActor(destroyZone);
 	}
 

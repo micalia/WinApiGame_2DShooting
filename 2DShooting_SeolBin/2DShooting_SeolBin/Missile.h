@@ -18,7 +18,7 @@ protected:
 
 private:
 	//Flipbook* FB_BlueMissile = nullptr;
-	float speed = 800;
+	float speed = 300;
 	Vec2Int _cellPos = {};
 };
 

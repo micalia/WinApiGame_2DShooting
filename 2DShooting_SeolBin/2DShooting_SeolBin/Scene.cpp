@@ -4,6 +4,7 @@
 #include "TimeManager.h"
 #include "SceneManager.h"
 #include "UI.h"
+#include "CollisionManager.h"
 
 Scene::Scene()
 {
@@ -38,7 +39,7 @@ void Scene::Update()
 {
 	float deltaTime = GET_SINGLE(TimeManager)->GetDeltaTime();
 
-	//GET_SINGLE(CollisionManager)->Update();
+	GET_SINGLE(CollisionManager)->Update();
 
 	//// 거리 = 시간 * 속도
 	for (const vector<Actor*> actors : _actors)
@@ -51,6 +52,12 @@ void Scene::Update()
 
 void Scene::Render(HDC hdc)
 {
+	vector<Actor*>& actors = _actors[LAYER_OBJECT];
+	std::sort(actors.begin(), actors.end(), [=](Actor* a, Actor* b) 
+		{
+			return a->GetPos().y < b->GetPos().y;
+		});
+
 	for (const vector<Actor*>& actors : _actors)
 		for (Actor* actor : actors)
 			actor->Render(hdc);
