@@ -43,7 +43,7 @@ void Scene::Update()
 	//// 거리 = 시간 * 속도
 	for (const vector<Actor*> actors : _actors)
 		for (Actor* actor : actors)
-			actor->Tick();
+			actor->Tick(deltaTime);
 
 	//for (UI* ui : _uis)
 	//	ui->Tick();

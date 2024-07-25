@@ -10,7 +10,7 @@ public:
 	virtual ~Actor();
 
 	virtual void BeginPlay();
-	virtual void Tick();
+	virtual void Tick(float deltaTime);
 	virtual void Render(HDC hdc);
 
 	//액터의 정중앙

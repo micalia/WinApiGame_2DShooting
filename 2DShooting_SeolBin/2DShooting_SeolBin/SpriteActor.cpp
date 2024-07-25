@@ -20,9 +20,9 @@ void SpriteActor::BeginPlay()
 
 }
 
-void SpriteActor::Tick()
+void SpriteActor::Tick(float deltaTime)
 {
-	Super::Tick();
+	Super::Tick(deltaTime);
 
 }
 
@@ -36,7 +36,7 @@ void SpriteActor::Render(HDC hdc)
 	Vec2Int size = _sprite->GetSize();
 	Vec2 cameraPos = GET_SINGLE(SceneManager)->GetCameraPos();
 
-	/*::TransparentBlt(hdc,
+	::TransparentBlt(hdc,
 		(int32)_pos.x - size.x / 2 - ((int32)cameraPos.x - GWinSizeX / 2),
 		(int32)_pos.y - size.y / 2 - ((int32)cameraPos.y - GWinSizeY / 2),
 		size.x,
@@ -46,15 +46,17 @@ void SpriteActor::Render(HDC hdc)
 		_sprite->GetPos().y,
 		_sprite->GetSize().x,
 		_sprite->GetSize().y,
-		_sprite->GetTransparent());*/
+		RGB(255, 255, 255));
+		//_sprite->GetTransparent());
 
-	::BitBlt(hdc,
-		(int32)_pos.x - size.x / 2 - ((int32)cameraPos.x - GWinSizeX / 2),
-		(int32)_pos.y - size.y / 2 - ((int32)cameraPos.y - GWinSizeY / 2),
-		size.x,
-		size.y,
-		_sprite->GetDC(),
-		_sprite->GetPos().x,
-		_sprite->GetPos().y,
-		SRCCOPY);
+		/* 이 함수가 투명도 없이 렌더링하기 때문에 미세하게 더 빠름
+		::BitBlt(hdc,
+			(int32)_pos.x - size.x / 2 - ((int32)cameraPos.x - GWinSizeX / 2),
+			(int32)_pos.y - size.y / 2 - ((int32)cameraPos.y - GWinSizeY / 2),
+			size.x,
+			size.y,
+			_sprite->GetDC(),
+			_sprite->GetPos().x,
+			_sprite->GetPos().y,
+			SRCCOPY);*/
 }

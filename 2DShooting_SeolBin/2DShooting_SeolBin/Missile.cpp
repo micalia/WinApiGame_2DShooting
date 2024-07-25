@@ -22,19 +22,13 @@ void Missile::BeginPlay()
 
 }
 
-void Missile::Tick()
+void Missile::Tick(float deltaTime)
 {
-	Super::Tick();
+	Super::Tick(deltaTime);
 	
-	float deltaTime = GET_SINGLE(TimeManager)->GetDeltaTime();
 	if (deltaTime > 0.1f) return;
 	_pos.y -= deltaTime * speed;
 	
-	if (_sprite != nullptr) {
-		auto Val = _sprite;
-		auto pos = Val->GetPos();
-		auto a = pos;
-	}
 	//_sprite->SetPos
 	//// Ãæµ¹
 	//const vector<Object*> objects = GET_SINGLE(ObjectManager)->GetObjects();

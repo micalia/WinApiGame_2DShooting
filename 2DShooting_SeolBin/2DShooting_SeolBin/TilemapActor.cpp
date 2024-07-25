@@ -21,9 +21,9 @@ void TilemapActor::BeginPlay()
 	Super::BeginPlay();
 }
 
-void TilemapActor::Tick()
+void TilemapActor::Tick(float deltaTime)
 {
-	Super::Tick();
+	Super::Tick(deltaTime);
 
 	//TickPicking();
 }

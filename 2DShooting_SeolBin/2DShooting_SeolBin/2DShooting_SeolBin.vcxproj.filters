@@ -164,6 +164,10 @@
     <ClInclude Include="Missile.h">
       <Filter>소스 파일\03.Objects</Filter>
     </ClInclude>
+    <ClInclude Include="Background.h">
+      <Filter>소스 파일\03.Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="DestroyZone.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="2DShooting_SeolBin.cpp">
@@ -261,6 +265,12 @@
     </ClCompile>
     <ClCompile Include="Missile.cpp">
       <Filter>소스 파일\03.Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Background.cpp">
+      <Filter>소스 파일\03.Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="DestroyZone.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -22,7 +22,7 @@ public:
 	virtual ~Player() override;
 
 	virtual void BeginPlay() override;
-	virtual void Tick() override;
+	virtual void Tick(float deltaTime) override;
 	virtual void Render(HDC hdc) override;
 
 	void MoveAction();

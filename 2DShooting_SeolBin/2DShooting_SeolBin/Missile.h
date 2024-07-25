@@ -9,7 +9,7 @@ public:
 	virtual ~Missile() override;
 
 	virtual void BeginPlay() override;
-	virtual void Tick() override;
+	virtual void Tick(float deltaTime) override;
 	virtual void Render(HDC hdc) override;
 
 	void SetCellPos(Vec2Int cellPos, bool teleport = false);

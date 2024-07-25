@@ -19,7 +19,7 @@ public:
 	virtual ~TilemapActor();
 
 	virtual void BeginPlay();
-	virtual void Tick();
+	virtual void Tick(float deltaTime);
 	virtual void Render(HDC hdc);
 
 	void TickPicking();

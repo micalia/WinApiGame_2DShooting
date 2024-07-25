@@ -20,6 +20,8 @@ using namespace std;
 
 #include <assert.h>
 
+#include <tchar.h> // _tfreopen, _tprintf¸¦ »ç¿ë
+
 // C++20
 #include <format>
 #include <filesystem>

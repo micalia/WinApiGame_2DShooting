@@ -13,10 +13,13 @@
 #include "BoxCollider.h"
 #include "SceneManager.h"
 #include "Missile.h"
+#include "Background.h"
+#include "DestroyZone.h"
 
 DevScene::DevScene()
 {
 	GET_SINGLE(ResourceManager)->LoadTexture(L"Background", L"Sprite\\Map\\Background.bmp");
+	//GET_SINGLE(ResourceManager)->LoadTexture(L"Background", L"Sprite\\Map\\Background_mini.bmp");
 	GET_SINGLE(ResourceManager)->LoadTexture(L"BluePlayer", L"Sprite\\Player\\BluePlayer.bmp", RGB(255, 255, 255));
 	
 	GET_SINGLE(ResourceManager)->CreateSprite(L"Background", GET_SINGLE(ResourceManager)->GetTexture(L"Background"));
@@ -43,16 +46,43 @@ void DevScene::Init()
 		AddActor(BluePlayer);
 	}
 
+	Sprite* sprite = GET_SINGLE(ResourceManager)->GetSprite(L"Background");
 	{
-		Sprite* sprite = GET_SINGLE(ResourceManager)->GetSprite(L"Background");
 
-		SpriteActor* background = new SpriteActor();
+		Background* background = new Background();
 		background->SetSprite(sprite);
 		background->SetLayer(LAYER_BACKGROUND);
 		const Vec2Int size = sprite->GetSize();
-		background->SetPos(Vec2(size.x / 2, size.y / 2));
-		auto Val = background->GetPos();
+		float Ysize = size.y;
+		background->SetPos(Vec2(size.x / 2, Ysize));
 		AddActor(background);
+	}
+
+	{
+		Background* background2 = new Background();
+		background2->SetSprite(sprite);
+		background2->SetLayer(LAYER_BACKGROUND);
+		const Vec2Int size = sprite->GetSize();
+		float Ysize = size.y * 2;
+		background2->SetPos(Vec2(size.x / 2, Ysize));
+		AddActor(background2);
+	}
+
+	{
+		Background* background3 = new Background();
+		background3->SetSprite(sprite);
+		background3->SetLayer(LAYER_BACKGROUND);
+		const Vec2Int size = sprite->GetSize();
+		float Ysize = size.y * 3;
+		background3->SetPos(Vec2(size.x / 2, Ysize));
+		AddActor(background3);
+	}
+
+	{
+		DestroyZone* destroyZone = new DestroyZone();
+		destroyZone->SetLayer(LAYER_OBJECT);
+		//destroyZone->SetPos();
+		AddActor(destroyZone);
 	}
 
 	

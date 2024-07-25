@@ -5,6 +5,10 @@
 #include "2DShooting_SeolBin.h"
 #include "Game.h"
 
+#pragma warning(disable: 4996) // 표준이 아닌 MS 자체 함수로서 _s로 끝나는 함수를 쓸 것을 강제하는 것을 비활성화합니다.
+#include <stdio.h> // freopen, printf 등을 사용
+#include <locale.h> // locale 적용
+
 #define MAX_LOADSTRING 100
 
 // 전역 변수:
@@ -137,10 +141,21 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //  WM_DESTROY  - 종료 메시지를 게시하고 반환합니다.
 //
 //
+BOOL WINAPI AllocConsole(void);
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
     {
+    case WM_CREATE:
+        AllocConsole();
+        SetConsoleTitle(TEXT("테스트용 콘솔"));
+		/* AllocConsole 함수를 호출하여 콘솔창을 띄웠다면 freopen 함수로 기본 입출력 위치를 지정해야 합니다. */
+		_tfreopen(_T("CONOUT$"), _T("w"), stdout);
+		_tfreopen(_T("CONIN$"), _T("r"), stdin);
+		_tfreopen(_T("CONERR$"), _T("w"), stderr);
+		/* setlocale 함수로 기본 입출력에 대한 로케일을 설정합니다. */
+		_tsetlocale(LC_ALL, _T(""));
+        break;
     case WM_COMMAND:
         {
             int wmId = LOWORD(wParam);

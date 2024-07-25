@@ -21,9 +21,9 @@ void FlipbookActor::BeginPlay()
 	Super::BeginPlay();
 }
 
-void FlipbookActor::Tick()
+void FlipbookActor::Tick(float deltaTime)
 {
-	Super::Tick();
+	Super::Tick(deltaTime);
 
 	if (_flipbook == nullptr)
 		return;
@@ -31,8 +31,6 @@ void FlipbookActor::Tick()
 	const FlipbookInfo& info = _flipbook->GetInfo();
 	if (info.loop == false && _idx == info.end)
 		return;
-
-	float deltaTime = GET_SINGLE(TimeManager)->GetDeltaTime();
 
 	_sumTime += deltaTime;
 

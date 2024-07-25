@@ -32,9 +32,9 @@ void Player::BeginPlay()
 	SetFlipbook(FB_BluePlayer);*/
 }
 
-void Player::Tick()
+void Player::Tick(float deltaTime)
 {
-	Super::Tick();
+	Super::Tick(deltaTime);
 	
 	MoveAction();
 	

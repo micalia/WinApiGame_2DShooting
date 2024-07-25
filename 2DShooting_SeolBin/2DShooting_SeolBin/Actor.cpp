@@ -22,7 +22,7 @@ void Actor::BeginPlay()
 	}
 }
 
-void Actor::Tick()
+void Actor::Tick(float deltaTime)
 {
 	for (Component* component : _components)
 	{
