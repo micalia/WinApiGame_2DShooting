@@ -15,6 +15,7 @@
 #include "Missile.h"
 #include "Background.h"
 #include "DestroyZone.h"
+#include "Wall.h"
 
 DevScene::DevScene()
 {
@@ -37,9 +38,23 @@ void DevScene::Init()
 
 		Player* BluePlayer = new Player();
 		BluePlayer->SetSprite(BluePlayerSprite);
-		BluePlayer->SetLayer(LAYER_OBJECT);
+		BluePlayer->SetLayer(LAYER_Player);
 		const Vec2Int size = BluePlayerSprite->GetSize();
 		BluePlayer->SetPos(Vec2(242, 588));
+		{
+			BoxCollider* collider = new BoxCollider();
+			collider->SetShowDebug(true);
+			//나의 콜리전 레이어
+			collider->SetCollisionLayer(CLT_PLAYER);
+
+			// 모든 콜리전 플래그 제거
+			collider->ResetCollisionFlag();
+			// 내가 충돌하고 싶은 레이어 추가
+			collider->AddCollisionFlagLayer(CLT_WALL);
+			collider->SetSize(Vec2(size.x, size.y));
+			GET_SINGLE(CollisionManager)->AddCollider(collider);
+			BluePlayer->AddComponent(collider);
+		}
 		AddActor(BluePlayer);
 	}
 
@@ -83,36 +98,44 @@ void DevScene::Init()
 		BoxCollider* collider = new BoxCollider();
 		collider->SetShowDebug(true);
 		collider->SetSize(Vec2(200, 100));
+		collider->SetCollisionLayer(CLT_OBJECT);
+		collider->AddCollisionFlagLayer(CLT_OBJECT);
 		GET_SINGLE(CollisionManager)->AddCollider(collider);
 		destroyZone->AddComponent(collider);
 		AddActor(destroyZone);
 	}
-
 	
-	//{ 
-	//	Player* player = new Player();
-	//	Missile* missile = new Missile();
-	//	{
-	//		BoxCollider* collider = new BoxCollider();
-	//		/*collider->ResetCollisionFlag();
-	//		collider->AddCollisionFlagLayer(CLT_GROUND);
-	//		collider->AddCollisionFlagLayer(CLT_WALL);
-	//		collider->AddCollisionFlagLayer(CLT_OBJECT);*/
-	//		collider->SetShowDebug(true);
-	//		collider->SetSize({ 80, 80 });
-	//		player->AddComponent(collider);
-	//		GET_SINGLE(CollisionManager)->AddCollider(collider);
-	//		auto posd = player->GetPos();
-	//		missile->SetPos(posd);
-	//		//GET_SINGLE(SceneManager)->GetCurrentScene()->AddActor(missile);
-	//	}
+	{
+		Wall* wall = new Wall();
+		wall->SetPos(Vec2(50.f, 400.f));
+		{
+			BoxCollider* collider = new BoxCollider();
+			collider->SetShowDebug(true);
+			collider->SetSize(Vec2(80, 500));
+			collider->SetCollisionLayer(CLT_WALL);
 
-	//	AddActor(player);
-	//	AddActor(missile);
-	//}
+			GET_SINGLE(CollisionManager)->AddCollider(collider);
+			wall->AddComponent(collider);
+		}
+		AddActor(wall);
+	}
 
+	{
+		Wall* wall = new Wall();
+		wall->SetPos(Vec2(450.f, 400.f));
+		{
+			BoxCollider* collider = new BoxCollider();
+			collider->SetShowDebug(true);
+			collider->SetSize(Vec2(80, 500));
+			collider->SetCollisionLayer(CLT_WALL);
 
-	GET_SINGLE(ResourceManager)->LoadTexture(L"Tile", L"Sprite\\Map\\Tile.bmp", RGB(128, 128, 128));
+			GET_SINGLE(CollisionManager)->AddCollider(collider);
+			wall->AddComponent(collider);
+		}
+		AddActor(wall);
+	}
+	
+	/*GET_SINGLE(ResourceManager)->LoadTexture(L"Tile", L"Sprite\\Map\\Tile.bmp", RGB(128, 128, 128));
 	GET_SINGLE(ResourceManager)->CreateSprite(L"TileO", GET_SINGLE(ResourceManager)->GetTexture(L"Tile"), 0, 0, 50, 50);
 	GET_SINGLE(ResourceManager)->CreateSprite(L"TileX", GET_SINGLE(ResourceManager)->GetTexture(L"Tile"), 50, 0, 50, 50);
 
@@ -131,7 +154,7 @@ void DevScene::Init()
 			_tilemapActor->SetTilemap(tm);
 			_tilemapActor->SetShowDebug(false);
 		}
-	}
+	}*/
 
 	Super::Init();
 }

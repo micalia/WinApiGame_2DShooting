@@ -3,6 +3,7 @@
 #include "SphereCollider.h"
 #include "BoxCollider.h"
 #include "Actor.h"
+#include "Player.h"
 
 Collider::Collider(ColliderType colliderType) : _colliderType(colliderType)
 {
@@ -31,6 +32,9 @@ void Collider::Render(HDC hdc)
 
 bool Collider::CheckCollision(Collider* other)
 {
+	if (dynamic_cast<Player*>(other->GetOwner())) {
+		int a = 1;
+	}
 	uint8 layer = other->GetCollisionLayer();
 	if (_collisionFlag & (1 << layer))
 		return true;

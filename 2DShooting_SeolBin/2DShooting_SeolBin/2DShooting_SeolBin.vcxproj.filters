@@ -170,6 +170,9 @@
     <ClInclude Include="DestroyZone.h">
       <Filter>소스 파일\03.Objects</Filter>
     </ClInclude>
+    <ClInclude Include="Wall.h">
+      <Filter>소스 파일\03.Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="2DShooting_SeolBin.cpp">
@@ -272,6 +275,9 @@
       <Filter>소스 파일\03.Objects</Filter>
     </ClCompile>
     <ClCompile Include="DestroyZone.cpp">
+      <Filter>소스 파일\03.Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="Wall.cpp">
       <Filter>소스 파일\03.Objects</Filter>
     </ClCompile>
   </ItemGroup>

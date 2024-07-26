@@ -25,6 +25,8 @@ Player::~Player()
 void Player::BeginPlay()
 {
 	Super::BeginPlay();
+
+	bCrashing = false;
 }
 
 void Player::Tick(float deltaTime)
@@ -50,11 +52,71 @@ void Player::Tick(float deltaTime)
 		BlueMissile->AddComponent(collider);
 		GET_SINGLE(SceneManager)->GetCurrentScene()->AddActor(BlueMissile);
 	}
+
+	if (bCrashing) {
+		_tprintf(_T("bCrashing : true\n"));
+		SetPos(CrashingPos);
+	}
+	else {
+		_tprintf(_T("bCrashing : false\n"));
+
+	}
 }
 
 void Player::Render(HDC hdc)
 {
 	Super::Render(hdc);
+}
+
+void Player::OnComponentBeginOverlap(Collider* collider, Collider* other)
+{
+	Super::OnComponentBeginOverlap(collider, other);
+	bCrashing = true;
+	BoxCollider* b1 = dynamic_cast<BoxCollider*>(collider);
+	BoxCollider* b2 = dynamic_cast<BoxCollider*>(other);
+	if (b1 == nullptr || b2 == nullptr)
+		return;
+
+	AdjustCollisionPos(b1, b2);
+}
+
+void Player::OnComponentEndOverlap(Collider* collider, Collider* other)
+{
+	Super::OnComponentEndOverlap(collider, other);
+	bCrashing = false;
+}
+
+void Player::AdjustCollisionPos(BoxCollider* b1, BoxCollider* b2)
+{
+	RECT r1 = b1->GetRect();
+	RECT r2 = b2->GetRect();
+
+	Vec2 pos = GetPos();
+	RECT intersect = {};
+	if (::IntersectRect(&intersect, &r1, &r2)) {
+		int32 w = intersect.right - intersect.left;
+		int32 h = intersect.bottom - intersect.top;
+
+		if (w > h) {
+			if (intersect.top == r2.top) {
+				pos.y -= h;
+			}
+			else {
+				pos.y += h;
+			}
+		}
+		else {
+			if (intersect.left == r2.left) {
+				pos.x -= w;
+			}
+			else {
+				pos.x += w;
+			}
+		}
+	}
+
+	CrashingPos = pos;
+	SetPos(CrashingPos);
 }
 
 void Player::MoveAction()

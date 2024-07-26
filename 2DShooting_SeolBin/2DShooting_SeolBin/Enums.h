@@ -11,8 +11,10 @@ enum class SceneType
 enum LAYER_TYPE
 {
 	LAYER_BACKGROUND,
+	LAYER_Player,
 	LAYER_BULLET,
 	LAYER_OBJECT,
+	LAYER_WALL,
 	// ...
 	LAYER_UI,
 
@@ -22,6 +24,7 @@ enum LAYER_TYPE
 enum COLLISION_LAYER_TYPE : uint8
 {
 	CLT_OBJECT,
+	CLT_PLAYER,
 	CLT_GROUND,
 	CLT_WALL,
 	// ...
