@@ -12,3 +12,5 @@
 # Precompiled Headers
 *.gch
 *.pch
+2DShooting_SeolBin/x64/Debug/2DShooting_SeolBin.pdb
+*.pdb

@@ -1,5 +1,5 @@
 #pragma once
-#include "SpriteActor.h"
+#include "FlipbookActor.h"
 
 enum class PlayerColor
 {
@@ -7,11 +7,28 @@ enum class PlayerColor
 	Red
 };
 
-class BoxCollider;
 
-class Player : public SpriteActor
+enum PlayerAnimState {
+	PA_Left,
+	PA_LeftReady,
+	PA_Idle,
+	PA_RightReady,
+	PA_Right
+};
+
+enum class PlayerDir
 {
-	using Super = SpriteActor;
+	Idle,
+	Left,
+	Right
+};
+
+class BoxCollider;
+class Flipbook;
+
+class Player : public FlipbookActor
+{
+	using Super = FlipbookActor;
 public:
 	Player();
 	virtual ~Player() override;
@@ -27,16 +44,31 @@ private:
 	void AdjustCollisionPos(BoxCollider* b1, BoxCollider* b2);
 
 	void MoveAction();
+	void UpdateAnimation();
 
+	void SetState(PlayerDir InDir);
 private:
+	PlayerDir playerDir = PlayerDir::Idle;
+	PlayerDir prevPlayerDir = PlayerDir::Idle;
 	PlayerColor Color = PlayerColor::Blue;
 	bool _keyPressed = false;
 
-	float speed = 700;
+	float speed = 300; // Default Val : 470
 	float Horizontal = 0;
 	float Vertical = 0;
 
 	bool bCrashing;
 	Vec2 CrashingPos;
+
+	Flipbook* _flipbookIdle = nullptr;
+	Flipbook* _flipbookLeft = nullptr;
+	Flipbook* _flipbookRight = nullptr;
+	Flipbook* _flipbookLeftReverse = nullptr;
+	Flipbook* _flipbookRightReverse = nullptr;
+
+private:
+	bool bReverseAnimOn;
+	float reverseAnimDelayTime = 0.2;
+	float currReverseAnimDelayTime = 0;
 };
 

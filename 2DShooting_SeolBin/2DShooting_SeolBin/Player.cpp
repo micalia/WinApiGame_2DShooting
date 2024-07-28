@@ -10,11 +10,18 @@
 #include "Sprite.h"
 #include "BoxCollider.h"
 #include "CollisionManager.h"
+#include "Flipbook.h"
 
 Player::Player()
 {
 	GET_SINGLE(ResourceManager)->LoadTexture(L"BlueMissile", L"Sprite\\Projectile\\BlueMissile.bmp", RGB(255, 255, 255));
 	GET_SINGLE(ResourceManager)->CreateSprite(L"BlueMissile", GET_SINGLE(ResourceManager)->GetTexture(L"BlueMissile"));
+
+	_flipbookIdle = GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_BluePlayerIdle");
+	_flipbookLeft = GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_BluePlayerLeft");
+	_flipbookRight = GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_BluePlayerRight");
+	_flipbookLeftReverse = GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_BluePlayerLeftReverse");
+	_flipbookRightReverse = GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_BluePlayerRightReverse");
 }
 
 Player::~Player()
@@ -27,6 +34,7 @@ void Player::BeginPlay()
 	Super::BeginPlay();
 
 	bCrashing = false;
+	SetFlipbook(_flipbookIdle);
 }
 
 void Player::Tick(float deltaTime)
@@ -54,12 +62,7 @@ void Player::Tick(float deltaTime)
 	}
 
 	if (bCrashing) {
-		_tprintf(_T("bCrashing : true\n"));
 		SetPos(CrashingPos);
-	}
-	else {
-		_tprintf(_T("bCrashing : false\n"));
-
 	}
 }
 
@@ -152,5 +155,83 @@ void Player::MoveAction()
 
 	Vec2 moveDir = dir * speed* deltaTime;
 	_pos += moveDir;
+
+	if (Horizontal > 0) {
+		SetState(PlayerDir::Right);
+	}
+	else if(Horizontal < 0)
+	{
+		SetState(PlayerDir::Left);
+	}
+	else {
+		SetState(PlayerDir::Idle);
+	}
+
+	if (bReverseAnimOn) {
+		currReverseAnimDelayTime += deltaTime;
+		if (currReverseAnimDelayTime > reverseAnimDelayTime) {
+			bReverseAnimOn = false;
+			currReverseAnimDelayTime = 0;
+			SetFlipbook(_flipbookIdle);
+		}
+	}
+
+
+	UpdateAnimation();
+}
+
+void Player::UpdateAnimation()
+{
+	if (bReverseAnimOn == true) return;
+	if (prevPlayerDir == playerDir) return;
+
+	switch (prevPlayerDir)
+	{
+	case PlayerDir::Idle:
+		_tprintf(_T("Player dir Idle\n"));
+		break;
+	case PlayerDir::Left:
+		_tprintf(_T("Player dir Left\n"));
+		break;
+	case PlayerDir::Right:
+		_tprintf(_T("Player dir Right \n"));
+		break;
+	default:
+		break;
+	}
+	switch (playerDir)
+	{
+	case PlayerDir::Idle:
+		if (prevPlayerDir == PlayerDir::Idle) {
+			SetFlipbook(_flipbookIdle);
+		}
+		else if (prevPlayerDir == PlayerDir::Left) {
+			SetFlipbook(_flipbookLeftReverse);
+			bReverseAnimOn = true;
+		}
+		else if (prevPlayerDir == PlayerDir::Right) {
+			SetFlipbook(_flipbookRightReverse);
+			bReverseAnimOn = true;
+		}
+		break;
+	case PlayerDir::Left:
+		SetFlipbook(_flipbookLeft);
+		break;
+	case PlayerDir::Right:
+		SetFlipbook(_flipbookRight);
+		break;
+	default:
+		break;
+	}
+	prevPlayerDir = playerDir;
+}
+
+void Player::SetState(PlayerDir InDir)
+{
+	if (playerDir == InDir)
+		return;
+
+	playerDir = InDir;
+	UpdateAnimation();
 }
 

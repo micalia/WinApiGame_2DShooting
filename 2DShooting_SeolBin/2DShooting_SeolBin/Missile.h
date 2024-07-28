@@ -12,13 +12,10 @@ public:
 	virtual void Tick(float deltaTime) override;
 	virtual void Render(HDC hdc) override;
 
-	void SetCellPos(Vec2Int cellPos, bool teleport = false);
-
 protected:
 
 private:
-	//Flipbook* FB_BlueMissile = nullptr;
 	float speed = 300;
-	Vec2Int _cellPos = {};
+	
 };
 

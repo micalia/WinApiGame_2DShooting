@@ -16,12 +16,14 @@
 #include "Background.h"
 #include "DestroyZone.h"
 #include "Wall.h"
+#include "EnemySpawnManager.h"
 
 DevScene::DevScene()
 {
 	GET_SINGLE(ResourceManager)->LoadTexture(L"Background", L"Sprite\\Map\\Background.bmp");
 	//GET_SINGLE(ResourceManager)->LoadTexture(L"Background", L"Sprite\\Map\\Background_mini.bmp");
-	GET_SINGLE(ResourceManager)->LoadTexture(L"BluePlayer", L"Sprite\\Player\\BluePlayer.bmp", RGB(255, 255, 255));
+	//GET_SINGLE(ResourceManager)->LoadTexture(L"BluePlayer", L"Sprite\\Player\\BluePlayer.bmp", RGB(255, 255, 255)); // old charchter - no animation
+	GET_SINGLE(ResourceManager)->LoadTexture(L"BluePlayer", L"Sprite\\Player\\NewBluePlayerSpriteAnim.bmp", RGB(255, 255, 255));
 	
 	GET_SINGLE(ResourceManager)->CreateSprite(L"Background", GET_SINGLE(ResourceManager)->GetTexture(L"Background"));
 	GET_SINGLE(ResourceManager)->CreateSprite(L"BluePlayer", GET_SINGLE(ResourceManager)->GetTexture(L"BluePlayer"));
@@ -34,12 +36,36 @@ DevScene::~DevScene()
 void DevScene::Init()
 {
 	{
-		Sprite* BluePlayerSprite = GET_SINGLE(ResourceManager)->GetSprite(L"BluePlayer");
+		Texture* texture = GET_SINGLE(ResourceManager)->GetTexture(L"BluePlayer");
+		Flipbook* fb = GET_SINGLE(ResourceManager)->CreateFlipbook(L"FB_BluePlayerIdle");
+		fb->SetInfo({ texture, L"FB_BluePlayerIdle", {70, 70}, 0, 0, 0, 1.f, false });
+	}
+	{
+		Texture* texture = GET_SINGLE(ResourceManager)->GetTexture(L"BluePlayer");
+		Flipbook* fb = GET_SINGLE(ResourceManager)->CreateFlipbook(L"FB_BluePlayerLeft");
+		fb->SetInfo({ texture, L"FB_BluePlayerLeft", {70, 70}, 0, 2, 2, 0.7f, false });
+	}
+	{
+		Texture* texture = GET_SINGLE(ResourceManager)->GetTexture(L"BluePlayer");
+		Flipbook* fb = GET_SINGLE(ResourceManager)->CreateFlipbook(L"FB_BluePlayerRight");
+		fb->SetInfo({ texture, L"FB_BluePlayerRight", {70, 70}, 0, 2, 3, 0.7f, false });
+	}
+	{
+		Texture* texture = GET_SINGLE(ResourceManager)->GetTexture(L"BluePlayer");
+		Flipbook* fb = GET_SINGLE(ResourceManager)->CreateFlipbook(L"FB_BluePlayerRightReverse");
+		fb->SetInfo({ texture, L"FB_BluePlayerRightReverse", {70, 70}, 1, 1, 4, 0.3f, false });
+	}
+	{
+		Texture* texture = GET_SINGLE(ResourceManager)->GetTexture(L"BluePlayer");
+		Flipbook* fb = GET_SINGLE(ResourceManager)->CreateFlipbook(L"FB_BluePlayerLeftReverse");
+		fb->SetInfo({ texture, L"FB_BluePlayerLeftReverse", {70, 70}, 1, 1, 1, 0.3f, false });
+	}
 
+	{
 		Player* BluePlayer = new Player();
-		BluePlayer->SetSprite(BluePlayerSprite);
+		
 		BluePlayer->SetLayer(LAYER_Player);
-		const Vec2Int size = BluePlayerSprite->GetSize();
+		const Vec2Int size = Vec2Int(47, 67);
 		BluePlayer->SetPos(Vec2(242, 588));
 		{
 			BoxCollider* collider = new BoxCollider();
@@ -56,6 +82,12 @@ void DevScene::Init()
 			BluePlayer->AddComponent(collider);
 		}
 		AddActor(BluePlayer);
+	}
+
+	{
+		EnemySpawnManager* EnemySpawnMgr = new EnemySpawnManager();
+		EnemySpawnMgr->SetPos(Vec2(250, 15));
+		AddActor(EnemySpawnMgr);
 	}
 
 	/*Sprite* sprite = GET_SINGLE(ResourceManager)->GetSprite(L"Background");
@@ -90,22 +122,69 @@ void DevScene::Init()
 		AddActor(background3);
 	}
 	*/
-	{
+#pragma region Wall
+	{ // Top Wall
 		DestroyZone* destroyZone = new DestroyZone();
 		destroyZone->SetLayer(LAYER_OBJECT);
-		destroyZone->SetPos(Vec2(250.f, 200.f));
-
-		BoxCollider* collider = new BoxCollider();
-		collider->SetShowDebug(true);
-		collider->SetSize(Vec2(200, 100));
-		collider->SetCollisionLayer(CLT_OBJECT);
-		collider->AddCollisionFlagLayer(CLT_OBJECT);
-		GET_SINGLE(CollisionManager)->AddCollider(collider);
-		destroyZone->AddComponent(collider);
+		destroyZone->SetPos(Vec2(250.f, 20.f));
+		{
+			BoxCollider* collider = new BoxCollider();
+			collider->SetShowDebug(true);
+			collider->SetSize(Vec2(460, 20));
+			collider->SetCollisionLayer(CLT_WALL);
+			GET_SINGLE(CollisionManager)->AddCollider(collider);
+			destroyZone->AddComponent(collider);
+		}
 		AddActor(destroyZone);
 	}
 	
-	{
+	{ // Left Wall
+		DestroyZone* destroyZone = new DestroyZone();
+		destroyZone->SetLayer(LAYER_OBJECT);
+		destroyZone->SetPos(Vec2(10.f, 360.f));
+		{
+			BoxCollider* collider = new BoxCollider();
+			collider->SetShowDebug(true);
+			collider->SetSize(Vec2(10, 640));
+			collider->SetCollisionLayer(CLT_WALL);
+			GET_SINGLE(CollisionManager)->AddCollider(collider);
+			destroyZone->AddComponent(collider);
+		}
+		AddActor(destroyZone);
+	}
+
+	{ // Right Wall
+		DestroyZone* destroyZone = new DestroyZone();
+		destroyZone->SetLayer(LAYER_OBJECT);
+		destroyZone->SetPos(Vec2(490.f, 360.f));
+		{
+			BoxCollider* collider = new BoxCollider();
+			collider->SetShowDebug(true);
+			collider->SetSize(Vec2(10, 640));
+			collider->SetCollisionLayer(CLT_WALL);
+			GET_SINGLE(CollisionManager)->AddCollider(collider);
+			destroyZone->AddComponent(collider);
+		}
+		AddActor(destroyZone);
+	}
+
+	{ // Bottom Wall
+		DestroyZone* destroyZone = new DestroyZone();
+		destroyZone->SetLayer(LAYER_OBJECT);
+		destroyZone->SetPos(Vec2(250.f, 695.f));
+		{
+			BoxCollider* collider = new BoxCollider();
+			collider->SetShowDebug(true);
+			collider->SetSize(Vec2(460, 20));
+			collider->SetCollisionLayer(CLT_WALL);
+			GET_SINGLE(CollisionManager)->AddCollider(collider);
+			destroyZone->AddComponent(collider);
+		}
+		AddActor(destroyZone);
+	}
+#pragma endregion
+
+	/*{
 		Wall* wall = new Wall();
 		wall->SetPos(Vec2(50.f, 400.f));
 		{
@@ -113,7 +192,6 @@ void DevScene::Init()
 			collider->SetShowDebug(true);
 			collider->SetSize(Vec2(80, 500));
 			collider->SetCollisionLayer(CLT_WALL);
-
 			GET_SINGLE(CollisionManager)->AddCollider(collider);
 			wall->AddComponent(collider);
 		}
@@ -128,12 +206,11 @@ void DevScene::Init()
 			collider->SetShowDebug(true);
 			collider->SetSize(Vec2(80, 500));
 			collider->SetCollisionLayer(CLT_WALL);
-
 			GET_SINGLE(CollisionManager)->AddCollider(collider);
 			wall->AddComponent(collider);
 		}
 		AddActor(wall);
-	}
+	}*/
 	
 	/*GET_SINGLE(ResourceManager)->LoadTexture(L"Tile", L"Sprite\\Map\\Tile.bmp", RGB(128, 128, 128));
 	GET_SINGLE(ResourceManager)->CreateSprite(L"TileO", GET_SINGLE(ResourceManager)->GetTexture(L"Tile"), 0, 0, 50, 50);

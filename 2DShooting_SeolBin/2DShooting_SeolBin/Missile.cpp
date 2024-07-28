@@ -67,17 +67,3 @@ void Missile::Render(HDC hdc)
 {
 	Super::Render(hdc);
 }
-
-void Missile::SetCellPos(Vec2Int cellPos, bool teleport /*= false*/)
-{
-	_cellPos = cellPos;
-
-	DevScene* scene = dynamic_cast<DevScene*>(GET_SINGLE(SceneManager)->GetCurrentScene());
-	if (scene == nullptr)
-		return;
-
-	_destPos = scene->ConvertPos(cellPos);
-
-	if (teleport)
-		_pos = _destPos;
-}
