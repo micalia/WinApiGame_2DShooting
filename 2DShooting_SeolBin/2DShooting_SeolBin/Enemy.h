@@ -14,7 +14,11 @@ public:
 	virtual void Tick(float deltaTime) override;
 	virtual void Render(HDC hdc) override;
 
+	virtual void OnComponentBeginOverlap(Collider* collider, Collider* other) override;
+
 	virtual void Fire();
+
+	void Die(Player* WhoHitMe);
 
 	void SetHp(int32 _hp) { _hp = hp; }
 	int32 GetHp() { return hp; }

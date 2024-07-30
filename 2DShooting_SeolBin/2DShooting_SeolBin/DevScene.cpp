@@ -17,16 +17,14 @@
 #include "DestroyZone.h"
 #include "Wall.h"
 #include "EnemySpawnManager.h"
+#include "ExplosionEffect.h"
 
 DevScene::DevScene()
 {
 	GET_SINGLE(ResourceManager)->LoadTexture(L"Background", L"Sprite\\Map\\Background.bmp");
-	//GET_SINGLE(ResourceManager)->LoadTexture(L"Background", L"Sprite\\Map\\Background_mini.bmp");
-	//GET_SINGLE(ResourceManager)->LoadTexture(L"BluePlayer", L"Sprite\\Player\\BluePlayer.bmp", RGB(255, 255, 255)); // old charchter - no animation
 	GET_SINGLE(ResourceManager)->LoadTexture(L"BluePlayer", L"Sprite\\Player\\NewBluePlayerSpriteAnim.bmp", RGB(255, 255, 255));
-	
 	GET_SINGLE(ResourceManager)->CreateSprite(L"Background", GET_SINGLE(ResourceManager)->GetTexture(L"Background"));
-	GET_SINGLE(ResourceManager)->CreateSprite(L"BluePlayer", GET_SINGLE(ResourceManager)->GetTexture(L"BluePlayer"));
+	GET_SINGLE(ResourceManager)->LoadTexture(L"ExplosionEffect", L"Sprite\\Effect\\ExplosionEffect.bmp", RGB(255, 255, 255));
 }
 
 DevScene::~DevScene()
@@ -62,6 +60,12 @@ void DevScene::Init()
 	}
 
 	{
+		Texture* texture = GET_SINGLE(ResourceManager)->GetTexture(L"ExplosionEffect");
+		Flipbook* fb = GET_SINGLE(ResourceManager)->CreateFlipbook(L"FB_ExplosionEffect");
+		fb->SetInfo({ texture, L"FB_ExplosionEffect", {350, 350}, 0, 5, 0, 1.f, false });
+	}
+
+	{
 		Player* BluePlayer = new Player();
 		
 		BluePlayer->SetLayer(LAYER_Player);
@@ -89,6 +93,7 @@ void DevScene::Init()
 		EnemySpawnMgr->SetPos(Vec2(250, 15));
 		AddActor(EnemySpawnMgr);
 	}
+
 
 	/*Sprite* sprite = GET_SINGLE(ResourceManager)->GetSprite(L"Background");
 	{
@@ -126,11 +131,11 @@ void DevScene::Init()
 	{ // Top Wall
 		DestroyZone* destroyZone = new DestroyZone();
 		destroyZone->SetLayer(LAYER_OBJECT);
-		destroyZone->SetPos(Vec2(250.f, 20.f));
+		destroyZone->SetPos(Vec2(250.f, 10.f));
 		{
 			BoxCollider* collider = new BoxCollider();
 			collider->SetShowDebug(true);
-			collider->SetSize(Vec2(460, 20));
+			collider->SetSize(Vec2(460, 10));
 			collider->SetCollisionLayer(CLT_WALL);
 			GET_SINGLE(CollisionManager)->AddCollider(collider);
 			destroyZone->AddComponent(collider);
@@ -141,11 +146,11 @@ void DevScene::Init()
 	{ // Left Wall
 		DestroyZone* destroyZone = new DestroyZone();
 		destroyZone->SetLayer(LAYER_OBJECT);
-		destroyZone->SetPos(Vec2(10.f, 360.f));
+		destroyZone->SetPos(Vec2(10.f, 365.f));
 		{
 			BoxCollider* collider = new BoxCollider();
 			collider->SetShowDebug(true);
-			collider->SetSize(Vec2(10, 640));
+			collider->SetSize(Vec2(10, 700));
 			collider->SetCollisionLayer(CLT_WALL);
 			GET_SINGLE(CollisionManager)->AddCollider(collider);
 			destroyZone->AddComponent(collider);
@@ -156,11 +161,11 @@ void DevScene::Init()
 	{ // Right Wall
 		DestroyZone* destroyZone = new DestroyZone();
 		destroyZone->SetLayer(LAYER_OBJECT);
-		destroyZone->SetPos(Vec2(490.f, 360.f));
+		destroyZone->SetPos(Vec2(490.f, 365.f));
 		{
 			BoxCollider* collider = new BoxCollider();
 			collider->SetShowDebug(true);
-			collider->SetSize(Vec2(10, 640));
+			collider->SetSize(Vec2(10, 700));
 			collider->SetCollisionLayer(CLT_WALL);
 			GET_SINGLE(CollisionManager)->AddCollider(collider);
 			destroyZone->AddComponent(collider);
@@ -171,11 +176,11 @@ void DevScene::Init()
 	{ // Bottom Wall
 		DestroyZone* destroyZone = new DestroyZone();
 		destroyZone->SetLayer(LAYER_OBJECT);
-		destroyZone->SetPos(Vec2(250.f, 695.f));
+		destroyZone->SetPos(Vec2(250.f, 720.f));
 		{
 			BoxCollider* collider = new BoxCollider();
 			collider->SetShowDebug(true);
-			collider->SetSize(Vec2(460, 20));
+			collider->SetSize(Vec2(460, 10));
 			collider->SetCollisionLayer(CLT_WALL);
 			GET_SINGLE(CollisionManager)->AddCollider(collider);
 			destroyZone->AddComponent(collider);

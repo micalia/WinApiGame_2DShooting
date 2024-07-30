@@ -11,7 +11,7 @@ void CollisionManager::Init()
 void CollisionManager::Update()
 {
 	vector<Collider*>& colliders = _colliders;
-
+	//_tprintf(_T("Collision Cnt : %d \n"), colliders.size());
 	for (int32 i = 0; i < colliders.size(); i++)
 	{
 		for (int32 j = i + 1; j < colliders.size(); j++)

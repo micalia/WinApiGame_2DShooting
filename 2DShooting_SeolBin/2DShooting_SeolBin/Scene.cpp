@@ -61,7 +61,7 @@ void Scene::Render(HDC hdc)
 	for (const vector<Actor*>& actors : _actors)
 		for (Actor* actor : actors)
 			actor->Render(hdc);
-
+	
 	/*for (UI* ui : _uis)
 		ui->Render(hdc);*/
 }

@@ -16,6 +16,20 @@ public:
 	void AddActor(Actor* actor);
 	void RemoveActor(Actor* actor);
 
+	template<typename T>
+	T* SpawnActor(Vec2Int pos)
+	{
+		auto isGameObject = std::is_convertible_v<T*, Actor*>;
+		assert(isGameObject);
+
+		T* ret = new T();
+		AddActor(ret);
+
+		ret->BeginPlay();
+
+		return ret;
+	}
+
 public:
 	vector<Actor*> _actors[LAYER_MAXCOUNT];
 	vector<UI*> _uis;

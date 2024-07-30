@@ -20,6 +20,7 @@ void Missile::BeginPlay()
 {
 	Super::BeginPlay();
 
+
 }
 
 void Missile::Tick(float deltaTime)

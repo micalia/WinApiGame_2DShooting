@@ -8,6 +8,8 @@
 #include "ResourceManager.h"
 #include "Sprite.h"
 #include "Scene.h"
+#include "ExplosionEffect.h"
+#include "Missile.h"
 
 Enemy::Enemy()
 {
@@ -44,6 +46,22 @@ void Enemy::Render(HDC hdc)
 	Super::Render(hdc);
 }
 
+void Enemy::OnComponentBeginOverlap(Collider* collider, Collider* other)
+{
+	Super::OnComponentBeginOverlap(collider, other);
+
+	if (other != nullptr) {
+		if (auto missile = dynamic_cast<Missile*>(other->GetOwner())
+			) {
+			GET_SINGLE(CollisionManager)->RemoveCollider(other);
+			GET_SINGLE(SceneManager)->GetCurrentScene()->RemoveActor(missile);
+			GET_SINGLE(CollisionManager)->RemoveCollider(collider);
+			Player* HitPlayer = static_cast<Player*>(other->GetOwner());
+			Die(HitPlayer);
+		}
+	}
+}
+
 void Enemy::Fire()
 { 
 	Vec2 dir = target->GetPos() - GetPos();
@@ -67,4 +85,12 @@ void Enemy::Fire()
 		} 
 		GET_SINGLE(SceneManager)->GetCurrentScene()->AddActor(enemyMissile);
 	}
+}
+
+void Enemy::Die(Player* WhoHitMe)
+{
+	ExplosionEffect* explosionEffect = new ExplosionEffect();
+	explosionEffect->SetPos(GetPos());
+	GET_SINGLE(SceneManager)->GetCurrentScene()->AddActor(explosionEffect);
+	GET_SINGLE(SceneManager)->GetCurrentScene()->RemoveActor(this);
 }

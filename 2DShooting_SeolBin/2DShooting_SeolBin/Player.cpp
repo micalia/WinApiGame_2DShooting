@@ -35,8 +35,6 @@ void Player::BeginPlay()
 
 	bCrashing = false;
 	SetFlipbook(_flipbookIdle);
-
-	
 }
 
 void Player::Tick(float deltaTime)
@@ -57,11 +55,14 @@ void Player::Tick(float deltaTime)
 		BlueMissile->SetSprite(BlueMissileSprite);
 		BlueMissile->SetLayer(LAYER_BULLET); 
 		Vec2Int MissileSpriteSize = BlueMissileSprite->GetSize();
-		BoxCollider* collider = new BoxCollider();
-		collider->SetShowDebug(true);
-		collider->SetSize(Vec2(MissileSpriteSize.x, MissileSpriteSize.y));
-		GET_SINGLE(CollisionManager)->AddCollider(collider);
-		BlueMissile->AddComponent(collider);
+		{
+			BoxCollider* collider = new BoxCollider();
+			collider->SetCollisionLayer(CLT_MISSILE);
+			collider->SetShowDebug(true);
+			collider->SetSize(Vec2(MissileSpriteSize.x, MissileSpriteSize.y));
+			GET_SINGLE(CollisionManager)->AddCollider(collider);
+			BlueMissile->AddComponent(collider);
+		}
 		GET_SINGLE(SceneManager)->GetCurrentScene()->AddActor(BlueMissile);
 	}
 

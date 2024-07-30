@@ -185,6 +185,9 @@
     <ClInclude Include="EnemyMissile.h">
       <Filter>소스 파일\03.Objects</Filter>
     </ClInclude>
+    <ClInclude Include="ExplosionEffect.h">
+      <Filter>소스 파일\03.Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="2DShooting_SeolBin.cpp">
@@ -302,6 +305,9 @@
       <Filter>소스 파일\01.Manager</Filter>
     </ClCompile>
     <ClCompile Include="EnemyMissile.cpp">
+      <Filter>소스 파일\03.Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="ExplosionEffect.cpp">
       <Filter>소스 파일\03.Objects</Filter>
     </ClCompile>
   </ItemGroup>

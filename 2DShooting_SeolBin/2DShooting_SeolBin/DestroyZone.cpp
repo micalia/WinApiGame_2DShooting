@@ -6,6 +6,7 @@
 #include "Missile.h"
 #include "Enemy.h"
 #include "EnemyMissile.h"
+#include "CollisionManager.h"
 
 DestroyZone::DestroyZone()
 {
@@ -41,6 +42,7 @@ void DestroyZone::OnComponentBeginOverlap(Collider* collider, Collider* other)
 			|| dynamic_cast<Enemy*>(other->GetOwner())
 			|| dynamic_cast<EnemyMissile*>(other->GetOwner())
 			) {
+			GET_SINGLE(CollisionManager)->RemoveCollider(other);
 			GET_SINGLE(SceneManager)->GetCurrentScene()->RemoveActor(other->GetOwner());
 		}
 	}
