@@ -157,6 +157,7 @@
     <ClInclude Include="DevScene.h" />
     <ClInclude Include="EditScene.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyMissile.h" />
     <ClInclude Include="EnemySpawnManager.h" />
     <ClInclude Include="Enums.h" />
     <ClInclude Include="Flipbook.h" />
@@ -203,6 +204,7 @@
     <ClCompile Include="DevScene.cpp" />
     <ClCompile Include="EditScene.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyMissile.cpp" />
     <ClCompile Include="EnemySpawnManager.cpp" />
     <ClCompile Include="Flipbook.cpp" />
     <ClCompile Include="FlipbookActor.cpp" />

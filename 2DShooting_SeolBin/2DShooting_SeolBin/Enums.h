@@ -11,9 +11,9 @@ enum class SceneType
 enum LAYER_TYPE
 {
 	LAYER_BACKGROUND,
-	LAYER_Player,
 	LAYER_Enemy,
 	LAYER_BULLET,
+	LAYER_Player,
 	LAYER_OBJECT,
 	LAYER_WALL,
 	// ...

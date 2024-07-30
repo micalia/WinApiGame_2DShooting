@@ -7,6 +7,7 @@
 #include "CollisionManager.h"
 #include "SceneManager.h"
 #include "Scene.h"
+#include "Player.h"
 
 EnemySpawnManager::EnemySpawnManager()
 {
@@ -23,6 +24,12 @@ EnemySpawnManager::~EnemySpawnManager()
 void EnemySpawnManager::BeginPlay()
 {
 	Super::BeginPlay();
+	
+	auto& ActorArr = GET_SINGLE(SceneManager)->GetCurrentScene()->_actors[LAYER_Player];
+
+	for (Actor* actor : ActorArr) {
+		if (target = dynamic_cast<Player*>(actor)) break;
+	}
 
 	{
 		Sprite* HalfMoonEnemySprite = GET_SINGLE(ResourceManager)->GetSprite(L"HalfMoonEnemy");
@@ -32,6 +39,8 @@ void EnemySpawnManager::BeginPlay()
 		halfMoonEnemy->SetLayer(LAYER_Enemy);
 		const Vec2Int size = HalfMoonEnemySprite->GetSize();
 		halfMoonEnemy->SetPos(Vec2(242, 188));
+		halfMoonEnemy->SetTarget(target);
+
 		{
 			BoxCollider* collider = new BoxCollider();
 			collider->SetShowDebug(true);

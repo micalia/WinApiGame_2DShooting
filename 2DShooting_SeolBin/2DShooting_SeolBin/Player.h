@@ -67,6 +67,7 @@ private:
 	Flipbook* _flipbookRightReverse = nullptr;
 
 private:
+	void ReverseAnimDelay(float InDeltaTime);
 	bool bReverseAnimOn;
 	float reverseAnimDelayTime = 0.2;
 	float currReverseAnimDelayTime = 0;

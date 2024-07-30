@@ -35,6 +35,8 @@ void Player::BeginPlay()
 
 	bCrashing = false;
 	SetFlipbook(_flipbookIdle);
+
+	
 }
 
 void Player::Tick(float deltaTime)
@@ -42,7 +44,8 @@ void Player::Tick(float deltaTime)
 	Super::Tick(deltaTime);
 	
 	MoveAction();
-	
+	ReverseAnimDelay(deltaTime);
+
 	if (GET_SINGLE(InputManager)->GetButtonDown(KeyType::SpaceBar))
 	{
 		// TODO : 미사일 발사
@@ -53,9 +56,10 @@ void Player::Tick(float deltaTime)
 		BlueMissile->SetPos(_pos);
 		BlueMissile->SetSprite(BlueMissileSprite);
 		BlueMissile->SetLayer(LAYER_BULLET); 
+		Vec2Int MissileSpriteSize = BlueMissileSprite->GetSize();
 		BoxCollider* collider = new BoxCollider();
 		collider->SetShowDebug(true);
-		collider->SetSize(Vec2(21, 45));
+		collider->SetSize(Vec2(MissileSpriteSize.x, MissileSpriteSize.y));
 		GET_SINGLE(CollisionManager)->AddCollider(collider);
 		BlueMissile->AddComponent(collider);
 		GET_SINGLE(SceneManager)->GetCurrentScene()->AddActor(BlueMissile);
@@ -167,16 +171,7 @@ void Player::MoveAction()
 		SetState(PlayerDir::Idle);
 	}
 
-	if (bReverseAnimOn) {
-		currReverseAnimDelayTime += deltaTime;
-		if (currReverseAnimDelayTime > reverseAnimDelayTime) {
-			bReverseAnimOn = false;
-			currReverseAnimDelayTime = 0;
-			SetFlipbook(_flipbookIdle);
-		}
-	}
-
-
+	
 	UpdateAnimation();
 }
 
@@ -185,20 +180,6 @@ void Player::UpdateAnimation()
 	if (bReverseAnimOn == true) return;
 	if (prevPlayerDir == playerDir) return;
 
-	switch (prevPlayerDir)
-	{
-	case PlayerDir::Idle:
-		_tprintf(_T("Player dir Idle\n"));
-		break;
-	case PlayerDir::Left:
-		_tprintf(_T("Player dir Left\n"));
-		break;
-	case PlayerDir::Right:
-		_tprintf(_T("Player dir Right \n"));
-		break;
-	default:
-		break;
-	}
 	switch (playerDir)
 	{
 	case PlayerDir::Idle:
@@ -233,5 +214,17 @@ void Player::SetState(PlayerDir InDir)
 
 	playerDir = InDir;
 	UpdateAnimation();
+}
+
+void Player::ReverseAnimDelay(float InDeltaTime)
+{
+	if (bReverseAnimOn) {
+		currReverseAnimDelayTime += InDeltaTime;
+		if (currReverseAnimDelayTime > reverseAnimDelayTime) {
+			bReverseAnimOn = false;
+			currReverseAnimDelayTime = 0;
+			SetFlipbook(_flipbookIdle);
+		}
+	}
 }
 

@@ -182,6 +182,9 @@
     <ClInclude Include="EnemySpawnManager.h">
       <Filter>소스 파일\01.Manager</Filter>
     </ClInclude>
+    <ClInclude Include="EnemyMissile.h">
+      <Filter>소스 파일\03.Objects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="2DShooting_SeolBin.cpp">
@@ -297,6 +300,9 @@
     </ClCompile>
     <ClCompile Include="EnemySpawnManager.cpp">
       <Filter>소스 파일\01.Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyMissile.cpp">
+      <Filter>소스 파일\03.Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

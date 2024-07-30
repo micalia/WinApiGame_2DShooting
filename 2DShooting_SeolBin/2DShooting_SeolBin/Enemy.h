@@ -1,5 +1,8 @@
 #pragma once
 #include "SpriteActor.h"
+
+class Player;
+
 class Enemy : public SpriteActor
 {
 	using Super = SpriteActor;
@@ -11,10 +14,18 @@ public:
 	virtual void Tick(float deltaTime) override;
 	virtual void Render(HDC hdc) override;
 
+	virtual void Fire();
+
 	void SetHp(int32 _hp) { _hp = hp; }
 	int32 GetHp() { return hp; }
-private:
+
+	void SetTarget(Player* InTarget) { target = InTarget; };
+protected:
 	int32 hp = 100;
-	float speed = 300;
+	float speed = 10;
+	Player* target = nullptr;
+
+	float fireDelayTime = 1;
+	float fireDelayCurrTime = 0;
 };
 
