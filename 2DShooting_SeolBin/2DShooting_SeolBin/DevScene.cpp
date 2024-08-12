@@ -95,7 +95,7 @@ void DevScene::Init()
 	}
 
 
-	/*Sprite* sprite = GET_SINGLE(ResourceManager)->GetSprite(L"Background");
+	Sprite* sprite = GET_SINGLE(ResourceManager)->GetSprite(L"Background");
 	{
 
 		Background* background = new Background();
@@ -126,7 +126,7 @@ void DevScene::Init()
 		background3->SetPos(Vec2(size.x / 2, Ysize));
 		AddActor(background3);
 	}
-	*/
+	
 #pragma region Wall
 	{ // Top Wall
 		DestroyZone* destroyZone = new DestroyZone();

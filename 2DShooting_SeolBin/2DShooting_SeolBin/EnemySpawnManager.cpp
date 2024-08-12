@@ -38,7 +38,7 @@ void EnemySpawnManager::BeginPlay()
 		halfMoonEnemy->SetSprite(HalfMoonEnemySprite);
 		halfMoonEnemy->SetLayer(LAYER_Enemy);
 		const Vec2Int size = HalfMoonEnemySprite->GetSize();
-		halfMoonEnemy->SetPos(Vec2(242, 188));
+		halfMoonEnemy->SetPos(Vec2(242, 80));
 		halfMoonEnemy->SetTarget(target);
 
 		{
