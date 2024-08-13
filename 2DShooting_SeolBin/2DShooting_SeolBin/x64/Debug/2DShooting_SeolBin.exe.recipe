@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\2DShooting_SeolBin\x64\Debug\2DShooting_SeolBin.exe</FullPath>
+      <FullPath>C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\x64\Debug\2DShooting_SeolBin.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

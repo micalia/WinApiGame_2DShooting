@@ -5,6 +5,7 @@
 #include "SceneManager.h"
 #include "ResourceManager.h"
 #include "SoundManager.h"
+#include "NetworkManager.h"
 
 Game::Game()
 {
@@ -37,6 +38,8 @@ void Game::Init(HWND hwnd)
 	//GET_SINGLE(ResourceManager)->Init(hwnd, fs::path(L"C:\\ProgrammingWorks\\WinApiGame_2DShooting\\2DShooting_SeolBin\\Resources"));  // 3090 PC
 	GET_SINGLE(SoundManager)->Init(hwnd);
 	GET_SINGLE(SceneManager)->ChangeScene(SceneType::DevScene);
+
+	GET_SINGLE(NetworkManager)->Init();
 }
 
 void Game::Update()
@@ -44,6 +47,7 @@ void Game::Update()
 	GET_SINGLE(TimeManager)->Update();
 	GET_SINGLE(InputManager)->Update();
 	GET_SINGLE(SceneManager)->Update();
+	GET_SINGLE(NetworkManager)->Update();
 }
 
 void Game::Render()
