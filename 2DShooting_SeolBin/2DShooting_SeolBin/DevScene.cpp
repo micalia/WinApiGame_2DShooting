@@ -66,26 +66,26 @@ void DevScene::Init()
 	}
 
 	{
-		Player* BluePlayer = new Player();
-		
-		BluePlayer->SetLayer(LAYER_Player);
-		const Vec2Int size = Vec2Int(47, 67);
-		BluePlayer->SetPos(Vec2(242, 588));
-		{
-			BoxCollider* collider = new BoxCollider();
-			collider->SetShowDebug(true);
-			//나의 콜리전 레이어
-			collider->SetCollisionLayer(CLT_PLAYER);
+		//Player* BluePlayer = new Player();
+		//
+		//BluePlayer->SetLayer(LAYER_Player);
+		//const Vec2Int size = Vec2Int(47, 67);
+		//BluePlayer->SetPos(Vec2(242, 588));
+		//{
+		//	BoxCollider* collider = new BoxCollider();
+		//	collider->SetShowDebug(true);
+		//	//나의 콜리전 레이어
+		//	collider->SetCollisionLayer(CLT_PLAYER);
 
-			// 모든 콜리전 플래그 제거
-			collider->ResetCollisionFlag();
-			// 내가 충돌하고 싶은 레이어 추가
-			collider->AddCollisionFlagLayer(CLT_WALL);
-			collider->SetSize(Vec2(size.x, size.y));
-			GET_SINGLE(CollisionManager)->AddCollider(collider);
-			BluePlayer->AddComponent(collider);
-		}
-		AddActor(BluePlayer);
+		//	// 모든 콜리전 플래그 제거
+		//	collider->ResetCollisionFlag();
+		//	// 내가 충돌하고 싶은 레이어 추가
+		//	collider->AddCollisionFlagLayer(CLT_WALL);
+		//	collider->SetSize(Vec2(size.x, size.y));
+		//	GET_SINGLE(CollisionManager)->AddCollider(collider);
+		//	BluePlayer->AddComponent(collider);
+		//}
+		//AddActor(BluePlayer);
 	}
 
 	{

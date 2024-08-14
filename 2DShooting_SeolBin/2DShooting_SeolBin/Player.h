@@ -15,12 +15,18 @@ enum PlayerAnimState {
 	PA_Right
 };
 
-enum class PlayerDir
-{
-	Idle,
-	Left,
-	Right
-};
+#include "Enum.pb.h"
+using PlayerDir = Protocol::PLAYER_DIR_TYPE;
+
+#define PD_IDLE Protocol::PLAYER_DIR_TYPE_IDLE
+#define PD_LEFT Protocol::PLAYER_DIR_TYPE_LEFT
+#define PD_RIGHT Protocol::PLAYER_DIR_TYPE_RIGHT
+//enum class PlayerDir
+//{
+//	Idle,
+//	Left,
+//	Right
+//};
 
 class BoxCollider;
 class Flipbook;
@@ -39,7 +45,7 @@ public:
 	virtual void OnComponentBeginOverlap(Collider* collider, Collider* other) override;
 	virtual void OnComponentEndOverlap(Collider* collider, Collider* other) override;
 
-private:
+protected:
 	void AdjustCollisionPos(BoxCollider* b1, BoxCollider* b2);
 
 	void MoveAction();
@@ -47,14 +53,9 @@ private:
 
 	void SetState(PlayerDir InDir);
 private:
-	PlayerDir playerDir = PlayerDir::Idle;
-	PlayerDir prevPlayerDir = PlayerDir::Idle;
+	PlayerDir playerDir = PD_IDLE;
+	PlayerDir prevPlayerDir = PD_IDLE;
 	PlayerColor Color = PlayerColor::Blue;
-	bool _keyPressed = false;
-
-	float speed = 300; // Default Val : 470
-	float Horizontal = 0;
-	float Vertical = 0;
 
 	bool bCrashing;
 	Vec2 CrashingPos;

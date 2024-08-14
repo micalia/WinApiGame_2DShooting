@@ -129,49 +129,9 @@ void Player::AdjustCollisionPos(BoxCollider* b1, BoxCollider* b2)
 
 void Player::MoveAction()
 {
-	float deltaTime = GET_SINGLE(TimeManager)->GetDeltaTime();
-	// 거리 = 시간 * 속도
+	//_pos = Vec2(info.posx(), info.posy());
 
-	Horizontal = 0;
-	Vertical = 0;
-
-	if (GET_SINGLE(InputManager)->GetButton(KeyType::A))
-	{
-		Horizontal = -1;
-	}
-
-	if (GET_SINGLE(InputManager)->GetButton(KeyType::D))
-	{
-		Horizontal = 1;
-	}
-
-	if (GET_SINGLE(InputManager)->GetButton(KeyType::W))
-	{
-		Vertical = -1;
-	}
-
-	if (GET_SINGLE(InputManager)->GetButton(KeyType::S))
-	{
-		Vertical = 1;
-	}
-
-	Vec2 dir = Vec2(Horizontal, Vertical);
-	dir.Normalize();
-
-	Vec2 moveDir = dir * speed* deltaTime;
-	_pos += moveDir;
-
-	if (Horizontal > 0) {
-		SetState(PlayerDir::Right);
-	}
-	else if(Horizontal < 0)
-	{
-		SetState(PlayerDir::Left);
-	}
-	else {
-		SetState(PlayerDir::Idle);
-	}
-
+	SetState(info.playerdirtype());
 	
 	UpdateAnimation();
 }
@@ -181,25 +141,25 @@ void Player::UpdateAnimation()
 	if (bReverseAnimOn == true) return;
 	if (prevPlayerDir == playerDir) return;
 
-	switch (playerDir)
+	switch (info.playerdirtype())
 	{
-	case PlayerDir::Idle:
-		if (prevPlayerDir == PlayerDir::Idle) {
+	case PD_IDLE:
+		if (prevPlayerDir == PD_IDLE) {
 			SetFlipbook(_flipbookIdle);
 		}
-		else if (prevPlayerDir == PlayerDir::Left) {
+		else if (prevPlayerDir == PD_LEFT) {
 			SetFlipbook(_flipbookLeftReverse);
 			bReverseAnimOn = true;
 		}
-		else if (prevPlayerDir == PlayerDir::Right) {
+		else if (prevPlayerDir == PD_RIGHT) {
 			SetFlipbook(_flipbookRightReverse);
 			bReverseAnimOn = true;
 		}
 		break;
-	case PlayerDir::Left:
+	case PD_LEFT:
 		SetFlipbook(_flipbookLeft);
 		break;
-	case PlayerDir::Right:
+	case PD_RIGHT:
 		SetFlipbook(_flipbookRight);
 		break;
 	default:
@@ -213,6 +173,7 @@ void Player::SetState(PlayerDir InDir)
 	if (playerDir == InDir)
 		return;
 
+	info.set_playerdirtype(InDir);
 	playerDir = InDir;
 	UpdateAnimation();
 }

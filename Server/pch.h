@@ -3,6 +3,10 @@
 #include "CorePch.h"
 
 using GameSessionRef = shared_ptr<class GameSession>;
+using GameRoomRef = shared_ptr<class GameRoom>;
+using GameObjectRef = shared_ptr<class GameObject>;
+using PlayerRef = shared_ptr<class Player>;
+using EnemyRef = shared_ptr<class Enemy>;
 
 #include "Protocol.pb.h"
 #include "Enum.pb.h"

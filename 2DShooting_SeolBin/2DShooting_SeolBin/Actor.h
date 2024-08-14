@@ -14,8 +14,8 @@ public:
 	virtual void Render(HDC hdc);
 
 	//액터의 정중앙
-	void SetPos(Vec2 pos) { _pos = pos; }
-	Vec2 GetPos() { return _pos; }
+	void SetPos(Vec2 pos);
+	Vec2 GetPos();
 
 	void SetLayer(LAYER_TYPE layer) { _layer = layer; }
 	LAYER_TYPE GetLayer() { return _layer; }
@@ -28,10 +28,15 @@ public:
 	virtual void OnComponentBeginOverlap(Collider* collider, Collider* other);
 	virtual void OnComponentEndOverlap(Collider* collider, Collider* other);
 
+	int64 GetObjectID() { return info.objectid(); }
+	void SetObjectID(int64 id){info.set_objectid(id); }
 protected:
 	Vec2 _pos = { 0, 0 };
 	Vec2 _destPos = { 0, 0 };
 	LAYER_TYPE _layer = LAYER_OBJECT;
 	vector<Component*> _components;
+
+public:
+	Protocol::ObjectInfo info;
 };
 

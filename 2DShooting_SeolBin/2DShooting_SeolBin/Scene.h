@@ -17,7 +17,7 @@ public:
 	void RemoveActor(Actor* actor);
 
 	template<typename T>
-	T* SpawnActor(Vec2Int pos)
+	T* SpawnActor(Vec2 pos)
 	{
 		auto isGameObject = std::is_convertible_v<T*, Actor*>;
 		assert(isGameObject);

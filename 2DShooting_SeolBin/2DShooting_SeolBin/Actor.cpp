@@ -38,6 +38,19 @@ void Actor::Render(HDC hdc)
 	}
 }
 
+void Actor::SetPos(Vec2 pos)
+{
+	info.set_posx(pos.x);
+	info.set_posy(pos.y);
+
+	_pos = Vec2(pos);
+}
+
+Vec2 Actor::GetPos()
+{
+	return Vec2{info.posx(), info.posy()};
+}
+
 void Actor::AddComponent(Component* component)
 {
 	if (component == nullptr)

@@ -17,6 +17,6 @@ message ObjectInfo
 	PLAYER_DIR_TYPE playerDirType = 3;
 	int32 hp = 4;
 	int32 maxHp = 5;
-	int32 posX = 6;
-	int32 posY = 7;
+	float posX = 6;
+	float posY = 7;
 }

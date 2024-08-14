@@ -1,7 +1,11 @@
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\Enemy.cpp;C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\x64\Debug\Enemy.obj
 C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\Enum.pb.cc;C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\x64\Debug\Enum.pb.obj
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\GameObject.cpp;C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\x64\Debug\GameObject.obj
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\GameRoom.cpp;C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\x64\Debug\GameRoom.obj
 C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\GameSession.cpp;C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\x64\Debug\GameSession.obj
 C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\GameSessionManager.cpp;C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\x64\Debug\GameSessionManager.obj
 C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\pch.cpp;C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\x64\Debug\pch.obj
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\Player.cpp;C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\x64\Debug\Player.obj
 C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\Protocol.pb.cc;C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\x64\Debug\Protocol.pb.obj
 C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\Server.cpp;C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\x64\Debug\Server.obj
 C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\ServerPacketHandler.cpp;C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\x64\Debug\ServerPacketHandler.obj
