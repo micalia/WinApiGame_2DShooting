@@ -45,13 +45,13 @@ public:
 	virtual void OnComponentBeginOverlap(Collider* collider, Collider* other) override;
 	virtual void OnComponentEndOverlap(Collider* collider, Collider* other) override;
 
+	void SetState(PlayerDir InDir);
 protected:
 	void AdjustCollisionPos(BoxCollider* b1, BoxCollider* b2);
 
 	void MoveAction();
 	void UpdateAnimation();
 
-	void SetState(PlayerDir InDir);
 private:
 	PlayerDir playerDir = PD_IDLE;
 	PlayerDir prevPlayerDir = PD_IDLE;

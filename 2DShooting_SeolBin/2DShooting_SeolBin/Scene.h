@@ -1,5 +1,6 @@
 #pragma once
 
+class GameObject;
 class Actor;
 class UI;
 
@@ -30,6 +31,10 @@ public:
 		return ret;
 	}
 
+	void Handle_S_AddObject(Protocol::S_AddObject& pkt);
+	void Handle_S_RemoveObject(Protocol::S_RemoveObject& pkt);
+
+	GameObject* GetObject(uint64 id);
 public:
 	vector<Actor*> _actors[LAYER_MAXCOUNT];
 	vector<UI*> _uis;

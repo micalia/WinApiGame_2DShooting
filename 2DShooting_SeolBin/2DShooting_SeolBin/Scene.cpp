@@ -5,6 +5,9 @@
 #include "SceneManager.h"
 #include "UI.h"
 #include "CollisionManager.h"
+#include "Player.h"
+#include "Enemy.h"
+//#include "../Server/GameObject.h"
 
 Scene::Scene()
 {
@@ -81,4 +84,54 @@ void Scene::RemoveActor(Actor* actor)
 
 	vector<Actor*>& v = _actors[actor->GetLayer()];
 	v.erase(std::remove(v.begin(), v.end(), actor), v.end());
+}
+
+void Scene::Handle_S_AddObject(Protocol::S_AddObject& pkt)
+{
+	uint64 myPlayerId = GET_SINGLE(SceneManager)->GetMyPlayerId();
+
+	const int32 size = pkt.objects_size();
+	for (int32 i = 0; i < size; i++)
+	{
+		const Protocol::ObjectInfo& info = pkt.objects(i);
+		if (myPlayerId == info.objectid())
+			continue;
+
+		if (info.objecttype() == Protocol::OBJECT_TYPE_PLAYER)
+		{
+			Player* player = SpawnActor<Player>(Vec2{ info.posx(), info.posy() });
+			player->SetState(info.playerdirtype());
+			player->info = info;
+		}
+		else if (info.objecttype() == Protocol::OBJECT_TYPE_ENEMY)
+		{
+			Enemy* enemy = SpawnActor<Enemy>(Vec2{ info.posx(), info.posy() });
+			enemy->info = info;
+		}
+	}
+}
+
+void Scene::Handle_S_RemoveObject(Protocol::S_RemoveObject& pkt)
+{
+	const int32 size = pkt.ids_size();
+	for (int32 i = 0; i < size; i++)
+	{
+		int32 id = pkt.ids(i);
+
+		/*Actor* object = GetObject(id);
+		if (object)
+			RemoveActor(object);*/
+	}
+}
+
+GameObject* Scene::GetObject(uint64 id)
+{
+	for (Actor* actor : _actors[LAYER_OBJECT])
+	{
+		/*GameObject* gameObject = dynamic_cast<GameObject*>(actor);
+		if (gameObject && gameObject->info.objectid() == id)
+			return gameObject;*/
+	}
+
+	return nullptr;
 }
