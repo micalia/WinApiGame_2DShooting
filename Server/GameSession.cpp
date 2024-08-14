@@ -16,8 +16,8 @@ void GameSession::OnDisconnected()
 }
 
 void GameSession::OnRecvPacket(BYTE* buffer, int32 len)
-{
-	ServerPacketHandler::HandlePacket(buffer, len);
+{ 
+	ServerPacketHandler::HandlePacket(static_pointer_cast<GameSession>(shared_from_this()), buffer, len);
 }
 
 void GameSession::OnSend(int32 len)

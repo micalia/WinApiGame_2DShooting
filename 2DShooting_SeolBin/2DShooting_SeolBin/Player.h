@@ -7,7 +7,6 @@ enum class PlayerColor
 	Red
 };
 
-
 enum PlayerAnimState {
 	PA_Left,
 	PA_LeftReady,

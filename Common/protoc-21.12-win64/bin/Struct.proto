@@ -9,3 +9,14 @@ message BuffData
 	float remainTime = 2;
 	repeated uint64 victims = 3;
 }
+
+message ObjectInfo
+{
+	uint64 objectId = 1;
+	OBJECT_TYPE objectType = 2;
+	PLAYER_DIR_TYPE playerDirType = 3;
+	int32 hp = 4;
+	int32 maxHp = 5;
+	int32 posX = 6;
+	int32 posY = 7;
+}
