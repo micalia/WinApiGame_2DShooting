@@ -19,4 +19,11 @@ message ObjectInfo
 	int32 maxHp = 5;
 	float posX = 6;
 	float posY = 7;
+	string name = 8;
+}
+
+message ProjectileInfo
+{
+	OBJECT_TYPE objOwnerType = 1;
+	string objOwnerName = 2;
 }

@@ -41,6 +41,9 @@ public:
 	virtual void OnComponentEndOverlap(Collider* collider, Collider* other) override;
 
 	virtual void SetState(PlayerDir InDir) override;
+
+	string GetName(){ return _name; }
+	void SetName(string name){ _name = name; }
 protected:
 	void AdjustCollisionPos(BoxCollider* b1, BoxCollider* b2);
 
@@ -64,6 +67,7 @@ private:
 	Flipbook* _flipbookLeftReverse = nullptr;
 	Flipbook* _flipbookRightReverse = nullptr;
 
+	string _name = "";
 private:
 	void ReverseAnimDelay(float InDeltaTime);
 	bool bReverseAnimOn;

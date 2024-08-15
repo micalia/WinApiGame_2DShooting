@@ -52,10 +52,14 @@ extern BuffDataDefaultTypeInternal _BuffData_default_instance_;
 class ObjectInfo;
 struct ObjectInfoDefaultTypeInternal;
 extern ObjectInfoDefaultTypeInternal _ObjectInfo_default_instance_;
+class ProjectileInfo;
+struct ProjectileInfoDefaultTypeInternal;
+extern ProjectileInfoDefaultTypeInternal _ProjectileInfo_default_instance_;
 }  // namespace Protocol
 PROTOBUF_NAMESPACE_OPEN
 template<> ::Protocol::BuffData* Arena::CreateMaybeMessage<::Protocol::BuffData>(Arena*);
 template<> ::Protocol::ObjectInfo* Arena::CreateMaybeMessage<::Protocol::ObjectInfo>(Arena*);
+template<> ::Protocol::ProjectileInfo* Arena::CreateMaybeMessage<::Protocol::ProjectileInfo>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
 namespace Protocol {
 
@@ -366,6 +370,7 @@ class ObjectInfo final :
   // accessors -------------------------------------------------------
 
   enum : int {
+    kNameFieldNumber = 8,
     kObjectIdFieldNumber = 1,
     kObjectTypeFieldNumber = 2,
     kPlayerDirTypeFieldNumber = 3,
@@ -374,6 +379,20 @@ class ObjectInfo final :
     kPosXFieldNumber = 6,
     kPosYFieldNumber = 7,
   };
+  // string name = 8;
+  void clear_name();
+  const std::string& name() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_name(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_name();
+  PROTOBUF_NODISCARD std::string* release_name();
+  void set_allocated_name(std::string* name);
+  private:
+  const std::string& _internal_name() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_name(const std::string& value);
+  std::string* _internal_mutable_name();
+  public:
+
   // uint64 objectId = 1;
   void clear_objectid();
   uint64_t objectid() const;
@@ -445,6 +464,7 @@ class ObjectInfo final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr name_;
     uint64_t objectid_;
     int objecttype_;
     int playerdirtype_;
@@ -452,6 +472,170 @@ class ObjectInfo final :
     int32_t maxhp_;
     float posx_;
     float posy_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_Struct_2eproto;
+};
+// -------------------------------------------------------------------
+
+class ProjectileInfo final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Protocol.ProjectileInfo) */ {
+ public:
+  inline ProjectileInfo() : ProjectileInfo(nullptr) {}
+  ~ProjectileInfo() override;
+  explicit PROTOBUF_CONSTEXPR ProjectileInfo(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  ProjectileInfo(const ProjectileInfo& from);
+  ProjectileInfo(ProjectileInfo&& from) noexcept
+    : ProjectileInfo() {
+    *this = ::std::move(from);
+  }
+
+  inline ProjectileInfo& operator=(const ProjectileInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline ProjectileInfo& operator=(ProjectileInfo&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const ProjectileInfo& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const ProjectileInfo* internal_default_instance() {
+    return reinterpret_cast<const ProjectileInfo*>(
+               &_ProjectileInfo_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    2;
+
+  friend void swap(ProjectileInfo& a, ProjectileInfo& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(ProjectileInfo* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(ProjectileInfo* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  ProjectileInfo* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<ProjectileInfo>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const ProjectileInfo& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const ProjectileInfo& from) {
+    ProjectileInfo::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(ProjectileInfo* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "Protocol.ProjectileInfo";
+  }
+  protected:
+  explicit ProjectileInfo(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kObjOwnerNameFieldNumber = 2,
+    kObjOwnerTypeFieldNumber = 1,
+  };
+  // string objOwnerName = 2;
+  void clear_objownername();
+  const std::string& objownername() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_objownername(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_objownername();
+  PROTOBUF_NODISCARD std::string* release_objownername();
+  void set_allocated_objownername(std::string* objownername);
+  private:
+  const std::string& _internal_objownername() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_objownername(const std::string& value);
+  std::string* _internal_mutable_objownername();
+  public:
+
+  // .Protocol.OBJECT_TYPE objOwnerType = 1;
+  void clear_objownertype();
+  ::Protocol::OBJECT_TYPE objownertype() const;
+  void set_objownertype(::Protocol::OBJECT_TYPE value);
+  private:
+  ::Protocol::OBJECT_TYPE _internal_objownertype() const;
+  void _internal_set_objownertype(::Protocol::OBJECT_TYPE value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:Protocol.ProjectileInfo)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr objownername_;
+    int objownertype_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -699,9 +883,135 @@ inline void ObjectInfo::set_posy(float value) {
   // @@protoc_insertion_point(field_set:Protocol.ObjectInfo.posY)
 }
 
+// string name = 8;
+inline void ObjectInfo::clear_name() {
+  _impl_.name_.ClearToEmpty();
+}
+inline const std::string& ObjectInfo::name() const {
+  // @@protoc_insertion_point(field_get:Protocol.ObjectInfo.name)
+  return _internal_name();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void ObjectInfo::set_name(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:Protocol.ObjectInfo.name)
+}
+inline std::string* ObjectInfo::mutable_name() {
+  std::string* _s = _internal_mutable_name();
+  // @@protoc_insertion_point(field_mutable:Protocol.ObjectInfo.name)
+  return _s;
+}
+inline const std::string& ObjectInfo::_internal_name() const {
+  return _impl_.name_.Get();
+}
+inline void ObjectInfo::_internal_set_name(const std::string& value) {
+  
+  _impl_.name_.Set(value, GetArenaForAllocation());
+}
+inline std::string* ObjectInfo::_internal_mutable_name() {
+  
+  return _impl_.name_.Mutable(GetArenaForAllocation());
+}
+inline std::string* ObjectInfo::release_name() {
+  // @@protoc_insertion_point(field_release:Protocol.ObjectInfo.name)
+  return _impl_.name_.Release();
+}
+inline void ObjectInfo::set_allocated_name(std::string* name) {
+  if (name != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.name_.SetAllocated(name, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.name_.IsDefault()) {
+    _impl_.name_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:Protocol.ObjectInfo.name)
+}
+
+// -------------------------------------------------------------------
+
+// ProjectileInfo
+
+// .Protocol.OBJECT_TYPE objOwnerType = 1;
+inline void ProjectileInfo::clear_objownertype() {
+  _impl_.objownertype_ = 0;
+}
+inline ::Protocol::OBJECT_TYPE ProjectileInfo::_internal_objownertype() const {
+  return static_cast< ::Protocol::OBJECT_TYPE >(_impl_.objownertype_);
+}
+inline ::Protocol::OBJECT_TYPE ProjectileInfo::objownertype() const {
+  // @@protoc_insertion_point(field_get:Protocol.ProjectileInfo.objOwnerType)
+  return _internal_objownertype();
+}
+inline void ProjectileInfo::_internal_set_objownertype(::Protocol::OBJECT_TYPE value) {
+  
+  _impl_.objownertype_ = value;
+}
+inline void ProjectileInfo::set_objownertype(::Protocol::OBJECT_TYPE value) {
+  _internal_set_objownertype(value);
+  // @@protoc_insertion_point(field_set:Protocol.ProjectileInfo.objOwnerType)
+}
+
+// string objOwnerName = 2;
+inline void ProjectileInfo::clear_objownername() {
+  _impl_.objownername_.ClearToEmpty();
+}
+inline const std::string& ProjectileInfo::objownername() const {
+  // @@protoc_insertion_point(field_get:Protocol.ProjectileInfo.objOwnerName)
+  return _internal_objownername();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void ProjectileInfo::set_objownername(ArgT0&& arg0, ArgT... args) {
+ 
+ _impl_.objownername_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:Protocol.ProjectileInfo.objOwnerName)
+}
+inline std::string* ProjectileInfo::mutable_objownername() {
+  std::string* _s = _internal_mutable_objownername();
+  // @@protoc_insertion_point(field_mutable:Protocol.ProjectileInfo.objOwnerName)
+  return _s;
+}
+inline const std::string& ProjectileInfo::_internal_objownername() const {
+  return _impl_.objownername_.Get();
+}
+inline void ProjectileInfo::_internal_set_objownername(const std::string& value) {
+  
+  _impl_.objownername_.Set(value, GetArenaForAllocation());
+}
+inline std::string* ProjectileInfo::_internal_mutable_objownername() {
+  
+  return _impl_.objownername_.Mutable(GetArenaForAllocation());
+}
+inline std::string* ProjectileInfo::release_objownername() {
+  // @@protoc_insertion_point(field_release:Protocol.ProjectileInfo.objOwnerName)
+  return _impl_.objownername_.Release();
+}
+inline void ProjectileInfo::set_allocated_objownername(std::string* objownername) {
+  if (objownername != nullptr) {
+    
+  } else {
+    
+  }
+  _impl_.objownername_.SetAllocated(objownername, GetArenaForAllocation());
+#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.objownername_.IsDefault()) {
+    _impl_.objownername_.Set("", GetArenaForAllocation());
+  }
+#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  // @@protoc_insertion_point(field_set_allocated:Protocol.ProjectileInfo.objOwnerName)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 

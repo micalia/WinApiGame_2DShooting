@@ -100,6 +100,7 @@ void Scene::Handle_S_AddObject(Protocol::S_AddObject& pkt)
 		{
 			Player* player = SpawnActor<Player>(Vec2{ info.posx(), info.posy() });
 			player->SetState(info.playerdirtype());
+			player->SetName(info.name());
 			player->info = info;
 		}
 		else if (info.objecttype() == Protocol::OBJECT_TYPE_ENEMY)

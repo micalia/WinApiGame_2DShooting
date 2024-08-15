@@ -8,5 +8,6 @@ public:
 
 public:
 	GameSessionRef session;
+	string name;
 };
 

@@ -70,6 +70,9 @@ void Player::Tick(float deltaTime)
 		SetPos(CrashingPos);
 	}
 
+	string val = GetName();
+	printf("myid : %d / Val : %s \n", GetObjectID(), val.c_str());
+
 	uint64 myPlayerId = GET_SINGLE(SceneManager)->GetMyPlayerId();
 	if (myPlayerId != info.objectid()) {
 		ClientTimeSinceUpdate += deltaTime;

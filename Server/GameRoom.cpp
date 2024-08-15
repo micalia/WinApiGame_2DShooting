@@ -35,11 +35,31 @@ void GameRoom::EnterRoom(GameSessionRef session)
 	session->gameRoom = GetRoomRef();
 	session->player = player;
 	player->session = session;
+	
+	// 첫번째 입장은 무조건 BluePlayer
+	if (_players.size() == 0) {
+		player->info.set_name("BluePlayer");
+	}
+	else {
+		for (auto it = _players.begin(); it != _players.end(); it ++)
+		{
+			if (it->second->name == "BluePlayer") {
+				player->info.set_name("RedPlayer");
+				break;
+			}
+			else if (it->second->name == "RedPlayer") {
+				player->info.set_name("BluePlayer");
+				break;
+			}
+		}
+	}
 
 	//TEMP
+	player->info.set_hp(123);
 	player->info.set_posx(242);
 	player->info.set_posy(488);
 	
+
 	// 입장한 클라에게 정보를 보내주기
 	{
 		SendBufferRef sendBuffer = ServerPacketHandler::Make_S_MyPlayer(player->info);
@@ -120,10 +140,32 @@ void GameRoom::AddObject(ActorRef gameObject)
 	
 	auto objectType = gameObject->info.objecttype();
 
+	string playerName;
+	if (_players.size() == 0) {
+		gameObject->info.set_name("BluePlayer");
+		playerName = "BluePlayer";
+	}
+	else {
+		for (auto it = _players.begin(); it != _players.end(); it++)
+		{
+			if (it->second->name == "BluePlayer") {
+				gameObject->info.set_name("RedPlayer");
+				playerName = "RedPlayer";
+				break;
+			}
+			else if (it->second->name == "RedPlayer") {
+				gameObject->info.set_name("BluePlayer");
+				playerName = "BluePlayer";
+				break;
+			}
+		}
+	}
+
 	switch (objectType) 
 	{
 		case Protocol::OBJECT_TYPE_PLAYER:
 			_players[id] = static_pointer_cast<Player>(gameObject);
+			_players[id]->name = playerName;
 			break;
 		case Protocol::OBJECT_TYPE_ENEMY: 
 			_enemies[id] = static_pointer_cast<Enemy>(gameObject);
@@ -136,7 +178,7 @@ void GameRoom::AddObject(ActorRef gameObject)
 	//TODO 신규 오브젝트 전송
 	{
 		Protocol::S_AddObject pkt;
-
+		auto asdf = gameObject->info.name().c_str();
 		Protocol::ObjectInfo* info = pkt.add_objects();
 		*info = gameObject->info;
 

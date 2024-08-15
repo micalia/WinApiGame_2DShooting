@@ -23,7 +23,6 @@ void MyPlayer::Tick(float deltaTime)
 	Super::Tick(deltaTime);
 	TickInput();
 	MoveAction();
-
 	SyncToServer();
 }
 

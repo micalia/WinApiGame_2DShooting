@@ -88,6 +88,7 @@ void ClientPacketHandler::Handle_S_MyPlayer(ServerSessionRef session, BYTE* buff
 		MyPlayer* myPlayer = scene->SpawnActor<MyPlayer>(Vec2{ info.posx(), info.posy()});
 		//MyPlayer* myPlayer = scene->SpawnActor<MyPlayer>(Vec2{ info.posx(), info.posy() });
 		myPlayer->SetLayer(LAYER_Player);
+		myPlayer->SetName(info.name().c_str());
 		const Vec2Int size = Vec2Int(47, 67);
 		{
 			BoxCollider* collider = new BoxCollider();
