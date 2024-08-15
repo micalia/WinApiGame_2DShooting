@@ -56,7 +56,7 @@
     <ClCompile Include="Enum.pb.cc">
       <Filter>소스 파일\Protocol</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject.cpp">
+    <ClCompile Include="Actor.cpp">
       <Filter>소스 파일\Game\Object</Filter>
     </ClCompile>
     <ClCompile Include="GameRoom.cpp">
@@ -91,7 +91,7 @@
     <ClInclude Include="Struct.pb.h">
       <Filter>소스 파일\Protocol</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.h">
+    <ClInclude Include="Actor.h">
       <Filter>소스 파일\Game\Object</Filter>
     </ClInclude>
     <ClInclude Include="GameRoom.h">

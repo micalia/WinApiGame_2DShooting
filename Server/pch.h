@@ -4,7 +4,7 @@
 
 using GameSessionRef = shared_ptr<class GameSession>;
 using GameRoomRef = shared_ptr<class GameRoom>;
-using GameObjectRef = shared_ptr<class GameObject>;
+using ActorRef = shared_ptr<class Actor>;
 using PlayerRef = shared_ptr<class Player>;
 using EnemyRef = shared_ptr<class Enemy>;
 

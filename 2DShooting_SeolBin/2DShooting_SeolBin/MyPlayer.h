@@ -16,6 +16,11 @@ private:
 	void MoveAction();
 
 private:
+	void SyncToServer();
+	float currPacketSendDelay = 0;
+	float PacketSendDelay = 0.1f;
+
+private:
 	float speed = 300; // Default Val : 470
 	float Horizontal = 0;
 	float Vertical = 0;

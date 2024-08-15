@@ -39,14 +39,13 @@
   계속하려면 아무 키나 누르십시오 . . . 
   pch.cpp
   Enemy.cpp
-  GameObject.cpp
+  Actor.cpp
   GameRoom.cpp
   GameSession.cpp
   GameSessionManager.cpp
   Player.cpp
   Server.cpp
   ServerPacketHandler.cpp
-C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\ServerPacketHandler.cpp(18,2): warning C4065: switch문에 'default'가 있으나 'case' 레이블이 없습니다.
   코드를 생성하고 있습니다...
   Enum.pb.cc
   Protocol.pb.cc

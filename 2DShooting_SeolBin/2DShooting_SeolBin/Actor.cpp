@@ -24,6 +24,8 @@ void Actor::BeginPlay()
 
 void Actor::Tick(float deltaTime)
 {
+	_dirtyFlag = false;
+
 	for (Component* component : _components)
 	{
 		component->TickComponent();

@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "GameRoom.h"
 #include "Player.h"
-#include "GameObject.h"
+#include "Actor.h"
 #include "GameSession.h"
 #include "Enemy.h"
 
@@ -29,7 +29,7 @@ void GameRoom::Update()
 
 void GameRoom::EnterRoom(GameSessionRef session)
 {
-	PlayerRef player = GameObject::CreatePlayer();
+	PlayerRef player = Actor::CreatePlayer();
 	
 	// 서로의 존재를 연결
 	session->gameRoom = GetRoomRef();
@@ -38,7 +38,7 @@ void GameRoom::EnterRoom(GameSessionRef session)
 
 	//TEMP
 	player->info.set_posx(242);
-	player->info.set_posy(188);
+	player->info.set_posy(488);
 	
 	// 입장한 클라에게 정보를 보내주기
 	{
@@ -76,11 +76,11 @@ void GameRoom::LeaveRoom(GameSessionRef session)
 		return;
 
 	uint64 id = session->player.lock()->info.objectid();
-	GameObjectRef gameObject = FindObject(id);
+	ActorRef gameObject = FindObject(id);
 	RemoveObject(id);
 }
 
-GameObjectRef GameRoom::FindObject(uint64 id)
+ActorRef GameRoom::FindObject(uint64 id)
 {
 	{
 		auto findIt = _players.find(id);
@@ -96,7 +96,25 @@ GameObjectRef GameRoom::FindObject(uint64 id)
 	return nullptr;
 }
 
-void GameRoom::AddObject(GameObjectRef gameObject)
+void GameRoom::Handle_C_Move(Protocol::C_Move& pkt)
+{
+	uint64 id = pkt.info().objectid();
+	ActorRef gameObject = FindObject(id);
+	if (gameObject == nullptr)
+		return;
+
+	// TODO : Validation
+	gameObject->info.set_playerdirtype(pkt.info().playerdirtype());
+	gameObject->info.set_posx(pkt.info().posx());
+	gameObject->info.set_posy(pkt.info().posy());
+
+	{
+		SendBufferRef sendBuffer = ServerPacketHandler::Make_S_Move(pkt.info());
+		Broadcast(sendBuffer);
+	}
+}
+
+void GameRoom::AddObject(ActorRef gameObject)
 {
 	uint64 id = gameObject->info.objectid();
 	
@@ -129,7 +147,7 @@ void GameRoom::AddObject(GameObjectRef gameObject)
 
 void GameRoom::RemoveObject(uint64 id)
 {
-	GameObjectRef gameObject = FindObject(id);
+	ActorRef gameObject = FindObject(id);
 	if(gameObject == nullptr)
 		return;
 

@@ -36,6 +36,7 @@ protected:
 	LAYER_TYPE _layer = LAYER_OBJECT;
 	vector<Component*> _components;
 
+	bool _dirtyFlag = false;
 public:
 	Protocol::ObjectInfo info;
 };

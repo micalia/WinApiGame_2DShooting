@@ -1,21 +1,21 @@
 #include "pch.h"
-#include "GameObject.h"
+#include "Actor.h"
 #include "Player.h"
 #include "Enemy.h"
 
-atomic<uint64> GameObject::s_idGenerator = 1;
+atomic<uint64> Actor::s_idGenerator = 1;
 
-GameObject::GameObject()
+Actor::Actor()
 {
 
 }
 
-GameObject::~GameObject()
+Actor::~Actor()
 {
 
 }
 
-PlayerRef GameObject::CreatePlayer()
+PlayerRef Actor::CreatePlayer()
 {
 	PlayerRef player = make_shared<Player>();
 	player->info.set_objectid(s_idGenerator++);
@@ -24,7 +24,7 @@ PlayerRef GameObject::CreatePlayer()
 	return player;
 }
 
-EnemyRef GameObject::CreateEnemy()
+EnemyRef Actor::CreateEnemy()
 {
 	EnemyRef enemy = make_shared<Enemy>();
 	enemy->info.set_objectid(s_idGenerator++);

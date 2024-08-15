@@ -1,6 +1,6 @@
 #pragma once
-#include "GameObject.h"
-class Player : public GameObject
+#include "Actor.h"
+class Player : public Actor
 {
 public:
 	Player();

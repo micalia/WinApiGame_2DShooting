@@ -1,9 +1,9 @@
 #pragma once
-class GameObject : public enable_shared_from_this<GameObject>
+class Actor : public enable_shared_from_this<Actor>
 {
 public:
-	GameObject();
-	virtual ~GameObject();
+	Actor();
+	virtual ~Actor();
 
 	static PlayerRef CreatePlayer();
 	static EnemyRef CreateEnemy();

@@ -10,10 +10,13 @@ public:
 
 	void EnterRoom(GameSessionRef session);
 	void LeaveRoom(GameSessionRef session);
-	GameObjectRef FindObject(uint64 id);
+	ActorRef FindObject(uint64 id);
 	GameRoomRef GetRoomRef(){return shared_from_this(); }
 
-	void AddObject(GameObjectRef gameObject);
+public:
+	void Handle_C_Move(Protocol::C_Move& pkt);
+
+	void AddObject(ActorRef gameObject);
 	void RemoveObject(uint64 id);
 	void Broadcast(SendBufferRef& sendBuffer);
 private:

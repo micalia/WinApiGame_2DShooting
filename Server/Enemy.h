@@ -1,8 +1,8 @@
 #pragma once
-#include "GameObject.h"
-class Enemy : public GameObject
+#include "Actor.h"
+class Enemy : public Actor
 {
-	using Super = GameObject;
+	using Super = Actor;
 public:
 	Enemy();
 	virtual ~Enemy();

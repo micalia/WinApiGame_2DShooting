@@ -130,7 +130,7 @@ void Player::AdjustCollisionPos(BoxCollider* b1, BoxCollider* b2)
 void Player::MoveAction()
 {
 	//_pos = Vec2(info.posx(), info.posy());
-
+	
 	SetState(info.playerdirtype());
 	
 	UpdateAnimation();
@@ -176,6 +176,7 @@ void Player::SetState(PlayerDir InDir)
 	info.set_playerdirtype(InDir);
 	playerDir = InDir;
 	UpdateAnimation();
+	_dirtyFlag = true;
 }
 
 void Player::ReverseAnimDelay(float InDeltaTime)

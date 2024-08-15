@@ -7,7 +7,6 @@
 #include "CollisionManager.h"
 #include "Player.h"
 #include "Enemy.h"
-//#include "../Server/GameObject.h"
 
 Scene::Scene()
 {
@@ -118,19 +117,18 @@ void Scene::Handle_S_RemoveObject(Protocol::S_RemoveObject& pkt)
 	{
 		int32 id = pkt.ids(i);
 
-		/*Actor* object = GetObject(id);
+		Actor* object = GetObject(id);
 		if (object)
-			RemoveActor(object);*/
+			RemoveActor(object);
 	}
 }
 
-GameObject* Scene::GetObject(uint64 id)
+Actor* Scene::GetObject(uint64 id)
 {
 	for (Actor* actor : _actors[LAYER_OBJECT])
 	{
-		/*GameObject* gameObject = dynamic_cast<GameObject*>(actor);
-		if (gameObject && gameObject->info.objectid() == id)
-			return gameObject;*/
+		if (actor && actor->info.objectid() == id)
+			return actor;
 	}
 
 	return nullptr;

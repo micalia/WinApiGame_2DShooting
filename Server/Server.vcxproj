@@ -162,7 +162,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="Actor.cpp" />
     <ClCompile Include="GameRoom.cpp" />
     <ClCompile Include="GameSession.cpp" />
     <ClCompile Include="GameSessionManager.cpp" />
@@ -185,7 +185,7 @@
   <ItemGroup>
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Enum.pb.h" />
-    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="Actor.h" />
     <ClInclude Include="GameRoom.h" />
     <ClInclude Include="GameSession.h" />
     <ClInclude Include="GameSessionManager.h" />

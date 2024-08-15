@@ -23,11 +23,15 @@ void MyPlayer::Tick(float deltaTime)
 	Super::Tick(deltaTime);
 	TickInput();
 	MoveAction();
+
+	SyncToServer();
 }
 
 void MyPlayer::Render(HDC hdc)
 {
 	Super::Render(hdc);
+
+	Utils::DrawCircle(hdc, _pos, 10);
 }
 
 void MyPlayer::TickInput()
@@ -76,4 +80,22 @@ void MyPlayer::MoveAction()
 
 	Vec2 moveDir = dir * speed * deltaTime;
 	_pos += moveDir;
+
+	info.set_posx(_pos.x);
+	info.set_posy(_pos.y);
+
+	currPacketSendDelay+=deltaTime;
+	if (currPacketSendDelay > PacketSendDelay) {
+		_dirtyFlag = true;
+		currPacketSendDelay = 0;
+	}
+}
+
+void MyPlayer::SyncToServer()
+{
+	if(_dirtyFlag == false)
+		return;
+
+	SendBufferRef sendBuffer = ClientPacketHandler::Make_C_Move();
+	GET_SINGLE(NetworkManager)->SendPacket(sendBuffer);
 }

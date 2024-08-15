@@ -12,19 +12,7 @@
 #include "Struct.pb.h"
 #include <assert.h>
 #include "ClientPacketHandler.h"
-
-//#include <windows.h>
-//#include <vector>
-//#include <list>
-//#include <map>
-//#include <unordered_map>
-//#include <set>
-//#include <unordered_set>
-//#include <string>
-//#include <algorithm>
-//#include <functional>
-//using namespace std;
-
+#include "NetworkManager.h"
 
 #include <tchar.h> // _tfreopen, _tprintf¸¦ »ç¿ë
 
