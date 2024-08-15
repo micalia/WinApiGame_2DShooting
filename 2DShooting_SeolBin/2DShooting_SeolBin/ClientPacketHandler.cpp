@@ -155,6 +155,7 @@ void ClientPacketHandler::Handle_S_Move(ServerSessionRef session, BYTE* buffer, 
 
 		Actor* actor = scene->GetObject(info.objectid());
 		if (actor) {
+			actor->SetState(info.playerdirtype());
 			actor->SetPos(Vec2{info.posx(), info.posy()});
 		}
 	}

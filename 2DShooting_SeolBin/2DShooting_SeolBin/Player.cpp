@@ -69,6 +69,14 @@ void Player::Tick(float deltaTime)
 	if (bCrashing) {
 		SetPos(CrashingPos);
 	}
+
+	uint64 myPlayerId = GET_SINGLE(SceneManager)->GetMyPlayerId();
+	if (myPlayerId != info.objectid()) {
+		ClientTimeSinceUpdate += deltaTime;
+		GetNetRecvPos();
+		// 이전 프레임 위치
+		SetPrevRecvPos(GetPos());
+	}
 }
 
 void Player::Render(HDC hdc)

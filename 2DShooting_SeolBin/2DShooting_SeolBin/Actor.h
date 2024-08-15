@@ -1,5 +1,12 @@
 #pragma once
 
+#include "Enum.pb.h"
+using PlayerDir = Protocol::PLAYER_DIR_TYPE;
+
+#define PD_IDLE Protocol::PLAYER_DIR_TYPE_IDLE
+#define PD_LEFT Protocol::PLAYER_DIR_TYPE_LEFT
+#define PD_RIGHT Protocol::PLAYER_DIR_TYPE_RIGHT
+
 class Component;
 class Collider;
 
@@ -30,6 +37,8 @@ public:
 
 	int64 GetObjectID() { return info.objectid(); }
 	void SetObjectID(int64 id){info.set_objectid(id); }
+
+	virtual void SetState(PlayerDir InDir){};
 protected:
 	Vec2 _pos = { 0, 0 };
 	Vec2 _destPos = { 0, 0 };
@@ -39,5 +48,13 @@ protected:
 	bool _dirtyFlag = false;
 public:
 	Protocol::ObjectInfo info;
+
+	void SetNetRecvPos(Vec2 netRecvPos) { _netRecvPos = netRecvPos; }
+	Vec2 GetNetRecvPos() { return _netRecvPos; }
+	void SetPrevRecvPos(Vec2 prevRecvPos) { _prevRecvPos = prevRecvPos; }
+	Vec2 GetPrevRecvPos() { return _prevRecvPos; }
+private:
+	Vec2 _netRecvPos = { 0, 0 };
+	Vec2 _prevRecvPos = { 0, 0 };
 };
 

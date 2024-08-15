@@ -15,12 +15,7 @@ enum PlayerAnimState {
 	PA_Right
 };
 
-#include "Enum.pb.h"
-using PlayerDir = Protocol::PLAYER_DIR_TYPE;
 
-#define PD_IDLE Protocol::PLAYER_DIR_TYPE_IDLE
-#define PD_LEFT Protocol::PLAYER_DIR_TYPE_LEFT
-#define PD_RIGHT Protocol::PLAYER_DIR_TYPE_RIGHT
 //enum class PlayerDir
 //{
 //	Idle,
@@ -45,12 +40,15 @@ public:
 	virtual void OnComponentBeginOverlap(Collider* collider, Collider* other) override;
 	virtual void OnComponentEndOverlap(Collider* collider, Collider* other) override;
 
-	void SetState(PlayerDir InDir);
+	virtual void SetState(PlayerDir InDir) override;
 protected:
 	void AdjustCollisionPos(BoxCollider* b1, BoxCollider* b2);
 
 	void MoveAction();
 	void UpdateAnimation();
+
+protected:
+	float speed = 300; // Default Val : 470
 
 private:
 	PlayerDir playerDir = PD_IDLE;
@@ -71,5 +69,10 @@ private:
 	bool bReverseAnimOn;
 	float reverseAnimDelayTime = 0.2;
 	float currReverseAnimDelayTime = 0;
+
+private:
+	float ClientTimeSinceUpdate = 0.0f;
+	float ClientTimeBetweenLastUpdate = 0.0f;
+
 };
 
