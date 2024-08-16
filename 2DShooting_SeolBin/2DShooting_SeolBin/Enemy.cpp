@@ -31,14 +31,6 @@ void Enemy::Tick(float deltaTime)
 {
 	Super::Tick(deltaTime);
 
-	if (target != nullptr) {
-		fireDelayCurrTime += deltaTime;
-		if (fireDelayCurrTime > fireDelayTime) {
-			fireDelayCurrTime = 0;
-
-			Fire();
-		}
-	}
 }
 
 void Enemy::Render(HDC hdc)
@@ -62,31 +54,6 @@ void Enemy::OnComponentBeginOverlap(Collider* collider, Collider* other)
 	}
 }
 
-void Enemy::Fire()
-{ 
-	Vec2 dir = target->GetPos() - GetPos();
-	dir.Normalize();
-
-	{
-		Sprite* EnemyMissileSprite = GET_SINGLE(ResourceManager)->GetSprite(L"EnemyMissile");
-
-		EnemyMissile* enemyMissile = new EnemyMissile();
-		enemyMissile->SetPos(_pos);
-		enemyMissile->SetSprite(EnemyMissileSprite);
-		enemyMissile->SetLayer(LAYER_BULLET);
-		enemyMissile->SetDir(dir);
-		Vec2Int SpriteSize = EnemyMissileSprite->GetSize();
-		{
-			BoxCollider* collider = new BoxCollider();
-			collider->SetShowDebug(true);
-			collider->SetSize(Vec2(SpriteSize.x, SpriteSize.y));
-			GET_SINGLE(CollisionManager)->AddCollider(collider);
-			enemyMissile->AddComponent(collider);
-		} 
-		GET_SINGLE(SceneManager)->GetCurrentScene()->AddActor(enemyMissile);
-	}
-}
-
 void Enemy::Die(Player* WhoHitMe)
 {
 	ExplosionEffect* explosionEffect = new ExplosionEffect();
@@ -94,3 +61,16 @@ void Enemy::Die(Player* WhoHitMe)
 	GET_SINGLE(SceneManager)->GetCurrentScene()->AddActor(explosionEffect);
 	GET_SINGLE(SceneManager)->GetCurrentScene()->RemoveActor(this);
 }
+
+void Enemy::FindPlayer()
+{
+	auto& playerArr = GET_SINGLE(SceneManager)->GetCurrentScene()->_actors[LAYER_Player];
+	if (playerArr.size() == 2) {
+		int ranVal = Utils::RandomIntegerRange(0, 1);
+		target = static_cast<Player*>(playerArr[ranVal]);
+	}
+	else if(playerArr.size() == 1) {
+		target = static_cast<Player*>(playerArr[0]);
+	}
+}
+

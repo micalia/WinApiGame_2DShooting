@@ -11,6 +11,9 @@ public:
 	virtual void Tick(float deltaTime) override;
 	virtual void Render(HDC hdc) override;
 
+	void Fire();
 private:
+	float fireDelayTime = 1;
+	float fireDelayCurrTime = 0;
 };
 

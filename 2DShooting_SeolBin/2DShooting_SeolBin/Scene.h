@@ -18,12 +18,13 @@ public:
 	void RemoveActor(Actor* actor);
 
 	template<typename T>
-	T* SpawnActor(Vec2 pos)
+	T* SpawnActor(Vec2 pos, LAYER_TYPE layerType = LAYER_OBJECT)
 	{
 		auto isGameObject = std::is_convertible_v<T*, Actor*>;
 		assert(isGameObject);
 
 		T* ret = new T();
+		ret->SetLayer(layerType);
 		AddActor(ret);
 
 		ret->BeginPlay();

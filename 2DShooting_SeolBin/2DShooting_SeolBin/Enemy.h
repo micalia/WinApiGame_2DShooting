@@ -16,20 +16,17 @@ public:
 
 	virtual void OnComponentBeginOverlap(Collider* collider, Collider* other) override;
 
-	virtual void Fire();
-
 	void Die(Player* WhoHitMe);
 
 	void SetHp(int32 _hp) { _hp = hp; }
 	int32 GetHp() { return hp; }
 
-	void SetTarget(Player* InTarget) { target = InTarget; };
+	void SetTarget(Player* InTarget) { target = InTarget; }
+
+	void FindPlayer();
 protected:
 	int32 hp = 100;
 	float speed = 10;
 	Player* target = nullptr;
-
-	float fireDelayTime = 1;
-	float fireDelayCurrTime = 0;
 };
 

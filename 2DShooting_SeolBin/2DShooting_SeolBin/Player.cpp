@@ -208,10 +208,9 @@ void Player::Fire(Protocol::ObjectInfo InInfo)
 		missileSprite = GET_SINGLE(ResourceManager)->GetSprite(L"BlueMissile");
 	}
 
-	Missile* missile = new Missile();
-	missile->SetPos(Vec2{ InInfo.posx(), InInfo.posy() });
+	//Missile* missile = new Missile();
+	Missile* missile = GET_SINGLE(SceneManager)->GetCurrentScene()->SpawnActor<Missile>(Vec2{ InInfo.posx(), InInfo.posy() }, LAYER_BULLET);
 	missile->SetSprite(missileSprite);
-	missile->SetLayer(LAYER_BULLET);
 	InInfo.set_objecttype(Protocol::OBJECT_TYPE_PLAYER_MISSILE);
 	Vec2Int MissileSpriteSize = missileSprite->GetSize();
 	if(info.name() == InInfo.name())

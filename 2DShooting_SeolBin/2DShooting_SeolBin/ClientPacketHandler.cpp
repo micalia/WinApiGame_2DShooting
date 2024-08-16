@@ -90,9 +90,9 @@ void ClientPacketHandler::Handle_S_MyPlayer(ServerSessionRef session, BYTE* buff
 	DevScene* scene = GET_SINGLE(SceneManager)->GetDevScene();
 	if (scene)
 	{
-		MyPlayer* myPlayer = scene->SpawnActor<MyPlayer>(Vec2{ info.posx(), info.posy()});
+		MyPlayer* myPlayer = scene->SpawnActor<MyPlayer>(Vec2{ info.posx(), info.posy()}, LAYER_Player);
 		//MyPlayer* myPlayer = scene->SpawnActor<MyPlayer>(Vec2{ info.posx(), info.posy() });
-		myPlayer->SetLayer(LAYER_Player);
+		//myPlayer->SetLayer(LAYER_Player);
 		myPlayer->SetName(info.name().c_str());
 		const Vec2Int size = Vec2Int(47, 67);
 		{

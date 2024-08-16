@@ -98,7 +98,8 @@ void Scene::Handle_S_AddObject(Protocol::S_AddObject& pkt)
 
 		if (info.objecttype() == Protocol::OBJECT_TYPE_PLAYER)
 		{
-			Player* player = SpawnActor<Player>(Vec2{ info.posx(), info.posy() });
+			Player* player = SpawnActor<Player>(Vec2{ info.posx(), info.posy() }, LAYER_Player);
+			//player->SetLayer(LAYER_Player);
 			player->SetState(info.playerdirtype());
 			player->SetName(info.name());
 			player->info = info;
@@ -127,6 +128,16 @@ void Scene::Handle_S_RemoveObject(Protocol::S_RemoveObject& pkt)
 Actor* Scene::GetObject(uint64 id)
 {
 	for (Actor* actor : _actors[LAYER_OBJECT])
+	{
+		if (actor && actor->info.objectid() == id)
+			return actor;
+	}
+	for (Actor* actor : _actors[LAYER_Player])
+	{
+		if (actor && actor->info.objectid() == id)
+			return actor;
+	}
+	for (Actor* actor : _actors[LAYER_BULLET])
 	{
 		if (actor && actor->info.objectid() == id)
 			return actor;

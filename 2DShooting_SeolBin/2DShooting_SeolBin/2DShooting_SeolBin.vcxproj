@@ -202,6 +202,7 @@
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Values.h" />
     <ClInclude Include="Wall.h" />
+    <ClInclude Include="WhiteEnemy.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="2DShooting_SeolBin.cpp" />
@@ -262,6 +263,7 @@
     <ClCompile Include="UI.cpp" />
     <ClCompile Include="Utils.cpp" />
     <ClCompile Include="Wall.cpp" />
+    <ClCompile Include="WhiteEnemy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="2DShooting_SeolBin.rc" />

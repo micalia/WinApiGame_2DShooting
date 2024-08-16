@@ -215,6 +215,7 @@
     <ClInclude Include="MyPlayer.h">
       <Filter>소스 파일\03.Objects</Filter>
     </ClInclude>
+    <ClInclude Include="WhiteEnemy.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="2DShooting_SeolBin.cpp">
@@ -357,6 +358,9 @@
     </ClCompile>
     <ClCompile Include="MyPlayer.cpp">
       <Filter>소스 파일\03.Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="WhiteEnemy.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

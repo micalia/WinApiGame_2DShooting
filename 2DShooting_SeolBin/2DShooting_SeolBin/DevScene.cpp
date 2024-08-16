@@ -118,12 +118,11 @@ void DevScene::Init()
 		//AddActor(BluePlayer);
 	}
 
-	/*{
+	{
 		EnemySpawnManager* EnemySpawnMgr = new EnemySpawnManager();
 		EnemySpawnMgr->SetPos(Vec2(250, 15));
 		AddActor(EnemySpawnMgr);
-	}*/
-
+	}
 
 	Sprite* sprite = GET_SINGLE(ResourceManager)->GetSprite(L"Background");
 	{

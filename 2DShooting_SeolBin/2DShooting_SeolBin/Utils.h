@@ -13,5 +13,7 @@ public:
 	static void DrawCircle(HDC hdc, Pos pos, int32 radius);
 
 	static void DrawLine(HDC hdc, Pos from, Pos to);
+
+	static int RandomIntegerRange(int min, int max);
 };
 

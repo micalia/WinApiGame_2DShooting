@@ -1,1 +1,6 @@
-﻿  2DShooting_SeolBin.vcxproj -> C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\x64\Debug\2DShooting_SeolBin.exe
+﻿  WhiteEnemy.cpp
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\2DShooting_SeolBin\2DShooting_SeolBin\WhiteEnemy.h(25,24): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\2DShooting_SeolBin\2DShooting_SeolBin\Player.h(75,31): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\2DShooting_SeolBin\2DShooting_SeolBin\WhiteEnemy.cpp(95,51): warning C4244: '인수': 'int32'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\2DShooting_SeolBin\2DShooting_SeolBin\WhiteEnemy.cpp(95,37): warning C4244: '인수': 'int32'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  2DShooting_SeolBin.vcxproj -> C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\x64\Debug\2DShooting_SeolBin.exe
