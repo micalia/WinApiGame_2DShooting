@@ -6,22 +6,28 @@
 #include "SceneManager.h"
 #include "InputManager.h"
 #include "CameraComponent.h"
-#include "Missile.h"
-#include "Sprite.h"
 #include "BoxCollider.h"
-#include "CollisionManager.h"
 #include "Flipbook.h"
+#include "Sprite.h"
+#include "Missile.h"
+#include "CollisionManager.h"
 
 Player::Player()
 {
 	GET_SINGLE(ResourceManager)->LoadTexture(L"BlueMissile", L"Sprite\\Projectile\\BlueMissile.bmp", RGB(255, 255, 255));
 	GET_SINGLE(ResourceManager)->CreateSprite(L"BlueMissile", GET_SINGLE(ResourceManager)->GetTexture(L"BlueMissile"));
 
-	_flipbookIdle = GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_BluePlayerIdle");
-	_flipbookLeft = GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_BluePlayerLeft");
-	_flipbookRight = GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_BluePlayerRight");
-	_flipbookLeftReverse = GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_BluePlayerLeftReverse");
-	_flipbookRightReverse = GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_BluePlayerRightReverse");
+	_blueFlipbookIdle			= GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_BluePlayerIdle");
+	_blueFlipbookLeft			= GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_BluePlayerLeft");
+	_blueFlipbookRight			= GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_BluePlayerRight");
+	_blueFlipbookLeftReverse	= GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_BluePlayerLeftReverse");
+	_blueFlipbookRightReverse	= GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_BluePlayerRightReverse");
+
+	_redFlipbookIdle			= GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_RedPlayerIdle");
+	_redFlipbookLeft			= GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_RedPlayerLeft");
+	_redFlipbookRight			= GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_RedPlayerRight");
+	_redFlipbookLeftReverse		= GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_RedPlayerLeftReverse");
+	_redFlipbookRightReverse	= GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_RedPlayerRightReverse");
 }
 
 Player::~Player()
@@ -34,7 +40,13 @@ void Player::BeginPlay()
 	Super::BeginPlay();
 
 	bCrashing = false;
-	SetFlipbook(_flipbookIdle);
+
+	if (GetName() == "RedPlayer") {
+		SetFlipbook(_redFlipbookIdle);
+	}
+	else {
+		SetFlipbook(_blueFlipbookIdle);
+	}
 }
 
 void Player::Tick(float deltaTime)
@@ -44,41 +56,8 @@ void Player::Tick(float deltaTime)
 	MoveAction();
 	ReverseAnimDelay(deltaTime);
 
-	if (GET_SINGLE(InputManager)->GetButtonDown(KeyType::SpaceBar))
-	{
-		// TODO : 미사일 발사
-
-		Sprite* BlueMissileSprite = GET_SINGLE(ResourceManager)->GetSprite(L"BlueMissile");
-
-		Missile* BlueMissile = new Missile();
-		BlueMissile->SetPos(_pos);
-		BlueMissile->SetSprite(BlueMissileSprite);
-		BlueMissile->SetLayer(LAYER_BULLET); 
-		Vec2Int MissileSpriteSize = BlueMissileSprite->GetSize();
-		{
-			BoxCollider* collider = new BoxCollider();
-			collider->SetCollisionLayer(CLT_MISSILE);
-			collider->SetShowDebug(true);
-			collider->SetSize(Vec2(MissileSpriteSize.x, MissileSpriteSize.y));
-			GET_SINGLE(CollisionManager)->AddCollider(collider);
-			BlueMissile->AddComponent(collider);
-		}
-		GET_SINGLE(SceneManager)->GetCurrentScene()->AddActor(BlueMissile);
-	}
-
 	if (bCrashing) {
 		SetPos(CrashingPos);
-	}
-
-	string val = GetName();
-	printf("myid : %d / Val : %s \n", GetObjectID(), val.c_str());
-
-	uint64 myPlayerId = GET_SINGLE(SceneManager)->GetMyPlayerId();
-	if (myPlayerId != info.objectid()) {
-		ClientTimeSinceUpdate += deltaTime;
-		GetNetRecvPos();
-		// 이전 프레임 위치
-		SetPrevRecvPos(GetPos());
 	}
 }
 
@@ -156,22 +135,47 @@ void Player::UpdateAnimation()
 	{
 	case PD_IDLE:
 		if (prevPlayerDir == PD_IDLE) {
-			SetFlipbook(_flipbookIdle);
+			if (GetName() == "RedPlayer") {
+				SetFlipbook(_redFlipbookIdle);
+			}
+			else {
+				SetFlipbook(_blueFlipbookIdle);
+			}
 		}
 		else if (prevPlayerDir == PD_LEFT) {
-			SetFlipbook(_flipbookLeftReverse);
+			if (GetName() == "RedPlayer") {
+				SetFlipbook(_redFlipbookLeftReverse);
+			}
+			else {
+				SetFlipbook(_blueFlipbookLeftReverse);
+			}
 			bReverseAnimOn = true;
 		}
 		else if (prevPlayerDir == PD_RIGHT) {
-			SetFlipbook(_flipbookRightReverse);
+			if (GetName() == "RedPlayer") {
+				SetFlipbook(_redFlipbookRightReverse);
+			}
+			else {
+				SetFlipbook(_blueFlipbookRightReverse);
+			}
 			bReverseAnimOn = true;
 		}
 		break;
 	case PD_LEFT:
-		SetFlipbook(_flipbookLeft);
+		if (GetName() == "RedPlayer") {
+			SetFlipbook(_redFlipbookLeft);
+		}
+		else {
+			SetFlipbook(_blueFlipbookLeft);
+		}
 		break;
 	case PD_RIGHT:
-		SetFlipbook(_flipbookRight);
+		if (GetName() == "RedPlayer") {
+			SetFlipbook(_redFlipbookRight);
+		}
+		else {
+			SetFlipbook(_blueFlipbookRight);
+		}
 		break;
 	default:
 		break;
@@ -190,6 +194,28 @@ void Player::SetState(PlayerDir InDir)
 	_dirtyFlag = true;
 }
 
+void Player::Fire(Protocol::ObjectInfo info)
+{
+	// TODO : 미사일 발사
+	Sprite* BlueMissileSprite = GET_SINGLE(ResourceManager)->GetSprite(L"BlueMissile");
+
+	Missile* BlueMissile = new Missile();
+	BlueMissile->SetPos(Vec2{ info.posx(), info.posy() });
+	BlueMissile->SetSprite(BlueMissileSprite);
+	BlueMissile->SetLayer(LAYER_BULLET);
+	info.set_objecttype(Protocol::OBJECT_TYPE_PLAYER_MISSILE);
+	Vec2Int MissileSpriteSize = BlueMissileSprite->GetSize();
+	{
+		BoxCollider* collider = new BoxCollider();
+		collider->SetCollisionLayer(CLT_MISSILE);
+		collider->SetShowDebug(true);
+		collider->SetSize(Vec2(MissileSpriteSize.x, MissileSpriteSize.y));
+		GET_SINGLE(CollisionManager)->AddCollider(collider);
+		BlueMissile->AddComponent(collider);
+	}
+	GET_SINGLE(SceneManager)->GetCurrentScene()->AddActor(BlueMissile);
+}
+
 void Player::ReverseAnimDelay(float InDeltaTime)
 {
 	if (bReverseAnimOn) {
@@ -197,7 +223,12 @@ void Player::ReverseAnimDelay(float InDeltaTime)
 		if (currReverseAnimDelayTime > reverseAnimDelayTime) {
 			bReverseAnimOn = false;
 			currReverseAnimDelayTime = 0;
-			SetFlipbook(_flipbookIdle);
+			if (GetName() == "RedPlayer") {
+				SetFlipbook(_redFlipbookIdle);
+			}
+			else {
+				SetFlipbook(_blueFlipbookIdle);
+			}
 		}
 	}
 }

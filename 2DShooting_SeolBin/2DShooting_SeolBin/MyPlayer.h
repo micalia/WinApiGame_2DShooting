@@ -15,6 +15,7 @@ private:
 	void TickInput();
 	void MoveAction();
 
+	void Server_Missile();
 private:
 	void SyncToServer();
 	float currPacketSendDelay = 0;

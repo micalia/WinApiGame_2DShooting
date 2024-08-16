@@ -7,6 +7,8 @@
 #include "MyPlayer.h"
 #include "BoxCollider.h"
 #include "CollisionManager.h"
+#include "Missile.h"
+#include "Struct.pb.h"
 
 void ClientPacketHandler::HandlePacket(ServerSessionRef session, BYTE* buffer, int32 len)
 {
@@ -31,6 +33,9 @@ void ClientPacketHandler::HandlePacket(ServerSessionRef session, BYTE* buffer, i
 		break;
 	case S_Move:
 		Handle_S_Move(session, buffer, len);
+		break;
+	case S_Projectile:
+		Handle_S_Projectile(session, buffer, len);
 		break;
 	}
 }
@@ -162,6 +167,32 @@ void ClientPacketHandler::Handle_S_Move(ServerSessionRef session, BYTE* buffer, 
 	}
 }
 
+void ClientPacketHandler::Handle_S_Projectile(ServerSessionRef session, BYTE* buffer, int32 len)
+{
+	PacketHeader* header = (PacketHeader*)buffer;
+	//uint16 id = header->id;
+	uint16 size = header->size;
+
+	Protocol::S_Move pkt;
+	pkt.ParseFromArray(&header[1], size - sizeof(PacketHeader));
+
+	const Protocol::ObjectInfo& info = pkt.info();
+
+	DevScene* scene = GET_SINGLE(SceneManager)->GetDevScene();
+	if (scene) {
+		switch (info.objecttype()) {
+			case Protocol::OBJECT_TYPE_PLAYER:
+			{
+				auto myPlayer = GET_SINGLE(SceneManager)->GetMyPlayer();
+				myPlayer->Fire(info);
+			}
+				break;
+			case Protocol::OBJECT_TYPE_ENEMY:
+				break;
+		}
+	}
+}
+
 SendBufferRef ClientPacketHandler::Make_C_Move()
 {
 	Protocol::C_Move pkt;
@@ -170,4 +201,14 @@ SendBufferRef ClientPacketHandler::Make_C_Move()
 	*pkt.mutable_info() = myPlayer->info;
 
 	return MakeSendBuffer(pkt, C_Move);
+}
+
+SendBufferRef ClientPacketHandler::Make_C_Projectile()
+{
+	Protocol::C_Projectile pkt;
+
+	MyPlayer* myPlayer = GET_SINGLE(SceneManager)->GetMyPlayer();
+	*pkt.mutable_info() = myPlayer->info;
+
+	return MakeSendBuffer(pkt, C_Projectile);
 }

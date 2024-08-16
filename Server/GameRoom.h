@@ -15,6 +15,7 @@ public:
 
 public:
 	void Handle_C_Move(Protocol::C_Move& pkt);
+	void Handle_C_Projectile(Protocol::C_Projectile& pkt);
 
 	void AddObject(ActorRef gameObject);
 	void RemoveObject(uint64 id);

@@ -23,6 +23,7 @@ DevScene::DevScene()
 {
 	GET_SINGLE(ResourceManager)->LoadTexture(L"Background", L"Sprite\\Map\\Background.bmp");
 	GET_SINGLE(ResourceManager)->LoadTexture(L"BluePlayer", L"Sprite\\Player\\NewBluePlayerSpriteAnim.bmp", RGB(255, 255, 255));
+	GET_SINGLE(ResourceManager)->LoadTexture(L"RedPlayer", L"Sprite\\Player\\NewRedPlayerSpriteAnim.bmp", RGB(255, 255, 255));
 	GET_SINGLE(ResourceManager)->CreateSprite(L"Background", GET_SINGLE(ResourceManager)->GetTexture(L"Background"));
 	GET_SINGLE(ResourceManager)->LoadTexture(L"ExplosionEffect", L"Sprite\\Effect\\ExplosionEffect.bmp", RGB(255, 255, 255));
 }
@@ -33,6 +34,7 @@ DevScene::~DevScene()
 
 void DevScene::Init()
 {
+#pragma region BluePlayer Anim
 	{
 		Texture* texture = GET_SINGLE(ResourceManager)->GetTexture(L"BluePlayer");
 		Flipbook* fb = GET_SINGLE(ResourceManager)->CreateFlipbook(L"FB_BluePlayerIdle");
@@ -58,6 +60,34 @@ void DevScene::Init()
 		Flipbook* fb = GET_SINGLE(ResourceManager)->CreateFlipbook(L"FB_BluePlayerLeftReverse");
 		fb->SetInfo({ texture, L"FB_BluePlayerLeftReverse", {70, 70}, 1, 1, 1, 0.3f, false });
 	}
+#pragma endregion
+#pragma region RedPlayer Anim
+	{
+		Texture* texture = GET_SINGLE(ResourceManager)->GetTexture(L"RedPlayer");
+		Flipbook* fb = GET_SINGLE(ResourceManager)->CreateFlipbook(L"FB_RedPlayerIdle");
+		fb->SetInfo({ texture, L"FB_RedPlayerIdle", {70, 70}, 0, 0, 0, 1.f, false });
+	}
+	{
+		Texture* texture = GET_SINGLE(ResourceManager)->GetTexture(L"RedPlayer");
+		Flipbook* fb = GET_SINGLE(ResourceManager)->CreateFlipbook(L"FB_RedPlayerLeft");
+		fb->SetInfo({ texture, L"FB_RedPlayerLeft", {70, 70}, 0, 2, 2, 0.7f, false });
+	}
+	{
+		Texture* texture = GET_SINGLE(ResourceManager)->GetTexture(L"RedPlayer");
+		Flipbook* fb = GET_SINGLE(ResourceManager)->CreateFlipbook(L"FB_RedPlayerRight");
+		fb->SetInfo({ texture, L"FB_RedPlayerRight", {70, 70}, 0, 2, 3, 0.7f, false });
+	}
+	{
+		Texture* texture = GET_SINGLE(ResourceManager)->GetTexture(L"RedPlayer");
+		Flipbook* fb = GET_SINGLE(ResourceManager)->CreateFlipbook(L"FB_RedPlayerRightReverse");
+		fb->SetInfo({ texture, L"FB_RedPlayerRightReverse", {70, 70}, 1, 1, 4, 0.3f, false });
+	}
+	{
+		Texture* texture = GET_SINGLE(ResourceManager)->GetTexture(L"RedPlayer");
+		Flipbook* fb = GET_SINGLE(ResourceManager)->CreateFlipbook(L"FB_RedPlayerLeftReverse");
+		fb->SetInfo({ texture, L"FB_RedPlayerLeftReverse", {70, 70}, 1, 1, 1, 0.3f, false });
+	}
+#pragma endregion
 
 	{
 		Texture* texture = GET_SINGLE(ResourceManager)->GetTexture(L"ExplosionEffect");

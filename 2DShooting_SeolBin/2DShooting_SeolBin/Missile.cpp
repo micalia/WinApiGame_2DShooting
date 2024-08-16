@@ -5,6 +5,7 @@
 #include "DevScene.h"
 #include "SceneManager.h"
 #include "Sprite.h"
+#include "Component.h"
 
 Missile::Missile()
 {
@@ -29,6 +30,7 @@ void Missile::Tick(float deltaTime)
 	
 	if (deltaTime > 0.1f) return;
 	_pos.y -= deltaTime * speed;
+	SetPos(_pos);
 	
 	//_sprite->SetPos
 	//// Ãæµ¹

@@ -68,6 +68,12 @@ void MyPlayer::TickInput()
 	else {
 		SetState(PD_IDLE);
 	}
+
+	if (GET_SINGLE(InputManager)->GetButtonDown(KeyType::SpaceBar))
+	{
+		_dirtyFlag = true;
+		Server_Missile();
+	}
 }
 
 void MyPlayer::MoveAction()
@@ -88,6 +94,15 @@ void MyPlayer::MoveAction()
 	if (currPacketSendDelay > PacketSendDelay) {
 		currPacketSendDelay = 0;
 	}
+}
+
+void MyPlayer::Server_Missile()
+{
+	if (_dirtyFlag == false)
+		return;
+
+	SendBufferRef sendBuffer = ClientPacketHandler::Make_C_Projectile();
+	GET_SINGLE(NetworkManager)->SendPacket(sendBuffer);
 }
 
 void MyPlayer::SyncToServer()

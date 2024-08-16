@@ -55,7 +55,6 @@ void GameRoom::EnterRoom(GameSessionRef session)
 	}
 
 	//TEMP
-	player->info.set_hp(123);
 	player->info.set_posx(242);
 	player->info.set_posy(488);
 	
@@ -130,6 +129,26 @@ void GameRoom::Handle_C_Move(Protocol::C_Move& pkt)
 
 	{
 		SendBufferRef sendBuffer = ServerPacketHandler::Make_S_Move(pkt.info());
+		Broadcast(sendBuffer);
+	}
+}
+
+void GameRoom::Handle_C_Projectile(Protocol::C_Projectile& pkt)
+{
+	uint64 id = pkt.info().objectid();
+	ActorRef gameObject = FindObject(id);
+	if (gameObject == nullptr)
+		return;
+
+	// TODO : Validation
+
+	gameObject->info.set_name(pkt.info().name());
+	gameObject->info.set_objecttype(pkt.info().objecttype());
+	gameObject->info.set_posx(pkt.info().posx());
+	gameObject->info.set_posy(pkt.info().posy());
+
+	{
+		SendBufferRef sendBuffer = ServerPacketHandler::Make_S_Projectile(pkt.info());
 		Broadcast(sendBuffer);
 	}
 }

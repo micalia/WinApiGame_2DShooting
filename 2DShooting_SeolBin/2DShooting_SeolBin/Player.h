@@ -15,14 +15,7 @@ enum PlayerAnimState {
 	PA_Right
 };
 
-
-//enum class PlayerDir
-//{
-//	Idle,
-//	Left,
-//	Right
-//};
-
+class ObjectInfo;
 class BoxCollider;
 class Flipbook;
 
@@ -44,6 +37,8 @@ public:
 
 	string GetName(){ return _name; }
 	void SetName(string name){ _name = name; }
+
+	void Fire(Protocol::ObjectInfo info);
 protected:
 	void AdjustCollisionPos(BoxCollider* b1, BoxCollider* b2);
 
@@ -61,11 +56,17 @@ private:
 	bool bCrashing;
 	Vec2 CrashingPos;
 
-	Flipbook* _flipbookIdle = nullptr;
-	Flipbook* _flipbookLeft = nullptr;
-	Flipbook* _flipbookRight = nullptr;
-	Flipbook* _flipbookLeftReverse = nullptr;
-	Flipbook* _flipbookRightReverse = nullptr;
+	Flipbook* _blueFlipbookIdle = nullptr;
+	Flipbook* _blueFlipbookLeft = nullptr;
+	Flipbook* _blueFlipbookRight = nullptr;
+	Flipbook* _blueFlipbookLeftReverse = nullptr;
+	Flipbook* _blueFlipbookRightReverse = nullptr;
+
+	Flipbook* _redFlipbookIdle = nullptr;
+	Flipbook* _redFlipbookLeft = nullptr;
+	Flipbook* _redFlipbookRight = nullptr;
+	Flipbook* _redFlipbookLeftReverse = nullptr;
+	Flipbook* _redFlipbookRightReverse = nullptr;
 
 	string _name = "";
 private:
@@ -73,10 +74,5 @@ private:
 	bool bReverseAnimOn;
 	float reverseAnimDelayTime = 0.2;
 	float currReverseAnimDelayTime = 0;
-
-private:
-	float ClientTimeSinceUpdate = 0.0f;
-	float ClientTimeBetweenLastUpdate = 0.0f;
-
 };
 

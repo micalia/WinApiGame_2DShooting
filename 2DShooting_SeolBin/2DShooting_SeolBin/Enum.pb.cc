@@ -32,17 +32,20 @@ const char descriptor_table_protodef_Enum_2eproto[] PROTOBUF_SECTION_VARIABLE(pr
   "\n\nEnum.proto\022\010Protocol*h\n\nPlayerType\022\024\n\020"
   "PLAYER_TYPE_NONE\020\000\022\026\n\022PLAYER_TYPE_KNIGHT"
   "\020\001\022\024\n\020PLAYER_TYPE_MAGE\020\002\022\026\n\022PLAYER_TYPE_"
-  "ARCHER\020\003*R\n\013OBJECT_TYPE\022\024\n\020OBJECT_TYPE_N"
-  "ONE\020\000\022\026\n\022OBJECT_TYPE_PLAYER\020\001\022\025\n\021OBJECT_"
-  "TYPE_ENEMY\020\002*J\n\021PLAYER_COLOR_TYPE\022\032\n\026PLA"
-  "YER_COLOR_TYPE_BLUE\020\000\022\031\n\025PLAYER_COLOR_TY"
-  "PE_RED\020\001*`\n\017PLAYER_DIR_TYPE\022\030\n\024PLAYER_DI"
-  "R_TYPE_IDLE\020\000\022\030\n\024PLAYER_DIR_TYPE_LEFT\020\001\022"
-  "\031\n\025PLAYER_DIR_TYPE_RIGHT\020\002b\006proto3"
+  "ARCHER\020\003*\256\001\n\013OBJECT_TYPE\022\024\n\020OBJECT_TYPE_"
+  "NONE\020\000\022\026\n\022OBJECT_TYPE_PLAYER\020\001\022\036\n\032OBJECT"
+  "_TYPE_PLAYER_MISSILE\020\002\022\033\n\027OBJECT_TYPE_PL"
+  "AYER_BOMB\020\003\022\025\n\021OBJECT_TYPE_ENEMY\020\004\022\035\n\031OB"
+  "JECT_TYPE_ENEMY_MISSILE\020\005*J\n\021PLAYER_COLO"
+  "R_TYPE\022\032\n\026PLAYER_COLOR_TYPE_BLUE\020\000\022\031\n\025PL"
+  "AYER_COLOR_TYPE_RED\020\001*`\n\017PLAYER_DIR_TYPE"
+  "\022\030\n\024PLAYER_DIR_TYPE_IDLE\020\000\022\030\n\024PLAYER_DIR"
+  "_TYPE_LEFT\020\001\022\031\n\025PLAYER_DIR_TYPE_RIGHT\020\002b"
+  "\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_Enum_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_Enum_2eproto = {
-    false, false, 394, descriptor_table_protodef_Enum_2eproto,
+    false, false, 487, descriptor_table_protodef_Enum_2eproto,
     "Enum.proto",
     &descriptor_table_Enum_2eproto_once, nullptr, 0, 0,
     schemas, file_default_instances, TableStruct_Enum_2eproto::offsets,
@@ -81,6 +84,9 @@ bool OBJECT_TYPE_IsValid(int value) {
     case 0:
     case 1:
     case 2:
+    case 3:
+    case 4:
+    case 5:
       return true;
     default:
       return false;
