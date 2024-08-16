@@ -17,6 +17,9 @@ Player::Player()
 	GET_SINGLE(ResourceManager)->LoadTexture(L"BlueMissile", L"Sprite\\Projectile\\BlueMissile.bmp", RGB(255, 255, 255));
 	GET_SINGLE(ResourceManager)->CreateSprite(L"BlueMissile", GET_SINGLE(ResourceManager)->GetTexture(L"BlueMissile"));
 
+	GET_SINGLE(ResourceManager)->LoadTexture(L"RedMissile", L"Sprite\\Projectile\\RedMissile.bmp", RGB(255, 255, 255));
+	GET_SINGLE(ResourceManager)->CreateSprite(L"RedMissile", GET_SINGLE(ResourceManager)->GetTexture(L"RedMissile"));
+
 	_blueFlipbookIdle			= GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_BluePlayerIdle");
 	_blueFlipbookLeft			= GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_BluePlayerLeft");
 	_blueFlipbookRight			= GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_BluePlayerRight");
@@ -194,26 +197,33 @@ void Player::SetState(PlayerDir InDir)
 	_dirtyFlag = true;
 }
 
-void Player::Fire(Protocol::ObjectInfo info)
+void Player::Fire(Protocol::ObjectInfo InInfo)
 {
 	// TODO : 미사일 발사
-	Sprite* BlueMissileSprite = GET_SINGLE(ResourceManager)->GetSprite(L"BlueMissile");
+	Sprite* missileSprite = nullptr;
+	if (InInfo.name() == "RedPlayer") {
+		missileSprite = GET_SINGLE(ResourceManager)->GetSprite(L"RedMissile");
+	}
+	else {
+		missileSprite = GET_SINGLE(ResourceManager)->GetSprite(L"BlueMissile");
+	}
 
-	Missile* BlueMissile = new Missile();
-	BlueMissile->SetPos(Vec2{ info.posx(), info.posy() });
-	BlueMissile->SetSprite(BlueMissileSprite);
-	BlueMissile->SetLayer(LAYER_BULLET);
-	info.set_objecttype(Protocol::OBJECT_TYPE_PLAYER_MISSILE);
-	Vec2Int MissileSpriteSize = BlueMissileSprite->GetSize();
+	Missile* missile = new Missile();
+	missile->SetPos(Vec2{ InInfo.posx(), InInfo.posy() });
+	missile->SetSprite(missileSprite);
+	missile->SetLayer(LAYER_BULLET);
+	InInfo.set_objecttype(Protocol::OBJECT_TYPE_PLAYER_MISSILE);
+	Vec2Int MissileSpriteSize = missileSprite->GetSize();
+	if(info.name() == InInfo.name())
 	{
 		BoxCollider* collider = new BoxCollider();
 		collider->SetCollisionLayer(CLT_MISSILE);
 		collider->SetShowDebug(true);
 		collider->SetSize(Vec2(MissileSpriteSize.x, MissileSpriteSize.y));
 		GET_SINGLE(CollisionManager)->AddCollider(collider);
-		BlueMissile->AddComponent(collider);
+		missile->AddComponent(collider);
 	}
-	GET_SINGLE(SceneManager)->GetCurrentScene()->AddActor(BlueMissile);
+	GET_SINGLE(SceneManager)->GetCurrentScene()->AddActor(missile);
 }
 
 void Player::ReverseAnimDelay(float InDeltaTime)

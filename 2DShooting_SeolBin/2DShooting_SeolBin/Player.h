@@ -38,7 +38,7 @@ public:
 	string GetName(){ return _name; }
 	void SetName(string name){ _name = name; }
 
-	void Fire(Protocol::ObjectInfo info);
+	void Fire(Protocol::ObjectInfo InInfo);
 protected:
 	void AdjustCollisionPos(BoxCollider* b1, BoxCollider* b2);
 
