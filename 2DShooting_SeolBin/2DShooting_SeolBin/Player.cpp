@@ -208,7 +208,6 @@ void Player::Fire(Protocol::ObjectInfo InInfo)
 		missileSprite = GET_SINGLE(ResourceManager)->GetSprite(L"BlueMissile");
 	}
 
-	//Missile* missile = new Missile();
 	Missile* missile = GET_SINGLE(SceneManager)->GetCurrentScene()->SpawnActor<Missile>(Vec2{ InInfo.posx(), InInfo.posy() }, LAYER_BULLET);
 	missile->SetSprite(missileSprite);
 	InInfo.set_objecttype(Protocol::OBJECT_TYPE_PLAYER_MISSILE);

@@ -3,6 +3,7 @@
 #include "DevScene.h"
 #include "EditScene.h"
 #include "MyPlayer.h"
+#include "InputManager.h"
 
 void SceneManager::Init()
 {

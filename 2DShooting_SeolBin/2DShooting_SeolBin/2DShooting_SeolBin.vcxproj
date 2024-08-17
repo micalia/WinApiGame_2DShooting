@@ -171,6 +171,7 @@
     <ClInclude Include="FlipbookActor.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="HalfMoonEnemy.h" />
     <ClInclude Include="InputManager.h" />
@@ -228,6 +229,7 @@
     <ClCompile Include="Flipbook.cpp" />
     <ClCompile Include="FlipbookActor.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="HalfMoonEnemy.cpp" />
     <ClCompile Include="InputManager.cpp" />

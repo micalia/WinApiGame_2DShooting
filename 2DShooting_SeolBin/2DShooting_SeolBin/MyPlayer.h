@@ -25,5 +25,7 @@ private:
 	float Horizontal = 0;
 	float Vertical = 0;
 
+	float fireTermTime = 0.2;
+	float currFireTermTime = 0;
 };
 

@@ -24,11 +24,16 @@ void HalfMoonEnemy::BeginPlay()
 	Super::BeginPlay();
 
 	speed = 50;
+	hp = 5;
 }
 
 void HalfMoonEnemy::Tick(float deltaTime)
 {
 	Super::Tick(deltaTime);
+	
+	if (deltaTime > 0.1f) return;
+	_pos.y += deltaTime * speed;
+	SetPos(_pos);
 
 	fireDelayCurrTime += deltaTime;
 	if (fireDelayCurrTime > fireDelayTime) {
@@ -37,9 +42,14 @@ void HalfMoonEnemy::Tick(float deltaTime)
 		Fire();
 	}
 
-	if (deltaTime > 0.1f) return;
-	_pos.y += deltaTime * speed;
-	SetPos(_pos);
+	if (bDamaged) {
+		currDamagedStateTime += deltaTime;
+		if (currDamagedStateTime > damagedStateTime) {
+			currDamagedStateTime = 0;
+			bDamaged = false;
+			SetDefaultSprite();
+		}
+	}
 }
 
 void HalfMoonEnemy::Render(HDC hdc)
@@ -72,4 +82,23 @@ void HalfMoonEnemy::Fire()
 		} 
 		GET_SINGLE(SceneManager)->GetCurrentScene()->AddActor(enemyMissile);
 	}
+}
+
+void HalfMoonEnemy::SetDamagedSprite()
+{
+	Sprite* damagedSprite = GET_SINGLE(ResourceManager)->GetSprite(L"HalfMoonEnemyDamaged");
+	SetSprite(damagedSprite);
+}
+
+void HalfMoonEnemy::SetDefaultSprite()
+{
+	Sprite* defaultSprite = GET_SINGLE(ResourceManager)->GetSprite(L"HalfMoonEnemy");
+	SetSprite(defaultSprite);
+}
+
+void HalfMoonEnemy::Damaged()
+{
+	hp--;
+	bDamaged = true;
+	SetDamagedSprite();
 }

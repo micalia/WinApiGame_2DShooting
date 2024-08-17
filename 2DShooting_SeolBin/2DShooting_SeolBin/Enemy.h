@@ -24,9 +24,10 @@ public:
 	void SetTarget(Player* InTarget) { target = InTarget; }
 
 	void FindPlayer();
+	virtual void Damaged(){}
 protected:
 	int32 hp = 100;
-	float speed = 10;
+	float speed = 0;
 	Player* target = nullptr;
 };
 

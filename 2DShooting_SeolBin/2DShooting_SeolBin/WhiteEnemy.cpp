@@ -23,24 +23,32 @@ void WhiteEnemy::BeginPlay()
 {
 	Super::BeginPlay();
 
-	speed = 0;
+	speed = 50;
+	hp = 5;
 }
 
 void WhiteEnemy::Tick(float deltaTime)
 {
 	Super::Tick(deltaTime);
-	speed = 0;
+	
+	if (deltaTime > 0.1f) return;
+	_pos.y += deltaTime * speed;
+	SetPos(_pos);
 
 	fireDelayCurrTime += deltaTime;
 	if (fireDelayCurrTime > fireDelayTime) {
 		fireDelayCurrTime = 0;
-		FindPlayer();
 		Fire();
 	}
 
-	if (deltaTime > 0.1f) return;
-	_pos.y += deltaTime * speed;
-	SetPos(_pos);
+	if (bDamaged) {
+		currDamagedStateTime += deltaTime;
+		if (currDamagedStateTime > damagedStateTime) {
+			currDamagedStateTime = 0;
+			bDamaged = false;
+			SetDefaultSprite();
+		}
+	}
 }
 
 void WhiteEnemy::Render(HDC hdc)
@@ -48,18 +56,21 @@ void WhiteEnemy::Render(HDC hdc)
 	Super::Render(hdc);
 }
 
+void WhiteEnemy::OnComponentBeginOverlap(Collider* collider, Collider* other)
+{
+	Super::OnComponentBeginOverlap(collider, other);
+}
+
 void WhiteEnemy::Fire()
 {
-	if (target == nullptr) return;
-
 	float x = 0;
 	float y = 0;
 	float vx = 0;       // 미사일의 x 속도
 	float vy = 0;       // 미사일의 y 속도
-	float cx = 0;     // 회전 중심 x 좌표
-	float cy = 0;     // 회전 중심 y 좌표
+	float cx = 0;		 // 회전 중심 x 좌표
+	float cy = 0;		// 회전 중심 y 좌표
 	float r = 1.0f;       // 반경
-	float omega = 1.0f;// 각도 변화량
+	float omega = 1.0f;		// 각도 변화량
 	MoveLoopingBullet(x, y, vx, vy, cx, cy, r, theta, omega);
 
 	if (bReverseFire) {
@@ -74,12 +85,8 @@ void WhiteEnemy::Fire()
 			bReverseFire = true;
 		}
 	}
-	printf("theta : %f \n", theta);
-	/*Vec2 dir = target->GetPos() - GetPos();
-	dir.Normalize();*/
 
 	Vec2 dir = Vec2(x,y);
-//	Vec2 dir = destDir - GetPos();
 	{
 		Sprite* EnemyMissileSprite = GET_SINGLE(ResourceManager)->GetSprite(L"EnemyMissile");
 
@@ -118,4 +125,23 @@ void WhiteEnemy::MoveLoopingBullet(
 	// 탄의 속도(필요할 때만)
 	vx = -r * omega * sin(theta);
 	vy = r * omega * cos(theta);
+}
+
+void WhiteEnemy::SetDamagedSprite()
+{
+	Sprite* damagedSprite = GET_SINGLE(ResourceManager)->GetSprite(L"WhiteEnemyDamaged");
+	SetSprite(damagedSprite);
+}
+
+void WhiteEnemy::SetDefaultSprite()
+{
+	Sprite* defaultSprite = GET_SINGLE(ResourceManager)->GetSprite(L"WhiteEnemy");
+	SetSprite(defaultSprite);
+}
+
+void WhiteEnemy::Damaged()
+{
+ 	hp--; 
+	bDamaged = true;
+	SetDamagedSprite();
 }

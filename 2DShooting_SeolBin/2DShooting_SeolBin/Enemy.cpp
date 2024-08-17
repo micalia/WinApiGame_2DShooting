@@ -45,11 +45,14 @@ void Enemy::OnComponentBeginOverlap(Collider* collider, Collider* other)
 	if (other != nullptr) {
 		if (auto missile = dynamic_cast<Missile*>(other->GetOwner())
 			) {
+			if (hp <= 0) {
+				Player* HitPlayer = static_cast<Player*>(other->GetOwner());
+				GET_SINGLE(CollisionManager)->RemoveCollider(collider);
+				Die(HitPlayer);
+			}
 			GET_SINGLE(CollisionManager)->RemoveCollider(other);
 			GET_SINGLE(SceneManager)->GetCurrentScene()->RemoveActor(missile);
-			GET_SINGLE(CollisionManager)->RemoveCollider(collider);
-			Player* HitPlayer = static_cast<Player*>(other->GetOwner());
-			Die(HitPlayer);
+			Damaged();
 		}
 	}
 }

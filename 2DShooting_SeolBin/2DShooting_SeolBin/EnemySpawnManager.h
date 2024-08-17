@@ -14,7 +14,11 @@ public:
 	virtual void Tick(float deltaTime) override;
 	virtual void Render(HDC hdc) override;
 
+	void RandomEnemySpawn();
 private:
 	Player* target = nullptr;
+
+	float currSpawnDelayTime = 0;
+	float SpawnDelayTime = 4;
 };
 

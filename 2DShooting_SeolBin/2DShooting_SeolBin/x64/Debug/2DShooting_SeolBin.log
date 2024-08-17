@@ -1,6 +1,36 @@
-﻿  WhiteEnemy.cpp
-C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\2DShooting_SeolBin\2DShooting_SeolBin\WhiteEnemy.h(25,24): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
+﻿  DevScene.cpp
 C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\2DShooting_SeolBin\2DShooting_SeolBin\Player.h(75,31): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
-C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\2DShooting_SeolBin\2DShooting_SeolBin\WhiteEnemy.cpp(95,51): warning C4244: '인수': 'int32'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\2DShooting_SeolBin\2DShooting_SeolBin\WhiteEnemy.cpp(95,37): warning C4244: '인수': 'int32'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\2DShooting_SeolBin\2DShooting_SeolBin\DevScene.cpp(134,15): warning C4244: '초기화 중': 'const int32'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\2DShooting_SeolBin\2DShooting_SeolBin\DevScene.cpp(135,34): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\2DShooting_SeolBin\2DShooting_SeolBin\DevScene.cpp(144,15): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\2DShooting_SeolBin\2DShooting_SeolBin\DevScene.cpp(145,35): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\2DShooting_SeolBin\2DShooting_SeolBin\DevScene.cpp(154,15): warning C4244: '초기화 중': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\2DShooting_SeolBin\2DShooting_SeolBin\DevScene.cpp(155,35): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  EnemySpawnManager.cpp
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\2DShooting_SeolBin\2DShooting_SeolBin\HalfMoonEnemy.h(26,27): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\2DShooting_SeolBin\2DShooting_SeolBin\Player.h(75,31): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\2DShooting_SeolBin\2DShooting_SeolBin\WhiteEnemy.h(32,24): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\2DShooting_SeolBin\2DShooting_SeolBin\WhiteEnemy.h(40,27): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\2DShooting_SeolBin\2DShooting_SeolBin\EnemySpawnManager.cpp(58,39): warning C4244: '인수': 'const int32'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\2DShooting_SeolBin\2DShooting_SeolBin\EnemySpawnManager.cpp(58,31): warning C4244: '인수': 'const int32'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\2DShooting_SeolBin\2DShooting_SeolBin\EnemySpawnManager.cpp(81,39): warning C4244: '인수': 'const int32'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\2DShooting_SeolBin\2DShooting_SeolBin\EnemySpawnManager.cpp(81,31): warning C4244: '인수': 'const int32'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\2DShooting_SeolBin\2DShooting_SeolBin\EnemySpawnManager.cpp(118,104): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\2DShooting_SeolBin\2DShooting_SeolBin\EnemySpawnManager.cpp(133,39): warning C4244: '인수': 'const int32'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\2DShooting_SeolBin\2DShooting_SeolBin\EnemySpawnManager.cpp(133,31): warning C4244: '인수': 'const int32'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\2DShooting_SeolBin\2DShooting_SeolBin\EnemySpawnManager.cpp(142,113): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\2DShooting_SeolBin\2DShooting_SeolBin\EnemySpawnManager.cpp(157,39): warning C4244: '인수': 'const int32'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\2DShooting_SeolBin\2DShooting_SeolBin\EnemySpawnManager.cpp(157,31): warning C4244: '인수': 'const int32'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  HalfMoonEnemy.cpp
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\2DShooting_SeolBin\2DShooting_SeolBin\HalfMoonEnemy.h(26,27): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\2DShooting_SeolBin\2DShooting_SeolBin\Player.h(75,31): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\2DShooting_SeolBin\2DShooting_SeolBin\HalfMoonEnemy.cpp(79,51): warning C4244: '인수': 'int32'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\2DShooting_SeolBin\2DShooting_SeolBin\HalfMoonEnemy.cpp(79,37): warning C4244: '인수': 'int32'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  WhiteEnemy.cpp
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\2DShooting_SeolBin\2DShooting_SeolBin\WhiteEnemy.h(32,24): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\2DShooting_SeolBin\2DShooting_SeolBin\WhiteEnemy.h(40,27): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\2DShooting_SeolBin\2DShooting_SeolBin\Player.h(75,31): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\2DShooting_SeolBin\2DShooting_SeolBin\WhiteEnemy.cpp(102,51): warning C4244: '인수': 'int32'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\2DShooting_SeolBin\2DShooting_SeolBin\WhiteEnemy.cpp(102,37): warning C4244: '인수': 'int32'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  코드를 생성하고 있습니다...
   2DShooting_SeolBin.vcxproj -> C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\x64\Debug\2DShooting_SeolBin.exe

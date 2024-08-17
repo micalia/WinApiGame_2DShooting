@@ -24,6 +24,14 @@ void MyPlayer::Tick(float deltaTime)
 	TickInput();
 	MoveAction();
 	SyncToServer();
+
+	currFireTermTime+=deltaTime;
+	if (currFireTermTime > fireTermTime) {
+		currFireTermTime = 0;
+		return;
+		_dirtyFlag = true;
+		Server_Missile();
+	}
 }
 
 void MyPlayer::Render(HDC hdc)

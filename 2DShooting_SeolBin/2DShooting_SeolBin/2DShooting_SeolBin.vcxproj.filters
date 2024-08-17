@@ -215,7 +215,12 @@
     <ClInclude Include="MyPlayer.h">
       <Filter>소스 파일\03.Objects</Filter>
     </ClInclude>
-    <ClInclude Include="WhiteEnemy.h" />
+    <ClInclude Include="WhiteEnemy.h">
+      <Filter>소스 파일\03.Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>소스 파일\01.Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="2DShooting_SeolBin.cpp">
@@ -360,7 +365,10 @@
       <Filter>소스 파일\03.Objects</Filter>
     </ClCompile>
     <ClCompile Include="WhiteEnemy.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\03.Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>소스 파일\01.Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
