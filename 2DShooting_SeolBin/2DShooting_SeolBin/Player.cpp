@@ -11,6 +11,7 @@
 #include "Sprite.h"
 #include "Missile.h"
 #include "CollisionManager.h"
+#include "ExplosionEffect.h"
 
 Player::Player()
 {
@@ -31,6 +32,8 @@ Player::Player()
 	_redFlipbookRight			= GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_RedPlayerRight");
 	_redFlipbookLeftReverse		= GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_RedPlayerLeftReverse");
 	_redFlipbookRightReverse	= GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_RedPlayerRightReverse");
+
+	_playerTransparent			= GET_SINGLE(ResourceManager)->GetFlipbook(L"FB_FullTransparent");
 }
 
 Player::~Player()
@@ -55,36 +58,42 @@ void Player::BeginPlay()
 void Player::Tick(float deltaTime)
 {
 	Super::Tick(deltaTime);
-	
 	MoveAction();
 	ReverseAnimDelay(deltaTime);
-
+	
 	if (bCrashing) {
 		SetPos(CrashingPos);
+	}
+
+	if (bRespawn) {
+		currBlinkTime += deltaTime;
+		if (currBlinkTime > blinkTime) {
+			currBlinkTime = 0;
+			blinkCurrCount++;
+			bTransparent = (bTransparent == true) ? false : true;
+			if (blinkCurrCount > blinkCount) {
+				blinkCurrCount = 0;
+				bTransparent = false;
+				bRespawn = false;
+			}
+		}
 	}
 }
 
 void Player::Render(HDC hdc)
 {
+	if(bTransparent) return;
 	Super::Render(hdc);
 }
 
 void Player::OnComponentBeginOverlap(Collider* collider, Collider* other)
 {
 	Super::OnComponentBeginOverlap(collider, other);
-	bCrashing = true;
-	BoxCollider* b1 = dynamic_cast<BoxCollider*>(collider);
-	BoxCollider* b2 = dynamic_cast<BoxCollider*>(other);
-	if (b1 == nullptr || b2 == nullptr)
-		return;
-
-	AdjustCollisionPos(b1, b2);
 }
 
 void Player::OnComponentEndOverlap(Collider* collider, Collider* other)
 {
 	Super::OnComponentEndOverlap(collider, other);
-	bCrashing = false;
 }
 
 void Player::AdjustCollisionPos(BoxCollider* b1, BoxCollider* b2)
@@ -222,6 +231,34 @@ void Player::Fire(Protocol::ObjectInfo InInfo)
 		missile->AddComponent(collider);
 	}
 	GET_SINGLE(SceneManager)->GetCurrentScene()->AddActor(missile);
+}
+
+void Player::Damaged()
+{
+	ExplosionEffect* explosionEffect = GET_SINGLE(SceneManager)->GetCurrentScene()->SpawnActor<ExplosionEffect>(GetPos()); 
+	SetPlayerState(RespawnScene);
+	if (GetName() == "RedPlayer") {
+		SetFlipbook(_redFlipbookIdle);
+	}
+	else if (GetName() == "BluePlayer") {
+		SetFlipbook(_blueFlipbookIdle);
+	}
+	prevPlayerDir = PD_IDLE;
+}
+
+void Player::SetPlayerState(PlayerState playerState)
+{
+	switch (playerState)
+	{
+	case RespawnScene:
+		SetPos(GET_SINGLE(SceneManager)->GetDevScene()->GetRespawnStartPos());
+		break;
+	case RespawnSceneComplete:
+		break;
+	default:
+		break;
+	}
+	_playerState = playerState;
 }
 
 void Player::ReverseAnimDelay(float InDeltaTime)

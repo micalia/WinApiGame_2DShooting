@@ -24,7 +24,7 @@ void HalfMoonEnemy::BeginPlay()
 	Super::BeginPlay();
 
 	speed = 50;
-	hp = 5;
+	SetHp(5);
 }
 
 void HalfMoonEnemy::Tick(float deltaTime)
@@ -77,6 +77,7 @@ void HalfMoonEnemy::Fire()
 			BoxCollider* collider = new BoxCollider();
 			collider->SetShowDebug(true);
 			collider->SetSize(Vec2(SpriteSize.x, SpriteSize.y));
+			collider->SetCollisionLayer(CLT_ENEMY_MISSILE);
 			GET_SINGLE(CollisionManager)->AddCollider(collider);
 			enemyMissile->AddComponent(collider);
 		} 
@@ -98,7 +99,8 @@ void HalfMoonEnemy::SetDefaultSprite()
 
 void HalfMoonEnemy::Damaged()
 {
-	hp--;
+	int currHp = GetHp();
+	SetHp(--currHp);
 	bDamaged = true;
 	SetDamagedSprite();
 }

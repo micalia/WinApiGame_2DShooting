@@ -37,54 +37,54 @@ void EnemySpawnManager::BeginPlay()
 	for (Actor* actor : ActorArr) {
 		if (target = dynamic_cast<Player*>(actor)) break;
 	}
-	
-	{
-		Sprite* whiteEnemySprite = GET_SINGLE(ResourceManager)->GetSprite(L"WhiteEnemy");
-		WhiteEnemy* whiteEnemy = GET_SINGLE(SceneManager)->GetCurrentScene()->SpawnActor<WhiteEnemy>(Vec2(80 * 1, 80), LAYER_Enemy);
-		whiteEnemy->SetSprite(whiteEnemySprite);
-		const Vec2Int size = whiteEnemySprite->GetSize();
-		whiteEnemy->SetTarget(target);
-		{
-			BoxCollider* collider = new BoxCollider();
-			collider->SetShowDebug(true);
-			//나의 콜리전 레이어
-			collider->SetCollisionLayer(CLT_ENEMY);
-			// 모든 콜리전 플래그 제거
-			collider->ResetCollisionFlag();
-			// 내가 충돌하고 싶은 레이어 추가
-			collider->AddCollisionFlagLayer(CLT_WALL);
-			collider->AddCollisionFlagLayer(CLT_MISSILE);
-			collider->AddCollisionFlagLayer(CLT_PLAYER);
-			collider->SetSize(Vec2(size.x, size.y));
-			GET_SINGLE(CollisionManager)->AddCollider(collider);
-			whiteEnemy->AddComponent(collider);
-		}
-	}
+	currSpawnDelayTime = SpawnDelayTime;
+	//{
+	//	Sprite* whiteEnemySprite = GET_SINGLE(ResourceManager)->GetSprite(L"WhiteEnemy");
+	//	WhiteEnemy* whiteEnemy = GET_SINGLE(SceneManager)->GetCurrentScene()->SpawnActor<WhiteEnemy>(Vec2(80 * 1, 80), LAYER_Enemy);
+	//	whiteEnemy->SetSprite(whiteEnemySprite);
+	//	const Vec2Int size = whiteEnemySprite->GetSize();
+	//	whiteEnemy->SetTarget(target);
+	//	{
+	//		BoxCollider* collider = new BoxCollider();
+	//		collider->SetShowDebug(true);
+	//		//나의 콜리전 레이어
+	//		collider->SetCollisionLayer(CLT_ENEMY);
+	//		// 모든 콜리전 플래그 제거
+	//		collider->ResetCollisionFlag();
+	//		// 내가 충돌하고 싶은 레이어 추가
+	//		collider->AddCollisionFlagLayer(CLT_WALL);
+	//		collider->AddCollisionFlagLayer(CLT_MISSILE);
+	//		collider->AddCollisionFlagLayer(CLT_PLAYER);
+	//		collider->SetSize(Vec2(size.x, size.y));
+	//		GET_SINGLE(CollisionManager)->AddCollider(collider);
+	//		whiteEnemy->AddComponent(collider);
+	//	}
+	//}
 
-	{
-		Sprite* HalfMoonEnemySprite = GET_SINGLE(ResourceManager)->GetSprite(L"HalfMoonEnemy");
-		HalfMoonEnemy* halfMoonEnemy = GET_SINGLE(SceneManager)->GetCurrentScene()->SpawnActor<HalfMoonEnemy>(Vec2(80 * 3, 80), LAYER_Enemy);
-		halfMoonEnemy->SetSprite(HalfMoonEnemySprite);
-		const Vec2Int size = HalfMoonEnemySprite->GetSize();
-		halfMoonEnemy->SetTarget(target);
-		{
-			BoxCollider* collider = new BoxCollider();
-			collider->SetShowDebug(true);
-			//나의 콜리전 레이어
-			collider->SetCollisionLayer(CLT_ENEMY);
-			// 모든 콜리전 플래그 제거
-			collider->ResetCollisionFlag();
-			// 내가 충돌하고 싶은 레이어 추가
-			collider->AddCollisionFlagLayer(CLT_WALL);
-			collider->AddCollisionFlagLayer(CLT_MISSILE);
-			collider->AddCollisionFlagLayer(CLT_PLAYER);
-			collider->SetSize(Vec2(size.x, size.y));
-			GET_SINGLE(CollisionManager)->AddCollider(collider);
-			halfMoonEnemy->AddComponent(collider);
-		}
-		GET_SINGLE(SceneManager)->GetCurrentScene()->AddActor(halfMoonEnemy);
-	
-	}
+	//{
+	//	Sprite* HalfMoonEnemySprite = GET_SINGLE(ResourceManager)->GetSprite(L"HalfMoonEnemy");
+	//	HalfMoonEnemy* halfMoonEnemy = GET_SINGLE(SceneManager)->GetCurrentScene()->SpawnActor<HalfMoonEnemy>(Vec2(80 * 3, 80), LAYER_Enemy);
+	//	halfMoonEnemy->SetSprite(HalfMoonEnemySprite);
+	//	const Vec2Int size = HalfMoonEnemySprite->GetSize();
+	//	halfMoonEnemy->SetTarget(target);
+	//	{
+	//		BoxCollider* collider = new BoxCollider();
+	//		collider->SetShowDebug(true);
+	//		//나의 콜리전 레이어
+	//		collider->SetCollisionLayer(CLT_ENEMY);
+	//		// 모든 콜리전 플래그 제거
+	//		collider->ResetCollisionFlag();
+	//		// 내가 충돌하고 싶은 레이어 추가
+	//		collider->AddCollisionFlagLayer(CLT_WALL);
+	//		collider->AddCollisionFlagLayer(CLT_MISSILE);
+	//		collider->AddCollisionFlagLayer(CLT_PLAYER);
+	//		collider->SetSize(Vec2(size.x, size.y));
+	//		GET_SINGLE(CollisionManager)->AddCollider(collider);
+	//		halfMoonEnemy->AddComponent(collider);
+	//	}
+	//	GET_SINGLE(SceneManager)->GetCurrentScene()->AddActor(halfMoonEnemy);
+	//
+	//}
 
 	
 }
@@ -92,7 +92,7 @@ void EnemySpawnManager::BeginPlay()
 void EnemySpawnManager::Tick(float deltaTime)
 {
 	Super::Tick(deltaTime);
-
+	
 	currSpawnDelayTime += deltaTime;
 	if (currSpawnDelayTime > SpawnDelayTime) {
 		currSpawnDelayTime = 0;
@@ -109,7 +109,8 @@ void EnemySpawnManager::Render(HDC hdc)
 void EnemySpawnManager::RandomEnemySpawn()
 {	//  Y축 80일때 삭제 안됨
 	int ranPosVal = Utils::RandomIntegerRange(1, 5);
-	int ranEnemyVal = Utils::RandomIntegerRange(0,3);
+	int ranEnemyVal = 1;
+	//int ranEnemyVal = Utils::RandomIntegerRange(0,3);
 	switch (ranEnemyVal)
 	{
 	case 0:

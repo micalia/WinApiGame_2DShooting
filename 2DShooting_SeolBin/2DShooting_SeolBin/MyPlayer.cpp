@@ -2,6 +2,15 @@
 #include "MyPlayer.h"
 #include "InputManager.h"
 #include "TimeManager.h"
+#include "CollisionManager.h"
+#include "EnemyMissile.h"
+#include "SceneManager.h"
+#include "Scene.h"
+#include "Collider.h"
+#include "BoxCollider.h"
+#include "DestroyZone.h"
+#include "DevScene.h"
+#include "Flipbook.h"
 
 MyPlayer::MyPlayer()
 {
@@ -21,16 +30,26 @@ void MyPlayer::BeginPlay()
 void MyPlayer::Tick(float deltaTime)
 {
 	Super::Tick(deltaTime);
-	TickInput();
-	MoveAction();
-	SyncToServer();
+	
+	switch (GetPlayerState())
+	{
+	case RespawnScene:
+		RespawnSceneMove(deltaTime);
+		SyncToServer();
+		break;
+	case RespawnSceneComplete:
+		TickInput();
+		MoveAction();
+		SyncToServer();
 
-	currFireTermTime+=deltaTime;
-	if (currFireTermTime > fireTermTime) {
-		currFireTermTime = 0;
-		return;
-		_dirtyFlag = true;
-		Server_Missile();
+		currFireTermTime+=deltaTime;
+		if (currFireTermTime > fireTermTime) {
+			currFireTermTime = 0;
+			return;
+			_dirtyFlag = true;
+			Server_Missile();
+		}
+		break;
 	}
 }
 
@@ -39,6 +58,61 @@ void MyPlayer::Render(HDC hdc)
 	Super::Render(hdc);
 
 	Utils::DrawCircle(hdc, _pos, 10);
+}
+
+void MyPlayer::OnComponentBeginOverlap(Collider* collider, Collider* other)
+{
+	Super::OnComponentBeginOverlap(collider, other);
+
+	if (bRespawn == false && other != nullptr) {
+		if (auto missile = dynamic_cast<EnemyMissile*>(other->GetOwner())
+			) {
+			if (GetHp() <= 0) {
+
+			}
+			GET_SINGLE(CollisionManager)->RemoveCollider(other);
+			GET_SINGLE(SceneManager)->GetCurrentScene()->RemoveActor(missile);
+			Damaged();
+			_dirtyFlag = true;
+			SyncToServer();
+			bRespawn = true;
+		}
+	}
+
+	if (dynamic_cast<DestroyZone*>(other->GetOwner()))
+	{
+		bCrashing = true;
+		BoxCollider* b1 = dynamic_cast<BoxCollider*>(collider);
+		BoxCollider* b2 = dynamic_cast<BoxCollider*>(other);
+		if (b1 == nullptr || b2 == nullptr)
+			return;
+
+		AdjustCollisionPos(b1, b2);
+	}
+}
+
+void MyPlayer::OnComponentEndOverlap(Collider* collider, Collider* other)
+{
+	Super::OnComponentEndOverlap(collider, other);
+	bCrashing = false;
+}
+
+void MyPlayer::RespawnSceneMove(float deltaTime)
+{ 
+	_dirtyFlag = true;
+	Vec2 respawnEndPos = GET_SINGLE(SceneManager)->GetDevScene()->GetRespawnEndPos();
+	if (_pos.y < respawnEndPos.y) {
+		SetPlayerState(RespawnSceneComplete);
+		SetPos(_pos);
+	}
+	else {
+		_pos.y -= speed * deltaTime;
+	}
+	SetState(PD_IDLE);
+
+	info.set_posx(_pos.x);
+	info.set_posy(_pos.y);
+	SyncToServer();
 }
 
 void MyPlayer::TickInput()

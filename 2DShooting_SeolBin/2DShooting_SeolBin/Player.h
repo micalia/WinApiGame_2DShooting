@@ -15,6 +15,11 @@ enum PlayerAnimState {
 	PA_Right
 };
 
+enum PlayerState {
+	RespawnScene,
+	RespawnSceneComplete,
+};
+
 class ObjectInfo;
 class BoxCollider;
 class Flipbook;
@@ -39,6 +44,14 @@ public:
 	void SetName(string name){ _name = name; }
 
 	void Fire(Protocol::ObjectInfo InInfo);
+
+	int GetHp(){return _hp;}
+	void SetHp(int hp) {_hp = hp;}
+
+	void Damaged();
+
+	void SetPlayerState(PlayerState playerState);
+	PlayerState GetPlayerState(){ return _playerState; }
 protected:
 	void AdjustCollisionPos(BoxCollider* b1, BoxCollider* b2);
 
@@ -47,16 +60,17 @@ protected:
 
 protected:
 	float speed = 300; // Default Val : 470
+	bool bCrashing = false;
 
+	Flipbook* _blueFlipbookIdle = nullptr;
 private:
 	PlayerDir playerDir = PD_IDLE;
 	PlayerDir prevPlayerDir = PD_IDLE;
 	PlayerColor Color = PlayerColor::Blue;
+	PlayerState _playerState = PlayerState::RespawnScene;
 
-	bool bCrashing;
 	Vec2 CrashingPos;
 
-	Flipbook* _blueFlipbookIdle = nullptr;
 	Flipbook* _blueFlipbookLeft = nullptr;
 	Flipbook* _blueFlipbookRight = nullptr;
 	Flipbook* _blueFlipbookLeftReverse = nullptr;
@@ -68,11 +82,25 @@ private:
 	Flipbook* _redFlipbookLeftReverse = nullptr;
 	Flipbook* _redFlipbookRightReverse = nullptr;
 
+	Flipbook* _playerTransparent = nullptr;
+
 	string _name = "";
-private:
+protected:
 	void ReverseAnimDelay(float InDeltaTime);
 	bool bReverseAnimOn;
 	float reverseAnimDelayTime = 0.2;
 	float currReverseAnimDelayTime = 0;
+
+private:
+	int _hp = 3;
+
+protected:
+	bool bRespawn = false;
+private:
+	int blinkCount = 18;
+	int blinkCurrCount = 0;
+	float blinkTime = 0.2;
+	float currBlinkTime = 0;
+	bool bTransparent = false;
 };
 

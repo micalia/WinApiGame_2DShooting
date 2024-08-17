@@ -11,6 +11,10 @@ public:
 	virtual void Tick(float deltaTime) override;
 	virtual void Render(HDC hdc) override;
 
+	virtual void OnComponentBeginOverlap(Collider* collider, Collider* other) override;
+	virtual void OnComponentEndOverlap(Collider* collider, Collider* other) override;
+
+	void RespawnSceneMove(float deltaTime);
 private:
 	void TickInput();
 	void MoveAction();
@@ -27,5 +31,7 @@ private:
 
 	float fireTermTime = 0.2;
 	float currFireTermTime = 0;
+
+
 };
 

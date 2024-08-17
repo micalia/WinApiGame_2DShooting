@@ -22,9 +22,9 @@ WhiteEnemy::~WhiteEnemy()
 void WhiteEnemy::BeginPlay()
 {
 	Super::BeginPlay();
-
+	
 	speed = 50;
-	hp = 5;
+	SetHp(5);
 }
 
 void WhiteEnemy::Tick(float deltaTime)
@@ -141,7 +141,8 @@ void WhiteEnemy::SetDefaultSprite()
 
 void WhiteEnemy::Damaged()
 {
- 	hp--; 
+	int currHp = GetHp();
+	SetHp(--currHp);
 	bDamaged = true;
 	SetDamagedSprite();
 }

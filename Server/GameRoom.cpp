@@ -56,7 +56,7 @@ void GameRoom::EnterRoom(GameSessionRef session)
 
 	//TEMP
 	player->info.set_posx(242);
-	player->info.set_posy(488);
+	player->info.set_posy(540);
 	
 
 	// 입장한 클라에게 정보를 보내주기

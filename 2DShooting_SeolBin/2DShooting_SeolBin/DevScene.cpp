@@ -21,6 +21,7 @@
 
 DevScene::DevScene()
 {
+	GET_SINGLE(ResourceManager)->LoadTexture(L"Transparent", L"Sprite\\Player\\Transparent.bmp");
 	GET_SINGLE(ResourceManager)->LoadTexture(L"Background", L"Sprite\\Map\\Background.bmp");
 	GET_SINGLE(ResourceManager)->LoadTexture(L"BluePlayer", L"Sprite\\Player\\NewBluePlayerSpriteAnim.bmp", RGB(255, 255, 255));
 	GET_SINGLE(ResourceManager)->LoadTexture(L"RedPlayer", L"Sprite\\Player\\NewRedPlayerSpriteAnim.bmp", RGB(255, 255, 255));
@@ -59,6 +60,11 @@ void DevScene::Init()
 		Texture* texture = GET_SINGLE(ResourceManager)->GetTexture(L"BluePlayer");
 		Flipbook* fb = GET_SINGLE(ResourceManager)->CreateFlipbook(L"FB_BluePlayerLeftReverse");
 		fb->SetInfo({ texture, L"FB_BluePlayerLeftReverse", {70, 70}, 1, 1, 1, 0.3f, false });
+	}
+	{
+		Texture* texture = GET_SINGLE(ResourceManager)->GetTexture(L"BluePlayer");
+		Flipbook* fb = GET_SINGLE(ResourceManager)->CreateFlipbook(L"FB_FullTransparent");
+		fb->SetInfo({ texture, L"FB_FullTransparent", {70, 70}, 2, 2, 0, 0.3f, false });
 	}
 #pragma endregion
 #pragma region RedPlayer Anim
