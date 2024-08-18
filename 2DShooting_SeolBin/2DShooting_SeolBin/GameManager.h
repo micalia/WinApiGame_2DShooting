@@ -8,7 +8,7 @@ public:
 	void Update();
 	void Render(HDC hdc);
 
-	void AddScore(string playerName, int addScore);
+	void SetScore(string playerName, int setScore);
 	int GetBluePlayerScore(){return bluePlayerScore; }
 	int GetRedPlayerScore(){return redPlayerScore; }
 private:

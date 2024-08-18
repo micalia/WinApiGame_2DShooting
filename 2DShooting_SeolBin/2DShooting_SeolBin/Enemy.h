@@ -25,9 +25,16 @@ public:
 
 	void FindPlayer();
 	virtual void Damaged(){}
+
+	void SetKillScore(int32 addScore){ _killScore = addScore; }
+	int32 GetKillScore(){ return _killScore; }
+	
+	void Server_AddScore(Player* whoKillMe, int32 addScore);
+
 protected:
 	int32 hp = 0;
 	float speed = 0;
+	int32 _killScore = 0;
 	Player* target = nullptr;
 };
 

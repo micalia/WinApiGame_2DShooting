@@ -25,6 +25,7 @@ void WhiteEnemy::BeginPlay()
 	
 	speed = 50;
 	SetHp(5);
+	SetKillScore(500);
 }
 
 void WhiteEnemy::Tick(float deltaTime)

@@ -1,11 +1,11 @@
 #pragma once
 #include "FlipbookActor.h"
 
-enum class PlayerColor
-{
-	Blue,
-	Red
-};
+//enum class PlayerColor
+//{
+//	Blue,
+//	Red
+//};
 
 enum PlayerAnimState {
 	PA_Left,
@@ -52,6 +52,8 @@ public:
 
 	void SetPlayerState(PlayerState playerState);
 	PlayerState GetPlayerState(){ return _playerState; }
+
+	Protocol::ScoreInfo scoreInfo;
 protected:
 	void AdjustCollisionPos(BoxCollider* b1, BoxCollider* b2);
 
@@ -69,9 +71,8 @@ protected:
 private:
 	PlayerDir playerDir = PD_IDLE;
 	PlayerDir prevPlayerDir = PD_IDLE;
-	PlayerColor Color = PlayerColor::Blue;
+	//PlayerColor Color = PlayerColor::Blue;
 	PlayerState _playerState = PlayerState::RespawnScene;
-
 
 	Flipbook* _blueFlipbookLeft = nullptr;
 	Flipbook* _blueFlipbookRight = nullptr;

@@ -103,31 +103,6 @@ inline bool OBJECT_TYPE_Parse(
   return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<OBJECT_TYPE>(
     OBJECT_TYPE_descriptor(), name, value);
 }
-enum PLAYER_COLOR_TYPE : int {
-  PLAYER_COLOR_TYPE_BLUE = 0,
-  PLAYER_COLOR_TYPE_RED = 1,
-  PLAYER_COLOR_TYPE_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
-  PLAYER_COLOR_TYPE_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
-};
-bool PLAYER_COLOR_TYPE_IsValid(int value);
-constexpr PLAYER_COLOR_TYPE PLAYER_COLOR_TYPE_MIN = PLAYER_COLOR_TYPE_BLUE;
-constexpr PLAYER_COLOR_TYPE PLAYER_COLOR_TYPE_MAX = PLAYER_COLOR_TYPE_RED;
-constexpr int PLAYER_COLOR_TYPE_ARRAYSIZE = PLAYER_COLOR_TYPE_MAX + 1;
-
-const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* PLAYER_COLOR_TYPE_descriptor();
-template<typename T>
-inline const std::string& PLAYER_COLOR_TYPE_Name(T enum_t_value) {
-  static_assert(::std::is_same<T, PLAYER_COLOR_TYPE>::value ||
-    ::std::is_integral<T>::value,
-    "Incorrect type passed to function PLAYER_COLOR_TYPE_Name.");
-  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
-    PLAYER_COLOR_TYPE_descriptor(), enum_t_value);
-}
-inline bool PLAYER_COLOR_TYPE_Parse(
-    ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, PLAYER_COLOR_TYPE* value) {
-  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<PLAYER_COLOR_TYPE>(
-    PLAYER_COLOR_TYPE_descriptor(), name, value);
-}
 enum PLAYER_DIR_TYPE : int {
   PLAYER_DIR_TYPE_IDLE = 0,
   PLAYER_DIR_TYPE_LEFT = 1,
@@ -185,11 +160,6 @@ template <> struct is_proto_enum< ::Protocol::OBJECT_TYPE> : ::std::true_type {}
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::Protocol::OBJECT_TYPE>() {
   return ::Protocol::OBJECT_TYPE_descriptor();
-}
-template <> struct is_proto_enum< ::Protocol::PLAYER_COLOR_TYPE> : ::std::true_type {};
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Protocol::PLAYER_COLOR_TYPE>() {
-  return ::Protocol::PLAYER_COLOR_TYPE_descriptor();
 }
 template <> struct is_proto_enum< ::Protocol::PLAYER_DIR_TYPE> : ::std::true_type {};
 template <>

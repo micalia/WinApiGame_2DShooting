@@ -16,6 +16,5 @@ protected:
 
 private:
 	float speed = 300;
-	
 };
 

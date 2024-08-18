@@ -9,6 +9,7 @@
 #include "CollisionManager.h"
 #include "Missile.h"
 #include "Struct.pb.h"
+#include "GameManager.h"
 
 void ClientPacketHandler::HandlePacket(ServerSessionRef session, BYTE* buffer, int32 len)
 {
@@ -36,6 +37,9 @@ void ClientPacketHandler::HandlePacket(ServerSessionRef session, BYTE* buffer, i
 		break;
 	case S_Projectile:
 		Handle_S_Projectile(session, buffer, len);
+		break;
+	case S_Score:
+		Handle_S_Score(session, buffer, len);
 		break;
 	}
 }
@@ -195,6 +199,21 @@ void ClientPacketHandler::Handle_S_Projectile(ServerSessionRef session, BYTE* bu
 	}
 }
 
+void ClientPacketHandler::Handle_S_Score(ServerSessionRef session, BYTE* buffer, int32 len)
+{
+	PacketHeader* header = (PacketHeader*)buffer;
+	uint16 size = header->size;
+
+	Protocol::S_Score pkt;
+	pkt.ParseFromArray(&header[1], size - sizeof(PacketHeader));
+
+	const Protocol::ScoreInfo& scoreInfo = pkt.scoreinfo();
+	DevScene* scene = GET_SINGLE(SceneManager)->GetDevScene();
+	if (scene) {
+		GET_SINGLE(GameManager)->SetScore(scoreInfo.playername(), scoreInfo.fullscore());
+	}
+}
+
 SendBufferRef ClientPacketHandler::Make_C_Move()
 {
 	Protocol::C_Move pkt;
@@ -213,4 +232,13 @@ SendBufferRef ClientPacketHandler::Make_C_Projectile()
 	*pkt.mutable_info() = myPlayer->info;
 
 	return MakeSendBuffer(pkt, C_Projectile);
+}
+
+SendBufferRef ClientPacketHandler::Make_C_ScoreCalculate(Player* player)
+{
+	Protocol::C_Score pkt;
+	if(player == nullptr) return nullptr;
+	*pkt.mutable_scoreinfo() = player->scoreInfo;
+
+	return MakeSendBuffer(pkt, C_Score);
 }

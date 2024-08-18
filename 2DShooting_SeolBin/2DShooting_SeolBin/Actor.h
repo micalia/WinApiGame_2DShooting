@@ -53,8 +53,13 @@ public:
 	Vec2 GetNetRecvPos() { return _netRecvPos; }
 	void SetPrevRecvPos(Vec2 prevRecvPos) { _prevRecvPos = prevRecvPos; }
 	Vec2 GetPrevRecvPos() { return _prevRecvPos; }
+
+	void SetOwner(Actor* owner) { _owner = owner; }
+	Actor* GetOwner() { return _owner; }
 private:
 	Vec2 _netRecvPos = { 0, 0 };
 	Vec2 _prevRecvPos = { 0, 0 };
+
+	Actor* _owner;
 };
 

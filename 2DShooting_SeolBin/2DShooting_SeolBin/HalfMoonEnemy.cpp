@@ -24,7 +24,8 @@ void HalfMoonEnemy::BeginPlay()
 	Super::BeginPlay();
 
 	speed = 50;
-	SetHp(5);
+	SetHp(1);
+	SetKillScore(100);
 }
 
 void HalfMoonEnemy::Tick(float deltaTime)

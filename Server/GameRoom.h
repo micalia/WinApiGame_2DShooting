@@ -16,13 +16,27 @@ public:
 public:
 	void Handle_C_Move(Protocol::C_Move& pkt);
 	void Handle_C_Projectile(Protocol::C_Projectile& pkt);
+	void Handle_C_Score(Protocol::C_Score& pkt);
 
 	void AddObject(ActorRef gameObject);
 	void RemoveObject(uint64 id);
 	void Broadcast(SendBufferRef& sendBuffer);
+
+	int GetBluePlayerScore(){return _bluePlayerScore;}
+	int GetRedPlayerScore(){return _redPlayerScore;}
+
+	void SetBluePlayerScore(int addScore) {  _bluePlayerScore += addScore; }
+	void SetRedPlayerScore(int addScore) { _redPlayerScore += addScore; }
 private:
 	map<uint64, PlayerRef> _players;
 	map<uint64, EnemyRef> _enemies;
+
+private:
+	Protocol::ScoreInfo scoreInfo;
+
+	int _redPlayerScore = 0;
+	int _bluePlayerScore = 0;
+
 };
 
 extern GameRoomRef GRoom;

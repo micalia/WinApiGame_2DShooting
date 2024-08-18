@@ -20,6 +20,9 @@ void ServerPacketHandler::HandlePacket(GameSessionRef session, BYTE* buffer, int
 	case C_Projectile:
 		Handle_C_Projectile(session, buffer, len);
 		break;
+	case C_Score:
+		Handle_C_Score(session, buffer, len);
+		break;
 	default:
 		break;
 	}
@@ -51,6 +54,19 @@ void ServerPacketHandler::Handle_C_Projectile(GameSessionRef session, BYTE* buff
 	GameRoomRef gameRoom = session->gameRoom.lock();
 	if (gameRoom)
 		gameRoom->Handle_C_Projectile(pkt);
+}
+
+void ServerPacketHandler::Handle_C_Score(GameSessionRef session, BYTE* buffer, int32 len)
+{
+	PacketHeader* header = (PacketHeader*)buffer;
+	uint16 size = header->size;
+
+	Protocol::C_Score pkt;
+	pkt.ParseFromArray(&header[1], size - sizeof(PacketHeader));
+
+	GameRoomRef gameRoom = session->gameRoom.lock();
+	if (gameRoom)
+		gameRoom->Handle_C_Score(pkt);
 }
 
 SendBufferRef ServerPacketHandler::Make_S_TEST(uint64 id, uint32 hp, uint16 attack, vector<BuffData> buffs)
@@ -129,4 +145,14 @@ SendBufferRef ServerPacketHandler::Make_S_Projectile(const Protocol::ObjectInfo&
 	*objectInfo = info;
 
 	return MakeSendBuffer(pkt, S_Projectile);
+}
+
+SendBufferRef ServerPacketHandler::Make_S_Score(const Protocol::ScoreInfo& scoreInfo)
+{
+	Protocol::S_Score pkt;
+
+	Protocol::ScoreInfo* objectInfo = pkt.mutable_scoreinfo();
+	*objectInfo = scoreInfo;
+
+	return MakeSendBuffer(pkt, S_Score);
 }

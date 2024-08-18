@@ -217,6 +217,7 @@ void Player::Fire(Protocol::ObjectInfo InInfo)
 	missile->SetSprite(missileSprite);
 	InInfo.set_objecttype(Protocol::OBJECT_TYPE_PLAYER_MISSILE);
 	Vec2Int MissileSpriteSize = missileSprite->GetSize();
+	missile->SetOwner(this);
 	if(info.name() == InInfo.name())
 	{
 		BoxCollider* collider = new BoxCollider();

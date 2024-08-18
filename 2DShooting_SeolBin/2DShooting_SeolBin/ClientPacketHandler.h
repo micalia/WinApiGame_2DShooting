@@ -12,9 +12,14 @@ enum
 	C_Move = 10,
 	S_Move = 11,
 
-	C_Projectile =12,
-	S_Projectile =13,
+	C_Projectile = 12,
+	S_Projectile = 13,
+
+	C_Score = 14,
+	S_Score = 15,
 };
+
+class Player;
 
 class ClientPacketHandler
 {
@@ -29,10 +34,12 @@ public:
 	static void Handle_S_RemoveObject(ServerSessionRef session, BYTE* buffer, int32 len);
 	static void Handle_S_Move(ServerSessionRef session, BYTE* buffer, int32 len);
 	static void Handle_S_Projectile(ServerSessionRef session, BYTE* buffer, int32 len);
+	static void Handle_S_Score(ServerSessionRef session, BYTE* buffer, int32 len);
 
 	// º¸³»±â
 	static SendBufferRef Make_C_Move();
 	static SendBufferRef Make_C_Projectile();
+	static SendBufferRef Make_C_ScoreCalculate(Player* player);
 
 	template<typename T>
 	static SendBufferRef MakeSendBuffer(T& pkt, uint16 pktId)

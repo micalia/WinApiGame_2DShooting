@@ -19,3 +19,10 @@ message ObjectInfo
 	float posY = 6;
 	string name = 7;
 }
+
+message ScoreInfo
+{
+	string playerName = 1;
+	uint32 enemyScore = 2;
+	uint32 fullScore = 3;
+}

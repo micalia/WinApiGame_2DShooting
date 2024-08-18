@@ -153,6 +153,25 @@ void GameRoom::Handle_C_Projectile(Protocol::C_Projectile& pkt)
 	}
 }
 
+void GameRoom::Handle_C_Score(Protocol::C_Score& pkt)
+{
+	// TODO : Validation
+	scoreInfo.set_playername(pkt.scoreinfo().playername());
+	if (pkt.scoreinfo().playername() == "RedPlayer") {
+		SetRedPlayerScore(pkt.scoreinfo().enemyscore());
+		scoreInfo.set_fullscore(GetRedPlayerScore());
+	}
+	else if (pkt.scoreinfo().playername() == "BluePlayer") {
+		SetBluePlayerScore(pkt.scoreinfo().enemyscore());
+		scoreInfo.set_fullscore(GetBluePlayerScore());
+	}
+
+	{
+		SendBufferRef sendBuffer = ServerPacketHandler::Make_S_Score(scoreInfo);
+		Broadcast(sendBuffer);
+	}
+}
+
 void GameRoom::AddObject(ActorRef gameObject)
 {
 	uint64 id = gameObject->info.objectid();

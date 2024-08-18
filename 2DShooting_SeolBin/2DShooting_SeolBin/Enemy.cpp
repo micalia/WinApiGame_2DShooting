@@ -47,7 +47,7 @@ void Enemy::OnComponentBeginOverlap(Collider* collider, Collider* other)
 			) {
 			Damaged();
  			if (hp <= 0) {
-				Player* HitPlayer = static_cast<Player*>(other->GetOwner());
+				Player* HitPlayer = dynamic_cast<Player*>(missile->GetOwner());
 				GET_SINGLE(CollisionManager)->RemoveCollider(collider);
 				Die(HitPlayer);
 			}
@@ -63,6 +63,9 @@ void Enemy::Die(Player* WhoHitMe)
 	explosionEffect->SetPos(GetPos());
 	GET_SINGLE(SceneManager)->GetCurrentScene()->AddActor(explosionEffect);
 	GET_SINGLE(SceneManager)->GetCurrentScene()->RemoveActor(this);
+	_dirtyFlag = true;
+
+	Server_AddScore(WhoHitMe, GetKillScore());
 }
 
 void Enemy::FindPlayer()
@@ -75,5 +78,16 @@ void Enemy::FindPlayer()
 	else if(playerArr.size() == 1) {
 		target = static_cast<Player*>(playerArr[0]);
 	}
+}
+
+void Enemy::Server_AddScore(Player* whoKillMe, int32 addScore)
+{
+	if (_dirtyFlag == false && whoKillMe == nullptr)
+		return;
+
+	whoKillMe->scoreInfo.set_enemyscore(addScore);
+	whoKillMe->scoreInfo.set_playername(whoKillMe->GetName());
+	SendBufferRef sendBuffer = ClientPacketHandler::Make_C_ScoreCalculate(whoKillMe);
+	GET_SINGLE(NetworkManager)->SendPacket(sendBuffer);
 }
 

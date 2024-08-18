@@ -21,7 +21,7 @@ void GameManager::Render(HDC hdc)
 		::TextOut(hdc, 30, 30, str.c_str(), static_cast<int32>(str.size()));
 	}
 	{
-		wstring str = std::format(L"Red Score: {0}", GetBluePlayerScore());
+		wstring str = std::format(L"Red Score: {0}", GetRedPlayerScore());
 		::TextOut(hdc, 300, 30, str.c_str(), static_cast<int32>(str.size()));
 	}
 
@@ -31,12 +31,12 @@ void GameManager::Render(HDC hdc)
 
 }
 
-void GameManager::AddScore(string playerName, int addScore)
+void GameManager::SetScore(string playerName, int setScore)
 {
 	if (playerName == "BluePlayer") {
-		bluePlayerScore += addScore;
+		bluePlayerScore = setScore;
 	}
 	else if (playerName == "RedPlayer") {
-		redPlayerScore += addScore;
+		redPlayerScore = setScore;
 	}
 }
