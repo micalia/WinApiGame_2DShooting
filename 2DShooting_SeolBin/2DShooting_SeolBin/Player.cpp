@@ -61,10 +61,6 @@ void Player::Tick(float deltaTime)
 	MoveAction();
 	ReverseAnimDelay(deltaTime);
 	
-	if (bCrashing) {
-		SetPos(CrashingPos);
-	}
-
 	if (bRespawn) {
 		currBlinkTime += deltaTime;
 		if (currBlinkTime > blinkTime) {
@@ -244,6 +240,7 @@ void Player::Damaged()
 		SetFlipbook(_blueFlipbookIdle);
 	}
 	prevPlayerDir = PD_IDLE;
+	bCrashing = false;
 }
 
 void Player::SetPlayerState(PlayerState playerState)

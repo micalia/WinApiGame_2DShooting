@@ -43,10 +43,9 @@ void Actor::Render(HDC hdc)
 
 void Actor::SetPos(Vec2 pos)
 {
+	_pos = Vec2(pos);
 	info.set_posx(pos.x);
 	info.set_posy(pos.y);
-
-	_pos = Vec2(pos);
 }
 
 Vec2 Actor::GetPos()
@@ -72,12 +71,12 @@ void Actor::RemoveComponent(Component* component)
 	_components.erase(findIt);
 }
 
-Component* Actor::GetCollider()
+Collider* Actor::GetCollider()
 {
 	for (Component* component : _components)
 	{
-		if (dynamic_cast<Collider*>(component))
-			return component;
+		if (auto actorCollider = dynamic_cast<Collider*>(component))
+			return actorCollider;
 	}
 
 	return nullptr;

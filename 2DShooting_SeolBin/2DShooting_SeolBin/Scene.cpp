@@ -40,7 +40,7 @@ void Scene::Init()
 void Scene::Update()
 {
 	float deltaTime = GET_SINGLE(TimeManager)->GetDeltaTime();
-
+	if (deltaTime > 0.1f) return;
 	GET_SINGLE(CollisionManager)->Update();
 
 	//// 거리 = 시간 * 속도

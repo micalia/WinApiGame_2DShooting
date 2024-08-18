@@ -106,6 +106,7 @@ void ClientPacketHandler::Handle_S_MyPlayer(ServerSessionRef session, BYTE* buff
 			// 내가 충돌하고 싶은 레이어 추가
 			collider->AddCollisionFlagLayer(CLT_WALL);
 			collider->AddCollisionFlagLayer(CLT_ENEMY_MISSILE);
+			myPlayer->SetPlayerCollisionFlag(collider->GetCollisionFlag());
 			collider->SetSize(Vec2(size.x, size.y));
 			GET_SINGLE(CollisionManager)->AddCollider(collider);
 			myPlayer->AddComponent(collider);

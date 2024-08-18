@@ -25,6 +25,7 @@ MyPlayer::~MyPlayer()
 void MyPlayer::BeginPlay()
 {
 	Super::BeginPlay();
+
 }
 
 void MyPlayer::Tick(float deltaTime)
@@ -34,10 +35,17 @@ void MyPlayer::Tick(float deltaTime)
 	switch (GetPlayerState())
 	{
 	case RespawnScene:
+		{
+		Collider* myCollider = GetCollider();
+		myCollider->ResetCollisionFlag();
 		RespawnSceneMove(deltaTime);
 		SyncToServer();
+		}
 		break;
 	case RespawnSceneComplete:
+	{
+		Collider* myCollider = GetCollider();
+		myCollider->SetCollisionFlag(playerCollisionFlag);
 		TickInput();
 		MoveAction();
 		SyncToServer();
@@ -49,6 +57,7 @@ void MyPlayer::Tick(float deltaTime)
 			_dirtyFlag = true;
 			Server_Missile();
 		}
+	}
 		break;
 	}
 }
@@ -56,8 +65,11 @@ void MyPlayer::Tick(float deltaTime)
 void MyPlayer::Render(HDC hdc)
 {
 	Super::Render(hdc);
-
 	Utils::DrawCircle(hdc, _pos, 10);
+
+	if (bCrashing && GetPlayerState() == RespawnSceneComplete) {
+		SetPos(CrashingPos);
+	}
 }
 
 void MyPlayer::OnComponentBeginOverlap(Collider* collider, Collider* other)
@@ -71,8 +83,11 @@ void MyPlayer::OnComponentBeginOverlap(Collider* collider, Collider* other)
 
 			}
 			GET_SINGLE(CollisionManager)->RemoveCollider(other);
+			//GET_SINGLE(CollisionManager)->RemoveCollider(collider);
 			GET_SINGLE(SceneManager)->GetCurrentScene()->RemoveActor(missile);
 			Damaged();
+			_pos = GET_SINGLE(SceneManager)->GetDevScene()->GetRespawnStartPos();
+			SetPos(_pos);
 			_dirtyFlag = true;
 			SyncToServer();
 			bRespawn = true;

@@ -18,7 +18,7 @@ void CollisionManager::Update()
 		{
 			Collider* src = colliders[i];
 			Collider* dest = colliders[j];
-
+			if(dest->GetCollisionFlag() == 0)continue; // NoCollisionÀÌ¸é return
 			if (src->CheckCollision(dest))
 			{
 				if (src->_collisionMap.contains(dest) == false)

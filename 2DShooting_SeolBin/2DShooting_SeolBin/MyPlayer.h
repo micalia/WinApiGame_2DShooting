@@ -15,6 +15,8 @@ public:
 	virtual void OnComponentEndOverlap(Collider* collider, Collider* other) override;
 
 	void RespawnSceneMove(float deltaTime);
+	void SetPlayerCollisionFlag(uint32 collFlag){ playerCollisionFlag = collFlag;}
+	uint32 GetPlayerCollisionFlag(){ return playerCollisionFlag;}
 private:
 	void TickInput();
 	void MoveAction();
@@ -32,6 +34,6 @@ private:
 	float fireTermTime = 0.2;
 	float currFireTermTime = 0;
 
-
+	uint32 playerCollisionFlag = 0;
 };
 

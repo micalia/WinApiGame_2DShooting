@@ -63,13 +63,15 @@ protected:
 	bool bCrashing = false;
 
 	Flipbook* _blueFlipbookIdle = nullptr;
+
+protected:
+	Vec2 CrashingPos;
 private:
 	PlayerDir playerDir = PD_IDLE;
 	PlayerDir prevPlayerDir = PD_IDLE;
 	PlayerColor Color = PlayerColor::Blue;
 	PlayerState _playerState = PlayerState::RespawnScene;
 
-	Vec2 CrashingPos;
 
 	Flipbook* _blueFlipbookLeft = nullptr;
 	Flipbook* _blueFlipbookRight = nullptr;
