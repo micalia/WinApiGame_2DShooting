@@ -22,7 +22,7 @@ namespace _pbi = _pb::internal;
 
 namespace Protocol {
 }  // namespace Protocol
-static const ::_pb::EnumDescriptor* file_level_enum_descriptors_Enum_2eproto[3];
+static const ::_pb::EnumDescriptor* file_level_enum_descriptors_Enum_2eproto[4];
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_Enum_2eproto = nullptr;
 const uint32_t TableStruct_Enum_2eproto::offsets[1] = {};
 static constexpr ::_pbi::MigrationSchema* schemas = nullptr;
@@ -39,11 +39,13 @@ const char descriptor_table_protodef_Enum_2eproto[] PROTOBUF_SECTION_VARIABLE(pr
   "JECT_TYPE_ENEMY_MISSILE\020\005*`\n\017PLAYER_DIR_"
   "TYPE\022\030\n\024PLAYER_DIR_TYPE_IDLE\020\000\022\030\n\024PLAYER"
   "_DIR_TYPE_LEFT\020\001\022\031\n\025PLAYER_DIR_TYPE_RIGH"
-  "T\020\002b\006proto3"
+  "T\020\002*K\n\tEnemyType\022\023\n\017ENEMY_TYPE_NONE\020\000\022\023\n"
+  "\017ENEMY_TYPE_HALF\020\001\022\024\n\020ENEMY_TYPE_WHITE\020\002"
+  "b\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_Enum_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_Enum_2eproto = {
-    false, false, 411, descriptor_table_protodef_Enum_2eproto,
+    false, false, 488, descriptor_table_protodef_Enum_2eproto,
     "Enum.proto",
     &descriptor_table_Enum_2eproto_once, nullptr, 0, 0,
     schemas, file_default_instances, TableStruct_Enum_2eproto::offsets,
@@ -96,6 +98,21 @@ const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* PLAYER_DIR_TYPE_descriptor() {
   return file_level_enum_descriptors_Enum_2eproto[2];
 }
 bool PLAYER_DIR_TYPE_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EnemyType_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_Enum_2eproto);
+  return file_level_enum_descriptors_Enum_2eproto[3];
+}
+bool EnemyType_IsValid(int value) {
   switch (value) {
     case 0:
     case 1:

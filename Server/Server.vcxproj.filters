@@ -30,6 +30,9 @@
     <Filter Include="소스 파일\Game\Room">
       <UniqueIdentifier>{7ea54c85-5dd6-4eee-83e4-99bc228bc46f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Game\Manager">
+      <UniqueIdentifier>{33aef153-581c-438d-bc05-f7cdb5895d35}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -68,6 +71,15 @@
     <ClCompile Include="Player.cpp">
       <Filter>소스 파일\Game\Object</Filter>
     </ClCompile>
+    <ClCompile Include="SeverTimeManager.cpp">
+      <Filter>소스 파일\Game\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="ServerEnemySpawnMgr.cpp">
+      <Filter>소스 파일\Game\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="ServerUtils.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -102,6 +114,19 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>소스 파일\Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="SeverTimeManager.h">
+      <Filter>소스 파일\Game\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Defines.h">
+      <Filter>소스 파일\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerEnemySpawnMgr.h">
+      <Filter>소스 파일\Game\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerUtils.h" />
+    <ClInclude Include="Types.h">
+      <Filter>소스 파일\Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

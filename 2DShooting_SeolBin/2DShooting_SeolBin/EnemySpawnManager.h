@@ -15,6 +15,9 @@ public:
 	virtual void Render(HDC hdc) override;
 
 	void RandomEnemySpawn();
+
+	void HalfEnemySpawn(Vec2 spawnPos);
+	void WhiteEnemySpawn(Vec2 spawnPos);
 private:
 	Player* target = nullptr;
 

@@ -26,3 +26,11 @@ message ScoreInfo
 	uint32 enemyScore = 2;
 	uint32 fullScore = 3;
 }
+
+message EnemyInfo
+{
+	uint64 objectId = 1;
+	EnemyType enemyType = 2;
+	float posX = 3;
+	float posY = 4;
+}

@@ -9,6 +9,6 @@ public:
 
 	virtual void Update();
 
-
+	Protocol::EnemyInfo enemyInfo;
 };
 

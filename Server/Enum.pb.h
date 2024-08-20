@@ -129,6 +129,32 @@ inline bool PLAYER_DIR_TYPE_Parse(
   return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<PLAYER_DIR_TYPE>(
     PLAYER_DIR_TYPE_descriptor(), name, value);
 }
+enum EnemyType : int {
+  ENEMY_TYPE_NONE = 0,
+  ENEMY_TYPE_HALF = 1,
+  ENEMY_TYPE_WHITE = 2,
+  EnemyType_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
+  EnemyType_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
+};
+bool EnemyType_IsValid(int value);
+constexpr EnemyType EnemyType_MIN = ENEMY_TYPE_NONE;
+constexpr EnemyType EnemyType_MAX = ENEMY_TYPE_WHITE;
+constexpr int EnemyType_ARRAYSIZE = EnemyType_MAX + 1;
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* EnemyType_descriptor();
+template<typename T>
+inline const std::string& EnemyType_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, EnemyType>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function EnemyType_Name.");
+  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
+    EnemyType_descriptor(), enum_t_value);
+}
+inline bool EnemyType_Parse(
+    ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, EnemyType* value) {
+  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<EnemyType>(
+    EnemyType_descriptor(), name, value);
+}
 // ===================================================================
 
 
@@ -165,6 +191,11 @@ template <> struct is_proto_enum< ::Protocol::PLAYER_DIR_TYPE> : ::std::true_typ
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::Protocol::PLAYER_DIR_TYPE>() {
   return ::Protocol::PLAYER_DIR_TYPE_descriptor();
+}
+template <> struct is_proto_enum< ::Protocol::EnemyType> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::Protocol::EnemyType>() {
+  return ::Protocol::EnemyType_descriptor();
 }
 
 PROTOBUF_NAMESPACE_CLOSE

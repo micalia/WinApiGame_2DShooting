@@ -4,6 +4,8 @@
 #include "Actor.h"
 #include "GameSession.h"
 #include "Enemy.h"
+#include "ServerEnemySpawnMgr.h"
+#include "SeverTimeManager.h"
 
 GameRoomRef GRoom = make_shared<GameRoom>();
 
@@ -19,12 +21,16 @@ GameRoom::~GameRoom()
 
 void GameRoom::Init()
 {
-	
+	enemyMgr = make_shared<ServerEnemySpawnMgr>();
+	GET_SINGLE(SeverTimeManager)->Init();
 }
 
 void GameRoom::Update()
 {
-
+	//if (currUserCount == 2) {
+	GET_SINGLE(SeverTimeManager)->Update();
+		enemyMgr->Update();
+	//}
 }
 
 void GameRoom::EnterRoom(GameSessionRef session)
@@ -85,6 +91,7 @@ void GameRoom::EnterRoom(GameSessionRef session)
 	}
 
 	AddObject(player);
+	++currUserCount;
 }
 
 void GameRoom::LeaveRoom(GameSessionRef session)
@@ -97,6 +104,7 @@ void GameRoom::LeaveRoom(GameSessionRef session)
 	uint64 id = session->player.lock()->info.objectid();
 	ActorRef gameObject = FindObject(id);
 	RemoveObject(id);
+	--currUserCount;
 }
 
 ActorRef GameRoom::FindObject(uint64 id)
@@ -178,32 +186,33 @@ void GameRoom::AddObject(ActorRef gameObject)
 	
 	auto objectType = gameObject->info.objecttype();
 
-	string playerName;
-	if (_players.size() == 0) {
-		gameObject->info.set_name("BluePlayer");
-		playerName = "BluePlayer";
-	}
-	else {
-		for (auto it = _players.begin(); it != _players.end(); it++)
-		{
-			if (it->second->name == "BluePlayer") {
-				gameObject->info.set_name("RedPlayer");
-				playerName = "RedPlayer";
-				break;
-			}
-			else if (it->second->name == "RedPlayer") {
-				gameObject->info.set_name("BluePlayer");
-				playerName = "BluePlayer";
-				break;
-			}
-		}
-	}
-
 	switch (objectType) 
 	{
-		case Protocol::OBJECT_TYPE_PLAYER:
-			_players[id] = static_pointer_cast<Player>(gameObject);
-			_players[id]->name = playerName;
+	case Protocol::OBJECT_TYPE_PLAYER: 
+			{
+				string playerName;
+				if (_players.size() == 0) {
+					gameObject->info.set_name("BluePlayer");
+					playerName = "BluePlayer";
+				}
+				else {
+					for (auto it = _players.begin(); it != _players.end(); it++)
+					{
+						if (it->second->name == "BluePlayer") {
+							gameObject->info.set_name("RedPlayer");
+							playerName = "RedPlayer";
+							break;
+						}
+						else if (it->second->name == "RedPlayer") {
+							gameObject->info.set_name("BluePlayer");
+							playerName = "BluePlayer";
+							break;
+						}
+					}
+				}
+				_players[id] = static_pointer_cast<Player>(gameObject);
+				_players[id]->name = playerName;
+			}
 			break;
 		case Protocol::OBJECT_TYPE_ENEMY: 
 			_enemies[id] = static_pointer_cast<Enemy>(gameObject);
@@ -216,7 +225,6 @@ void GameRoom::AddObject(ActorRef gameObject)
 	//TODO 신규 오브젝트 전송
 	{
 		Protocol::S_AddObject pkt;
-		auto asdf = gameObject->info.name().c_str();
 		Protocol::ObjectInfo* info = pkt.add_objects();
 		*info = gameObject->info;
 

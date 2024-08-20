@@ -3,6 +3,9 @@
 *.VC.opendb
 *project.lock.json
 
+*.ilk
+*.tlog
+
 # Compiled Object files
 *.slo
 *.lo

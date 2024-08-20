@@ -7,6 +7,8 @@
 #include "CollisionManager.h"
 #include "Player.h"
 #include "Enemy.h"
+#include "DevScene.h"
+#include "EnemySpawnManager.h"
 
 Scene::Scene()
 {
@@ -106,8 +108,15 @@ void Scene::Handle_S_AddObject(Protocol::S_AddObject& pkt)
 		}
 		else if (info.objecttype() == Protocol::OBJECT_TYPE_ENEMY)
 		{
-			Enemy* enemy = SpawnActor<Enemy>(Vec2{ info.posx(), info.posy() });
-			enemy->info = info;
+			auto EnemySpawnMgr = GET_SINGLE(SceneManager)->GetDevScene()->GetEnemySpawnMgr();
+			if (EnemySpawnMgr) { 
+				if (info.name() == "HalfEnemy") {
+					EnemySpawnMgr->HalfEnemySpawn(Vec2(info.posx(), info.posy()));
+				}
+				else if (info.name() == "WhiteEnemy") {
+					EnemySpawnMgr->WhiteEnemySpawn(Vec2(info.posx(), info.posy()));
+				}
+			}
 		}
 	}
 }

@@ -1,4 +1,5 @@
 #pragma once
+
 class Actor : public enable_shared_from_this<Actor>
 {
 public:
@@ -6,7 +7,7 @@ public:
 	virtual ~Actor();
 
 	static PlayerRef CreatePlayer();
-	static EnemyRef CreateEnemy();
+	static EnemyRef CreateEnemy(Protocol::EnemyType enemyType, Vector spawnPos);
 public:
 	Protocol::ObjectInfo info;
 	GameRoomRef room;

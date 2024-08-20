@@ -2,15 +2,21 @@
 
 #include "CorePch.h"
 
+#include "Defines.h"
+#include "Types.h"
+
 using GameSessionRef = shared_ptr<class GameSession>;
 using GameRoomRef = shared_ptr<class GameRoom>;
 using ActorRef = shared_ptr<class Actor>;
 using PlayerRef = shared_ptr<class Player>;
 using EnemyRef = shared_ptr<class Enemy>;
+using EnemySpawnMgrRef = shared_ptr<class ServerEnemySpawnMgr>;
 
 #include "Protocol.pb.h"
 #include "Enum.pb.h"
 #include "Struct.pb.h"
+
+#include "ServerUtils.h"
 
 #ifdef _DEBUG
 #pragma comment(lib, "ServerCore\\Debug\\ServerCore.lib")

@@ -49,6 +49,9 @@ namespace Protocol {
 class BuffData;
 struct BuffDataDefaultTypeInternal;
 extern BuffDataDefaultTypeInternal _BuffData_default_instance_;
+class EnemyInfo;
+struct EnemyInfoDefaultTypeInternal;
+extern EnemyInfoDefaultTypeInternal _EnemyInfo_default_instance_;
 class ObjectInfo;
 struct ObjectInfoDefaultTypeInternal;
 extern ObjectInfoDefaultTypeInternal _ObjectInfo_default_instance_;
@@ -58,6 +61,7 @@ extern ScoreInfoDefaultTypeInternal _ScoreInfo_default_instance_;
 }  // namespace Protocol
 PROTOBUF_NAMESPACE_OPEN
 template<> ::Protocol::BuffData* Arena::CreateMaybeMessage<::Protocol::BuffData>(Arena*);
+template<> ::Protocol::EnemyInfo* Arena::CreateMaybeMessage<::Protocol::EnemyInfo>(Arena*);
 template<> ::Protocol::ObjectInfo* Arena::CreateMaybeMessage<::Protocol::ObjectInfo>(Arena*);
 template<> ::Protocol::ScoreInfo* Arena::CreateMaybeMessage<::Protocol::ScoreInfo>(Arena*);
 PROTOBUF_NAMESPACE_CLOSE
@@ -630,6 +634,187 @@ class ScoreInfo final :
   union { Impl_ _impl_; };
   friend struct ::TableStruct_Struct_2eproto;
 };
+// -------------------------------------------------------------------
+
+class EnemyInfo final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Protocol.EnemyInfo) */ {
+ public:
+  inline EnemyInfo() : EnemyInfo(nullptr) {}
+  ~EnemyInfo() override;
+  explicit PROTOBUF_CONSTEXPR EnemyInfo(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  EnemyInfo(const EnemyInfo& from);
+  EnemyInfo(EnemyInfo&& from) noexcept
+    : EnemyInfo() {
+    *this = ::std::move(from);
+  }
+
+  inline EnemyInfo& operator=(const EnemyInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline EnemyInfo& operator=(EnemyInfo&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const EnemyInfo& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const EnemyInfo* internal_default_instance() {
+    return reinterpret_cast<const EnemyInfo*>(
+               &_EnemyInfo_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    3;
+
+  friend void swap(EnemyInfo& a, EnemyInfo& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(EnemyInfo* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(EnemyInfo* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  EnemyInfo* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<EnemyInfo>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const EnemyInfo& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const EnemyInfo& from) {
+    EnemyInfo::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(EnemyInfo* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "Protocol.EnemyInfo";
+  }
+  protected:
+  explicit EnemyInfo(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kObjectIdFieldNumber = 1,
+    kEnemyTypeFieldNumber = 2,
+    kPosXFieldNumber = 3,
+    kPosYFieldNumber = 4,
+  };
+  // uint64 objectId = 1;
+  void clear_objectid();
+  uint64_t objectid() const;
+  void set_objectid(uint64_t value);
+  private:
+  uint64_t _internal_objectid() const;
+  void _internal_set_objectid(uint64_t value);
+  public:
+
+  // .Protocol.EnemyType enemyType = 2;
+  void clear_enemytype();
+  ::Protocol::EnemyType enemytype() const;
+  void set_enemytype(::Protocol::EnemyType value);
+  private:
+  ::Protocol::EnemyType _internal_enemytype() const;
+  void _internal_set_enemytype(::Protocol::EnemyType value);
+  public:
+
+  // float posX = 3;
+  void clear_posx();
+  float posx() const;
+  void set_posx(float value);
+  private:
+  float _internal_posx() const;
+  void _internal_set_posx(float value);
+  public:
+
+  // float posY = 4;
+  void clear_posy();
+  float posy() const;
+  void set_posy(float value);
+  private:
+  float _internal_posy() const;
+  void _internal_set_posy(float value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:Protocol.EnemyInfo)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    uint64_t objectid_;
+    int enemytype_;
+    float posx_;
+    float posy_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_Struct_2eproto;
+};
 // ===================================================================
 
 
@@ -976,9 +1161,95 @@ inline void ScoreInfo::set_fullscore(uint32_t value) {
   // @@protoc_insertion_point(field_set:Protocol.ScoreInfo.fullScore)
 }
 
+// -------------------------------------------------------------------
+
+// EnemyInfo
+
+// uint64 objectId = 1;
+inline void EnemyInfo::clear_objectid() {
+  _impl_.objectid_ = uint64_t{0u};
+}
+inline uint64_t EnemyInfo::_internal_objectid() const {
+  return _impl_.objectid_;
+}
+inline uint64_t EnemyInfo::objectid() const {
+  // @@protoc_insertion_point(field_get:Protocol.EnemyInfo.objectId)
+  return _internal_objectid();
+}
+inline void EnemyInfo::_internal_set_objectid(uint64_t value) {
+  
+  _impl_.objectid_ = value;
+}
+inline void EnemyInfo::set_objectid(uint64_t value) {
+  _internal_set_objectid(value);
+  // @@protoc_insertion_point(field_set:Protocol.EnemyInfo.objectId)
+}
+
+// .Protocol.EnemyType enemyType = 2;
+inline void EnemyInfo::clear_enemytype() {
+  _impl_.enemytype_ = 0;
+}
+inline ::Protocol::EnemyType EnemyInfo::_internal_enemytype() const {
+  return static_cast< ::Protocol::EnemyType >(_impl_.enemytype_);
+}
+inline ::Protocol::EnemyType EnemyInfo::enemytype() const {
+  // @@protoc_insertion_point(field_get:Protocol.EnemyInfo.enemyType)
+  return _internal_enemytype();
+}
+inline void EnemyInfo::_internal_set_enemytype(::Protocol::EnemyType value) {
+  
+  _impl_.enemytype_ = value;
+}
+inline void EnemyInfo::set_enemytype(::Protocol::EnemyType value) {
+  _internal_set_enemytype(value);
+  // @@protoc_insertion_point(field_set:Protocol.EnemyInfo.enemyType)
+}
+
+// float posX = 3;
+inline void EnemyInfo::clear_posx() {
+  _impl_.posx_ = 0;
+}
+inline float EnemyInfo::_internal_posx() const {
+  return _impl_.posx_;
+}
+inline float EnemyInfo::posx() const {
+  // @@protoc_insertion_point(field_get:Protocol.EnemyInfo.posX)
+  return _internal_posx();
+}
+inline void EnemyInfo::_internal_set_posx(float value) {
+  
+  _impl_.posx_ = value;
+}
+inline void EnemyInfo::set_posx(float value) {
+  _internal_set_posx(value);
+  // @@protoc_insertion_point(field_set:Protocol.EnemyInfo.posX)
+}
+
+// float posY = 4;
+inline void EnemyInfo::clear_posy() {
+  _impl_.posy_ = 0;
+}
+inline float EnemyInfo::_internal_posy() const {
+  return _impl_.posy_;
+}
+inline float EnemyInfo::posy() const {
+  // @@protoc_insertion_point(field_get:Protocol.EnemyInfo.posY)
+  return _internal_posy();
+}
+inline void EnemyInfo::_internal_set_posy(float value) {
+  
+  _impl_.posy_ = value;
+}
+inline void EnemyInfo::set_posy(float value) {
+  _internal_set_posy(value);
+  // @@protoc_insertion_point(field_set:Protocol.EnemyInfo.posY)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

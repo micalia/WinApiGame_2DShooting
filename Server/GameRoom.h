@@ -20,6 +20,7 @@ public:
 
 	void AddObject(ActorRef gameObject);
 	void RemoveObject(uint64 id);
+
 	void Broadcast(SendBufferRef& sendBuffer);
 
 	int GetBluePlayerScore(){return _bluePlayerScore;}
@@ -27,6 +28,9 @@ public:
 
 	void SetBluePlayerScore(int addScore) {  _bluePlayerScore += addScore; }
 	void SetRedPlayerScore(int addScore) { _redPlayerScore += addScore; }
+private:
+	EnemySpawnMgrRef enemyMgr;
+
 private:
 	map<uint64, PlayerRef> _players;
 	map<uint64, EnemyRef> _enemies;
@@ -37,6 +41,7 @@ private:
 	int _redPlayerScore = 0;
 	int _bluePlayerScore = 0;
 
+	int currUserCount = 0;
 };
 
 extern GameRoomRef GRoom;
