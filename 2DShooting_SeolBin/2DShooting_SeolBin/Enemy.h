@@ -31,6 +31,7 @@ public:
 	
 	void Server_AddScore(Player* whoKillMe, int32 addScore);
 
+	Protocol::EnemyInfo enemyInfo;
 protected:
 	int32 hp = 0;
 	float speed = 0;

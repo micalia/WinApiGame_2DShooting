@@ -156,3 +156,13 @@ SendBufferRef ServerPacketHandler::Make_S_Score(const Protocol::ScoreInfo& score
 
 	return MakeSendBuffer(pkt, S_Score);
 }
+
+SendBufferRef ServerPacketHandler::Make_S_EnemyMove(const Protocol::EnemyInfo& enemyInfo)
+{
+	Protocol::S_EnemyMove pkt;
+
+	Protocol::EnemyInfo* objectInfo = pkt.mutable_enemymoveinfo();
+	*objectInfo = enemyInfo;
+
+	return MakeSendBuffer(pkt, S_EnemyMove);
+}

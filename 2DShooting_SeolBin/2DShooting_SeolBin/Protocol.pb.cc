@@ -117,6 +117,19 @@ struct S_MoveDefaultTypeInternal {
   };
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_MoveDefaultTypeInternal _S_Move_default_instance_;
+PROTOBUF_CONSTEXPR S_EnemyMove::S_EnemyMove(
+    ::_pbi::ConstantInitialized): _impl_{
+    /*decltype(_impl_.enemymoveinfo_)*/nullptr
+  , /*decltype(_impl_._cached_size_)*/{}} {}
+struct S_EnemyMoveDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR S_EnemyMoveDefaultTypeInternal()
+      : _instance(::_pbi::ConstantInitialized{}) {}
+  ~S_EnemyMoveDefaultTypeInternal() {}
+  union {
+    S_EnemyMove _instance;
+  };
+};
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_EnemyMoveDefaultTypeInternal _S_EnemyMove_default_instance_;
 PROTOBUF_CONSTEXPR C_Projectile::C_Projectile(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.info_)*/nullptr
@@ -183,7 +196,7 @@ struct S_EnemySpawnDefaultTypeInternal {
 };
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 S_EnemySpawnDefaultTypeInternal _S_EnemySpawn_default_instance_;
 }  // namespace Protocol
-static ::_pb::Metadata file_level_metadata_Protocol_2eproto[12];
+static ::_pb::Metadata file_level_metadata_Protocol_2eproto[13];
 static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_Protocol_2eproto = nullptr;
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_Protocol_2eproto = nullptr;
 
@@ -242,6 +255,13 @@ const uint32_t TableStruct_Protocol_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE
   ~0u,  // no _inlined_string_donated_
   PROTOBUF_FIELD_OFFSET(::Protocol::S_Move, _impl_.info_),
   ~0u,  // no _has_bits_
+  PROTOBUF_FIELD_OFFSET(::Protocol::S_EnemyMove, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::Protocol::S_EnemyMove, _impl_.enemymoveinfo_),
+  ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::Protocol::C_Projectile, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
@@ -285,11 +305,12 @@ static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protode
   { 32, -1, -1, sizeof(::Protocol::S_RemoveObject)},
   { 39, -1, -1, sizeof(::Protocol::C_Move)},
   { 46, -1, -1, sizeof(::Protocol::S_Move)},
-  { 53, -1, -1, sizeof(::Protocol::C_Projectile)},
-  { 60, -1, -1, sizeof(::Protocol::S_Projectile)},
-  { 67, -1, -1, sizeof(::Protocol::C_Score)},
-  { 74, -1, -1, sizeof(::Protocol::S_Score)},
-  { 81, -1, -1, sizeof(::Protocol::S_EnemySpawn)},
+  { 53, -1, -1, sizeof(::Protocol::S_EnemyMove)},
+  { 60, -1, -1, sizeof(::Protocol::C_Projectile)},
+  { 67, -1, -1, sizeof(::Protocol::S_Projectile)},
+  { 74, -1, -1, sizeof(::Protocol::C_Score)},
+  { 81, -1, -1, sizeof(::Protocol::S_Score)},
+  { 88, -1, -1, sizeof(::Protocol::S_EnemySpawn)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -300,6 +321,7 @@ static const ::_pb::Message* const file_default_instances[] = {
   &::Protocol::_S_RemoveObject_default_instance_._instance,
   &::Protocol::_C_Move_default_instance_._instance,
   &::Protocol::_S_Move_default_instance_._instance,
+  &::Protocol::_S_EnemyMove_default_instance_._instance,
   &::Protocol::_C_Projectile_default_instance_._instance,
   &::Protocol::_S_Projectile_default_instance_._instance,
   &::Protocol::_C_Score_default_instance_._instance,
@@ -318,14 +340,15 @@ const char descriptor_table_protodef_Protocol_2eproto[] PROTOBUF_SECTION_VARIABL
   "l.ObjectInfo\"\035\n\016S_RemoveObject\022\013\n\003ids\030\001 "
   "\003(\004\",\n\006C_Move\022\"\n\004info\030\001 \001(\0132\024.Protocol.O"
   "bjectInfo\",\n\006S_Move\022\"\n\004info\030\001 \001(\0132\024.Prot"
-  "ocol.ObjectInfo\"2\n\014C_Projectile\022\"\n\004info\030"
-  "\001 \001(\0132\024.Protocol.ObjectInfo\"2\n\014S_Project"
-  "ile\022\"\n\004info\030\001 \001(\0132\024.Protocol.ObjectInfo\""
-  "1\n\007C_Score\022&\n\tscoreInfo\030\001 \001(\0132\023.Protocol"
-  ".ScoreInfo\"1\n\007S_Score\022&\n\tscoreInfo\030\001 \001(\013"
-  "2\023.Protocol.ScoreInfo\";\n\014S_EnemySpawn\022+\n"
-  "\016enemySpawnInfo\030\001 \001(\0132\023.Protocol.EnemyIn"
-  "fob\006proto3"
+  "ocol.ObjectInfo\"9\n\013S_EnemyMove\022*\n\renemyM"
+  "oveInfo\030\001 \001(\0132\023.Protocol.EnemyInfo\"2\n\014C_"
+  "Projectile\022\"\n\004info\030\001 \001(\0132\024.Protocol.Obje"
+  "ctInfo\"2\n\014S_Projectile\022\"\n\004info\030\001 \001(\0132\024.P"
+  "rotocol.ObjectInfo\"1\n\007C_Score\022&\n\tscoreIn"
+  "fo\030\001 \001(\0132\023.Protocol.ScoreInfo\"1\n\007S_Score"
+  "\022&\n\tscoreInfo\030\001 \001(\0132\023.Protocol.ScoreInfo"
+  "\";\n\014S_EnemySpawn\022+\n\016enemySpawnInfo\030\001 \001(\013"
+  "2\023.Protocol.EnemyInfob\006proto3"
   ;
 static const ::_pbi::DescriptorTable* const descriptor_table_Protocol_2eproto_deps[2] = {
   &::descriptor_table_Enum_2eproto,
@@ -333,9 +356,9 @@ static const ::_pbi::DescriptorTable* const descriptor_table_Protocol_2eproto_de
 };
 static ::_pbi::once_flag descriptor_table_Protocol_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_Protocol_2eproto = {
-    false, false, 690, descriptor_table_protodef_Protocol_2eproto,
+    false, false, 749, descriptor_table_protodef_Protocol_2eproto,
     "Protocol.proto",
-    &descriptor_table_Protocol_2eproto_once, descriptor_table_Protocol_2eproto_deps, 2, 12,
+    &descriptor_table_Protocol_2eproto_once, descriptor_table_Protocol_2eproto_deps, 2, 13,
     schemas, file_default_instances, TableStruct_Protocol_2eproto::offsets,
     file_level_metadata_Protocol_2eproto, file_level_enum_descriptors_Protocol_2eproto,
     file_level_service_descriptors_Protocol_2eproto,
@@ -1811,6 +1834,205 @@ void S_Move::InternalSwap(S_Move* other) {
 
 // ===================================================================
 
+class S_EnemyMove::_Internal {
+ public:
+  static const ::Protocol::EnemyInfo& enemymoveinfo(const S_EnemyMove* msg);
+};
+
+const ::Protocol::EnemyInfo&
+S_EnemyMove::_Internal::enemymoveinfo(const S_EnemyMove* msg) {
+  return *msg->_impl_.enemymoveinfo_;
+}
+void S_EnemyMove::clear_enemymoveinfo() {
+  if (GetArenaForAllocation() == nullptr && _impl_.enemymoveinfo_ != nullptr) {
+    delete _impl_.enemymoveinfo_;
+  }
+  _impl_.enemymoveinfo_ = nullptr;
+}
+S_EnemyMove::S_EnemyMove(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned)
+  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  SharedCtor(arena, is_message_owned);
+  // @@protoc_insertion_point(arena_constructor:Protocol.S_EnemyMove)
+}
+S_EnemyMove::S_EnemyMove(const S_EnemyMove& from)
+  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  S_EnemyMove* const _this = this; (void)_this;
+  new (&_impl_) Impl_{
+      decltype(_impl_.enemymoveinfo_){nullptr}
+    , /*decltype(_impl_._cached_size_)*/{}};
+
+  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  if (from._internal_has_enemymoveinfo()) {
+    _this->_impl_.enemymoveinfo_ = new ::Protocol::EnemyInfo(*from._impl_.enemymoveinfo_);
+  }
+  // @@protoc_insertion_point(copy_constructor:Protocol.S_EnemyMove)
+}
+
+inline void S_EnemyMove::SharedCtor(
+    ::_pb::Arena* arena, bool is_message_owned) {
+  (void)arena;
+  (void)is_message_owned;
+  new (&_impl_) Impl_{
+      decltype(_impl_.enemymoveinfo_){nullptr}
+    , /*decltype(_impl_._cached_size_)*/{}
+  };
+}
+
+S_EnemyMove::~S_EnemyMove() {
+  // @@protoc_insertion_point(destructor:Protocol.S_EnemyMove)
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  (void)arena;
+    return;
+  }
+  SharedDtor();
+}
+
+inline void S_EnemyMove::SharedDtor() {
+  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+  if (this != internal_default_instance()) delete _impl_.enemymoveinfo_;
+}
+
+void S_EnemyMove::SetCachedSize(int size) const {
+  _impl_._cached_size_.Set(size);
+}
+
+void S_EnemyMove::Clear() {
+// @@protoc_insertion_point(message_clear_start:Protocol.S_EnemyMove)
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  if (GetArenaForAllocation() == nullptr && _impl_.enemymoveinfo_ != nullptr) {
+    delete _impl_.enemymoveinfo_;
+  }
+  _impl_.enemymoveinfo_ = nullptr;
+  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+}
+
+const char* S_EnemyMove::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    uint32_t tag;
+    ptr = ::_pbi::ReadTag(ptr, &tag);
+    switch (tag >> 3) {
+      // .Protocol.EnemyInfo enemyMoveInfo = 1;
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+          ptr = ctx->ParseMessage(_internal_mutable_enemymoveinfo(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      default:
+        goto handle_unusual;
+    }  // switch
+  handle_unusual:
+    if ((tag == 0) || ((tag & 7) == 4)) {
+      CHK_(ptr);
+      ctx->SetLastTag(tag);
+      goto message_done;
+    }
+    ptr = UnknownFieldParse(
+        tag,
+        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        ptr, ctx);
+    CHK_(ptr != nullptr);
+  }  // while
+message_done:
+  return ptr;
+failure:
+  ptr = nullptr;
+  goto message_done;
+#undef CHK_
+}
+
+uint8_t* S_EnemyMove::_InternalSerialize(
+    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:Protocol.S_EnemyMove)
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // .Protocol.EnemyInfo enemyMoveInfo = 1;
+  if (this->_internal_has_enemymoveinfo()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(1, _Internal::enemymoveinfo(this),
+        _Internal::enemymoveinfo(this).GetCachedSize(), target, stream);
+  }
+
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:Protocol.S_EnemyMove)
+  return target;
+}
+
+size_t S_EnemyMove::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:Protocol.S_EnemyMove)
+  size_t total_size = 0;
+
+  uint32_t cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  // .Protocol.EnemyInfo enemyMoveInfo = 1;
+  if (this->_internal_has_enemymoveinfo()) {
+    total_size += 1 +
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+        *_impl_.enemymoveinfo_);
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+}
+
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData S_EnemyMove::_class_data_ = {
+    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+    S_EnemyMove::MergeImpl
+};
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*S_EnemyMove::GetClassData() const { return &_class_data_; }
+
+
+void S_EnemyMove::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<S_EnemyMove*>(&to_msg);
+  auto& from = static_cast<const S_EnemyMove&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:Protocol.S_EnemyMove)
+  GOOGLE_DCHECK_NE(&from, _this);
+  uint32_t cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  if (from._internal_has_enemymoveinfo()) {
+    _this->_internal_mutable_enemymoveinfo()->::Protocol::EnemyInfo::MergeFrom(
+        from._internal_enemymoveinfo());
+  }
+  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+}
+
+void S_EnemyMove::CopyFrom(const S_EnemyMove& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:Protocol.S_EnemyMove)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool S_EnemyMove::IsInitialized() const {
+  return true;
+}
+
+void S_EnemyMove::InternalSwap(S_EnemyMove* other) {
+  using std::swap;
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_.enemymoveinfo_, other->_impl_.enemymoveinfo_);
+}
+
+::PROTOBUF_NAMESPACE_ID::Metadata S_EnemyMove::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_Protocol_2eproto_getter, &descriptor_table_Protocol_2eproto_once,
+      file_level_metadata_Protocol_2eproto[7]);
+}
+
+// ===================================================================
+
 class C_Projectile::_Internal {
  public:
   static const ::Protocol::ObjectInfo& info(const C_Projectile* msg);
@@ -2005,7 +2227,7 @@ void C_Projectile::InternalSwap(C_Projectile* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata C_Projectile::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Protocol_2eproto_getter, &descriptor_table_Protocol_2eproto_once,
-      file_level_metadata_Protocol_2eproto[7]);
+      file_level_metadata_Protocol_2eproto[8]);
 }
 
 // ===================================================================
@@ -2204,7 +2426,7 @@ void S_Projectile::InternalSwap(S_Projectile* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata S_Projectile::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Protocol_2eproto_getter, &descriptor_table_Protocol_2eproto_once,
-      file_level_metadata_Protocol_2eproto[8]);
+      file_level_metadata_Protocol_2eproto[9]);
 }
 
 // ===================================================================
@@ -2403,7 +2625,7 @@ void C_Score::InternalSwap(C_Score* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata C_Score::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Protocol_2eproto_getter, &descriptor_table_Protocol_2eproto_once,
-      file_level_metadata_Protocol_2eproto[9]);
+      file_level_metadata_Protocol_2eproto[10]);
 }
 
 // ===================================================================
@@ -2602,7 +2824,7 @@ void S_Score::InternalSwap(S_Score* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata S_Score::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Protocol_2eproto_getter, &descriptor_table_Protocol_2eproto_once,
-      file_level_metadata_Protocol_2eproto[10]);
+      file_level_metadata_Protocol_2eproto[11]);
 }
 
 // ===================================================================
@@ -2801,7 +3023,7 @@ void S_EnemySpawn::InternalSwap(S_EnemySpawn* other) {
 ::PROTOBUF_NAMESPACE_ID::Metadata S_EnemySpawn::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_Protocol_2eproto_getter, &descriptor_table_Protocol_2eproto_once,
-      file_level_metadata_Protocol_2eproto[11]);
+      file_level_metadata_Protocol_2eproto[12]);
 }
 
 // @@protoc_insertion_point(namespace_scope)
@@ -2834,6 +3056,10 @@ Arena::CreateMaybeMessage< ::Protocol::C_Move >(Arena* arena) {
 template<> PROTOBUF_NOINLINE ::Protocol::S_Move*
 Arena::CreateMaybeMessage< ::Protocol::S_Move >(Arena* arena) {
   return Arena::CreateMessageInternal< ::Protocol::S_Move >(arena);
+}
+template<> PROTOBUF_NOINLINE ::Protocol::S_EnemyMove*
+Arena::CreateMaybeMessage< ::Protocol::S_EnemyMove >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::Protocol::S_EnemyMove >(arena);
 }
 template<> PROTOBUF_NOINLINE ::Protocol::C_Projectile*
 Arena::CreateMaybeMessage< ::Protocol::C_Projectile >(Arena* arena) {

@@ -41,6 +41,9 @@ void ClientPacketHandler::HandlePacket(ServerSessionRef session, BYTE* buffer, i
 	case S_Score:
 		Handle_S_Score(session, buffer, len);
 		break;
+	case S_EnemyMove:
+		Handle_S_EnemyMove(session, buffer, len);
+		break;
 	}
 }
 
@@ -211,6 +214,27 @@ void ClientPacketHandler::Handle_S_Score(ServerSessionRef session, BYTE* buffer,
 	DevScene* scene = GET_SINGLE(SceneManager)->GetDevScene();
 	if (scene) {
 		GET_SINGLE(GameManager)->SetScore(scoreInfo.playername(), scoreInfo.fullscore());
+	}
+}
+
+void ClientPacketHandler::Handle_S_EnemyMove(ServerSessionRef session, BYTE* buffer, int32 len)
+{
+	PacketHeader* header = (PacketHeader*)buffer;
+	uint16 size = header->size;
+
+	Protocol::S_EnemyMove pkt;
+	pkt.ParseFromArray(&header[1], size - sizeof(PacketHeader));
+	//
+	const Protocol::EnemyInfo& info = pkt.enemymoveinfo();
+
+	DevScene* scene = GET_SINGLE(SceneManager)->GetDevScene();
+	if (scene)
+	{
+		Actor* actor = scene->GetObject(info.objectid());
+		if (actor)
+		{
+			actor->SetPos(Vec2(info.posx(), info.posy()));
+		}
 	}
 }
 

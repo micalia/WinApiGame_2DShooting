@@ -111,10 +111,10 @@ void Scene::Handle_S_AddObject(Protocol::S_AddObject& pkt)
 			auto EnemySpawnMgr = GET_SINGLE(SceneManager)->GetDevScene()->GetEnemySpawnMgr();
 			if (EnemySpawnMgr) { 
 				if (info.name() == "HalfEnemy") {
-					EnemySpawnMgr->HalfEnemySpawn(Vec2(info.posx(), info.posy()));
+					EnemySpawnMgr->HalfEnemySpawn(info);
 				}
 				else if (info.name() == "WhiteEnemy") {
-					EnemySpawnMgr->WhiteEnemySpawn(Vec2(info.posx(), info.posy()));
+					EnemySpawnMgr->WhiteEnemySpawn(info);
 				}
 			}
 		}
@@ -136,7 +136,7 @@ void Scene::Handle_S_RemoveObject(Protocol::S_RemoveObject& pkt)
 
 Actor* Scene::GetObject(uint64 id)
 {
-	for (Actor* actor : _actors[LAYER_OBJECT])
+	for (Actor* actor : _actors[LAYER_Enemy])
 	{
 		if (actor && actor->info.objectid() == id)
 			return actor;
@@ -147,6 +147,11 @@ Actor* Scene::GetObject(uint64 id)
 			return actor;
 	}
 	for (Actor* actor : _actors[LAYER_BULLET])
+	{
+		if (actor && actor->info.objectid() == id)
+			return actor;
+	}
+	for (Actor* actor : _actors[LAYER_OBJECT])
 	{
 		if (actor && actor->info.objectid() == id)
 			return actor;

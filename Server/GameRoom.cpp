@@ -31,6 +31,10 @@ void GameRoom::Update()
 	GET_SINGLE(SeverTimeManager)->Update();
 		enemyMgr->Update();
 	//}
+	for (auto& item : _enemies)
+	{
+		item.second->Update();
+	}
 }
 
 void GameRoom::EnterRoom(GameSessionRef session)

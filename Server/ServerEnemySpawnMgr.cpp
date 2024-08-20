@@ -37,9 +37,7 @@ void ServerEnemySpawnMgr::RandomEnemySpawn()
 	switch (ranEnemyVal)
 	{
 	case 0: 
-	{
 		enemyRef = Actor::CreateEnemy(Protocol::ENEMY_TYPE_WHITE, spawnPos);
-	}
 		break;
 	default:
 		enemyRef = Actor::CreateEnemy(Protocol::ENEMY_TYPE_HALF, spawnPos);

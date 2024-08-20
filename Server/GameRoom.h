@@ -13,6 +13,7 @@ public:
 	ActorRef FindObject(uint64 id);
 	GameRoomRef GetRoomRef(){return shared_from_this(); }
 
+
 public:
 	void Handle_C_Move(Protocol::C_Move& pkt);
 	void Handle_C_Projectile(Protocol::C_Projectile& pkt);

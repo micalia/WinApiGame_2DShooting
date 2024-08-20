@@ -16,8 +16,8 @@ public:
 
 	void RandomEnemySpawn();
 
-	void HalfEnemySpawn(Vec2 spawnPos);
-	void WhiteEnemySpawn(Vec2 spawnPos);
+	void HalfEnemySpawn(Protocol::ObjectInfo info);
+	void WhiteEnemySpawn(Protocol::ObjectInfo info);
 private:
 	Player* target = nullptr;
 

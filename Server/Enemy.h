@@ -10,5 +10,16 @@ public:
 	virtual void Update();
 
 	Protocol::EnemyInfo enemyInfo;
+
+	void EnemyBroadcastMove();
+	void SetEnemyPos(Vector pos);
+
+	void SetSpeed(float speed){ _speed = speed;}
+	float GetSpeed(){ return _speed;}
+private:
+	float replicateDelay = 0.2f;
+	float currReplicateDelay = 0;
+
+	float _speed = 0;
 };
 

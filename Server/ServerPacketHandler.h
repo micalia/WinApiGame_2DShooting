@@ -17,6 +17,8 @@ enum
 
 	C_Score = 14,
 	S_Score = 15,
+
+	S_EnemyMove = 16,
 };
 
 struct BuffData
@@ -44,6 +46,7 @@ public:
 	static SendBufferRef Make_S_Move(const Protocol::ObjectInfo& info);
 	static SendBufferRef Make_S_Projectile(const Protocol::ObjectInfo& info);
 	static SendBufferRef Make_S_Score(const Protocol::ScoreInfo& scoreInfo);
+	static SendBufferRef Make_S_EnemyMove(const Protocol::EnemyInfo& enemyInfo);
 
 	template<typename T>
 	static SendBufferRef MakeSendBuffer(T& pkt, uint16 pktId)

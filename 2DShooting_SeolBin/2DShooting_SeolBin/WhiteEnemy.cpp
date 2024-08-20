@@ -23,7 +23,7 @@ void WhiteEnemy::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	speed = 50;
+	//speed = 50;
 	SetHp(5);
 	SetKillScore(500);
 }
@@ -33,14 +33,14 @@ void WhiteEnemy::Tick(float deltaTime)
 	Super::Tick(deltaTime);
 	
 	if (deltaTime > 0.1f) return;
-	_pos.y += deltaTime * speed;
+	/*_pos.y += deltaTime * speed;
 	SetPos(_pos);
 
 	fireDelayCurrTime += deltaTime;
 	if (fireDelayCurrTime > fireDelayTime) {
 		fireDelayCurrTime = 0;
 		Fire();
-	}
+	}*/
 
 	if (bDamaged) {
 		currDamagedStateTime += deltaTime;

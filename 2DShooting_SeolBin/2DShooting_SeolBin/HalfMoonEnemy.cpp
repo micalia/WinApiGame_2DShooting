@@ -23,7 +23,7 @@ void HalfMoonEnemy::BeginPlay()
 {
 	Super::BeginPlay();
 
-	speed = 50;
+	//speed = 50;
 	SetHp(1);
 	SetKillScore(100);
 }
@@ -33,7 +33,7 @@ void HalfMoonEnemy::Tick(float deltaTime)
 	Super::Tick(deltaTime);
 	
 	if (deltaTime > 0.1f) return;
-	_pos.y += deltaTime * speed;
+	/*_pos.y += deltaTime * speed;
 	SetPos(_pos);
 
 	fireDelayCurrTime += deltaTime;
@@ -41,7 +41,7 @@ void HalfMoonEnemy::Tick(float deltaTime)
 		fireDelayCurrTime = 0;
 		FindPlayer();
 		Fire();
-	}
+	}*/
 
 	if (bDamaged) {
 		currDamagedStateTime += deltaTime;

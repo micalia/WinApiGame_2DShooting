@@ -8,6 +8,7 @@ public:
 
 	static PlayerRef CreatePlayer();
 	static EnemyRef CreateEnemy(Protocol::EnemyType enemyType, Vector spawnPos);
+
 public:
 	Protocol::ObjectInfo info;
 	GameRoomRef room;

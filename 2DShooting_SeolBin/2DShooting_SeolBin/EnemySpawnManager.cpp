@@ -117,10 +117,12 @@ void EnemySpawnManager::RandomEnemySpawn()
 	}
 }
 
-void EnemySpawnManager::HalfEnemySpawn(Vec2 spawnPos)
+void EnemySpawnManager::HalfEnemySpawn(Protocol::ObjectInfo info)
 {
 	Sprite* HalfMoonEnemySprite = GET_SINGLE(ResourceManager)->GetSprite(L"HalfMoonEnemy");
-	HalfMoonEnemy* halfMoonEnemy = GET_SINGLE(SceneManager)->GetCurrentScene()->SpawnActor<HalfMoonEnemy>(Vec2(spawnPos.x, spawnPos.y), LAYER_Enemy);
+	HalfMoonEnemy* halfMoonEnemy = GET_SINGLE(SceneManager)->GetCurrentScene()->SpawnActor<HalfMoonEnemy>(Vec2(info.posx(), info.posy()), LAYER_Enemy);
+	halfMoonEnemy->info = info;
+	halfMoonEnemy->enemyInfo.set_posx(info.posx());
 	halfMoonEnemy->SetSprite(HalfMoonEnemySprite);
 	const Vec2Int size = HalfMoonEnemySprite->GetSize();
 	halfMoonEnemy->SetTarget(target);
@@ -141,12 +143,14 @@ void EnemySpawnManager::HalfEnemySpawn(Vec2 spawnPos)
 	}
 }
 
-void EnemySpawnManager::WhiteEnemySpawn(Vec2 spawnPos)
+void EnemySpawnManager::WhiteEnemySpawn(Protocol::ObjectInfo info)
 {
 	Sprite* whiteEnemySprite = GET_SINGLE(ResourceManager)->GetSprite(L"WhiteEnemy");
-	WhiteEnemy* whiteEnemy = GET_SINGLE(SceneManager)->GetCurrentScene()->SpawnActor<WhiteEnemy>(Vec2(spawnPos.x, spawnPos.y), LAYER_Enemy);
+	WhiteEnemy* whiteEnemy = GET_SINGLE(SceneManager)->GetCurrentScene()->SpawnActor<WhiteEnemy>(Vec2(info.posx(), info.posy()), LAYER_Enemy);
 	whiteEnemy->SetSprite(whiteEnemySprite);
 	const Vec2Int size = whiteEnemySprite->GetSize();
+	whiteEnemy->info = info;
+	whiteEnemy->enemyInfo.set_posx(info.posx());
 	whiteEnemy->SetTarget(target);
 	{
 		BoxCollider* collider = new BoxCollider();

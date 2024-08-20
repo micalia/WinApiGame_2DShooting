@@ -38,15 +38,16 @@
   C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Common\protoc-21.12-win64\bin\*.h을(를) 찾을 수 없습니다.
   계속하려면 아무 키나 누르십시오 . . . 
   pch.cpp
-  Enemy.cpp
-  ServerEnemySpawnMgr.cpp
-C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\ServerEnemySpawnMgr.cpp(32,30): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Actor.cpp
+  Enemy.cpp
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\Enemy.cpp(25,11): warning C4477: 'printf' : 서식 문자열 '%d'에 'int' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'uint64_t'입니다.
   GameRoom.cpp
   GameSession.cpp
   GameSessionManager.cpp
   Player.cpp
   Server.cpp
+  ServerEnemySpawnMgr.cpp
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\ServerEnemySpawnMgr.cpp(32,30): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   ServerPacketHandler.cpp
   ServerUtils.cpp
   SeverTimeManager.cpp
