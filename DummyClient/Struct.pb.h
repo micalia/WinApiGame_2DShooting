@@ -380,6 +380,7 @@ class ObjectInfo final :
     kPlayerDirTypeFieldNumber = 4,
     kPosXFieldNumber = 5,
     kPosYFieldNumber = 6,
+    kSpeedFieldNumber = 8,
   };
   // string name = 7;
   void clear_name();
@@ -440,6 +441,15 @@ class ObjectInfo final :
   void _internal_set_posy(float value);
   public:
 
+  // float speed = 8;
+  void clear_speed();
+  float speed() const;
+  void set_speed(float value);
+  private:
+  float _internal_speed() const;
+  void _internal_set_speed(float value);
+  public:
+
   // @@protoc_insertion_point(class_scope:Protocol.ObjectInfo)
  private:
   class _Internal;
@@ -454,6 +464,7 @@ class ObjectInfo final :
     int playerdirtype_;
     float posx_;
     float posy_;
+    float speed_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -1065,6 +1076,26 @@ inline void ObjectInfo::set_allocated_name(std::string* name) {
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   // @@protoc_insertion_point(field_set_allocated:Protocol.ObjectInfo.name)
+}
+
+// float speed = 8;
+inline void ObjectInfo::clear_speed() {
+  _impl_.speed_ = 0;
+}
+inline float ObjectInfo::_internal_speed() const {
+  return _impl_.speed_;
+}
+inline float ObjectInfo::speed() const {
+  // @@protoc_insertion_point(field_get:Protocol.ObjectInfo.speed)
+  return _internal_speed();
+}
+inline void ObjectInfo::_internal_set_speed(float value) {
+  
+  _impl_.speed_ = value;
+}
+inline void ObjectInfo::set_speed(float value) {
+  _internal_set_speed(value);
+  // @@protoc_insertion_point(field_set:Protocol.ObjectInfo.speed)
 }
 
 // -------------------------------------------------------------------

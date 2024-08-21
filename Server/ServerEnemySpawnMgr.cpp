@@ -7,7 +7,7 @@
 
 ServerEnemySpawnMgr::ServerEnemySpawnMgr()
 {
-
+	RandomEnemySpawn();
 }
 
 ServerEnemySpawnMgr::~ServerEnemySpawnMgr()
@@ -17,13 +17,13 @@ ServerEnemySpawnMgr::~ServerEnemySpawnMgr()
 
 void ServerEnemySpawnMgr::Update()
 {
-	float deltaTime = GET_SINGLE(SeverTimeManager)->GetDeltaTime();
+	/*float deltaTime = GET_SINGLE(SeverTimeManager)->GetDeltaTime();
 	if (deltaTime > 0.1f) return;
 	currSpawnDelayTime += deltaTime;
 	if (currSpawnDelayTime > SpawnDelayTime) {
 		currSpawnDelayTime = 0;
 		RandomEnemySpawn();
-	}
+	}*/
 }
 
 void ServerEnemySpawnMgr::RandomEnemySpawn()

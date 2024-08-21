@@ -40,7 +40,7 @@
   pch.cpp
   Actor.cpp
   Enemy.cpp
-C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\Enemy.cpp(25,11): warning C4477: 'printf' : 서식 문자열 '%d'에 'int' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'uint64_t'입니다.
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\Enemy.cpp(24,11): warning C4477: 'printf' : 서식 문자열 '%d'에 'int' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'uint64_t'입니다.
   GameRoom.cpp
   GameSession.cpp
   GameSessionManager.cpp

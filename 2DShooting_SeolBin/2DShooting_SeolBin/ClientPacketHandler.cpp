@@ -10,6 +10,7 @@
 #include "Missile.h"
 #include "Struct.pb.h"
 #include "GameManager.h"
+#include "Enemy.h"
 
 void ClientPacketHandler::HandlePacket(ServerSessionRef session, BYTE* buffer, int32 len)
 {
@@ -230,10 +231,13 @@ void ClientPacketHandler::Handle_S_EnemyMove(ServerSessionRef session, BYTE* buf
 	DevScene* scene = GET_SINGLE(SceneManager)->GetDevScene();
 	if (scene)
 	{
-		Actor* actor = scene->GetObject(info.objectid());
-		if (actor)
+		Enemy* enemy  = static_cast<Enemy*>(scene->GetObject(info.objectid()));
+		if (enemy)
 		{
-			actor->SetPos(Vec2(info.posx(), info.posy()));
+			printf("Packet Handle ClientNewLoc : X : %f / Y : %f \n", info.posx(), info.posy());
+			enemy->SetPos(Vec2(info.posx(), info.posy()));
+			enemy->SetServerNewLocation(Vec2(info.posx(), info.posy()));
+			enemy->OnRep_ServerLoc();
 		}
 	}
 }

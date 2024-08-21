@@ -18,6 +18,7 @@
 #include "Wall.h"
 #include "EnemySpawnManager.h"
 #include "ExplosionEffect.h"
+#include "TestLerpActor.h"
 
 DevScene::DevScene()
 {
@@ -102,6 +103,7 @@ void DevScene::Init()
 	}
 
 	{
+		//GET_SINGLE(SceneManager)->GetDevScene()->SpawnActor<TestLerpActor>(Vec2(250, 150));
 		//Player* BluePlayer = new Player();
 		//
 		//BluePlayer->SetLayer(LAYER_Player);

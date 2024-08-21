@@ -29,15 +29,20 @@ EnemyRef Actor::CreateEnemy(Protocol::EnemyType enemyType, Vector spawnPos)
 	EnemyRef enemy = make_shared<Enemy>();
 	enemy->info.set_objectid(s_idGenerator++);
 	enemy->enemyInfo.set_enemytype(enemyType);
+	float speed = 0;
 	switch (enemyType)
 	{
 	case Protocol::ENEMY_TYPE_HALF:
 		enemy->info.set_name("HalfEnemy");
-		enemy->SetSpeed(1500);
+		speed = 100;
+		enemy->info.set_speed(speed);
+		enemy->SetSpeed(speed);
 		break;
 	case Protocol::ENEMY_TYPE_WHITE:
 		enemy->info.set_name("WhiteEnemy");
-		enemy->SetSpeed(1500);
+		speed = 100;
+		enemy->info.set_speed(speed);
+		enemy->SetSpeed(speed);
 		break;
 	default:
 		enemy->info.set_name("Enemy Name NONE");

@@ -20,7 +20,6 @@ void Enemy::Update()
 
 	currReplicateDelay += deltaTime;
 	if (currReplicateDelay > replicateDelay) {
-		currReplicateDelay = 0;
 		if (info.objectid() == 2) {
 			printf("enemyID : %d / posX : %f / posY : %f \n", enemyInfo.objectid(), enemyInfo.posx(), enemyInfo.posy());
 
@@ -28,15 +27,16 @@ void Enemy::Update()
 		float currPosY = enemyInfo.posy();
 		if (info.name() == "HalfEnemy") {
 			enemyInfo.set_enemytype(Protocol::ENEMY_TYPE_HALF);
-			currPosY += deltaTime * GetSpeed();
+			currPosY += (currReplicateDelay * GetSpeed());
 		}
 		else if (info.name() == "WhiteEnemy") {
 			enemyInfo.set_enemytype(Protocol::ENEMY_TYPE_WHITE);
-			currPosY += deltaTime * GetSpeed();
+			currPosY += (currReplicateDelay * GetSpeed());
 		}
 		enemyInfo.set_posy(currPosY);
 		enemyInfo.set_objectid(info.objectid());
 		EnemyBroadcastMove();
+		currReplicateDelay = 0;
 	}
 }
 

@@ -31,6 +31,14 @@ void Enemy::Tick(float deltaTime)
 {
 	Super::Tick(deltaTime);
 
+	ClientTimeSinceUpdate += deltaTime;
+	const Vec2 EstimateLocation = GetServerNewLocation() + (Vec2(0, 1) * GetSpeed() * ClientTimeBetweenLastUpdate);
+	const float LerpRatio = ClientTimeSinceUpdate / ClientTimeBetweenLastUpdate;
+
+	float ClientNewY = lerp(GetServerNewLocation().y, EstimateLocation.y, LerpRatio);
+	const Vec2 ClientNewLoc = Vec2(GetPos().x, ClientNewY);
+	SetPos(ClientNewLoc);
+	//printf("ClientNewLoc : X : %f / Y : %f \n", ClientNewLoc.x, ClientNewLoc.y);
 }
 
 void Enemy::Render(HDC hdc)
@@ -91,3 +99,8 @@ void Enemy::Server_AddScore(Player* whoKillMe, int32 addScore)
 	GET_SINGLE(NetworkManager)->SendPacket(sendBuffer);
 }
 
+void Enemy::OnRep_ServerLoc()
+{
+	ClientTimeBetweenLastUpdate = ClientTimeSinceUpdate;
+	ClientTimeSinceUpdate = 0.0f;
+}

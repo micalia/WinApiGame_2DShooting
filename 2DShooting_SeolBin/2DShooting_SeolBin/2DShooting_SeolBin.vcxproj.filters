@@ -221,6 +221,7 @@
     <ClInclude Include="GameManager.h">
       <Filter>소스 파일\01.Manager</Filter>
     </ClInclude>
+    <ClInclude Include="TestLerpActor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="2DShooting_SeolBin.cpp">
@@ -369,6 +370,9 @@
     </ClCompile>
     <ClCompile Include="GameManager.cpp">
       <Filter>소스 파일\01.Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="TestLerpActor.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

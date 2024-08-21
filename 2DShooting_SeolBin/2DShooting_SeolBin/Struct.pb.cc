@@ -45,6 +45,7 @@ PROTOBUF_CONSTEXPR ObjectInfo::ObjectInfo(
   , /*decltype(_impl_.playerdirtype_)*/0
   , /*decltype(_impl_.posx_)*/0
   , /*decltype(_impl_.posy_)*/0
+  , /*decltype(_impl_.speed_)*/0
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct ObjectInfoDefaultTypeInternal {
   PROTOBUF_CONSTEXPR ObjectInfoDefaultTypeInternal()
@@ -113,6 +114,7 @@ const uint32_t TableStruct_Struct_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(p
   PROTOBUF_FIELD_OFFSET(::Protocol::ObjectInfo, _impl_.posx_),
   PROTOBUF_FIELD_OFFSET(::Protocol::ObjectInfo, _impl_.posy_),
   PROTOBUF_FIELD_OFFSET(::Protocol::ObjectInfo, _impl_.name_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::ObjectInfo, _impl_.speed_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::Protocol::ScoreInfo, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -136,8 +138,8 @@ const uint32_t TableStruct_Struct_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(p
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::Protocol::BuffData)},
   { 9, -1, -1, sizeof(::Protocol::ObjectInfo)},
-  { 21, -1, -1, sizeof(::Protocol::ScoreInfo)},
-  { 30, -1, -1, sizeof(::Protocol::EnemyInfo)},
+  { 22, -1, -1, sizeof(::Protocol::ScoreInfo)},
+  { 31, -1, -1, sizeof(::Protocol::EnemyInfo)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -150,23 +152,23 @@ static const ::_pb::Message* const file_default_instances[] = {
 const char descriptor_table_protodef_Struct_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\014Struct.proto\022\010Protocol\032\nEnum.proto\"\?\n\010"
   "BuffData\022\016\n\006buffId\030\001 \001(\004\022\022\n\nremainTime\030\002"
-  " \001(\002\022\017\n\007victims\030\003 \003(\004\"\245\001\n\nObjectInfo\022\020\n\010"
+  " \001(\002\022\017\n\007victims\030\003 \003(\004\"\264\001\n\nObjectInfo\022\020\n\010"
   "objectId\030\001 \001(\004\022)\n\nobjectType\030\002 \001(\0162\025.Pro"
   "tocol.OBJECT_TYPE\0220\n\rplayerDirType\030\004 \001(\016"
   "2\031.Protocol.PLAYER_DIR_TYPE\022\014\n\004posX\030\005 \001("
-  "\002\022\014\n\004posY\030\006 \001(\002\022\014\n\004name\030\007 \001(\t\"F\n\tScoreIn"
-  "fo\022\022\n\nplayerName\030\001 \001(\t\022\022\n\nenemyScore\030\002 \001"
-  "(\r\022\021\n\tfullScore\030\003 \001(\r\"a\n\tEnemyInfo\022\020\n\010ob"
-  "jectId\030\001 \001(\004\022&\n\tenemyType\030\002 \001(\0162\023.Protoc"
-  "ol.EnemyType\022\014\n\004posX\030\003 \001(\002\022\014\n\004posY\030\004 \001(\002"
-  "b\006proto3"
+  "\002\022\014\n\004posY\030\006 \001(\002\022\014\n\004name\030\007 \001(\t\022\r\n\005speed\030\010"
+  " \001(\002\"F\n\tScoreInfo\022\022\n\nplayerName\030\001 \001(\t\022\022\n"
+  "\nenemyScore\030\002 \001(\r\022\021\n\tfullScore\030\003 \001(\r\"a\n\t"
+  "EnemyInfo\022\020\n\010objectId\030\001 \001(\004\022&\n\tenemyType"
+  "\030\002 \001(\0162\023.Protocol.EnemyType\022\014\n\004posX\030\003 \001("
+  "\002\022\014\n\004posY\030\004 \001(\002b\006proto3"
   ;
 static const ::_pbi::DescriptorTable* const descriptor_table_Struct_2eproto_deps[1] = {
   &::descriptor_table_Enum_2eproto,
 };
 static ::_pbi::once_flag descriptor_table_Struct_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_Struct_2eproto = {
-    false, false, 448, descriptor_table_protodef_Struct_2eproto,
+    false, false, 463, descriptor_table_protodef_Struct_2eproto,
     "Struct.proto",
     &descriptor_table_Struct_2eproto_once, descriptor_table_Struct_2eproto_deps, 1, 4,
     schemas, file_default_instances, TableStruct_Struct_2eproto::offsets,
@@ -468,6 +470,7 @@ ObjectInfo::ObjectInfo(const ObjectInfo& from)
     , decltype(_impl_.playerdirtype_){}
     , decltype(_impl_.posx_){}
     , decltype(_impl_.posy_){}
+    , decltype(_impl_.speed_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
@@ -480,8 +483,8 @@ ObjectInfo::ObjectInfo(const ObjectInfo& from)
       _this->GetArenaForAllocation());
   }
   ::memcpy(&_impl_.objectid_, &from._impl_.objectid_,
-    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.posy_) -
-    reinterpret_cast<char*>(&_impl_.objectid_)) + sizeof(_impl_.posy_));
+    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.speed_) -
+    reinterpret_cast<char*>(&_impl_.objectid_)) + sizeof(_impl_.speed_));
   // @@protoc_insertion_point(copy_constructor:Protocol.ObjectInfo)
 }
 
@@ -496,6 +499,7 @@ inline void ObjectInfo::SharedCtor(
     , decltype(_impl_.playerdirtype_){0}
     , decltype(_impl_.posx_){0}
     , decltype(_impl_.posy_){0}
+    , decltype(_impl_.speed_){0}
     , /*decltype(_impl_._cached_size_)*/{}
   };
   _impl_.name_.InitDefault();
@@ -530,8 +534,8 @@ void ObjectInfo::Clear() {
 
   _impl_.name_.ClearToEmpty();
   ::memset(&_impl_.objectid_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&_impl_.posy_) -
-      reinterpret_cast<char*>(&_impl_.objectid_)) + sizeof(_impl_.posy_));
+      reinterpret_cast<char*>(&_impl_.speed_) -
+      reinterpret_cast<char*>(&_impl_.objectid_)) + sizeof(_impl_.speed_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -590,6 +594,14 @@ const char* ObjectInfo::_InternalParse(const char* ptr, ::_pbi::ParseContext* ct
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
           CHK_(::_pbi::VerifyUTF8(str, "Protocol.ObjectInfo.name"));
+        } else
+          goto handle_unusual;
+        continue;
+      // float speed = 8;
+      case 8:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 69)) {
+          _impl_.speed_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
         } else
           goto handle_unusual;
         continue;
@@ -672,6 +684,16 @@ uint8_t* ObjectInfo::_InternalSerialize(
         7, this->_internal_name(), target);
   }
 
+  // float speed = 8;
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_speed = this->_internal_speed();
+  uint32_t raw_speed;
+  memcpy(&raw_speed, &tmp_speed, sizeof(tmp_speed));
+  if (raw_speed != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteFloatToArray(8, this->_internal_speed(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -730,6 +752,15 @@ size_t ObjectInfo::ByteSizeLong() const {
     total_size += 1 + 4;
   }
 
+  // float speed = 8;
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_speed = this->_internal_speed();
+  uint32_t raw_speed;
+  memcpy(&raw_speed, &tmp_speed, sizeof(tmp_speed));
+  if (raw_speed != 0) {
+    total_size += 1 + 4;
+  }
+
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
@@ -774,6 +805,13 @@ void ObjectInfo::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PRO
   if (raw_posy != 0) {
     _this->_internal_set_posy(from._internal_posy());
   }
+  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
+  float tmp_speed = from._internal_speed();
+  uint32_t raw_speed;
+  memcpy(&raw_speed, &tmp_speed, sizeof(tmp_speed));
+  if (raw_speed != 0) {
+    _this->_internal_set_speed(from._internal_speed());
+  }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
@@ -798,8 +836,8 @@ void ObjectInfo::InternalSwap(ObjectInfo* other) {
       &other->_impl_.name_, rhs_arena
   );
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(ObjectInfo, _impl_.posy_)
-      + sizeof(ObjectInfo::_impl_.posy_)
+      PROTOBUF_FIELD_OFFSET(ObjectInfo, _impl_.speed_)
+      + sizeof(ObjectInfo::_impl_.speed_)
       - PROTOBUF_FIELD_OFFSET(ObjectInfo, _impl_.objectid_)>(
           reinterpret_cast<char*>(&_impl_.objectid_),
           reinterpret_cast<char*>(&other->_impl_.objectid_));

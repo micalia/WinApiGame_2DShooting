@@ -17,7 +17,7 @@ public:
 	void SetSpeed(float speed){ _speed = speed;}
 	float GetSpeed(){ return _speed;}
 private:
-	float replicateDelay = 0.2f;
+	float replicateDelay = 2.0f;
 	float currReplicateDelay = 0;
 
 	float _speed = 0;

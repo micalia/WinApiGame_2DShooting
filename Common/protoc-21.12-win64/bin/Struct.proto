@@ -18,6 +18,7 @@ message ObjectInfo
 	float posX = 5;
 	float posY = 6;
 	string name = 7;
+	float speed = 8;
 }
 
 message ScoreInfo
