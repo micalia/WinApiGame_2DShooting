@@ -13,7 +13,7 @@ public:
 	Protocol::ObjectInfo info;
 	GameRoomRef room;
 
-private:
+protected:
 	static atomic<uint64> s_idGenerator;
 };
 

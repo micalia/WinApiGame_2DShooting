@@ -20,22 +20,7 @@ void Enemy::Update()
 
 	currReplicateDelay += deltaTime;
 	if (currReplicateDelay > replicateDelay) {
-		if (info.objectid() == 2) {
-			printf("enemyID : %d / posX : %f / posY : %f \n", enemyInfo.objectid(), enemyInfo.posx(), enemyInfo.posy());
-
-		}
-		float currPosY = enemyInfo.posy();
-		if (info.name() == "HalfEnemy") {
-			enemyInfo.set_enemytype(Protocol::ENEMY_TYPE_HALF);
-			currPosY += (currReplicateDelay * GetSpeed());
-		}
-		else if (info.name() == "WhiteEnemy") {
-			enemyInfo.set_enemytype(Protocol::ENEMY_TYPE_WHITE);
-			currPosY += (currReplicateDelay * GetSpeed());
-		}
-		enemyInfo.set_posy(currPosY);
-		enemyInfo.set_objectid(info.objectid());
-		EnemyBroadcastMove();
+		Move();
 		currReplicateDelay = 0;
 	}
 }
@@ -54,5 +39,33 @@ void Enemy::SetEnemyPos(Vector pos)
 	enemyInfo.set_posx(pos.x);
 	enemyInfo.set_posy(pos.y);
 
+	EnemyBroadcastMove();
+}
+
+void Enemy::SetEnemyInfo(EnemyRef InEnemy, Vector InSpawnPos, Protocol::EnemyType InEnemyType, float InSpeed)
+{
+	info.set_objectid(s_idGenerator++);
+	enemyInfo.set_enemytype(InEnemyType);
+	info.set_posx(InSpawnPos.x);
+	info.set_posy(InSpawnPos.y);
+	enemyInfo.set_posx(InSpawnPos.x);
+	enemyInfo.set_posy(InSpawnPos.y);
+	info.set_speed(InSpeed);
+	SetSpeed(InSpeed);
+}
+
+void Enemy::Move()
+{
+	currPosY = enemyInfo.posy();
+	if (info.name() == "HalfEnemy") {
+		enemyInfo.set_enemytype(Protocol::ENEMY_TYPE_HALF);
+		currPosY += (currReplicateDelay * GetSpeed());
+	}
+	else if (info.name() == "WhiteEnemy") {
+		enemyInfo.set_enemytype(Protocol::ENEMY_TYPE_WHITE);
+		currPosY += (currReplicateDelay * GetSpeed());
+	}
+	enemyInfo.set_posy(currPosY);
+	enemyInfo.set_objectid(info.objectid());
 	EnemyBroadcastMove();
 }

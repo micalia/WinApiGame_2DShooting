@@ -40,6 +40,7 @@ public:
 	float GetSpeed(){ return _speed;}
 
 	void OnRep_ServerLoc();
+	void SetClientTimeBetweenLastUpdate(float _ClientTimeBetweenLastUpdate) { ClientTimeBetweenLastUpdate = _ClientTimeBetweenLastUpdate;}
 protected:
 	int32 hp = 0;
 	int32 _killScore = 0;

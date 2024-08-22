@@ -17,3 +17,5 @@ public:\
 		delete ptr;				\
 		ptr = nullptr;			\
 	}
+
+#define UE_KINDA_SMALL_NUMBER	(1.e-4f) // 0.0001

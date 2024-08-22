@@ -27,8 +27,8 @@ public:
 		ret->SetLayer(layerType);
 		AddActor(ret);
 
-		ret->BeginPlay();
 		ret->SetPos(pos);
+		ret->BeginPlay();
 
 		return ret;
 	}

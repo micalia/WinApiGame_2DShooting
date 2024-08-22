@@ -159,6 +159,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="HalfEnemy.cpp" />
     <ClCompile Include="ServerEnemySpawnMgr.cpp" />
     <ClCompile Include="Enum.pb.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
@@ -185,10 +186,12 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="SeverTimeManager.cpp" />
+    <ClCompile Include="WhiteEnemy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Defines.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="HalfEnemy.h" />
     <ClInclude Include="ServerEnemySpawnMgr.h" />
     <ClInclude Include="Enum.pb.h" />
     <ClInclude Include="Actor.h" />
@@ -203,6 +206,7 @@
     <ClInclude Include="Struct.pb.h" />
     <ClInclude Include="SeverTimeManager.h" />
     <ClInclude Include="Types.h" />
+    <ClInclude Include="WhiteEnemy.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Common\protoc-21.12-win64\bin\Enum.proto" />

@@ -50,7 +50,8 @@ void Actor::SetPos(Vec2 pos)
 
 Vec2 Actor::GetPos()
 {
-	return Vec2{info.posx(), info.posy()};
+	//return Vec2{info.posx(), info.posy()};
+	return _pos;
 }
 
 void Actor::AddComponent(Component* component)

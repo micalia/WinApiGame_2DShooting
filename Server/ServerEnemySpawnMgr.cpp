@@ -33,7 +33,8 @@ void ServerEnemySpawnMgr::RandomEnemySpawn()
 	
 	EnemyRef enemyRef = nullptr;
 
-	int ranEnemyVal = ServerUtils::RandomIntegerRange(0,3);
+	//int ranEnemyVal = ServerUtils::RandomIntegerRange(0,3);
+	int ranEnemyVal = 0; // WhiteEnemy¸¸ ½ºÆù
 	switch (ranEnemyVal)
 	{
 	case 0: 

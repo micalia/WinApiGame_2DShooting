@@ -9,6 +9,7 @@
 #include "Scene.h"
 #include "Player.h"
 #include "WhiteEnemy.h"
+#include "TimeManager.h"
 
 EnemySpawnManager::EnemySpawnManager()
 {
@@ -123,6 +124,7 @@ void EnemySpawnManager::HalfEnemySpawn(Protocol::ObjectInfo info)
 	HalfMoonEnemy* halfMoonEnemy = GET_SINGLE(SceneManager)->GetCurrentScene()->SpawnActor<HalfMoonEnemy>(Vec2(info.posx(), info.posy()), LAYER_Enemy);
 	halfMoonEnemy->info = info;
 	halfMoonEnemy->enemyInfo.set_posx(info.posx());
+	halfMoonEnemy->enemyInfo.set_posy(info.posy());
 	halfMoonEnemy->SetSprite(HalfMoonEnemySprite);
 	halfMoonEnemy->SetSpeed(info.speed());
 	const Vec2Int size = HalfMoonEnemySprite->GetSize();
@@ -152,6 +154,7 @@ void EnemySpawnManager::WhiteEnemySpawn(Protocol::ObjectInfo info)
 	const Vec2Int size = whiteEnemySprite->GetSize();
 	whiteEnemy->info = info;
 	whiteEnemy->enemyInfo.set_posx(info.posx());
+	whiteEnemy->enemyInfo.set_posy(info.posy());
 	whiteEnemy->SetTarget(target);
 	whiteEnemy->SetSpeed(info.speed());
 	{
@@ -169,4 +172,5 @@ void EnemySpawnManager::WhiteEnemySpawn(Protocol::ObjectInfo info)
 		GET_SINGLE(CollisionManager)->AddCollider(collider);
 		whiteEnemy->AddComponent(collider);
 	}
+
 }

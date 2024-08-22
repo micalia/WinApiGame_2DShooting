@@ -10,6 +10,7 @@
 #include "Scene.h"
 #include "ExplosionEffect.h"
 #include "Missile.h"
+#include "TimeManager.h"
 
 Enemy::Enemy()
 {
@@ -25,13 +26,20 @@ Enemy::~Enemy()
 void Enemy::BeginPlay()
 {
 	Super::BeginPlay();
+
+	float deltaTime = GET_SINGLE(TimeManager)->GetDeltaTime();
+	SetClientTimeBetweenLastUpdate(deltaTime);
+	SetServerNewLocation(Vec2(GetPos().x, GetPos().y));
 }
 
 void Enemy::Tick(float deltaTime)
 {
 	Super::Tick(deltaTime);
-
 	ClientTimeSinceUpdate += deltaTime;
+	if (ClientTimeBetweenLastUpdate < UE_KINDA_SMALL_NUMBER)
+	{
+		return;
+	}
 	const Vec2 EstimateLocation = GetServerNewLocation() + (Vec2(0, 1) * GetSpeed() * ClientTimeBetweenLastUpdate);
 	const float LerpRatio = ClientTimeSinceUpdate / ClientTimeBetweenLastUpdate;
 

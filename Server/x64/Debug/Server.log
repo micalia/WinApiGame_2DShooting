@@ -40,10 +40,10 @@
   pch.cpp
   Actor.cpp
   Enemy.cpp
-C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\Enemy.cpp(24,11): warning C4477: 'printf' : 서식 문자열 '%d'에 'int' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'uint64_t'입니다.
   GameRoom.cpp
   GameSession.cpp
   GameSessionManager.cpp
+  HalfEnemy.cpp
   Player.cpp
   Server.cpp
   ServerEnemySpawnMgr.cpp
@@ -51,6 +51,7 @@ C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\ServerEnemySpawnMgr.c
   ServerPacketHandler.cpp
   ServerUtils.cpp
   SeverTimeManager.cpp
+  WhiteEnemy.cpp
   코드를 생성하고 있습니다...
   Enum.pb.cc
   Protocol.pb.cc

@@ -15,11 +15,16 @@ public:
 	void SetEnemyPos(Vector pos);
 
 	void SetSpeed(float speed){ _speed = speed;}
-	float GetSpeed(){ return _speed;}
+	float GetSpeed() { return _speed; }
+
+	void SetEnemyInfo(EnemyRef InEnemy, Vector InSpawnPos, Protocol::EnemyType InEnemyType, float InSpeed);
+
+	void Move();
 private:
-	float replicateDelay = 2.0f;
+	float replicateDelay = 3.0f;
 	float currReplicateDelay = 0;
 
 	float _speed = 0;
+	float currPosY = 0;
 };
 

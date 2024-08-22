@@ -80,6 +80,12 @@
     <ClCompile Include="ServerUtils.cpp">
       <Filter>소스 파일\Headers</Filter>
     </ClCompile>
+    <ClCompile Include="HalfEnemy.cpp">
+      <Filter>소스 파일\Game\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="WhiteEnemy.cpp">
+      <Filter>소스 파일\Game\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -129,6 +135,12 @@
     </ClInclude>
     <ClInclude Include="ServerUtils.h">
       <Filter>소스 파일\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="HalfEnemy.h">
+      <Filter>소스 파일\Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="WhiteEnemy.h">
+      <Filter>소스 파일\Game\Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

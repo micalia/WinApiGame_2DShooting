@@ -35,3 +35,9 @@ message EnemyInfo
 	float posX = 3;
 	float posY = 4;
 }
+
+message EnemyMissile
+{
+	float posX = 3;
+	float posY = 4;
+}

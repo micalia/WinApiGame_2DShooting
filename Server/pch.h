@@ -10,6 +10,8 @@ using GameRoomRef = shared_ptr<class GameRoom>;
 using ActorRef = shared_ptr<class Actor>;
 using PlayerRef = shared_ptr<class Player>;
 using EnemyRef = shared_ptr<class Enemy>;
+using HalfEnemyRef = shared_ptr<class HalfEnemy>;
+using WhiteEnemyRef = shared_ptr<class WhiteEnemy>;
 using EnemySpawnMgrRef = shared_ptr<class ServerEnemySpawnMgr>;
 
 #include "Protocol.pb.h"
