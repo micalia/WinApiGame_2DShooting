@@ -19,6 +19,9 @@ message ObjectInfo
 	float posY = 6;
 	string name = 7;
 	float speed = 8;
+	float dirX = 9;
+	float dirY = 10;
+	uint64 objectOwnerId = 11;
 }
 
 message ScoreInfo
@@ -36,8 +39,10 @@ message EnemyInfo
 	float posY = 4;
 }
 
-message EnemyMissile
+message EnemyMissileInfo
 {
-	float posX = 3;
-	float posY = 4;
+	float posX = 1;
+	float posY = 2;
+	float spawnPosX = 3;
+	float spawnPosY = 4;
 }

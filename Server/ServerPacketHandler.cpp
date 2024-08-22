@@ -166,3 +166,13 @@ SendBufferRef ServerPacketHandler::Make_S_EnemyMove(const Protocol::EnemyInfo& e
 
 	return MakeSendBuffer(pkt, S_EnemyMove);
 }
+
+SendBufferRef ServerPacketHandler::Make_S_EnemyMissileMove(const Protocol::EnemyMissileInfo& enemyMissileInfo)
+{
+	Protocol::S_EnemyMissile pkt;
+
+	Protocol::EnemyMissileInfo* objectInfo = pkt.mutable_enemymissileinfo();
+	*objectInfo = enemyMissileInfo;
+
+	return MakeSendBuffer(pkt, S_EnemyMissile);
+}

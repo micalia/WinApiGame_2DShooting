@@ -4,6 +4,7 @@
 #include "Enemy.h"
 #include "HalfEnemy.h"
 #include "WhiteEnemy.h"
+#include "SEnemyMissile.h"
 
 atomic<uint64> Actor::s_idGenerator = 1;
 
@@ -53,4 +54,17 @@ EnemyRef Actor::CreateEnemy(Protocol::EnemyType enemyType, Vector spawnPos)
 	}
 
 	return nullptr;
+}
+
+EnemyMissileRef Actor::CreateEnemyMissile(Vector spawnPos, Vector dir)
+{
+	EnemyMissileRef enemyMissile = make_shared<SEnemyMissile>();
+	enemyMissile->info.set_objectid(s_idGenerator++);
+	enemyMissile->info.set_objecttype(Protocol::OBJECT_TYPE_ENEMY_MISSILE);
+	enemyMissile->info.set_posx(spawnPos.x);
+	enemyMissile->info.set_posy(spawnPos.y);
+	enemyMissile->info.set_dirx(dir.x);
+	enemyMissile->info.set_diry(dir.y);
+
+	return enemyMissile;
 }

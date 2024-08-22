@@ -234,7 +234,6 @@ void ClientPacketHandler::Handle_S_EnemyMove(ServerSessionRef session, BYTE* buf
 		Enemy* enemy  = static_cast<Enemy*>(scene->GetObject(info.objectid()));
 		if (enemy)
 		{
-			printf("Packet Handle ClientNewLoc : X : %f / Y : %f \n", info.posx(), info.posy());
 			enemy->SetPos(Vec2(info.posx(), info.posy()));
 			enemy->SetServerNewLocation(Vec2(info.posx(), info.posy()));
 			enemy->OnRep_ServerLoc();

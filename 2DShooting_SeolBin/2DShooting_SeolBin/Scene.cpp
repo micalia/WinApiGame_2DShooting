@@ -98,15 +98,17 @@ void Scene::Handle_S_AddObject(Protocol::S_AddObject& pkt)
 		if (myPlayerId == info.objectid())
 			continue;
 
-		if (info.objecttype() == Protocol::OBJECT_TYPE_PLAYER)
+		switch (info.objecttype())
+		{
+		case Protocol::OBJECT_TYPE_PLAYER:
 		{
 			Player* player = SpawnActor<Player>(Vec2{ info.posx(), info.posy() }, LAYER_Player);
-			//player->SetLayer(LAYER_Player);
 			player->SetState(info.playerdirtype());
 			player->SetName(info.name());
 			player->info = info;
 		}
-		else if (info.objecttype() == Protocol::OBJECT_TYPE_ENEMY)
+			break;
+		case Protocol::OBJECT_TYPE_ENEMY:
 		{
 			auto EnemySpawnMgr = GET_SINGLE(SceneManager)->GetDevScene()->GetEnemySpawnMgr();
 			if (EnemySpawnMgr) { 
@@ -117,6 +119,17 @@ void Scene::Handle_S_AddObject(Protocol::S_AddObject& pkt)
 					EnemySpawnMgr->WhiteEnemySpawn(info);
 				}
 			}
+		}
+			break;
+		case Protocol::OBJECT_TYPE_ENEMY_MISSILE:
+		{
+			if (auto EnemySpawnMgr = GET_SINGLE(SceneManager)->GetDevScene()->GetEnemySpawnMgr()) {
+				EnemySpawnMgr->EnemyMissileSpawn(info);
+			}
+		}
+			break;
+		default:
+			break;
 		}
 	}
 }

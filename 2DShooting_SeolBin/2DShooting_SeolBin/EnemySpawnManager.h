@@ -16,6 +16,8 @@ public:
 
 	void RandomEnemySpawn();
 
+	void EnemyMissileSpawn(Protocol::ObjectInfo info);
+
 	void HalfEnemySpawn(Protocol::ObjectInfo info);
 	void WhiteEnemySpawn(Protocol::ObjectInfo info);
 private:

@@ -160,6 +160,7 @@
   <ItemGroup>
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="HalfEnemy.cpp" />
+    <ClCompile Include="SEnemyMissile.cpp" />
     <ClCompile Include="ServerEnemySpawnMgr.cpp" />
     <ClCompile Include="Enum.pb.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
@@ -192,6 +193,7 @@
     <ClInclude Include="Defines.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="HalfEnemy.h" />
+    <ClInclude Include="SEnemyMissile.h" />
     <ClInclude Include="ServerEnemySpawnMgr.h" />
     <ClInclude Include="Enum.pb.h" />
     <ClInclude Include="Actor.h" />

@@ -15,6 +15,7 @@ Enemy::~Enemy()
 
 void Enemy::Update()
 {
+	Super::Update();
 	float deltaTime = GET_SINGLE(SeverTimeManager)->GetDeltaTime();
 	if (deltaTime > 0.1f) return;
 

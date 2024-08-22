@@ -35,6 +35,7 @@ private:
 private:
 	map<uint64, PlayerRef> _players;
 	map<uint64, EnemyRef> _enemies;
+	map<uint64, ActorRef> _objects;
 
 private:
 	Protocol::ScoreInfo scoreInfo;

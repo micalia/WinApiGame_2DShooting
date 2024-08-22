@@ -6,6 +6,7 @@
 #include "Enemy.h"
 #include "ServerEnemySpawnMgr.h"
 #include "SeverTimeManager.h"
+#include "SEnemyMissile.h"
 
 GameRoomRef GRoom = make_shared<GameRoom>();
 
@@ -29,9 +30,14 @@ void GameRoom::Update()
 {
 	//if (currUserCount == 2) {
 	GET_SINGLE(SeverTimeManager)->Update();
-		enemyMgr->Update();
+	enemyMgr->Update();
 	//}
 	for (auto& item : _enemies)
+	{
+		item.second->Update();
+	}
+
+	for (auto& item : _objects)
 	{
 		item.second->Update();
 	}
@@ -40,18 +46,18 @@ void GameRoom::Update()
 void GameRoom::EnterRoom(GameSessionRef session)
 {
 	PlayerRef player = Actor::CreatePlayer();
-	
+
 	// 서로의 존재를 연결
 	session->gameRoom = GetRoomRef();
 	session->player = player;
 	player->session = session;
-	
+
 	// 첫번째 입장은 무조건 BluePlayer
 	if (_players.size() == 0) {
 		player->info.set_name("BluePlayer");
 	}
 	else {
-		for (auto it = _players.begin(); it != _players.end(); it ++)
+		for (auto it = _players.begin(); it != _players.end(); it++)
 		{
 			if (it->second->name == "BluePlayer") {
 				player->info.set_name("RedPlayer");
@@ -67,7 +73,7 @@ void GameRoom::EnterRoom(GameSessionRef session)
 	//TEMP
 	player->info.set_posx(242);
 	player->info.set_posy(540);
-	
+
 
 	// 입장한 클라에게 정보를 보내주기
 	{
@@ -100,9 +106,9 @@ void GameRoom::EnterRoom(GameSessionRef session)
 
 void GameRoom::LeaveRoom(GameSessionRef session)
 {
-	if(session == nullptr)
+	if (session == nullptr)
 		return;
-	if(session->player.lock() == nullptr)
+	if (session->player.lock() == nullptr)
 		return;
 
 	uint64 id = session->player.lock()->info.objectid();
@@ -115,12 +121,12 @@ ActorRef GameRoom::FindObject(uint64 id)
 {
 	{
 		auto findIt = _players.find(id);
-		if(findIt != _players.end())
+		if (findIt != _players.end())
 			return findIt->second;
 	}
 	{
 		auto findIt = _enemies.find(id);
-		if(findIt != _enemies.end())
+		if (findIt != _enemies.end())
 			return findIt->second;
 	}
 
@@ -187,45 +193,52 @@ void GameRoom::Handle_C_Score(Protocol::C_Score& pkt)
 void GameRoom::AddObject(ActorRef gameObject)
 {
 	uint64 id = gameObject->info.objectid();
-	
+
 	auto objectType = gameObject->info.objecttype();
 
-	switch (objectType) 
+	gameObject->room = GetRoomRef();
+
+	switch (objectType)
 	{
-	case Protocol::OBJECT_TYPE_PLAYER: 
+	case Protocol::OBJECT_TYPE_PLAYER:
+	{
+		string playerName;
+		if (_players.size() == 0) {
+			gameObject->info.set_name("BluePlayer");
+			playerName = "BluePlayer";
+		}
+		else {
+			for (auto it = _players.begin(); it != _players.end(); it++)
 			{
-				string playerName;
-				if (_players.size() == 0) {
+				if (it->second->name == "BluePlayer") {
+					gameObject->info.set_name("RedPlayer");
+					playerName = "RedPlayer";
+					break;
+				}
+				else if (it->second->name == "RedPlayer") {
 					gameObject->info.set_name("BluePlayer");
 					playerName = "BluePlayer";
+					break;
 				}
-				else {
-					for (auto it = _players.begin(); it != _players.end(); it++)
-					{
-						if (it->second->name == "BluePlayer") {
-							gameObject->info.set_name("RedPlayer");
-							playerName = "RedPlayer";
-							break;
-						}
-						else if (it->second->name == "RedPlayer") {
-							gameObject->info.set_name("BluePlayer");
-							playerName = "BluePlayer";
-							break;
-						}
-					}
-				}
-				_players[id] = static_pointer_cast<Player>(gameObject);
-				_players[id]->name = playerName;
 			}
-			break;
-		case Protocol::OBJECT_TYPE_ENEMY: 
-			_enemies[id] = static_pointer_cast<Enemy>(gameObject);
-			break;
-		default:
-			return;
+		}
+		_players[id] = static_pointer_cast<Player>(gameObject);
+		_players[id]->name = playerName;
+	}
+	break;
+	case Protocol::OBJECT_TYPE_ENEMY:
+		_enemies[id] = static_pointer_cast<Enemy>(gameObject);
+		break;
+	case Protocol::OBJECT_TYPE_ENEMY_MISSILE:
+	{
+		_objects[id] = static_pointer_cast<SEnemyMissile>(gameObject);
+		break;
+	}
+	break;
+	default:
+		return;
 	}
 
-	gameObject->room = GetRoomRef();
 	//TODO 신규 오브젝트 전송
 	{
 		Protocol::S_AddObject pkt;
@@ -240,7 +253,7 @@ void GameRoom::AddObject(ActorRef gameObject)
 void GameRoom::RemoveObject(uint64 id)
 {
 	ActorRef gameObject = FindObject(id);
-	if(gameObject == nullptr)
+	if (gameObject == nullptr)
 		return;
 
 	switch (gameObject->info.objecttype())
@@ -256,7 +269,7 @@ void GameRoom::RemoveObject(uint64 id)
 	}
 
 	gameObject->room = nullptr;
-	
+
 	// 오브젝트 삭제 전송
 	{
 		Protocol::S_RemoveObject pkt;

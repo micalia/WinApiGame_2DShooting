@@ -7,7 +7,7 @@ public:
 	Enemy();
 	virtual ~Enemy();
 
-	virtual void Update();
+	virtual void Update() override;
 
 	Protocol::EnemyInfo enemyInfo;
 

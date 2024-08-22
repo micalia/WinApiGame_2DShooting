@@ -72,3 +72,8 @@ message S_EnemySpawn
 {
 	EnemyInfo enemySpawnInfo = 1;
 }
+
+message S_EnemyMissile
+{
+	EnemyMissileInfo enemyMissileInfo = 1;
+}

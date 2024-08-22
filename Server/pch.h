@@ -13,6 +13,7 @@ using EnemyRef = shared_ptr<class Enemy>;
 using HalfEnemyRef = shared_ptr<class HalfEnemy>;
 using WhiteEnemyRef = shared_ptr<class WhiteEnemy>;
 using EnemySpawnMgrRef = shared_ptr<class ServerEnemySpawnMgr>;
+using EnemyMissileRef = shared_ptr<class SEnemyMissile>;
 
 #include "Protocol.pb.h"
 #include "Enum.pb.h"

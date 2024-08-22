@@ -25,7 +25,7 @@ private:
 private:
 	void SyncToServer();
 	float currPacketSendDelay = 0;
-	float PacketSendDelay = 0.0f;
+	float PacketSendDelay = 0.02f;
 
 private:
 	float Horizontal = 0;

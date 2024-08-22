@@ -59,6 +59,9 @@ extern C_ScoreDefaultTypeInternal _C_Score_default_instance_;
 class S_AddObject;
 struct S_AddObjectDefaultTypeInternal;
 extern S_AddObjectDefaultTypeInternal _S_AddObject_default_instance_;
+class S_EnemyMissile;
+struct S_EnemyMissileDefaultTypeInternal;
+extern S_EnemyMissileDefaultTypeInternal _S_EnemyMissile_default_instance_;
 class S_EnemyMove;
 struct S_EnemyMoveDefaultTypeInternal;
 extern S_EnemyMoveDefaultTypeInternal _S_EnemyMove_default_instance_;
@@ -92,6 +95,7 @@ template<> ::Protocol::C_Move* Arena::CreateMaybeMessage<::Protocol::C_Move>(Are
 template<> ::Protocol::C_Projectile* Arena::CreateMaybeMessage<::Protocol::C_Projectile>(Arena*);
 template<> ::Protocol::C_Score* Arena::CreateMaybeMessage<::Protocol::C_Score>(Arena*);
 template<> ::Protocol::S_AddObject* Arena::CreateMaybeMessage<::Protocol::S_AddObject>(Arena*);
+template<> ::Protocol::S_EnemyMissile* Arena::CreateMaybeMessage<::Protocol::S_EnemyMissile>(Arena*);
 template<> ::Protocol::S_EnemyMove* Arena::CreateMaybeMessage<::Protocol::S_EnemyMove>(Arena*);
 template<> ::Protocol::S_EnemySpawn* Arena::CreateMaybeMessage<::Protocol::S_EnemySpawn>(Arena*);
 template<> ::Protocol::S_EnterGame* Arena::CreateMaybeMessage<::Protocol::S_EnterGame>(Arena*);
@@ -2185,6 +2189,163 @@ class S_EnemySpawn final :
   union { Impl_ _impl_; };
   friend struct ::TableStruct_Protocol_2eproto;
 };
+// -------------------------------------------------------------------
+
+class S_EnemyMissile final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:Protocol.S_EnemyMissile) */ {
+ public:
+  inline S_EnemyMissile() : S_EnemyMissile(nullptr) {}
+  ~S_EnemyMissile() override;
+  explicit PROTOBUF_CONSTEXPR S_EnemyMissile(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  S_EnemyMissile(const S_EnemyMissile& from);
+  S_EnemyMissile(S_EnemyMissile&& from) noexcept
+    : S_EnemyMissile() {
+    *this = ::std::move(from);
+  }
+
+  inline S_EnemyMissile& operator=(const S_EnemyMissile& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline S_EnemyMissile& operator=(S_EnemyMissile&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const S_EnemyMissile& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const S_EnemyMissile* internal_default_instance() {
+    return reinterpret_cast<const S_EnemyMissile*>(
+               &_S_EnemyMissile_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    13;
+
+  friend void swap(S_EnemyMissile& a, S_EnemyMissile& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(S_EnemyMissile* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(S_EnemyMissile* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  S_EnemyMissile* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<S_EnemyMissile>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const S_EnemyMissile& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const S_EnemyMissile& from) {
+    S_EnemyMissile::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(S_EnemyMissile* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "Protocol.S_EnemyMissile";
+  }
+  protected:
+  explicit S_EnemyMissile(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kEnemyMissileInfoFieldNumber = 1,
+  };
+  // .Protocol.EnemyMissileInfo enemyMissileInfo = 1;
+  bool has_enemymissileinfo() const;
+  private:
+  bool _internal_has_enemymissileinfo() const;
+  public:
+  void clear_enemymissileinfo();
+  const ::Protocol::EnemyMissileInfo& enemymissileinfo() const;
+  PROTOBUF_NODISCARD ::Protocol::EnemyMissileInfo* release_enemymissileinfo();
+  ::Protocol::EnemyMissileInfo* mutable_enemymissileinfo();
+  void set_allocated_enemymissileinfo(::Protocol::EnemyMissileInfo* enemymissileinfo);
+  private:
+  const ::Protocol::EnemyMissileInfo& _internal_enemymissileinfo() const;
+  ::Protocol::EnemyMissileInfo* _internal_mutable_enemymissileinfo();
+  public:
+  void unsafe_arena_set_allocated_enemymissileinfo(
+      ::Protocol::EnemyMissileInfo* enemymissileinfo);
+  ::Protocol::EnemyMissileInfo* unsafe_arena_release_enemymissileinfo();
+
+  // @@protoc_insertion_point(class_scope:Protocol.S_EnemyMissile)
+ private:
+  class _Internal;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::Protocol::EnemyMissileInfo* enemymissileinfo_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_Protocol_2eproto;
+};
 // ===================================================================
 
 
@@ -3230,9 +3391,100 @@ inline void S_EnemySpawn::set_allocated_enemyspawninfo(::Protocol::EnemyInfo* en
   // @@protoc_insertion_point(field_set_allocated:Protocol.S_EnemySpawn.enemySpawnInfo)
 }
 
+// -------------------------------------------------------------------
+
+// S_EnemyMissile
+
+// .Protocol.EnemyMissileInfo enemyMissileInfo = 1;
+inline bool S_EnemyMissile::_internal_has_enemymissileinfo() const {
+  return this != internal_default_instance() && _impl_.enemymissileinfo_ != nullptr;
+}
+inline bool S_EnemyMissile::has_enemymissileinfo() const {
+  return _internal_has_enemymissileinfo();
+}
+inline const ::Protocol::EnemyMissileInfo& S_EnemyMissile::_internal_enemymissileinfo() const {
+  const ::Protocol::EnemyMissileInfo* p = _impl_.enemymissileinfo_;
+  return p != nullptr ? *p : reinterpret_cast<const ::Protocol::EnemyMissileInfo&>(
+      ::Protocol::_EnemyMissileInfo_default_instance_);
+}
+inline const ::Protocol::EnemyMissileInfo& S_EnemyMissile::enemymissileinfo() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_EnemyMissile.enemyMissileInfo)
+  return _internal_enemymissileinfo();
+}
+inline void S_EnemyMissile::unsafe_arena_set_allocated_enemymissileinfo(
+    ::Protocol::EnemyMissileInfo* enemymissileinfo) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.enemymissileinfo_);
+  }
+  _impl_.enemymissileinfo_ = enemymissileinfo;
+  if (enemymissileinfo) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:Protocol.S_EnemyMissile.enemyMissileInfo)
+}
+inline ::Protocol::EnemyMissileInfo* S_EnemyMissile::release_enemymissileinfo() {
+  
+  ::Protocol::EnemyMissileInfo* temp = _impl_.enemymissileinfo_;
+  _impl_.enemymissileinfo_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::Protocol::EnemyMissileInfo* S_EnemyMissile::unsafe_arena_release_enemymissileinfo() {
+  // @@protoc_insertion_point(field_release:Protocol.S_EnemyMissile.enemyMissileInfo)
+  
+  ::Protocol::EnemyMissileInfo* temp = _impl_.enemymissileinfo_;
+  _impl_.enemymissileinfo_ = nullptr;
+  return temp;
+}
+inline ::Protocol::EnemyMissileInfo* S_EnemyMissile::_internal_mutable_enemymissileinfo() {
+  
+  if (_impl_.enemymissileinfo_ == nullptr) {
+    auto* p = CreateMaybeMessage<::Protocol::EnemyMissileInfo>(GetArenaForAllocation());
+    _impl_.enemymissileinfo_ = p;
+  }
+  return _impl_.enemymissileinfo_;
+}
+inline ::Protocol::EnemyMissileInfo* S_EnemyMissile::mutable_enemymissileinfo() {
+  ::Protocol::EnemyMissileInfo* _msg = _internal_mutable_enemymissileinfo();
+  // @@protoc_insertion_point(field_mutable:Protocol.S_EnemyMissile.enemyMissileInfo)
+  return _msg;
+}
+inline void S_EnemyMissile::set_allocated_enemymissileinfo(::Protocol::EnemyMissileInfo* enemymissileinfo) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete reinterpret_cast< ::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.enemymissileinfo_);
+  }
+  if (enemymissileinfo) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(
+                reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(enemymissileinfo));
+    if (message_arena != submessage_arena) {
+      enemymissileinfo = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, enemymissileinfo, submessage_arena);
+    }
+    
+  } else {
+    
+  }
+  _impl_.enemymissileinfo_ = enemymissileinfo;
+  // @@protoc_insertion_point(field_set_allocated:Protocol.S_EnemyMissile.enemyMissileInfo)
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

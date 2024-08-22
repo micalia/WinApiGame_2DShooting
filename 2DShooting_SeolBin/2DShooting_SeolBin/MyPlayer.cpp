@@ -186,9 +186,9 @@ void MyPlayer::MoveAction()
 	info.set_posx(_pos.x);
 	info.set_posy(_pos.y);
 
-	_dirtyFlag = true;
 	currPacketSendDelay+=deltaTime;
 	if (currPacketSendDelay > PacketSendDelay) {
+		_dirtyFlag = true;
 		currPacketSendDelay = 0;
 	}
 }

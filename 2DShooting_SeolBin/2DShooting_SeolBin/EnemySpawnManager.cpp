@@ -10,6 +10,7 @@
 #include "Player.h"
 #include "WhiteEnemy.h"
 #include "TimeManager.h"
+#include "EnemyMissile.h"
 
 EnemySpawnManager::EnemySpawnManager()
 {
@@ -115,6 +116,25 @@ void EnemySpawnManager::RandomEnemySpawn()
 		GET_SINGLE(SceneManager)->GetCurrentScene()->AddActor(halfMoonEnemy);
 	}
 		break;
+	}
+}
+
+void EnemySpawnManager::EnemyMissileSpawn(Protocol::ObjectInfo info)
+{
+	{
+		Sprite* EnemyMissileSprite = GET_SINGLE(ResourceManager)->GetSprite(L"EnemyMissile");
+		Vec2 spawnPos = Vec2(info.posx(), info.posy());
+		EnemyMissile* enemyMissile = GET_SINGLE(SceneManager)->GetCurrentScene()->SpawnActor<EnemyMissile>(spawnPos, LAYER_OBJECT);
+		enemyMissile->SetSprite(EnemyMissileSprite);
+		enemyMissile->SetDir(Vec2(info.dirx(), info.diry()));
+		Vec2Int SpriteSize = EnemyMissileSprite->GetSize();
+		{
+			BoxCollider* collider = new BoxCollider();
+			collider->SetShowDebug(true);
+			collider->SetSize(Vec2(SpriteSize.x, SpriteSize.y));
+			GET_SINGLE(CollisionManager)->AddCollider(collider);
+			enemyMissile->AddComponent(collider);
+		}
 	}
 }
 

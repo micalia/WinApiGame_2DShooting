@@ -6,8 +6,11 @@ public:
 	Actor();
 	virtual ~Actor();
 
+	virtual void Update(){};
+
 	static PlayerRef CreatePlayer();
 	static EnemyRef CreateEnemy(Protocol::EnemyType enemyType, Vector spawnPos);
+	static EnemyMissileRef CreateEnemyMissile(Vector spawnPos, Vector dir);
 
 public:
 	Protocol::ObjectInfo info;

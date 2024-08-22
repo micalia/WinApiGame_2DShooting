@@ -86,6 +86,9 @@
     <ClCompile Include="WhiteEnemy.cpp">
       <Filter>소스 파일\Game\Object</Filter>
     </ClCompile>
+    <ClCompile Include="SEnemyMissile.cpp">
+      <Filter>소스 파일\Game\Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -140,6 +143,9 @@
       <Filter>소스 파일\Game\Object</Filter>
     </ClInclude>
     <ClInclude Include="WhiteEnemy.h">
+      <Filter>소스 파일\Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="SEnemyMissile.h">
       <Filter>소스 파일\Game\Object</Filter>
     </ClInclude>
   </ItemGroup>
