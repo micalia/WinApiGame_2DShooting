@@ -11,6 +11,8 @@
 #include "Struct.pb.h"
 #include "GameManager.h"
 #include "Enemy.h"
+#include "EnemyMissile.h"
+#include "EnemyManager.h"
 
 void ClientPacketHandler::HandlePacket(ServerSessionRef session, BYTE* buffer, int32 len)
 {
@@ -44,6 +46,9 @@ void ClientPacketHandler::HandlePacket(ServerSessionRef session, BYTE* buffer, i
 		break;
 	case S_EnemyMove:
 		Handle_S_EnemyMove(session, buffer, len);
+		break;
+	case S_EnemyMissile:
+		Handle_S_EnemyMissileMove(session, buffer, len);
 		break;
 	}
 }
@@ -237,6 +242,29 @@ void ClientPacketHandler::Handle_S_EnemyMove(ServerSessionRef session, BYTE* buf
 			enemy->SetPos(Vec2(info.posx(), info.posy()));
 			enemy->SetServerNewLocation(Vec2(info.posx(), info.posy()));
 			enemy->OnRep_ServerLoc();
+		}
+	}
+}
+
+void ClientPacketHandler::Handle_S_EnemyMissileMove(ServerSessionRef session, BYTE* buffer, int32 len)
+{
+	PacketHeader* header = (PacketHeader*)buffer;
+	uint16 size = header->size;
+
+	Protocol::S_EnemyMissile pkt;
+	pkt.ParseFromArray(&header[1], size - sizeof(PacketHeader));
+	
+	const Protocol::EnemyMissileInfo& info = pkt.enemymissileinfo();
+
+	DevScene* scene = GET_SINGLE(SceneManager)->GetDevScene();
+	if (scene)
+	{
+		EnemyMissile* missile = static_cast<EnemyMissile*>(scene->GetEnemyMgr()->GetMissileObj(info.objectid()));
+		if (missile)
+		{
+			missile->SetPos(Vec2(info.posx(), info.posy()));
+			missile->SetServerNewLocation(Vec2(info.posx(), info.posy()));
+			missile->OnRep_ServerLoc();
 		}
 	}
 }

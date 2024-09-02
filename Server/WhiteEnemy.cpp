@@ -4,6 +4,8 @@
 #include "GameRoom.h"
 #include "Actor.h"
 #include "SEnemyMissile.h"
+#include "SBoxCollider.h"
+#include "SCollisionManager.h"
 
 void WhiteEnemy::Update()
 {
@@ -47,6 +49,13 @@ void WhiteEnemy::Fire()
 	Vector missileDir = Vector(_x, _y);
 
 	EnemyMissileRef missileRef = Actor::CreateEnemyMissile(spawnPos, missileDir);
+	{
+		shared_ptr<SBoxCollider> collider = make_shared<SBoxCollider>();
+		collider->SetSize(Vector(17, 17)); //Enemy Missile Sprite Pixel Size
+		printf(": AddCollider \n");
+		GET_SINGLE(SCollisionManager)->AddCollider(collider);
+		missileRef->AddComponent(collider);
+	}
 	GRoom->AddObject(missileRef);
 }
 

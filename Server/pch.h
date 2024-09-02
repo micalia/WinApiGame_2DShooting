@@ -2,6 +2,7 @@
 
 #include "CorePch.h"
 
+#include "Enums.h"
 #include "Defines.h"
 #include "Types.h"
 

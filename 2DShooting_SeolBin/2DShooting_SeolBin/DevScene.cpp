@@ -16,7 +16,7 @@
 #include "Background.h"
 #include "DestroyZone.h"
 #include "Wall.h"
-#include "EnemySpawnManager.h"
+#include "EnemyManager.h"
 #include "ExplosionEffect.h"
 #include "TestLerpActor.h"
 
@@ -127,10 +127,10 @@ void DevScene::Init()
 	}
 
 	{
-		EnemySpawnMgr = new EnemySpawnManager();
-		if(EnemySpawnMgr){
-			EnemySpawnMgr->SetPos(Vec2(250, 15));
-			AddActor(EnemySpawnMgr);
+		EnemyMgr = new EnemyManager();
+		if(EnemyMgr){
+			EnemyMgr->SetPos(Vec2(250, 15));
+			AddActor(EnemyMgr);
 		}
 	}
 
@@ -170,11 +170,11 @@ void DevScene::Init()
 	{ // Top Wall
 		DestroyZone* destroyZone = new DestroyZone();
 		destroyZone->SetLayer(LAYER_OBJECT);
-		destroyZone->SetPos(Vec2(250.f, 10.f));
+		destroyZone->SetPos(Vec2(250.f, 0.f));
 		{
 			BoxCollider* collider = new BoxCollider();
 			collider->SetShowDebug(true);
-			collider->SetSize(Vec2(460, 10));
+			collider->SetSize(Vec2(480, 30));
 			collider->SetCollisionLayer(CLT_WALL);
 			GET_SINGLE(CollisionManager)->AddCollider(collider);
 			destroyZone->AddComponent(collider);
@@ -185,11 +185,11 @@ void DevScene::Init()
 	{ // Left Wall
 		DestroyZone* destroyZone = new DestroyZone();
 		destroyZone->SetLayer(LAYER_OBJECT);
-		destroyZone->SetPos(Vec2(10.f, 365.f));
+		destroyZone->SetPos(Vec2(0.f, 365.f));
 		{
 			BoxCollider* collider = new BoxCollider();
 			collider->SetShowDebug(true);
-			collider->SetSize(Vec2(10, 700));
+			collider->SetSize(Vec2(30, 700));
 			collider->SetCollisionLayer(CLT_WALL);
 			GET_SINGLE(CollisionManager)->AddCollider(collider);
 			destroyZone->AddComponent(collider);
@@ -200,11 +200,11 @@ void DevScene::Init()
 	{ // Right Wall
 		DestroyZone* destroyZone = new DestroyZone();
 		destroyZone->SetLayer(LAYER_OBJECT);
-		destroyZone->SetPos(Vec2(490.f, 365.f));
+		destroyZone->SetPos(Vec2(500.f, 365.f));
 		{
 			BoxCollider* collider = new BoxCollider();
 			collider->SetShowDebug(true);
-			collider->SetSize(Vec2(10, 700));
+			collider->SetSize(Vec2(30, 700));
 			collider->SetCollisionLayer(CLT_WALL);
 			GET_SINGLE(CollisionManager)->AddCollider(collider);
 			destroyZone->AddComponent(collider);
@@ -215,11 +215,11 @@ void DevScene::Init()
 	{ // Bottom Wall
 		DestroyZone* destroyZone = new DestroyZone();
 		destroyZone->SetLayer(LAYER_OBJECT);
-		destroyZone->SetPos(Vec2(250.f, 720.f));
+		destroyZone->SetPos(Vec2(250.f, 730.f));
 		{
 			BoxCollider* collider = new BoxCollider();
 			collider->SetShowDebug(true);
-			collider->SetSize(Vec2(460, 10));
+			collider->SetSize(Vec2(480, 30));
 			collider->SetCollisionLayer(CLT_WALL);
 			GET_SINGLE(CollisionManager)->AddCollider(collider);
 			destroyZone->AddComponent(collider);

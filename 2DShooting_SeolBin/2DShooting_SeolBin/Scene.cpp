@@ -8,7 +8,8 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "DevScene.h"
-#include "EnemySpawnManager.h"
+#include "EnemyManager.h"
+#include "EnemyMissile.h"
 
 Scene::Scene()
 {
@@ -83,6 +84,12 @@ void Scene::RemoveActor(Actor* actor)
 	if (actor == nullptr)
 		return;
 
+	if (actor->GetLayer() == LAYER_EnemyMissile) {
+		EnemyMissile* missile = static_cast<EnemyMissile*>(actor);
+		if (DevScene* scene = GET_SINGLE(SceneManager)->GetDevScene()) {
+			scene->GetEnemyMgr()->RemoveMissile(missile->info.objectid());
+		}
+	}
 	vector<Actor*>& v = _actors[actor->GetLayer()];
 	v.erase(std::remove(v.begin(), v.end(), actor), v.end());
 }
@@ -110,7 +117,7 @@ void Scene::Handle_S_AddObject(Protocol::S_AddObject& pkt)
 			break;
 		case Protocol::OBJECT_TYPE_ENEMY:
 		{
-			auto EnemySpawnMgr = GET_SINGLE(SceneManager)->GetDevScene()->GetEnemySpawnMgr();
+			auto EnemySpawnMgr = GET_SINGLE(SceneManager)->GetDevScene()->GetEnemyMgr();
 			if (EnemySpawnMgr) { 
 				if (info.name() == "HalfEnemy") {
 					EnemySpawnMgr->HalfEnemySpawn(info);
@@ -123,8 +130,8 @@ void Scene::Handle_S_AddObject(Protocol::S_AddObject& pkt)
 			break;
 		case Protocol::OBJECT_TYPE_ENEMY_MISSILE:
 		{
-			if (auto EnemySpawnMgr = GET_SINGLE(SceneManager)->GetDevScene()->GetEnemySpawnMgr()) {
-				EnemySpawnMgr->EnemyMissileSpawn(info);
+			if (auto EnemyMgr = GET_SINGLE(SceneManager)->GetDevScene()->GetEnemyMgr()) {
+				EnemyMgr->EnemyMissileSpawn(info);
 			}
 		}
 			break;

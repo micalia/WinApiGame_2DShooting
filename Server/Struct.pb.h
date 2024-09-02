@@ -386,6 +386,7 @@ class ObjectInfo final :
     kPosYFieldNumber = 6,
     kSpeedFieldNumber = 8,
     kDirXFieldNumber = 9,
+    kObjectOwnerIdFieldNumber = 11,
     kDirYFieldNumber = 10,
   };
   // string name = 7;
@@ -465,6 +466,15 @@ class ObjectInfo final :
   void _internal_set_dirx(float value);
   public:
 
+  // uint64 objectOwnerId = 11;
+  void clear_objectownerid();
+  uint64_t objectownerid() const;
+  void set_objectownerid(uint64_t value);
+  private:
+  uint64_t _internal_objectownerid() const;
+  void _internal_set_objectownerid(uint64_t value);
+  public:
+
   // float dirY = 10;
   void clear_diry();
   float diry() const;
@@ -490,6 +500,7 @@ class ObjectInfo final :
     float posy_;
     float speed_;
     float dirx_;
+    uint64_t objectownerid_;
     float diry_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
@@ -975,12 +986,20 @@ class EnemyMissileInfo final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kPosXFieldNumber = 1,
-    kPosYFieldNumber = 2,
-    kSpawnPosXFieldNumber = 3,
-    kSpawnPosYFieldNumber = 4,
+    kObjectIdFieldNumber = 1,
+    kPosXFieldNumber = 2,
+    kPosYFieldNumber = 3,
   };
-  // float posX = 1;
+  // uint64 objectId = 1;
+  void clear_objectid();
+  uint64_t objectid() const;
+  void set_objectid(uint64_t value);
+  private:
+  uint64_t _internal_objectid() const;
+  void _internal_set_objectid(uint64_t value);
+  public:
+
+  // float posX = 2;
   void clear_posx();
   float posx() const;
   void set_posx(float value);
@@ -989,31 +1008,13 @@ class EnemyMissileInfo final :
   void _internal_set_posx(float value);
   public:
 
-  // float posY = 2;
+  // float posY = 3;
   void clear_posy();
   float posy() const;
   void set_posy(float value);
   private:
   float _internal_posy() const;
   void _internal_set_posy(float value);
-  public:
-
-  // float spawnPosX = 3;
-  void clear_spawnposx();
-  float spawnposx() const;
-  void set_spawnposx(float value);
-  private:
-  float _internal_spawnposx() const;
-  void _internal_set_spawnposx(float value);
-  public:
-
-  // float spawnPosY = 4;
-  void clear_spawnposy();
-  float spawnposy() const;
-  void set_spawnposy(float value);
-  private:
-  float _internal_spawnposy() const;
-  void _internal_set_spawnposy(float value);
   public:
 
   // @@protoc_insertion_point(class_scope:Protocol.EnemyMissileInfo)
@@ -1024,10 +1025,9 @@ class EnemyMissileInfo final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
+    uint64_t objectid_;
     float posx_;
     float posy_;
-    float spawnposx_;
-    float spawnposy_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -1345,6 +1345,26 @@ inline void ObjectInfo::set_diry(float value) {
   // @@protoc_insertion_point(field_set:Protocol.ObjectInfo.dirY)
 }
 
+// uint64 objectOwnerId = 11;
+inline void ObjectInfo::clear_objectownerid() {
+  _impl_.objectownerid_ = uint64_t{0u};
+}
+inline uint64_t ObjectInfo::_internal_objectownerid() const {
+  return _impl_.objectownerid_;
+}
+inline uint64_t ObjectInfo::objectownerid() const {
+  // @@protoc_insertion_point(field_get:Protocol.ObjectInfo.objectOwnerId)
+  return _internal_objectownerid();
+}
+inline void ObjectInfo::_internal_set_objectownerid(uint64_t value) {
+  
+  _impl_.objectownerid_ = value;
+}
+inline void ObjectInfo::set_objectownerid(uint64_t value) {
+  _internal_set_objectownerid(value);
+  // @@protoc_insertion_point(field_set:Protocol.ObjectInfo.objectOwnerId)
+}
+
 // -------------------------------------------------------------------
 
 // ScoreInfo
@@ -1527,7 +1547,27 @@ inline void EnemyInfo::set_posy(float value) {
 
 // EnemyMissileInfo
 
-// float posX = 1;
+// uint64 objectId = 1;
+inline void EnemyMissileInfo::clear_objectid() {
+  _impl_.objectid_ = uint64_t{0u};
+}
+inline uint64_t EnemyMissileInfo::_internal_objectid() const {
+  return _impl_.objectid_;
+}
+inline uint64_t EnemyMissileInfo::objectid() const {
+  // @@protoc_insertion_point(field_get:Protocol.EnemyMissileInfo.objectId)
+  return _internal_objectid();
+}
+inline void EnemyMissileInfo::_internal_set_objectid(uint64_t value) {
+  
+  _impl_.objectid_ = value;
+}
+inline void EnemyMissileInfo::set_objectid(uint64_t value) {
+  _internal_set_objectid(value);
+  // @@protoc_insertion_point(field_set:Protocol.EnemyMissileInfo.objectId)
+}
+
+// float posX = 2;
 inline void EnemyMissileInfo::clear_posx() {
   _impl_.posx_ = 0;
 }
@@ -1547,7 +1587,7 @@ inline void EnemyMissileInfo::set_posx(float value) {
   // @@protoc_insertion_point(field_set:Protocol.EnemyMissileInfo.posX)
 }
 
-// float posY = 2;
+// float posY = 3;
 inline void EnemyMissileInfo::clear_posy() {
   _impl_.posy_ = 0;
 }
@@ -1565,46 +1605,6 @@ inline void EnemyMissileInfo::_internal_set_posy(float value) {
 inline void EnemyMissileInfo::set_posy(float value) {
   _internal_set_posy(value);
   // @@protoc_insertion_point(field_set:Protocol.EnemyMissileInfo.posY)
-}
-
-// float spawnPosX = 3;
-inline void EnemyMissileInfo::clear_spawnposx() {
-  _impl_.spawnposx_ = 0;
-}
-inline float EnemyMissileInfo::_internal_spawnposx() const {
-  return _impl_.spawnposx_;
-}
-inline float EnemyMissileInfo::spawnposx() const {
-  // @@protoc_insertion_point(field_get:Protocol.EnemyMissileInfo.spawnPosX)
-  return _internal_spawnposx();
-}
-inline void EnemyMissileInfo::_internal_set_spawnposx(float value) {
-  
-  _impl_.spawnposx_ = value;
-}
-inline void EnemyMissileInfo::set_spawnposx(float value) {
-  _internal_set_spawnposx(value);
-  // @@protoc_insertion_point(field_set:Protocol.EnemyMissileInfo.spawnPosX)
-}
-
-// float spawnPosY = 4;
-inline void EnemyMissileInfo::clear_spawnposy() {
-  _impl_.spawnposy_ = 0;
-}
-inline float EnemyMissileInfo::_internal_spawnposy() const {
-  return _impl_.spawnposy_;
-}
-inline float EnemyMissileInfo::spawnposy() const {
-  // @@protoc_insertion_point(field_get:Protocol.EnemyMissileInfo.spawnPosY)
-  return _internal_spawnposy();
-}
-inline void EnemyMissileInfo::_internal_set_spawnposy(float value) {
-  
-  _impl_.spawnposy_ = value;
-}
-inline void EnemyMissileInfo::set_spawnposy(float value) {
-  _internal_set_spawnposy(value);
-  // @@protoc_insertion_point(field_set:Protocol.EnemyMissileInfo.spawnPosY)
 }
 
 #ifdef __GNUC__

@@ -107,8 +107,3 @@ void Enemy::Server_AddScore(Player* whoKillMe, int32 addScore)
 	GET_SINGLE(NetworkManager)->SendPacket(sendBuffer);
 }
 
-void Enemy::OnRep_ServerLoc()
-{
-	ClientTimeBetweenLastUpdate = ClientTimeSinceUpdate;
-	ClientTimeSinceUpdate = 0.0f;
-}

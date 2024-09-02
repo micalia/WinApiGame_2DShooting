@@ -92,3 +92,9 @@ void Actor::OnComponentEndOverlap(Collider* collider, Collider* other)
 {
 
 }
+
+void Actor::OnRep_ServerLoc()
+{
+	ClientTimeBetweenLastUpdate = ClientTimeSinceUpdate;
+	ClientTimeSinceUpdate = 0.0f;
+}

@@ -97,13 +97,13 @@ void WhiteEnemy::Fire()
 		enemyMissile->SetLayer(LAYER_BULLET);
 		enemyMissile->SetDir(dir); 
 		Vec2Int SpriteSize = EnemyMissileSprite->GetSize();
-		{
+		/*{
 			BoxCollider* collider = new BoxCollider();
 			collider->SetShowDebug(true);
 			collider->SetSize(Vec2(SpriteSize.x, SpriteSize.y));
 			GET_SINGLE(CollisionManager)->AddCollider(collider);
 			enemyMissile->AddComponent(collider);
-		} 
+		} */
 		GET_SINGLE(SceneManager)->GetCurrentScene()->AddActor(enemyMissile);
 	}
 }

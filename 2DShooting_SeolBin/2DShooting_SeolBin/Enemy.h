@@ -33,14 +33,9 @@ public:
 
 	Protocol::EnemyInfo enemyInfo;
 
-	void SetServerNewLocation(Vec2 serverNewLocation) { _serverNewLocation = serverNewLocation; }
-	Vec2 GetServerNewLocation() { return _serverNewLocation; }
-
 	void SetSpeed(float speed){ _speed  = speed;}
 	float GetSpeed(){ return _speed;}
 
-	void OnRep_ServerLoc();
-	void SetClientTimeBetweenLastUpdate(float _ClientTimeBetweenLastUpdate) { ClientTimeBetweenLastUpdate = _ClientTimeBetweenLastUpdate;}
 protected:
 	int32 hp = 0;
 	int32 _killScore = 0;
@@ -49,9 +44,6 @@ protected:
 private:
 	float _speed = 0;
 private:
-	Vec2 _serverNewLocation = Vec2(0, 0);
-	float ClientTimeSinceUpdate = 0.0f;
-	float ClientTimeBetweenLastUpdate = 0.0f;
 
 };
 

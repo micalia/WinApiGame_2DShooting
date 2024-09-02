@@ -47,6 +47,7 @@ PROTOBUF_CONSTEXPR ObjectInfo::ObjectInfo(
   , /*decltype(_impl_.posy_)*/0
   , /*decltype(_impl_.speed_)*/0
   , /*decltype(_impl_.dirx_)*/0
+  , /*decltype(_impl_.objectownerid_)*/uint64_t{0u}
   , /*decltype(_impl_.diry_)*/0
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct ObjectInfoDefaultTypeInternal {
@@ -91,10 +92,9 @@ struct EnemyInfoDefaultTypeInternal {
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 EnemyInfoDefaultTypeInternal _EnemyInfo_default_instance_;
 PROTOBUF_CONSTEXPR EnemyMissileInfo::EnemyMissileInfo(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.posx_)*/0
+    /*decltype(_impl_.objectid_)*/uint64_t{0u}
+  , /*decltype(_impl_.posx_)*/0
   , /*decltype(_impl_.posy_)*/0
-  , /*decltype(_impl_.spawnposx_)*/0
-  , /*decltype(_impl_.spawnposy_)*/0
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct EnemyMissileInfoDefaultTypeInternal {
   PROTOBUF_CONSTEXPR EnemyMissileInfoDefaultTypeInternal()
@@ -135,6 +135,7 @@ const uint32_t TableStruct_Struct_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(p
   PROTOBUF_FIELD_OFFSET(::Protocol::ObjectInfo, _impl_.speed_),
   PROTOBUF_FIELD_OFFSET(::Protocol::ObjectInfo, _impl_.dirx_),
   PROTOBUF_FIELD_OFFSET(::Protocol::ObjectInfo, _impl_.diry_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::ObjectInfo, _impl_.objectownerid_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::Protocol::ScoreInfo, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -160,17 +161,16 @@ const uint32_t TableStruct_Struct_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(p
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
+  PROTOBUF_FIELD_OFFSET(::Protocol::EnemyMissileInfo, _impl_.objectid_),
   PROTOBUF_FIELD_OFFSET(::Protocol::EnemyMissileInfo, _impl_.posx_),
   PROTOBUF_FIELD_OFFSET(::Protocol::EnemyMissileInfo, _impl_.posy_),
-  PROTOBUF_FIELD_OFFSET(::Protocol::EnemyMissileInfo, _impl_.spawnposx_),
-  PROTOBUF_FIELD_OFFSET(::Protocol::EnemyMissileInfo, _impl_.spawnposy_),
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, -1, sizeof(::Protocol::BuffData)},
   { 9, -1, -1, sizeof(::Protocol::ObjectInfo)},
-  { 24, -1, -1, sizeof(::Protocol::ScoreInfo)},
-  { 33, -1, -1, sizeof(::Protocol::EnemyInfo)},
-  { 43, -1, -1, sizeof(::Protocol::EnemyMissileInfo)},
+  { 25, -1, -1, sizeof(::Protocol::ScoreInfo)},
+  { 34, -1, -1, sizeof(::Protocol::EnemyInfo)},
+  { 44, -1, -1, sizeof(::Protocol::EnemyMissileInfo)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -184,26 +184,26 @@ static const ::_pb::Message* const file_default_instances[] = {
 const char descriptor_table_protodef_Struct_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\014Struct.proto\022\010Protocol\032\nEnum.proto\"\?\n\010"
   "BuffData\022\016\n\006buffId\030\001 \001(\004\022\022\n\nremainTime\030\002"
-  " \001(\002\022\017\n\007victims\030\003 \003(\004\"\320\001\n\nObjectInfo\022\020\n\010"
+  " \001(\002\022\017\n\007victims\030\003 \003(\004\"\347\001\n\nObjectInfo\022\020\n\010"
   "objectId\030\001 \001(\004\022)\n\nobjectType\030\002 \001(\0162\025.Pro"
   "tocol.OBJECT_TYPE\0220\n\rplayerDirType\030\004 \001(\016"
   "2\031.Protocol.PLAYER_DIR_TYPE\022\014\n\004posX\030\005 \001("
   "\002\022\014\n\004posY\030\006 \001(\002\022\014\n\004name\030\007 \001(\t\022\r\n\005speed\030\010"
-  " \001(\002\022\014\n\004dirX\030\t \001(\002\022\014\n\004dirY\030\n \001(\002\"F\n\tScor"
-  "eInfo\022\022\n\nplayerName\030\001 \001(\t\022\022\n\nenemyScore\030"
-  "\002 \001(\r\022\021\n\tfullScore\030\003 \001(\r\"a\n\tEnemyInfo\022\020\n"
-  "\010objectId\030\001 \001(\004\022&\n\tenemyType\030\002 \001(\0162\023.Pro"
-  "tocol.EnemyType\022\014\n\004posX\030\003 \001(\002\022\014\n\004posY\030\004 "
-  "\001(\002\"T\n\020EnemyMissileInfo\022\014\n\004posX\030\001 \001(\002\022\014\n"
-  "\004posY\030\002 \001(\002\022\021\n\tspawnPosX\030\003 \001(\002\022\021\n\tspawnP"
-  "osY\030\004 \001(\002b\006proto3"
+  " \001(\002\022\014\n\004dirX\030\t \001(\002\022\014\n\004dirY\030\n \001(\002\022\025\n\robje"
+  "ctOwnerId\030\013 \001(\004\"F\n\tScoreInfo\022\022\n\nplayerNa"
+  "me\030\001 \001(\t\022\022\n\nenemyScore\030\002 \001(\r\022\021\n\tfullScor"
+  "e\030\003 \001(\r\"a\n\tEnemyInfo\022\020\n\010objectId\030\001 \001(\004\022&"
+  "\n\tenemyType\030\002 \001(\0162\023.Protocol.EnemyType\022\014"
+  "\n\004posX\030\003 \001(\002\022\014\n\004posY\030\004 \001(\002\"@\n\020EnemyMissi"
+  "leInfo\022\020\n\010objectId\030\001 \001(\004\022\014\n\004posX\030\002 \001(\002\022\014"
+  "\n\004posY\030\003 \001(\002b\006proto3"
   ;
 static const ::_pbi::DescriptorTable* const descriptor_table_Struct_2eproto_deps[1] = {
   &::descriptor_table_Enum_2eproto,
 };
 static ::_pbi::once_flag descriptor_table_Struct_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_Struct_2eproto = {
-    false, false, 577, descriptor_table_protodef_Struct_2eproto,
+    false, false, 580, descriptor_table_protodef_Struct_2eproto,
     "Struct.proto",
     &descriptor_table_Struct_2eproto_once, descriptor_table_Struct_2eproto_deps, 1, 5,
     schemas, file_default_instances, TableStruct_Struct_2eproto::offsets,
@@ -507,6 +507,7 @@ ObjectInfo::ObjectInfo(const ObjectInfo& from)
     , decltype(_impl_.posy_){}
     , decltype(_impl_.speed_){}
     , decltype(_impl_.dirx_){}
+    , decltype(_impl_.objectownerid_){}
     , decltype(_impl_.diry_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
@@ -538,6 +539,7 @@ inline void ObjectInfo::SharedCtor(
     , decltype(_impl_.posy_){0}
     , decltype(_impl_.speed_){0}
     , decltype(_impl_.dirx_){0}
+    , decltype(_impl_.objectownerid_){uint64_t{0u}}
     , decltype(_impl_.diry_){0}
     , /*decltype(_impl_._cached_size_)*/{}
   };
@@ -660,6 +662,14 @@ const char* ObjectInfo::_InternalParse(const char* ptr, ::_pbi::ParseContext* ct
         } else
           goto handle_unusual;
         continue;
+      // uint64 objectOwnerId = 11;
+      case 11:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 88)) {
+          _impl_.objectownerid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
       default:
         goto handle_unusual;
     }  // switch
@@ -769,6 +779,12 @@ uint8_t* ObjectInfo::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteFloatToArray(10, this->_internal_diry(), target);
   }
 
+  // uint64 objectOwnerId = 11;
+  if (this->_internal_objectownerid() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteUInt64ToArray(11, this->_internal_objectownerid(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -845,6 +861,11 @@ size_t ObjectInfo::ByteSizeLong() const {
     total_size += 1 + 4;
   }
 
+  // uint64 objectOwnerId = 11;
+  if (this->_internal_objectownerid() != 0) {
+    total_size += ::_pbi::WireFormatLite::UInt64SizePlusOne(this->_internal_objectownerid());
+  }
+
   // float dirY = 10;
   static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
   float tmp_diry = this->_internal_diry();
@@ -911,6 +932,9 @@ void ObjectInfo::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PRO
   memcpy(&raw_dirx, &tmp_dirx, sizeof(tmp_dirx));
   if (raw_dirx != 0) {
     _this->_internal_set_dirx(from._internal_dirx());
+  }
+  if (from._internal_objectownerid() != 0) {
+    _this->_internal_set_objectownerid(from._internal_objectownerid());
   }
   static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
   float tmp_diry = from._internal_diry();
@@ -1521,16 +1545,15 @@ EnemyMissileInfo::EnemyMissileInfo(const EnemyMissileInfo& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
   EnemyMissileInfo* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.posx_){}
+      decltype(_impl_.objectid_){}
+    , decltype(_impl_.posx_){}
     , decltype(_impl_.posy_){}
-    , decltype(_impl_.spawnposx_){}
-    , decltype(_impl_.spawnposy_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  ::memcpy(&_impl_.posx_, &from._impl_.posx_,
-    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.spawnposy_) -
-    reinterpret_cast<char*>(&_impl_.posx_)) + sizeof(_impl_.spawnposy_));
+  ::memcpy(&_impl_.objectid_, &from._impl_.objectid_,
+    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.posy_) -
+    reinterpret_cast<char*>(&_impl_.objectid_)) + sizeof(_impl_.posy_));
   // @@protoc_insertion_point(copy_constructor:Protocol.EnemyMissileInfo)
 }
 
@@ -1539,10 +1562,9 @@ inline void EnemyMissileInfo::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.posx_){0}
+      decltype(_impl_.objectid_){uint64_t{0u}}
+    , decltype(_impl_.posx_){0}
     , decltype(_impl_.posy_){0}
-    , decltype(_impl_.spawnposx_){0}
-    , decltype(_impl_.spawnposy_){0}
     , /*decltype(_impl_._cached_size_)*/{}
   };
 }
@@ -1570,9 +1592,9 @@ void EnemyMissileInfo::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  ::memset(&_impl_.posx_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&_impl_.spawnposy_) -
-      reinterpret_cast<char*>(&_impl_.posx_)) + sizeof(_impl_.spawnposy_));
+  ::memset(&_impl_.objectid_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&_impl_.posy_) -
+      reinterpret_cast<char*>(&_impl_.objectid_)) + sizeof(_impl_.posy_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -1582,34 +1604,26 @@ const char* EnemyMissileInfo::_InternalParse(const char* ptr, ::_pbi::ParseConte
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // float posX = 1;
+      // uint64 objectId = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 13)) {
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
+          _impl_.objectid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // float posX = 2;
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 21)) {
           _impl_.posx_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
           ptr += sizeof(float);
         } else
           goto handle_unusual;
         continue;
-      // float posY = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 21)) {
-          _impl_.posy_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else
-          goto handle_unusual;
-        continue;
-      // float spawnPosX = 3;
+      // float posY = 3;
       case 3:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 29)) {
-          _impl_.spawnposx_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else
-          goto handle_unusual;
-        continue;
-      // float spawnPosY = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 37)) {
-          _impl_.spawnposy_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          _impl_.posy_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
           ptr += sizeof(float);
         } else
           goto handle_unusual;
@@ -1643,44 +1657,30 @@ uint8_t* EnemyMissileInfo::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // float posX = 1;
+  // uint64 objectId = 1;
+  if (this->_internal_objectid() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteUInt64ToArray(1, this->_internal_objectid(), target);
+  }
+
+  // float posX = 2;
   static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
   float tmp_posx = this->_internal_posx();
   uint32_t raw_posx;
   memcpy(&raw_posx, &tmp_posx, sizeof(tmp_posx));
   if (raw_posx != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(1, this->_internal_posx(), target);
+    target = ::_pbi::WireFormatLite::WriteFloatToArray(2, this->_internal_posx(), target);
   }
 
-  // float posY = 2;
+  // float posY = 3;
   static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
   float tmp_posy = this->_internal_posy();
   uint32_t raw_posy;
   memcpy(&raw_posy, &tmp_posy, sizeof(tmp_posy));
   if (raw_posy != 0) {
     target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(2, this->_internal_posy(), target);
-  }
-
-  // float spawnPosX = 3;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_spawnposx = this->_internal_spawnposx();
-  uint32_t raw_spawnposx;
-  memcpy(&raw_spawnposx, &tmp_spawnposx, sizeof(tmp_spawnposx));
-  if (raw_spawnposx != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(3, this->_internal_spawnposx(), target);
-  }
-
-  // float spawnPosY = 4;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_spawnposy = this->_internal_spawnposy();
-  uint32_t raw_spawnposy;
-  memcpy(&raw_spawnposy, &tmp_spawnposy, sizeof(tmp_spawnposy));
-  if (raw_spawnposy != 0) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(4, this->_internal_spawnposy(), target);
+    target = ::_pbi::WireFormatLite::WriteFloatToArray(3, this->_internal_posy(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -1699,7 +1699,12 @@ size_t EnemyMissileInfo::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // float posX = 1;
+  // uint64 objectId = 1;
+  if (this->_internal_objectid() != 0) {
+    total_size += ::_pbi::WireFormatLite::UInt64SizePlusOne(this->_internal_objectid());
+  }
+
+  // float posX = 2;
   static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
   float tmp_posx = this->_internal_posx();
   uint32_t raw_posx;
@@ -1708,30 +1713,12 @@ size_t EnemyMissileInfo::ByteSizeLong() const {
     total_size += 1 + 4;
   }
 
-  // float posY = 2;
+  // float posY = 3;
   static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
   float tmp_posy = this->_internal_posy();
   uint32_t raw_posy;
   memcpy(&raw_posy, &tmp_posy, sizeof(tmp_posy));
   if (raw_posy != 0) {
-    total_size += 1 + 4;
-  }
-
-  // float spawnPosX = 3;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_spawnposx = this->_internal_spawnposx();
-  uint32_t raw_spawnposx;
-  memcpy(&raw_spawnposx, &tmp_spawnposx, sizeof(tmp_spawnposx));
-  if (raw_spawnposx != 0) {
-    total_size += 1 + 4;
-  }
-
-  // float spawnPosY = 4;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_spawnposy = this->_internal_spawnposy();
-  uint32_t raw_spawnposy;
-  memcpy(&raw_spawnposy, &tmp_spawnposy, sizeof(tmp_spawnposy));
-  if (raw_spawnposy != 0) {
     total_size += 1 + 4;
   }
 
@@ -1753,6 +1740,9 @@ void EnemyMissileInfo::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
+  if (from._internal_objectid() != 0) {
+    _this->_internal_set_objectid(from._internal_objectid());
+  }
   static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
   float tmp_posx = from._internal_posx();
   uint32_t raw_posx;
@@ -1766,20 +1756,6 @@ void EnemyMissileInfo::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const
   memcpy(&raw_posy, &tmp_posy, sizeof(tmp_posy));
   if (raw_posy != 0) {
     _this->_internal_set_posy(from._internal_posy());
-  }
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_spawnposx = from._internal_spawnposx();
-  uint32_t raw_spawnposx;
-  memcpy(&raw_spawnposx, &tmp_spawnposx, sizeof(tmp_spawnposx));
-  if (raw_spawnposx != 0) {
-    _this->_internal_set_spawnposx(from._internal_spawnposx());
-  }
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_spawnposy = from._internal_spawnposy();
-  uint32_t raw_spawnposy;
-  memcpy(&raw_spawnposy, &tmp_spawnposy, sizeof(tmp_spawnposy));
-  if (raw_spawnposy != 0) {
-    _this->_internal_set_spawnposy(from._internal_spawnposy());
   }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -1799,11 +1775,11 @@ void EnemyMissileInfo::InternalSwap(EnemyMissileInfo* other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(EnemyMissileInfo, _impl_.spawnposy_)
-      + sizeof(EnemyMissileInfo::_impl_.spawnposy_)
-      - PROTOBUF_FIELD_OFFSET(EnemyMissileInfo, _impl_.posx_)>(
-          reinterpret_cast<char*>(&_impl_.posx_),
-          reinterpret_cast<char*>(&other->_impl_.posx_));
+      PROTOBUF_FIELD_OFFSET(EnemyMissileInfo, _impl_.posy_)
+      + sizeof(EnemyMissileInfo::_impl_.posy_)
+      - PROTOBUF_FIELD_OFFSET(EnemyMissileInfo, _impl_.objectid_)>(
+          reinterpret_cast<char*>(&_impl_.objectid_),
+          reinterpret_cast<char*>(&other->_impl_.objectid_));
 }
 
 ::PROTOBUF_NAMESPACE_ID::Metadata EnemyMissileInfo::GetMetadata() const {

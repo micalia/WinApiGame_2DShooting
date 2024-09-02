@@ -185,7 +185,7 @@
     <ClInclude Include="HalfMoonEnemy.h">
       <Filter>소스 파일\03.Objects</Filter>
     </ClInclude>
-    <ClInclude Include="EnemySpawnManager.h">
+    <ClInclude Include="EnemyManager.h">
       <Filter>소스 파일\01.Manager</Filter>
     </ClInclude>
     <ClInclude Include="EnemyMissile.h">
@@ -335,7 +335,7 @@
     <ClCompile Include="HalfMoonEnemy.cpp">
       <Filter>소스 파일\03.Objects</Filter>
     </ClCompile>
-    <ClCompile Include="EnemySpawnManager.cpp">
+    <ClCompile Include="EnemyManager.cpp">
       <Filter>소스 파일\01.Manager</Filter>
     </ClCompile>
     <ClCompile Include="EnemyMissile.cpp">

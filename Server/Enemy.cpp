@@ -68,5 +68,6 @@ void Enemy::Move()
 	}
 	enemyInfo.set_posy(currPosY);
 	enemyInfo.set_objectid(info.objectid());
+	SetPos(Vector(enemyInfo.posx(), enemyInfo.posy()));
 	EnemyBroadcastMove();
 }

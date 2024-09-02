@@ -7,6 +7,9 @@
 #include "ServerEnemySpawnMgr.h"
 #include "SeverTimeManager.h"
 #include "SEnemyMissile.h"
+#include "SCollisionManager.h"
+#include "SDestroyZone.h"
+#include "SBoxCollider.h"
 
 GameRoomRef GRoom = make_shared<GameRoom>();
 
@@ -24,6 +27,89 @@ void GameRoom::Init()
 {
 	enemyMgr = make_shared<ServerEnemySpawnMgr>();
 	GET_SINGLE(SeverTimeManager)->Init();
+
+#pragma region Wall
+	{ // Top Wall
+		shared_ptr<SDestroyZone> destroyZone = make_shared<SDestroyZone>();
+		destroyZone->SetLayer(LAYER_OBJECT);
+		destroyZone->SetPos(Vector(250.f, 0.f));
+		{
+			shared_ptr<SBoxCollider> collider = make_shared<SBoxCollider>();
+			collider->SetShowDebug(true);
+			collider->SetSize(Vector(480, 30));
+			collider->SetCollisionLayer(CLT_WALL);
+			GET_SINGLE(SCollisionManager)->AddCollider(collider);
+			destroyZone->AddComponent(collider);
+			collider->SetOwner(destroyZone);
+		}
+		destroyZone->SetObjectID(Actor::s_idGenerator++);
+		_objects.insert(make_pair(destroyZone->GetObjectID(), destroyZone));
+		//AddActor(destroyZone)
+		/*SDestroyZone* destroyZone = new SDestroyZone();
+		destroyZone->SetLayer(LAYER_OBJECT);
+		destroyZone->SetPos(Vector(250.f, 0.f));
+		{
+			SBoxCollider* collider = new SBoxCollider();
+			collider->SetShowDebug(true);
+			collider->SetSize(Vector(480, 30));
+			collider->SetCollisionLayer(CLT_WALL);
+			GET_SINGLE(SCollisionManager)->AddCollider(collider);
+			destroyZone->AddComponent(collider);
+		}
+		AddActor(destroyZone);*/
+	}
+
+	{ // Left Wall
+		shared_ptr<SDestroyZone> destroyZone = make_shared<SDestroyZone>();
+		destroyZone->SetLayer(LAYER_OBJECT);
+		destroyZone->SetPos(Vector(0.f, 365.f));
+		{
+			shared_ptr<SBoxCollider> collider = make_shared<SBoxCollider>();
+			collider->SetShowDebug(true);
+			collider->SetSize(Vector(30, 700));
+			collider->SetCollisionLayer(CLT_WALL);
+			GET_SINGLE(SCollisionManager)->AddCollider(collider);
+			destroyZone->AddComponent(collider);
+			collider->SetOwner(destroyZone);
+		}
+		destroyZone->SetObjectID(Actor::s_idGenerator++);
+		_objects.insert(make_pair(destroyZone->GetObjectID(), destroyZone));
+	}
+
+	{ // Right Wall
+		shared_ptr<SDestroyZone> destroyZone = make_shared<SDestroyZone>();
+		destroyZone->SetLayer(LAYER_OBJECT);
+		destroyZone->SetPos(Vector(500.f, 365.f));
+		{
+			shared_ptr<SBoxCollider> collider = make_shared<SBoxCollider>();
+			collider->SetShowDebug(true);
+			collider->SetSize(Vector(30, 700));
+			collider->SetCollisionLayer(CLT_WALL);
+			GET_SINGLE(SCollisionManager)->AddCollider(collider);
+			destroyZone->AddComponent(collider);
+			collider->SetOwner(destroyZone);
+		}
+		destroyZone->SetObjectID(Actor::s_idGenerator++);
+		_objects.insert(make_pair(destroyZone->GetObjectID(), destroyZone));
+	}
+
+	{ // Bottom Wall
+		shared_ptr<SDestroyZone> destroyZone = make_shared<SDestroyZone>();
+		destroyZone->SetLayer(LAYER_OBJECT);
+		destroyZone->SetPos(Vector(250.f, 730.f));
+		{
+			shared_ptr<SBoxCollider> collider = make_shared<SBoxCollider>();
+			collider->SetShowDebug(true);
+			collider->SetSize(Vector(480, 30));
+			collider->SetCollisionLayer(CLT_WALL);
+			GET_SINGLE(SCollisionManager)->AddCollider(collider);
+			destroyZone->AddComponent(collider);
+			collider->SetOwner(destroyZone);
+		}
+		destroyZone->SetObjectID(Actor::s_idGenerator++);
+		_objects.insert(make_pair(destroyZone->GetObjectID(), destroyZone));
+	}
+#pragma endregion
 }
 
 void GameRoom::Update()
@@ -41,6 +127,8 @@ void GameRoom::Update()
 	{
 		item.second->Update();
 	}
+
+	GET_SINGLE(SCollisionManager)->Update();
 }
 
 void GameRoom::EnterRoom(GameSessionRef session)
@@ -231,8 +319,7 @@ void GameRoom::AddObject(ActorRef gameObject)
 		break;
 	case Protocol::OBJECT_TYPE_ENEMY_MISSILE:
 	{
-		_objects[id] = static_pointer_cast<SEnemyMissile>(gameObject);
-		break;
+		_objects.insert(make_pair(id, static_pointer_cast<SEnemyMissile>(gameObject)));
 	}
 	break;
 	default:

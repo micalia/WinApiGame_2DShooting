@@ -4,7 +4,7 @@
 class Actor;
 class GameObject;
 class UI;
-class EnemySpawnManager;
+class EnemyManager;
 
 class DevScene : public Scene
 {
@@ -25,10 +25,10 @@ public:
 	Vec2 GetRespawnEndPos() { return respawnEndPos; }
 	Vec2 GetRespawnStartPos() { return respawnStartPos; }
 
-	EnemySpawnManager* GetEnemySpawnMgr(){return EnemySpawnMgr;}
+	EnemyManager* GetEnemyMgr(){return EnemyMgr;}
 private:
 	Vec2 respawnEndPos = Vec2(242, 540);
 	Vec2 respawnStartPos = Vec2(242, 1088);
-	EnemySpawnManager* EnemySpawnMgr = nullptr;
+	EnemyManager* EnemyMgr = nullptr;
 };
 

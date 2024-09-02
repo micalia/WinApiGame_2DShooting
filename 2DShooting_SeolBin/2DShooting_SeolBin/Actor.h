@@ -39,6 +39,12 @@ public:
 	void SetObjectID(int64 id){info.set_objectid(id); }
 
 	virtual void SetState(PlayerDir InDir){};
+
+	void SetServerNewLocation(Vec2 serverNewLocation) { _serverNewLocation = serverNewLocation; }
+	Vec2 GetServerNewLocation() { return _serverNewLocation; }
+
+	void OnRep_ServerLoc();
+	void SetClientTimeBetweenLastUpdate(float _ClientTimeBetweenLastUpdate) { ClientTimeBetweenLastUpdate = _ClientTimeBetweenLastUpdate; }
 protected:
 	Vec2 _pos = { 0, 0 };
 	Vec2 _destPos = { 0, 0 };
@@ -61,5 +67,11 @@ private:
 	Vec2 _prevRecvPos = { 0, 0 };
 
 	Actor* _owner;
+
+	Vec2 _serverNewLocation = Vec2(0, 0);
+
+protected: // 이동 보간
+	float ClientTimeSinceUpdate = 0.0f;
+	float ClientTimeBetweenLastUpdate = 0.0f;
 };
 

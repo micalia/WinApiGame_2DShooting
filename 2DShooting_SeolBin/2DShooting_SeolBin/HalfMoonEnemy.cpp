@@ -71,17 +71,17 @@ void HalfMoonEnemy::Fire()
 		EnemyMissile* enemyMissile = new EnemyMissile();
 		enemyMissile->SetPos(_pos);
 		enemyMissile->SetSprite(EnemyMissileSprite);
-		enemyMissile->SetLayer(LAYER_BULLET);
+		enemyMissile->SetLayer(LAYER_EnemyMissile);
 		enemyMissile->SetDir(dir); 
 		Vec2Int SpriteSize = EnemyMissileSprite->GetSize();
-		{
+		/*{
 			BoxCollider* collider = new BoxCollider();
 			collider->SetShowDebug(true);
 			collider->SetSize(Vec2(SpriteSize.x, SpriteSize.y));
 			collider->SetCollisionLayer(CLT_ENEMY_MISSILE);
 			GET_SINGLE(CollisionManager)->AddCollider(collider);
 			enemyMissile->AddComponent(collider);
-		} 
+		} */
 		GET_SINGLE(SceneManager)->GetCurrentScene()->AddActor(enemyMissile);
 	}
 }

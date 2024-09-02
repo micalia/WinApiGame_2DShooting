@@ -163,7 +163,7 @@
     <ClInclude Include="EditScene.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyMissile.h" />
-    <ClInclude Include="EnemySpawnManager.h" />
+    <ClInclude Include="EnemyManager.h" />
     <ClInclude Include="Enum.pb.h" />
     <ClInclude Include="Enums.h" />
     <ClInclude Include="ExplosionEffect.h" />
@@ -221,7 +221,7 @@
     <ClCompile Include="EditScene.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyMissile.cpp" />
-    <ClCompile Include="EnemySpawnManager.cpp" />
+    <ClCompile Include="EnemyManager.cpp" />
     <ClCompile Include="Enum.pb.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>

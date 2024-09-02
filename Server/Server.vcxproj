@@ -160,6 +160,11 @@
   <ItemGroup>
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="HalfEnemy.cpp" />
+    <ClCompile Include="SBoxCollider.cpp" />
+    <ClCompile Include="SCollider.cpp" />
+    <ClCompile Include="SCollisionManager.cpp" />
+    <ClCompile Include="SComponent.cpp" />
+    <ClCompile Include="SDestroyZone.cpp" />
     <ClCompile Include="SEnemyMissile.cpp" />
     <ClCompile Include="ServerEnemySpawnMgr.cpp" />
     <ClCompile Include="Enum.pb.cc">
@@ -182,6 +187,7 @@
     <ClCompile Include="Server.cpp" />
     <ClCompile Include="ServerPacketHandler.cpp" />
     <ClCompile Include="ServerUtils.cpp" />
+    <ClCompile Include="SSphereCollider.cpp" />
     <ClCompile Include="Struct.pb.cc">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
@@ -192,7 +198,13 @@
   <ItemGroup>
     <ClInclude Include="Defines.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Enums.h" />
     <ClInclude Include="HalfEnemy.h" />
+    <ClInclude Include="SBoxCollider.h" />
+    <ClInclude Include="SCollider.h" />
+    <ClInclude Include="SCollisionManager.h" />
+    <ClInclude Include="SComponent.h" />
+    <ClInclude Include="SDestroyZone.h" />
     <ClInclude Include="SEnemyMissile.h" />
     <ClInclude Include="ServerEnemySpawnMgr.h" />
     <ClInclude Include="Enum.pb.h" />
@@ -205,6 +217,7 @@
     <ClInclude Include="Protocol.pb.h" />
     <ClInclude Include="ServerPacketHandler.h" />
     <ClInclude Include="ServerUtils.h" />
+    <ClInclude Include="SSphereCollider.h" />
     <ClInclude Include="Struct.pb.h" />
     <ClInclude Include="SeverTimeManager.h" />
     <ClInclude Include="Types.h" />

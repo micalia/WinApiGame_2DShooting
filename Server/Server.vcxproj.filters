@@ -33,6 +33,12 @@
     <Filter Include="소스 파일\Game\Manager">
       <UniqueIdentifier>{33aef153-581c-438d-bc05-f7cdb5895d35}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Game\Component">
+      <UniqueIdentifier>{ac77220f-dcc8-47fb-88bd-459a8318ecff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Game\Component\Collision">
+      <UniqueIdentifier>{ae793e25-a936-45fb-acff-f53adae33267}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -87,6 +93,24 @@
       <Filter>소스 파일\Game\Object</Filter>
     </ClCompile>
     <ClCompile Include="SEnemyMissile.cpp">
+      <Filter>소스 파일\Game\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="SCollider.cpp">
+      <Filter>소스 파일\Game\Component\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="SComponent.cpp">
+      <Filter>소스 파일\Game\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="SBoxCollider.cpp">
+      <Filter>소스 파일\Game\Component\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="SSphereCollider.cpp">
+      <Filter>소스 파일\Game\Component\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="SCollisionManager.cpp">
+      <Filter>소스 파일\Game\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="SDestroyZone.cpp">
       <Filter>소스 파일\Game\Object</Filter>
     </ClCompile>
   </ItemGroup>
@@ -147,6 +171,27 @@
     </ClInclude>
     <ClInclude Include="SEnemyMissile.h">
       <Filter>소스 파일\Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="SCollider.h">
+      <Filter>소스 파일\Game\Component\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="SComponent.h">
+      <Filter>소스 파일\Game\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="SBoxCollider.h">
+      <Filter>소스 파일\Game\Component\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="SSphereCollider.h">
+      <Filter>소스 파일\Game\Component\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="SCollisionManager.h">
+      <Filter>소스 파일\Game\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="SDestroyZone.h">
+      <Filter>소스 파일\Game\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Enums.h">
+      <Filter>소스 파일\Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

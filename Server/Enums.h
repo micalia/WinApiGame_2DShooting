@@ -1,0 +1,35 @@
+#pragma once
+
+enum SLAYER_TYPE
+{
+	LAYER_BACKGROUND,
+	LAYER_Enemy,
+	LAYER_EnemyMissile,
+	LAYER_Player,
+	LAYER_BULLET,
+	LAYER_OBJECT,
+	LAYER_WALL,
+	// ...
+	LAYER_UI,
+
+	LAYER_MAXCOUNT
+};
+
+enum class SColliderType
+{
+	Box,
+	Sphere,
+};
+
+enum SCOLLISION_LAYER_TYPE : uint8
+{
+	CLT_NO_COLLISION,
+	CLT_OBJECT,
+	CLT_PLAYER,
+	CLT_MISSILE,
+	CLT_ENEMY,
+	CLT_ENEMY_MISSILE,
+	CLT_GROUND,
+	CLT_WALL,
+	// ...
+};
