@@ -17,8 +17,8 @@ private:
 	);
 
 private:
-	float fireDelayTime = 600;//0.1;
-	float fireDelayCurrTime = 599;//0;
+	float fireDelayTime = 0.1;//0.1;
+	float fireDelayCurrTime = 0;//0;
 
 	float theta = 0.0;
 	bool bReverseFire;

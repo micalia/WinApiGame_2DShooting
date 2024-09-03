@@ -3,6 +3,7 @@
 #include "SCollider.h"
 #include "Actor.h"
 #include "SEnemyMissile.h"
+#include "WhiteEnemy.h"
 
 void SCollisionManager::Init()
 {
@@ -19,7 +20,7 @@ void SCollisionManager::Update()
 		{
 			shared_ptr<SCollider> src = colliders[i];
 			shared_ptr<SCollider> dest = colliders[j];
-			if (dynamic_pointer_cast<SEnemyMissile>(dest->GetOwner())) {
+			if (dynamic_pointer_cast<WhiteEnemy>(dest->GetOwner())) {
 				int a = 1;
 			}
 			if (dest->GetCollisionFlag() == 0)continue; // NoCollision¿Ã∏È return

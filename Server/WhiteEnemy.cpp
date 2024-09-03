@@ -52,7 +52,6 @@ void WhiteEnemy::Fire()
 	{
 		shared_ptr<SBoxCollider> collider = make_shared<SBoxCollider>();
 		collider->SetSize(Vector(17, 17)); //Enemy Missile Sprite Pixel Size
-		printf(": AddCollider \n");
 		GET_SINGLE(SCollisionManager)->AddCollider(collider);
 		missileRef->AddComponent(collider);
 	}

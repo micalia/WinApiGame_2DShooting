@@ -26,7 +26,10 @@ void SDestroyZone::OnComponentBeginOverlap(shared_ptr<SCollider> collider, share
 	Super::OnComponentBeginOverlap(collider, other);
 
 	if (other != nullptr) {
-		if (dynamic_pointer_cast<SEnemyMissile>(other->GetOwner())) {
+		if (dynamic_pointer_cast<SEnemyMissile>(other->GetOwner())
+			|| dynamic_pointer_cast<Enemy>(other->GetOwner())
+		) {
+			auto val = other->GetOwner();
 			GET_SINGLE(SCollisionManager)->RemoveCollider(other);
 			GRoom->RemoveObject(other->GetOwner()->GetObjectID());
 		}

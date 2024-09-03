@@ -7,6 +7,8 @@
 #include "SEnemyMissile.h"
 #include "SComponent.h"
 #include "SCollider.h"
+#include "SCollisionManager.h"
+#include "SBoxCollider.h"
 
 atomic<uint64> Actor::s_idGenerator = 1;
 
@@ -48,6 +50,12 @@ EnemyRef Actor::CreateEnemy(Protocol::EnemyType enemyType, Vector spawnPos)
 		float speed = 50;
 		whiteEnemy->SetEnemyInfo(whiteEnemy, spawnPos, enemyType, speed);
 		whiteEnemy->info.set_name("WhiteEnemy");
+		{
+			shared_ptr<SBoxCollider> collider = make_shared<SBoxCollider>();
+			collider->SetSize(Vector(120, 120)); //Enemy Missile Sprite Pixel Size
+			GET_SINGLE(SCollisionManager)->AddCollider(collider);
+			whiteEnemy->AddComponent(collider);
+		}
 		return whiteEnemy;
 	}
 		break;

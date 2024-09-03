@@ -4,6 +4,8 @@
 #include "Actor.h"
 #include "GameRoom.h"
 #include "Enemy.h"
+#include "SBoxCollider.h"
+#include "SCollisionManager.h"
 
 ServerEnemySpawnMgr::ServerEnemySpawnMgr()
 {

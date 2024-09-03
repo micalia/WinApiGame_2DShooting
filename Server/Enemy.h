@@ -21,7 +21,7 @@ public:
 
 	void Move();
 private:
-	float replicateDelay = 3.0f;
+	float replicateDelay = 0.1f;
 	float currReplicateDelay = 0;
 
 	float _speed = 0;

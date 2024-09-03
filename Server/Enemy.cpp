@@ -52,6 +52,7 @@ void Enemy::SetEnemyInfo(EnemyRef InEnemy, Vector InSpawnPos, Protocol::EnemyTyp
 	enemyInfo.set_posx(InSpawnPos.x);
 	enemyInfo.set_posy(InSpawnPos.y);
 	info.set_speed(InSpeed);
+	SetPos(InSpawnPos);
 	SetSpeed(InSpeed);
 }
 
