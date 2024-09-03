@@ -46,7 +46,7 @@ void Player::BeginPlay()
 	Super::BeginPlay();
 
 	bCrashing = false;
-
+	
 	if (GetName() == "RedPlayer") {
 		SetFlipbook(_redFlipbookIdle);
 	}

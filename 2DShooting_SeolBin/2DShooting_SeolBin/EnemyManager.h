@@ -24,7 +24,12 @@ public:
 
 	void AddMissile(int64 id, EnemyMissile* missilePtr);
 	void RemoveMissile(int64 id);
-	EnemyMissile* GetMissileObj(int64 id){ return enemyMissileHashMap.find(id)->second; }
+	EnemyMissile* GetMissileObj(int64 id){	
+		auto findIt = enemyMissileHashMap.find(id);
+		if(findIt != enemyMissileHashMap.end())
+			return findIt->second;
+		return nullptr;
+	}
 
 private:
 	// 삽입 삭제 탐색이 빈번하게 일어나기 때문에 시간 복잡도가 O(1) HashTable자료구조를 사용함

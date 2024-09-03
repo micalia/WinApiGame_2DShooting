@@ -208,6 +208,11 @@ void GameRoom::LeaveRoom(GameSessionRef session)
 ActorRef GameRoom::FindObject(uint64 id)
 {
 	{
+		auto findIt = _objects.find(id);
+		if (findIt != _objects.end())
+			return findIt->second;
+	}
+	{
 		auto findIt = _players.find(id);
 		if (findIt != _players.end())
 			return findIt->second;
@@ -350,6 +355,9 @@ void GameRoom::RemoveObject(uint64 id)
 		break;
 	case Protocol::OBJECT_TYPE_ENEMY:
 		_enemies.erase(id);
+		break;
+	case Protocol::OBJECT_TYPE_ENEMY_MISSILE:
+		_objects.erase(id);
 		break;
 	default:
 		return;

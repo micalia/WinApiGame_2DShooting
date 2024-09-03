@@ -103,7 +103,7 @@ void ClientPacketHandler::Handle_S_MyPlayer(ServerSessionRef session, BYTE* buff
 	DevScene* scene = GET_SINGLE(SceneManager)->GetDevScene();
 	if (scene)
 	{
-		MyPlayer* myPlayer = scene->SpawnActor<MyPlayer>(Vec2{ info.posx(), info.posy()}, LAYER_Player);
+		MyPlayer* myPlayer = scene->SpawnActor<MyPlayer>(Vec2{ info.posx(), info.posy()}, LAYER_Player, info);
 		//MyPlayer* myPlayer = scene->SpawnActor<MyPlayer>(Vec2{ info.posx(), info.posy() });
 		//myPlayer->SetLayer(LAYER_Player);
 		myPlayer->SetName(info.name().c_str());
@@ -124,7 +124,6 @@ void ClientPacketHandler::Handle_S_MyPlayer(ServerSessionRef session, BYTE* buff
 			GET_SINGLE(CollisionManager)->AddCollider(collider);
 			myPlayer->AddComponent(collider);
 		}
-		myPlayer->info = info;
 		GET_SINGLE(SceneManager)->SetMyPlayer(myPlayer);
 	}
 }

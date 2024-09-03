@@ -67,6 +67,7 @@ void Scene::Render(HDC hdc)
 		for (Actor* actor : actors)
 			actor->Render(hdc);
 	
+
 	/*for (UI* ui : _uis)
 		ui->Render(hdc);*/
 }
@@ -76,6 +77,12 @@ void Scene::AddActor(Actor* actor)
 	if (actor == nullptr)
 		return;
 
+	if (actor->GetLayer() == LAYER_EnemyMissile) {
+		EnemyMissile* missile = static_cast<EnemyMissile*>(actor);
+		if (DevScene* scene = GET_SINGLE(SceneManager)->GetDevScene()) {
+			scene->GetEnemyMgr()->AddMissile(actor->info.objectid(), missile);
+		}
+	}
 	_actors[actor->GetLayer()].push_back(actor);
 }
 
@@ -156,6 +163,16 @@ void Scene::Handle_S_RemoveObject(Protocol::S_RemoveObject& pkt)
 
 Actor* Scene::GetObject(uint64 id)
 {
+	{	
+		auto missile = GetEnemyMgr()->GetMissileObj(id);
+		if(missile !=nullptr)
+			return missile;
+	}
+	for (Actor* actor : _actors[LAYER_EnemyMissile])
+	{
+		if (actor && actor->info.objectid() == id)
+			return actor;
+	}
 	for (Actor* actor : _actors[LAYER_Enemy])
 	{
 		if (actor && actor->info.objectid() == id)

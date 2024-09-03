@@ -46,7 +46,8 @@ void EnemyManager::BeginPlay()
 void EnemyManager::Tick(float deltaTime)
 {
 	Super::Tick(deltaTime);
-	
+	//
+	auto val = enemyMissileHashMap.size();
 	/*currSpawnDelayTime += deltaTime;
 	if (currSpawnDelayTime > SpawnDelayTime) {
 		currSpawnDelayTime = 0;
@@ -124,8 +125,7 @@ void EnemyManager::EnemyMissileSpawn(Protocol::ObjectInfo info)
 	{
 		Sprite* EnemyMissileSprite = GET_SINGLE(ResourceManager)->GetSprite(L"EnemyMissile");
 		Vec2 spawnPos = Vec2(info.posx(), info.posy());
-		EnemyMissile* enemyMissile = GET_SINGLE(SceneManager)->GetCurrentScene()->SpawnActor<EnemyMissile>(spawnPos, LAYER_EnemyMissile);
-		enemyMissile->info = info;
+		EnemyMissile* enemyMissile = GET_SINGLE(SceneManager)->GetCurrentScene()->SpawnActor<EnemyMissile>(spawnPos, LAYER_EnemyMissile, info);
 		enemyMissile->SetSprite(EnemyMissileSprite);
 		enemyMissile->SetDir(Vec2(info.dirx(), info.diry()));
 		Vec2Int SpriteSize = EnemyMissileSprite->GetSize();
@@ -137,7 +137,6 @@ void EnemyManager::EnemyMissileSpawn(Protocol::ObjectInfo info)
 			enemyMissile->AddComponent(collider);
 		}*/
 
-		AddMissile(info.objectid(), enemyMissile);
 	}
 }
 
@@ -200,7 +199,7 @@ void EnemyManager::WhiteEnemySpawn(Protocol::ObjectInfo info)
 
 void EnemyManager::AddMissile(int64 id, EnemyMissile* missilePtr)
 {
-	enemyMissileHashMap.insert(make_pair(id, missilePtr));
+	auto val = enemyMissileHashMap.insert(make_pair(id, missilePtr));
 }
 
 void EnemyManager::RemoveMissile(int64 id)

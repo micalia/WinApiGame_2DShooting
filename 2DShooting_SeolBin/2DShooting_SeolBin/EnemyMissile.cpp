@@ -21,7 +21,7 @@ void EnemyMissile::BeginPlay()
 void EnemyMissile::Tick(float deltaTime)
 {
 	Super::Tick(deltaTime);
-
+	
 	/*Vec2 P0 = GetPos();
 	Vec2 vt = dir * speed * deltaTime;
 	Vec2 P = P0 + vt;
