@@ -28,9 +28,9 @@ void Missile::Tick(float deltaTime)
 {
 	Super::Tick(deltaTime);
 	
-	if (deltaTime > 0.1f) return;
+	/*if (deltaTime > 0.1f) return;
 	_pos.y -= deltaTime * speed;
-	SetPos(_pos);
+	SetPos(_pos);*/
 	
 	//_sprite->SetPos
 	//// Ãæµ¹

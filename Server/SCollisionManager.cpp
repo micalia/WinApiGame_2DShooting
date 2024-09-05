@@ -13,7 +13,6 @@ void SCollisionManager::Init()
 void SCollisionManager::Update()
 {
 	vector<shared_ptr<SCollider>>& colliders = _colliders;
-	//_tprintf(_T("Collision Cnt : %d \n"), colliders.size());
 	for (int32 i = 0; i < colliders.size(); i++)
 	{
 		for (int32 j = i + 1; j < colliders.size(); j++)
@@ -27,7 +26,6 @@ void SCollisionManager::Update()
 			//콜리젼이 켜져있는가?
 			if (src->CheckCollision(dest))
 			{
-				
 				if (src->_collisionMap.contains(dest) == false)
 				{
 					src->GetOwner()->OnComponentBeginOverlap(src, dest);

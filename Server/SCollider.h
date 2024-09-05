@@ -7,6 +7,7 @@ class SSphereCollider;
 
 class SCollider : public SComponent
 {
+	using Super = SComponent;
 public:
 	SCollider(SColliderType colliderType);
 	virtual ~SCollider() override;

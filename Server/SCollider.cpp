@@ -7,7 +7,6 @@
 
 SCollider::SCollider(SColliderType colliderType) : _colliderType(colliderType)
 {
-
 }
 
 SCollider::~SCollider()
@@ -17,12 +16,12 @@ SCollider::~SCollider()
 
 void SCollider::BeginPlay()
 {
-
+	Super::BeginPlay();
 }
 
 void SCollider::TickComponent()
 {
-
+	Super::TickComponent();
 }
 
 bool SCollider::CheckCollision(shared_ptr<SCollider> other)

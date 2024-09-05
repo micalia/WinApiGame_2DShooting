@@ -5,11 +5,12 @@
 
 SEnemyMissile::SEnemyMissile()
 {
-
+	printf("SEnemyMissile () »ý¼º \n");
 }
 
 SEnemyMissile::~SEnemyMissile()
 {
+	printf("~SEnemyMissile () ¼Ò¸ê \n");
 
 }
 

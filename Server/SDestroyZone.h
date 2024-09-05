@@ -9,5 +9,6 @@ public:
 
 	virtual void Update() override;
 	virtual void OnComponentBeginOverlap(shared_ptr<SCollider> collider, shared_ptr<SCollider> other) override;
+	virtual void OnComponentEndOverlap(shared_ptr<SCollider> collider, shared_ptr<SCollider> other) override;
 };
 

@@ -48,11 +48,16 @@ C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\WhiteEnemy.h(20,24): 
   Player.cpp
   SBoxCollider.cpp
   SCollider.cpp
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\SCollider.cpp(12,10): warning C4477: 'printf' : 서식 문자열 '%d'에 'int' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'int64'입니다.
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\SCollider.cpp(12,10): warning C4477: 'printf' : 서식 문자열 '%d'에 'int' 형식의 인수가 필요하지만 variadic 인수 2의 형식이 'unsigned __int64'입니다.
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\SCollider.cpp(32,10): warning C4477: 'printf' : 서식 문자열 '%d'에 'int' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'int64'입니다.
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\SCollider.cpp(32,10): warning C4477: 'printf' : 서식 문자열 '%d'에 'int' 형식의 인수가 필요하지만 variadic 인수 2의 형식이 'unsigned __int64'입니다.
   SCollisionManager.cpp
 C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\WhiteEnemy.h(20,24): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
   SComponent.cpp
   SDestroyZone.cpp
   SEnemyMissile.cpp
+  SMissile.cpp
   SSphereCollider.cpp
   Server.cpp
   ServerEnemySpawnMgr.cpp
@@ -60,6 +65,8 @@ C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\ServerEnemySpawnMgr.c
   ServerPacketHandler.cpp
   ServerUtils.cpp
   SeverTimeManager.cpp
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
   WhiteEnemy.cpp
 C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\WhiteEnemy.h(20,24): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
   코드를 생성하고 있습니다...

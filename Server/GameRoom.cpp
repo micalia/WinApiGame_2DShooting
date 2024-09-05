@@ -357,7 +357,10 @@ void GameRoom::RemoveObject(uint64 id)
 		_enemies.erase(id);
 		break;
 	case Protocol::OBJECT_TYPE_ENEMY_MISSILE:
+	{
 		_objects.erase(id);
+		auto val = _objects.size();
+	}
 		break;
 	default:
 		return;
