@@ -2,5 +2,19 @@
 #include "Actor.h"
 class SMissile : public Actor
 {
+	using Super = Actor;
+public:
+	SMissile();
+	virtual ~SMissile();
+
+	virtual void Update() override;
+
+	void Move();
+	void MissileBroadcastMove();
+private:
+	float replicateDelay = 0.1f;
+	float currReplicateDelay = 0;
+
+	float speed = 200;
 };
 

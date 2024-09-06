@@ -50,6 +50,9 @@ void ClientPacketHandler::HandlePacket(ServerSessionRef session, BYTE* buffer, i
 	case S_EnemyMissile:
 		Handle_S_EnemyMissileMove(session, buffer, len);
 		break;
+	case S_PlayerMissileMove:
+		Handle_S_PlayerMissileMove(session, buffer, len);
+		break;
 	}
 }
 
@@ -96,7 +99,7 @@ void ClientPacketHandler::Handle_S_MyPlayer(ServerSessionRef session, BYTE* buff
 
 	Protocol::S_MyPlayer pkt;
 	pkt.ParseFromArray(&header[1], size - sizeof(PacketHeader));
-
+	 
 	//
 	const Protocol::ObjectInfo& info = pkt.info();
 
@@ -195,13 +198,11 @@ void ClientPacketHandler::Handle_S_Projectile(ServerSessionRef session, BYTE* bu
 	DevScene* scene = GET_SINGLE(SceneManager)->GetDevScene();
 	if (scene) {
 		switch (info.objecttype()) {
-			case Protocol::OBJECT_TYPE_PLAYER:
+			case Protocol::OBJECT_TYPE_PLAYER_MISSILE:
 			{
 				auto myPlayer = GET_SINGLE(SceneManager)->GetMyPlayer();
 				myPlayer->Fire(info);
 			}
-				break;
-			case Protocol::OBJECT_TYPE_ENEMY:
 				break;
 		}
 	}
@@ -259,6 +260,29 @@ void ClientPacketHandler::Handle_S_EnemyMissileMove(ServerSessionRef session, BY
 	if (scene)
 	{
 		EnemyMissile* missile = static_cast<EnemyMissile*>(scene->GetEnemyMgr()->GetMissileObj(info.objectid()));
+		if (missile)
+		{
+			missile->SetPos(Vec2(info.posx(), info.posy()));
+			missile->SetServerNewLocation(Vec2(info.posx(), info.posy()));
+			missile->OnRep_ServerLoc();
+		}
+	}
+}
+
+void ClientPacketHandler::Handle_S_PlayerMissileMove(ServerSessionRef session, BYTE* buffer, int32 len)
+{
+	PacketHeader* header = (PacketHeader*)buffer;
+	uint16 size = header->size;
+
+	Protocol::S_PlayerMissileMove pkt;
+	pkt.ParseFromArray(&header[1], size - sizeof(PacketHeader));
+
+	const Protocol::ObjectInfo& info = pkt.missileinfo();
+
+	DevScene* scene = GET_SINGLE(SceneManager)->GetDevScene();
+	if (scene)
+	{
+		Missile* missile = static_cast<Missile*>(scene->GetMissileObj(info.objectid()));
 		if (missile)
 		{
 			missile->SetPos(Vec2(info.posx(), info.posy()));

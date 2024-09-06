@@ -5,6 +5,7 @@ class Actor;
 class GameObject;
 class UI;
 class EnemyManager;
+class Missile;
 
 class DevScene : public Scene
 {
@@ -24,6 +25,15 @@ public:
 
 	Vec2 GetRespawnEndPos() { return respawnEndPos; }
 	Vec2 GetRespawnStartPos() { return respawnStartPos; }
+
+	Missile* GetMissileObj(int64 id) {
+		auto findIt = playerMissileHashMap.find(id);
+		if (findIt != playerMissileHashMap.end())
+			return findIt->second;
+		return nullptr;
+	}
+
+	unordered_map<int64, Missile*> playerMissileHashMap;
 
 private:
 	Vec2 respawnEndPos = Vec2(242, 540);

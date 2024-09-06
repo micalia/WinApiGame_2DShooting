@@ -47,7 +47,6 @@ void EnemyManager::Tick(float deltaTime)
 {
 	Super::Tick(deltaTime);
 	//
-	auto val = enemyMissileHashMap.size();
 	/*currSpawnDelayTime += deltaTime;
 	if (currSpawnDelayTime > SpawnDelayTime) {
 		currSpawnDelayTime = 0;
@@ -199,12 +198,10 @@ void EnemyManager::WhiteEnemySpawn(Protocol::ObjectInfo info)
 
 void EnemyManager::AddMissile(int64 id, EnemyMissile* missilePtr)
 {
-	auto val = enemyMissileHashMap.insert(make_pair(id, missilePtr));
+	enemyMissileHashMap.insert(make_pair(id, missilePtr));
 }
 
 void EnemyManager::RemoveMissile(int64 id)
 {
-	auto val1 = enemyMissileHashMap.find(id);
 	enemyMissileHashMap.erase(id);
-	auto val2 = enemyMissileHashMap.find(id);
 }

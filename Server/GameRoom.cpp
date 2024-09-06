@@ -10,6 +10,7 @@
 #include "SCollisionManager.h"
 #include "SDestroyZone.h"
 #include "SBoxCollider.h"
+#include "SMissile.h"
 
 GameRoomRef GRoom = make_shared<GameRoom>();
 
@@ -252,14 +253,19 @@ void GameRoom::Handle_C_Projectile(Protocol::C_Projectile& pkt)
 		return;
 
 	// TODO : Validation
-
-	gameObject->info.set_name(pkt.info().name());
-	gameObject->info.set_objecttype(pkt.info().objecttype());
-	gameObject->info.set_posx(pkt.info().posx());
-	gameObject->info.set_posy(pkt.info().posy());
+	Vector spawnPos = Vector(gameObject->info.posx(), gameObject->info.posy());
+	SMissileRef missileRef = Actor::CreatePlayerMissile(id, spawnPos); 
+	missileRef->info.set_name(gameObject->info.name());
+	{
+		shared_ptr<SBoxCollider> collider = make_shared<SBoxCollider>();
+		collider->SetSize(Vector(15, 31)); // missile Spite size 
+		GET_SINGLE(SCollisionManager)->AddCollider(collider);
+		missileRef->AddComponent(collider);
+	}
+	GRoom->AddObject(missileRef);
 
 	{
-		SendBufferRef sendBuffer = ServerPacketHandler::Make_S_Projectile(pkt.info());
+		SendBufferRef sendBuffer = ServerPacketHandler::Make_S_Projectile(missileRef->info);
 		Broadcast(sendBuffer);
 	}
 }
@@ -327,6 +333,9 @@ void GameRoom::AddObject(ActorRef gameObject)
 		_objects.insert(make_pair(id, static_pointer_cast<SEnemyMissile>(gameObject)));
 	}
 	break;
+	case Protocol::OBJECT_TYPE_PLAYER_MISSILE:
+		_objects.insert(make_pair(id, static_pointer_cast<SMissile>(gameObject)));
+		break;
 	default:
 		return;
 	}

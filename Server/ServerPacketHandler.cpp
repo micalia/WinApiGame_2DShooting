@@ -147,6 +147,16 @@ SendBufferRef ServerPacketHandler::Make_S_Projectile(const Protocol::ObjectInfo&
 	return MakeSendBuffer(pkt, S_Projectile);
 }
 
+SendBufferRef ServerPacketHandler::Make_S_PlayerMissileMove(const Protocol::ObjectInfo& info)
+{
+	Protocol::S_PlayerMissileMove pkt;
+
+	Protocol::ObjectInfo* objectInfo = pkt.mutable_missileinfo();
+	*objectInfo = info;
+
+	return MakeSendBuffer(pkt, S_PlayerMissileMove);
+}
+
 SendBufferRef ServerPacketHandler::Make_S_Score(const Protocol::ScoreInfo& scoreInfo)
 {
 	Protocol::S_Score pkt;

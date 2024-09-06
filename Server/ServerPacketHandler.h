@@ -20,6 +20,8 @@ enum
 
 	S_EnemyMove = 16,
 	S_EnemyMissile = 17,
+
+	S_PlayerMissileMove = 18,
 };
 
 struct BuffData
@@ -46,6 +48,7 @@ public:
 	static SendBufferRef Make_S_RemoveObject(const Protocol::S_RemoveObject& pkt);
 	static SendBufferRef Make_S_Move(const Protocol::ObjectInfo& info);
 	static SendBufferRef Make_S_Projectile(const Protocol::ObjectInfo& info);
+	static SendBufferRef Make_S_PlayerMissileMove(const Protocol::ObjectInfo& info);
 	static SendBufferRef Make_S_Score(const Protocol::ScoreInfo& scoreInfo);
 	static SendBufferRef Make_S_EnemyMove(const Protocol::EnemyInfo& enemyInfo);
 	static SendBufferRef Make_S_EnemyMissileMove(const Protocol::EnemyMissileInfo& enemyMissileInfo);

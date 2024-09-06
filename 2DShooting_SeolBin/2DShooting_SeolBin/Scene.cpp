@@ -10,6 +10,7 @@
 #include "DevScene.h"
 #include "EnemyManager.h"
 #include "EnemyMissile.h"
+#include "Missile.h"
 
 Scene::Scene()
 {
@@ -83,6 +84,12 @@ void Scene::AddActor(Actor* actor)
 			scene->GetEnemyMgr()->AddMissile(actor->info.objectid(), missile);
 		}
 	}
+	if (actor->GetLayer() == LAYER_BULLET) {
+		Missile* missile = static_cast<Missile*>(actor);
+		if (DevScene* scene = GET_SINGLE(SceneManager)->GetDevScene()) {
+			scene->playerMissileHashMap.insert(make_pair(actor->info.objectid(), missile));
+		}
+	}
 	_actors[actor->GetLayer()].push_back(actor);
 }
 
@@ -95,6 +102,12 @@ void Scene::RemoveActor(Actor* actor)
 		EnemyMissile* missile = static_cast<EnemyMissile*>(actor);
 		if (DevScene* scene = GET_SINGLE(SceneManager)->GetDevScene()) {
 			scene->GetEnemyMgr()->RemoveMissile(missile->info.objectid());
+		}
+	}
+	if (actor->GetLayer() == LAYER_BULLET) {
+		Missile* missile = static_cast<Missile*>(actor);
+		if (DevScene* scene = GET_SINGLE(SceneManager)->GetDevScene()) {
+			scene->playerMissileHashMap.erase(missile->info.objectid());
 		}
 	}
 	vector<Actor*>& v = _actors[actor->GetLayer()];
@@ -168,11 +181,6 @@ Actor* Scene::GetObject(uint64 id)
 		if(missile !=nullptr)
 			return missile;
 	}
-	for (Actor* actor : _actors[LAYER_EnemyMissile])
-	{
-		if (actor && actor->info.objectid() == id)
-			return actor;
-	}
 	for (Actor* actor : _actors[LAYER_Enemy])
 	{
 		if (actor && actor->info.objectid() == id)
@@ -189,6 +197,11 @@ Actor* Scene::GetObject(uint64 id)
 			return actor;
 	}
 	for (Actor* actor : _actors[LAYER_OBJECT])
+	{
+		if (actor && actor->info.objectid() == id)
+			return actor;
+	}
+	for (Actor* actor : _actors[LAYER_EnemyMissile])
 	{
 		if (actor && actor->info.objectid() == id)
 			return actor;

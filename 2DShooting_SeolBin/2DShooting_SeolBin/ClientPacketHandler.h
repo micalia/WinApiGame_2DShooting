@@ -21,6 +21,8 @@ enum
 	S_EnemyMove = 16,
 	S_EnemyMissile = 17,
 
+	S_PlayerMissileMove = 18, 
+
 };
 
 class Player;
@@ -41,6 +43,7 @@ public:
 	static void Handle_S_Score(ServerSessionRef session, BYTE* buffer, int32 len);
 	static void Handle_S_EnemyMove(ServerSessionRef session, BYTE* buffer, int32 len);
 	static void Handle_S_EnemyMissileMove(ServerSessionRef session, BYTE* buffer, int32 len);
+	static void Handle_S_PlayerMissileMove(ServerSessionRef session, BYTE* buffer, int32 len);
 
 	// º¸³»±â
 	static SendBufferRef Make_C_Move();

@@ -10,6 +10,7 @@ using GameSessionRef = shared_ptr<class GameSession>;
 using GameRoomRef = shared_ptr<class GameRoom>;
 using ActorRef = shared_ptr<class Actor>;
 using PlayerRef = shared_ptr<class Player>;
+using SMissileRef = shared_ptr<class SMissile>;
 using EnemyRef = shared_ptr<class Enemy>;
 using HalfEnemyRef = shared_ptr<class HalfEnemy>;
 using WhiteEnemyRef = shared_ptr<class WhiteEnemy>;

@@ -77,3 +77,8 @@ message S_EnemyMissile
 {
 	EnemyMissileInfo enemyMissileInfo = 1;
 }
+
+message S_PlayerMissileMove
+{
+	ObjectInfo missileInfo = 1;
+}

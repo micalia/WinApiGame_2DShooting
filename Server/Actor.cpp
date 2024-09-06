@@ -9,6 +9,7 @@
 #include "SCollider.h"
 #include "SCollisionManager.h"
 #include "SBoxCollider.h"
+#include "SMissile.h"
 
 atomic<uint64> Actor::s_idGenerator = 1;
 
@@ -31,6 +32,18 @@ PlayerRef Actor::CreatePlayer()
 	return player;
 }
 
+SMissileRef Actor::CreatePlayerMissile(uint64 owner, Vector spawnPos)
+{
+	SMissileRef missile = make_shared<SMissile>();
+	missile->info.set_objectid(s_idGenerator++);
+	missile->info.set_objecttype(Protocol::OBJECT_TYPE_PLAYER_MISSILE);
+	missile->info.set_objectownerid(owner);
+	missile->info.set_posx(spawnPos.x);
+	missile->info.set_posy(spawnPos.y);
+
+	return missile;
+}
+
 EnemyRef Actor::CreateEnemy(Protocol::EnemyType enemyType, Vector spawnPos)
 {
 	switch (enemyType)
@@ -47,7 +60,7 @@ EnemyRef Actor::CreateEnemy(Protocol::EnemyType enemyType, Vector spawnPos)
 	case Protocol::ENEMY_TYPE_WHITE:
 	{
 		WhiteEnemyRef whiteEnemy = make_shared<WhiteEnemy>();
-		float speed = 0;
+		float speed = 150;
 		whiteEnemy->SetEnemyInfo(whiteEnemy, spawnPos, enemyType, speed);
 		whiteEnemy->info.set_name("WhiteEnemy");
 		{

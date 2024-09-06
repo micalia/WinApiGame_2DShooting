@@ -12,6 +12,7 @@ public:
 	virtual void Update(){};
 
 	static PlayerRef CreatePlayer();
+	static SMissileRef CreatePlayerMissile(uint64 owner, Vector spawnPos);
 	static EnemyRef CreateEnemy(Protocol::EnemyType enemyType, Vector spawnPos);
 	static EnemyMissileRef CreateEnemyMissile(Vector spawnPos, Vector dir);
 
