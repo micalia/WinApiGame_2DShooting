@@ -15,7 +15,7 @@ public:
 	void SetDir(Vec2 InDir) { dir = InDir; }
 
 private:
-	float speed = 200;
+	float speed = 100;
 	Vec2 dir;
 	Vec2 startPos;
 };

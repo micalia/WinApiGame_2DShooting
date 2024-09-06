@@ -60,7 +60,7 @@ EnemyRef Actor::CreateEnemy(Protocol::EnemyType enemyType, Vector spawnPos)
 	case Protocol::ENEMY_TYPE_WHITE:
 	{
 		WhiteEnemyRef whiteEnemy = make_shared<WhiteEnemy>();
-		float speed = 150;
+		float speed = 50;
 		whiteEnemy->SetEnemyInfo(whiteEnemy, spawnPos, enemyType, speed);
 		whiteEnemy->info.set_name("WhiteEnemy");
 		{

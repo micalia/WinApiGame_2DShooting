@@ -9,7 +9,7 @@ public:
 
 	virtual void Update() override;
 
-	void Move();
+	void Move(float deltaTime);
 	void MissileBroadcastMove();
 private:
 	float replicateDelay = 0.1f;

@@ -19,10 +19,11 @@ void Enemy::Update()
 	float deltaTime = GET_SINGLE(SeverTimeManager)->GetDeltaTime();
 	if (deltaTime > 0.1f) return;
 
+	Move(deltaTime);
 	currReplicateDelay += deltaTime;
 	if (currReplicateDelay > replicateDelay) {
-		Move();
 		currReplicateDelay = 0;
+		EnemyBroadcastMove();
 	}
 }
 
@@ -56,19 +57,18 @@ void Enemy::SetEnemyInfo(EnemyRef InEnemy, Vector InSpawnPos, Protocol::EnemyTyp
 	SetSpeed(InSpeed);
 }
 
-void Enemy::Move()
+void Enemy::Move(float deltaTime)
 {
 	currPosY = enemyInfo.posy();
 	if (info.name() == "HalfEnemy") {
 		enemyInfo.set_enemytype(Protocol::ENEMY_TYPE_HALF);
-		currPosY += (currReplicateDelay * GetSpeed());
+		currPosY += (deltaTime * GetSpeed());
 	}
 	else if (info.name() == "WhiteEnemy") {
 		enemyInfo.set_enemytype(Protocol::ENEMY_TYPE_WHITE);
-		currPosY += (currReplicateDelay * GetSpeed());
+		currPosY += (deltaTime * GetSpeed());
 	}
 	enemyInfo.set_posy(currPosY);
 	enemyInfo.set_objectid(info.objectid());
 	SetPos(Vector(enemyInfo.posx(), enemyInfo.posy()));
-	EnemyBroadcastMove();
 }

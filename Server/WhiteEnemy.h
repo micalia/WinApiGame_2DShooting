@@ -17,7 +17,7 @@ private:
 	);
 
 private:
-	float fireDelayTime = 12000;//0.1;
+	float fireDelayTime = 0.1;//0.1;
 	float fireDelayCurrTime = 0;//0;
 
 	float theta = 0.0;

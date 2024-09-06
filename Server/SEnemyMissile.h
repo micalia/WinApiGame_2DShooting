@@ -11,12 +11,12 @@ public:
 
 	Protocol::EnemyMissileInfo enemyMissileInfo;
 
-	void Move();
+	void Move(float deltaTime);
 	void MissileBroadcastMove();
 private:
-	float replicateDelay = 0.1f;
+	float replicateDelay = 0.2f;
 	float currReplicateDelay = 0;
 
-	float speed = 200;
+	float speed = 100;
 };
 

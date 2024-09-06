@@ -19,7 +19,7 @@ public:
 
 	void SetEnemyInfo(EnemyRef InEnemy, Vector InSpawnPos, Protocol::EnemyType InEnemyType, float InSpeed);
 
-	void Move();
+	void Move(float deltaTime);
 private:
 	float replicateDelay = 0.1f;
 	float currReplicateDelay = 0;
