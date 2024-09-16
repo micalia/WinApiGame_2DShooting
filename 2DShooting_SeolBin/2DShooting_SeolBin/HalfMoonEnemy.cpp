@@ -24,7 +24,7 @@ void HalfMoonEnemy::BeginPlay()
 	Super::BeginPlay();
 
 	//speed = 50;
-	SetHp(1);
+	//SetHp(3);
 	SetKillScore(100);
 }
 

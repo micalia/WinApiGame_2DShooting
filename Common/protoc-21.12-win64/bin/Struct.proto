@@ -37,6 +37,7 @@ message EnemyInfo
 	EnemyType enemyType = 2;
 	float posX = 3;
 	float posY = 4;
+	uint32 hp = 5;
 }
 
 message EnemyMissileInfo

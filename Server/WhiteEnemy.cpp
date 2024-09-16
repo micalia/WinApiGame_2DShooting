@@ -78,3 +78,13 @@ void WhiteEnemy::MoveLoopingBullet(
 	vx = -r * omega * sin(theta);
 	vy = r * omega * cos(theta);
 }
+
+void WhiteEnemy::Damaged()
+{
+	int currHp = GetHp();
+	SetHp(--currHp);
+
+	Super::Damaged();
+	/*bDamaged = true;
+	SetDamagedSprite();*/
+}

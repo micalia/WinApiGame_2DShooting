@@ -79,9 +79,16 @@ void Enemy::Die(Player* WhoHitMe)
 	explosionEffect->SetPos(GetPos());
 	GET_SINGLE(SceneManager)->GetCurrentScene()->AddActor(explosionEffect);
 	GET_SINGLE(SceneManager)->GetCurrentScene()->RemoveActor(this);
-	_dirtyFlag = true;
 
 	Server_AddScore(WhoHitMe, GetKillScore());
+}
+
+void Enemy::Die()
+{
+	ExplosionEffect* explosionEffect = new ExplosionEffect();
+	explosionEffect->SetPos(GetPos());
+	GET_SINGLE(SceneManager)->GetCurrentScene()->AddActor(explosionEffect);
+	GET_SINGLE(SceneManager)->GetCurrentScene()->RemoveActor(this);
 }
 
 void Enemy::FindPlayer()

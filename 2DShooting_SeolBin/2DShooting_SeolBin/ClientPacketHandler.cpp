@@ -53,6 +53,9 @@ void ClientPacketHandler::HandlePacket(ServerSessionRef session, BYTE* buffer, i
 	case S_PlayerMissileMove:
 		Handle_S_PlayerMissileMove(session, buffer, len);
 		break;
+	case S_EnemyDamaged:
+		Handle_S_EnemyDamaged(session, buffer, len);
+		break;
 	}
 }
 
@@ -288,6 +291,28 @@ void ClientPacketHandler::Handle_S_PlayerMissileMove(ServerSessionRef session, B
 			missile->SetPos(Vec2(info.posx(), info.posy()));
 			missile->SetServerNewLocation(Vec2(info.posx(), info.posy()));
 			missile->OnRep_ServerLoc();
+		}
+	}
+}
+
+void ClientPacketHandler::Handle_S_EnemyDamaged(ServerSessionRef session, BYTE* buffer, int32 len)
+{
+	PacketHeader* header = (PacketHeader*)buffer;
+	uint16 size = header->size;
+
+	Protocol::S_EnemyDamaged pkt;
+	pkt.ParseFromArray(&header[1], size - sizeof(PacketHeader));
+	//
+	const Protocol::EnemyInfo& info = pkt.enemyinfo();
+
+	DevScene* scene = GET_SINGLE(SceneManager)->GetDevScene();
+	if (scene)
+	{
+		Enemy* enemy = static_cast<Enemy*>(scene->GetObject(info.objectid()));
+		if (enemy)
+		{
+			enemy->SetHp(info.hp());
+			enemy->Damaged();
 		}
 	}
 }

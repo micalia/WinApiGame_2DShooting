@@ -809,6 +809,7 @@ class EnemyInfo final :
     kEnemyTypeFieldNumber = 2,
     kPosXFieldNumber = 3,
     kPosYFieldNumber = 4,
+    kHpFieldNumber = 5,
   };
   // uint64 objectId = 1;
   void clear_objectid();
@@ -846,6 +847,15 @@ class EnemyInfo final :
   void _internal_set_posy(float value);
   public:
 
+  // uint32 hp = 5;
+  void clear_hp();
+  uint32_t hp() const;
+  void set_hp(uint32_t value);
+  private:
+  uint32_t _internal_hp() const;
+  void _internal_set_hp(uint32_t value);
+  public:
+
   // @@protoc_insertion_point(class_scope:Protocol.EnemyInfo)
  private:
   class _Internal;
@@ -858,6 +868,7 @@ class EnemyInfo final :
     int enemytype_;
     float posx_;
     float posy_;
+    uint32_t hp_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -1541,6 +1552,26 @@ inline void EnemyInfo::_internal_set_posy(float value) {
 inline void EnemyInfo::set_posy(float value) {
   _internal_set_posy(value);
   // @@protoc_insertion_point(field_set:Protocol.EnemyInfo.posY)
+}
+
+// uint32 hp = 5;
+inline void EnemyInfo::clear_hp() {
+  _impl_.hp_ = 0u;
+}
+inline uint32_t EnemyInfo::_internal_hp() const {
+  return _impl_.hp_;
+}
+inline uint32_t EnemyInfo::hp() const {
+  // @@protoc_insertion_point(field_get:Protocol.EnemyInfo.hp)
+  return _internal_hp();
+}
+inline void EnemyInfo::_internal_set_hp(uint32_t value) {
+  
+  _impl_.hp_ = value;
+}
+inline void EnemyInfo::set_hp(uint32_t value) {
+  _internal_set_hp(value);
+  // @@protoc_insertion_point(field_set:Protocol.EnemyInfo.hp)
 }
 
 // -------------------------------------------------------------------

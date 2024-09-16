@@ -31,7 +31,7 @@ void ServerEnemySpawnMgr::Update()
 void ServerEnemySpawnMgr::RandomEnemySpawn()
 {
 	int ranPosVal = ServerUtils::RandomIntegerRange(1, 5);
-	Vector spawnPos = Vector(80 * ranPosVal, 80);
+	Vector spawnPos = Vector(80 * ranPosVal, 150);
 	
 	EnemyRef enemyRef = nullptr;
 

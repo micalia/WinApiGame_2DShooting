@@ -24,7 +24,7 @@ void WhiteEnemy::BeginPlay()
 	Super::BeginPlay();
 	
 	//speed = 50;
-	SetHp(5);
+	//SetHp(5);
 	SetKillScore(500);
 }
 
@@ -43,11 +43,15 @@ void WhiteEnemy::Tick(float deltaTime)
 	}*/
 
 	if (bDamaged) {
-		currDamagedStateTime += deltaTime;
-		if (currDamagedStateTime > damagedStateTime) {
-			currDamagedStateTime = 0;
-			bDamaged = false;
-			SetDefaultSprite();
+		if(GetHp() > 0){
+			currDamagedStateTime += deltaTime;
+			if (currDamagedStateTime > damagedStateTime) {
+				currDamagedStateTime = 0;
+				bDamaged = false;
+				SetDefaultSprite();
+			}
+		}else{
+			Die();
 		}
 	}
 }
@@ -142,8 +146,8 @@ void WhiteEnemy::SetDefaultSprite()
 
 void WhiteEnemy::Damaged()
 {
-	int currHp = GetHp();
-	SetHp(--currHp);
+	/*int currHp = GetHp();
+	SetHp(--currHp);*/
 	bDamaged = true;
 	SetDamagedSprite();
 }

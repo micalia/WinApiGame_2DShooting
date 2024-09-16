@@ -57,7 +57,7 @@ void EnemyManager::Tick(float deltaTime)
 void EnemyManager::Render(HDC hdc)
 {
 	Super::Render(hdc);
-	Utils::DrawCircle(hdc, _pos, 10);
+	//Utils::DrawCircle(hdc, _pos, 10);
 }
 
 void EnemyManager::RandomEnemySpawn()

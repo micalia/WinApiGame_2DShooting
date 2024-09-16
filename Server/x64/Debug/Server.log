@@ -39,7 +39,7 @@
   계속하려면 아무 키나 누르십시오 . . . 
   pch.cpp
   Actor.cpp
-C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\WhiteEnemy.h(20,24): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\WhiteEnemy.h(22,24): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
   Enemy.cpp
   GameRoom.cpp
   GameSession.cpp
@@ -49,7 +49,7 @@ C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\WhiteEnemy.h(20,24): 
   SBoxCollider.cpp
   SCollider.cpp
   SCollisionManager.cpp
-C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\WhiteEnemy.h(20,24): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\WhiteEnemy.h(22,24): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
   SComponent.cpp
   SDestroyZone.cpp
   SEnemyMissile.cpp
@@ -64,7 +64,7 @@ C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\ServerEnemySpawnMgr.c
   코드를 생성하고 있습니다...
   컴파일하고 있습니다...
   WhiteEnemy.cpp
-C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\WhiteEnemy.h(20,24): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\WhiteEnemy.h(22,24): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
   코드를 생성하고 있습니다...
   Enum.pb.cc
   Protocol.pb.cc

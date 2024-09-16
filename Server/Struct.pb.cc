@@ -80,6 +80,7 @@ PROTOBUF_CONSTEXPR EnemyInfo::EnemyInfo(
   , /*decltype(_impl_.enemytype_)*/0
   , /*decltype(_impl_.posx_)*/0
   , /*decltype(_impl_.posy_)*/0
+  , /*decltype(_impl_.hp_)*/0u
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct EnemyInfoDefaultTypeInternal {
   PROTOBUF_CONSTEXPR EnemyInfoDefaultTypeInternal()
@@ -155,6 +156,7 @@ const uint32_t TableStruct_Struct_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(p
   PROTOBUF_FIELD_OFFSET(::Protocol::EnemyInfo, _impl_.enemytype_),
   PROTOBUF_FIELD_OFFSET(::Protocol::EnemyInfo, _impl_.posx_),
   PROTOBUF_FIELD_OFFSET(::Protocol::EnemyInfo, _impl_.posy_),
+  PROTOBUF_FIELD_OFFSET(::Protocol::EnemyInfo, _impl_.hp_),
   ~0u,  // no _has_bits_
   PROTOBUF_FIELD_OFFSET(::Protocol::EnemyMissileInfo, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -170,7 +172,7 @@ static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protode
   { 9, -1, -1, sizeof(::Protocol::ObjectInfo)},
   { 25, -1, -1, sizeof(::Protocol::ScoreInfo)},
   { 34, -1, -1, sizeof(::Protocol::EnemyInfo)},
-  { 44, -1, -1, sizeof(::Protocol::EnemyMissileInfo)},
+  { 45, -1, -1, sizeof(::Protocol::EnemyMissileInfo)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -192,18 +194,18 @@ const char descriptor_table_protodef_Struct_2eproto[] PROTOBUF_SECTION_VARIABLE(
   " \001(\002\022\014\n\004dirX\030\t \001(\002\022\014\n\004dirY\030\n \001(\002\022\025\n\robje"
   "ctOwnerId\030\013 \001(\004\"F\n\tScoreInfo\022\022\n\nplayerNa"
   "me\030\001 \001(\t\022\022\n\nenemyScore\030\002 \001(\r\022\021\n\tfullScor"
-  "e\030\003 \001(\r\"a\n\tEnemyInfo\022\020\n\010objectId\030\001 \001(\004\022&"
+  "e\030\003 \001(\r\"m\n\tEnemyInfo\022\020\n\010objectId\030\001 \001(\004\022&"
   "\n\tenemyType\030\002 \001(\0162\023.Protocol.EnemyType\022\014"
-  "\n\004posX\030\003 \001(\002\022\014\n\004posY\030\004 \001(\002\"@\n\020EnemyMissi"
-  "leInfo\022\020\n\010objectId\030\001 \001(\004\022\014\n\004posX\030\002 \001(\002\022\014"
-  "\n\004posY\030\003 \001(\002b\006proto3"
+  "\n\004posX\030\003 \001(\002\022\014\n\004posY\030\004 \001(\002\022\n\n\002hp\030\005 \001(\r\"@"
+  "\n\020EnemyMissileInfo\022\020\n\010objectId\030\001 \001(\004\022\014\n\004"
+  "posX\030\002 \001(\002\022\014\n\004posY\030\003 \001(\002b\006proto3"
   ;
 static const ::_pbi::DescriptorTable* const descriptor_table_Struct_2eproto_deps[1] = {
   &::descriptor_table_Enum_2eproto,
 };
 static ::_pbi::once_flag descriptor_table_Struct_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_Struct_2eproto = {
-    false, false, 580, descriptor_table_protodef_Struct_2eproto,
+    false, false, 592, descriptor_table_protodef_Struct_2eproto,
     "Struct.proto",
     &descriptor_table_Struct_2eproto_once, descriptor_table_Struct_2eproto_deps, 1, 5,
     schemas, file_default_instances, TableStruct_Struct_2eproto::offsets,
@@ -1263,12 +1265,13 @@ EnemyInfo::EnemyInfo(const EnemyInfo& from)
     , decltype(_impl_.enemytype_){}
     , decltype(_impl_.posx_){}
     , decltype(_impl_.posy_){}
+    , decltype(_impl_.hp_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   ::memcpy(&_impl_.objectid_, &from._impl_.objectid_,
-    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.posy_) -
-    reinterpret_cast<char*>(&_impl_.objectid_)) + sizeof(_impl_.posy_));
+    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.hp_) -
+    reinterpret_cast<char*>(&_impl_.objectid_)) + sizeof(_impl_.hp_));
   // @@protoc_insertion_point(copy_constructor:Protocol.EnemyInfo)
 }
 
@@ -1281,6 +1284,7 @@ inline void EnemyInfo::SharedCtor(
     , decltype(_impl_.enemytype_){0}
     , decltype(_impl_.posx_){0}
     , decltype(_impl_.posy_){0}
+    , decltype(_impl_.hp_){0u}
     , /*decltype(_impl_._cached_size_)*/{}
   };
 }
@@ -1309,8 +1313,8 @@ void EnemyInfo::Clear() {
   (void) cached_has_bits;
 
   ::memset(&_impl_.objectid_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&_impl_.posy_) -
-      reinterpret_cast<char*>(&_impl_.objectid_)) + sizeof(_impl_.posy_));
+      reinterpret_cast<char*>(&_impl_.hp_) -
+      reinterpret_cast<char*>(&_impl_.objectid_)) + sizeof(_impl_.hp_));
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
@@ -1350,6 +1354,14 @@ const char* EnemyInfo::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 37)) {
           _impl_.posy_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
           ptr += sizeof(float);
+        } else
+          goto handle_unusual;
+        continue;
+      // uint32 hp = 5;
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
+          _impl_.hp_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+          CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
@@ -1415,6 +1427,12 @@ uint8_t* EnemyInfo::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteFloatToArray(4, this->_internal_posy(), target);
   }
 
+  // uint32 hp = 5;
+  if (this->_internal_hp() != 0) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteUInt32ToArray(5, this->_internal_hp(), target);
+  }
+
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
@@ -1460,6 +1478,11 @@ size_t EnemyInfo::ByteSizeLong() const {
     total_size += 1 + 4;
   }
 
+  // uint32 hp = 5;
+  if (this->_internal_hp() != 0) {
+    total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_hp());
+  }
+
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
@@ -1498,6 +1521,9 @@ void EnemyInfo::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROT
   if (raw_posy != 0) {
     _this->_internal_set_posy(from._internal_posy());
   }
+  if (from._internal_hp() != 0) {
+    _this->_internal_set_hp(from._internal_hp());
+  }
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
@@ -1516,8 +1542,8 @@ void EnemyInfo::InternalSwap(EnemyInfo* other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(EnemyInfo, _impl_.posy_)
-      + sizeof(EnemyInfo::_impl_.posy_)
+      PROTOBUF_FIELD_OFFSET(EnemyInfo, _impl_.hp_)
+      + sizeof(EnemyInfo::_impl_.hp_)
       - PROTOBUF_FIELD_OFFSET(EnemyInfo, _impl_.objectid_)>(
           reinterpret_cast<char*>(&_impl_.objectid_),
           reinterpret_cast<char*>(&other->_impl_.objectid_));

@@ -33,11 +33,11 @@ void GameRoom::Init()
 	{ // Top Wall
 		shared_ptr<SDestroyZone> destroyZone = make_shared<SDestroyZone>();
 		destroyZone->SetLayer(LAYER_OBJECT);
-		destroyZone->SetPos(Vector(250.f, 0.f));
+		destroyZone->SetPos(Vector(250.f, 50.f));
 		{
 			shared_ptr<SBoxCollider> collider = make_shared<SBoxCollider>();
 			collider->SetShowDebug(true);
-			collider->SetSize(Vector(480, 30));
+			collider->SetSize(Vector(460, 25));
 			collider->SetCollisionLayer(CLT_WALL);
 			GET_SINGLE(SCollisionManager)->AddCollider(collider);
 			destroyZone->AddComponent(collider);
@@ -63,11 +63,11 @@ void GameRoom::Init()
 	{ // Left Wall
 		shared_ptr<SDestroyZone> destroyZone = make_shared<SDestroyZone>();
 		destroyZone->SetLayer(LAYER_OBJECT);
-		destroyZone->SetPos(Vector(0.f, 365.f));
+		destroyZone->SetPos(Vector(20.f, 365.f));
 		{
 			shared_ptr<SBoxCollider> collider = make_shared<SBoxCollider>();
 			collider->SetShowDebug(true);
-			collider->SetSize(Vector(30, 700));
+			collider->SetSize(Vector(25, 700));
 			collider->SetCollisionLayer(CLT_WALL);
 			GET_SINGLE(SCollisionManager)->AddCollider(collider);
 			destroyZone->AddComponent(collider);
@@ -80,11 +80,11 @@ void GameRoom::Init()
 	{ // Right Wall
 		shared_ptr<SDestroyZone> destroyZone = make_shared<SDestroyZone>();
 		destroyZone->SetLayer(LAYER_OBJECT);
-		destroyZone->SetPos(Vector(500.f, 365.f));
+		destroyZone->SetPos(Vector(480.f, 365.f));
 		{
 			shared_ptr<SBoxCollider> collider = make_shared<SBoxCollider>();
 			collider->SetShowDebug(true);
-			collider->SetSize(Vector(30, 700));
+			collider->SetSize(Vector(25, 700));
 			collider->SetCollisionLayer(CLT_WALL);
 			GET_SINGLE(SCollisionManager)->AddCollider(collider);
 			destroyZone->AddComponent(collider);
@@ -97,11 +97,11 @@ void GameRoom::Init()
 	{ // Bottom Wall
 		shared_ptr<SDestroyZone> destroyZone = make_shared<SDestroyZone>();
 		destroyZone->SetLayer(LAYER_OBJECT);
-		destroyZone->SetPos(Vector(250.f, 730.f));
+		destroyZone->SetPos(Vector(250.f, 700.f));
 		{
 			shared_ptr<SBoxCollider> collider = make_shared<SBoxCollider>();
 			collider->SetShowDebug(true);
-			collider->SetSize(Vector(480, 30));
+			collider->SetSize(Vector(480, 25));
 			collider->SetCollisionLayer(CLT_WALL);
 			GET_SINGLE(SCollisionManager)->AddCollider(collider);
 			destroyZone->AddComponent(collider);
@@ -353,7 +353,7 @@ void GameRoom::AddObject(ActorRef gameObject)
 
 void GameRoom::RemoveObject(uint64 id)
 {
-	ActorRef gameObject = FindObject(id);
+  	ActorRef gameObject = FindObject(id);
 	if (gameObject == nullptr)
 		return;
 
@@ -366,10 +366,10 @@ void GameRoom::RemoveObject(uint64 id)
 		_enemies.erase(id);
 		break;
 	case Protocol::OBJECT_TYPE_ENEMY_MISSILE:
-	{
 		_objects.erase(id);
-		auto val = _objects.size();
-	}
+		break;
+	case Protocol::OBJECT_TYPE_PLAYER_MISSILE:
+		_objects.erase(id);
 		break;
 	default:
 		return;

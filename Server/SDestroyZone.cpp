@@ -5,6 +5,7 @@
 #include "Enemy.h"
 #include "SCollisionManager.h"
 #include "GameRoom.h"
+#include "SMissile.h"
 
 SDestroyZone::SDestroyZone()
 {
@@ -31,10 +32,13 @@ void SDestroyZone::OnComponentBeginOverlap(shared_ptr<SCollider> collider, share
 void SDestroyZone::OnComponentEndOverlap(shared_ptr<SCollider> collider, shared_ptr<SCollider> other)
 {
 	Super::OnComponentEndOverlap(collider, other);
-
+	if (dynamic_pointer_cast<SMissile>(other->GetOwner())) {
+		int a = 1;
+	}
 	if (other != nullptr) {
 		if (dynamic_pointer_cast<SEnemyMissile>(other->GetOwner())
 			|| dynamic_pointer_cast<Enemy>(other->GetOwner())
+			|| dynamic_pointer_cast<SMissile>(other->GetOwner())
 			) {
 			other->GetOwner()->RemoveComponent(other);
 			GET_SINGLE(SCollisionManager)->RemoveCollider(other);

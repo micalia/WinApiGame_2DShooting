@@ -170,11 +170,11 @@ void DevScene::Init()
 	{ // Top Wall
 		DestroyZone* destroyZone = new DestroyZone();
 		destroyZone->SetLayer(LAYER_OBJECT);
-		destroyZone->SetPos(Vec2(250.f, 0.f));
+		destroyZone->SetPos(Vec2(250.f, 50.f));
 		{
 			BoxCollider* collider = new BoxCollider();
 			collider->SetShowDebug(true);
-			collider->SetSize(Vec2(480, 30));
+			collider->SetSize(Vec2(460, 25));
 			collider->SetCollisionLayer(CLT_WALL);
 			GET_SINGLE(CollisionManager)->AddCollider(collider);
 			destroyZone->AddComponent(collider);
@@ -185,11 +185,11 @@ void DevScene::Init()
 	{ // Left Wall
 		DestroyZone* destroyZone = new DestroyZone();
 		destroyZone->SetLayer(LAYER_OBJECT);
-		destroyZone->SetPos(Vec2(0.f, 365.f));
+		destroyZone->SetPos(Vec2(20.f, 365.f));
 		{
 			BoxCollider* collider = new BoxCollider();
 			collider->SetShowDebug(true);
-			collider->SetSize(Vec2(30, 700));
+			collider->SetSize(Vec2(25, 700));
 			collider->SetCollisionLayer(CLT_WALL);
 			GET_SINGLE(CollisionManager)->AddCollider(collider);
 			destroyZone->AddComponent(collider);
@@ -200,11 +200,11 @@ void DevScene::Init()
 	{ // Right Wall
 		DestroyZone* destroyZone = new DestroyZone();
 		destroyZone->SetLayer(LAYER_OBJECT);
-		destroyZone->SetPos(Vec2(500.f, 365.f));
+		destroyZone->SetPos(Vec2(480.f, 365.f));
 		{
 			BoxCollider* collider = new BoxCollider();
 			collider->SetShowDebug(true);
-			collider->SetSize(Vec2(30, 700));
+			collider->SetSize(Vec2(25, 700));
 			collider->SetCollisionLayer(CLT_WALL);
 			GET_SINGLE(CollisionManager)->AddCollider(collider);
 			destroyZone->AddComponent(collider);
@@ -215,11 +215,11 @@ void DevScene::Init()
 	{ // Bottom Wall
 		DestroyZone* destroyZone = new DestroyZone();
 		destroyZone->SetLayer(LAYER_OBJECT);
-		destroyZone->SetPos(Vec2(250.f, 730.f));
+		destroyZone->SetPos(Vec2(250.f, 700.f));
 		{
 			BoxCollider* collider = new BoxCollider();
 			collider->SetShowDebug(true);
-			collider->SetSize(Vec2(480, 30));
+			collider->SetSize(Vec2(480, 25));
 			collider->SetCollisionLayer(CLT_WALL);
 			GET_SINGLE(CollisionManager)->AddCollider(collider);
 			destroyZone->AddComponent(collider);

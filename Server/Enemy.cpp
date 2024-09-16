@@ -2,6 +2,10 @@
 #include "Enemy.h"
 #include "GameRoom.h"
 #include "SeverTimeManager.h"
+#include "SCollisionManager.h"
+#include "SMissile.h"
+#include "SCollider.h"
+#include "Player.h"
 
 Enemy::Enemy() 
 {
@@ -13,6 +17,13 @@ Enemy::~Enemy()
 
 }
 
+void Enemy::Damaged() {
+	SetHp(--hp);
+	if (GetHp() > 0 && room != nullptr) {
+		SendBufferRef sendBuffer = ServerPacketHandler::Make_S_EnemyDamaged(enemyInfo);
+		room->Broadcast(sendBuffer);
+	}
+}
 void Enemy::Update()
 {
 	Super::Update();
@@ -25,6 +36,18 @@ void Enemy::Update()
 		currReplicateDelay = 0;
 		EnemyBroadcastMove();
 	}
+}
+
+void Enemy::Die(shared_ptr<Player> WhoHitMe)
+{
+	//printf("Server Enemy Die! \n", );
+	/*ExplosionEffect* explosionEffect = new ExplosionEffect();
+	explosionEffect->SetPos(GetPos());
+	GET_SINGLE(SceneManager)->GetCurrentScene()->AddActor(explosionEffect);
+	GET_SINGLE(SceneManager)->GetCurrentScene()->RemoveActor(this);
+	_dirtyFlag = true;
+
+	Server_AddScore(WhoHitMe, GetKillScore());*/
 }
 
 void Enemy::EnemyBroadcastMove()
@@ -71,4 +94,29 @@ void Enemy::Move(float deltaTime)
 	enemyInfo.set_posy(currPosY);
 	enemyInfo.set_objectid(info.objectid());
 	SetPos(Vector(enemyInfo.posx(), enemyInfo.posy()));
+}
+
+void Enemy::OnComponentBeginOverlap(shared_ptr<SCollider> collider, shared_ptr<SCollider> other)
+{
+	Super::OnComponentBeginOverlap(collider, other);
+	if (other != nullptr) {
+		if (auto missile = dynamic_pointer_cast<SMissile>(other->GetOwner())
+			) {
+			other->GetOwner()->RemoveComponent(other);
+			GET_SINGLE(SCollisionManager)->RemoveCollider(other);
+			GRoom->RemoveObject(other->GetOwner()->GetObjectID());
+			Damaged();
+			if (GetHp() <= 0) {
+				shared_ptr<Player> HitPlayer = dynamic_pointer_cast<Player>(missile->GetOwner());
+				GET_SINGLE(SCollisionManager)->RemoveCollider(collider);
+//				Die(HitPlayer);
+				GRoom->RemoveObject(GetObjectID());
+			}
+		}
+	}
+}
+
+void Enemy::OnComponentEndOverlap(shared_ptr<SCollider> collider, shared_ptr<SCollider> other)
+{
+	Super::OnComponentEndOverlap(collider, other);
 }

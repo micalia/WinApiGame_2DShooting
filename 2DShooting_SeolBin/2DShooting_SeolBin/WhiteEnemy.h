@@ -36,7 +36,7 @@ private:
 	bool bReverseFire;
 
 private:
-	bool bDamaged;
+	bool bDamaged = false;
 	float damagedStateTime = 0.3;
 	float currDamagedStateTime = 0;
 

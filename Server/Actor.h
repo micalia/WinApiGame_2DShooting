@@ -39,7 +39,8 @@ public:
 	int64 GetObjectID() { return info.objectid(); }
 	void SetObjectID(int64 id) { info.set_objectid(id); }
 
-
+	void SetOwner(shared_ptr<Actor> owner) { _owner = owner; }
+	shared_ptr<Actor> GetOwner() { return _owner; }
 public:
 	Protocol::ObjectInfo info;
 	GameRoomRef room;
@@ -52,5 +53,6 @@ protected:
 
 private:
 	Vector _pos = { 0, 0 };
+	shared_ptr<Actor> _owner;
 };
 

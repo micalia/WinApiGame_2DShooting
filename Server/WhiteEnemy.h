@@ -6,6 +6,8 @@ class WhiteEnemy : public Enemy
 public:
 	virtual void Update() override;
 	void Fire();
+
+	virtual void Damaged() override;
 private:
 	void MoveLoopingBullet(
 		float& x, float& y,    // ÅºÀÇ ÁÂÇ¥

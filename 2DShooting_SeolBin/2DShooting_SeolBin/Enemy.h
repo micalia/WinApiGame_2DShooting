@@ -16,7 +16,8 @@ public:
 
 	virtual void OnComponentBeginOverlap(Collider* collider, Collider* other) override;
 
-	void Die(Player* WhoHitMe);
+	void Die(Player* WhoHitMe); // Single Game Ver
+	void Die(); // Single Game Ver
 
 	void SetHp(int32 _hp) { hp = _hp; }
 	int32 GetHp() { return hp; }
@@ -43,7 +44,6 @@ protected:
 
 private:
 	float _speed = 0;
-private:
 
 };
 
