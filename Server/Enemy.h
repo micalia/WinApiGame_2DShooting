@@ -36,9 +36,14 @@ public:
 	virtual void OnComponentBeginOverlap(shared_ptr<SCollider> collider, shared_ptr<SCollider> other);
 	virtual void OnComponentEndOverlap(shared_ptr<SCollider> collider, shared_ptr<SCollider> other);
 	
+	void SetKillScore(int32 addScore) { _killScore = addScore; }
+	int32 GetKillScore() { return _killScore; }
+
 protected:
 	int32 hp = 0;
 private:
+	int32 _killScore = 0;
+
 	float replicateDelay = 0.1f;
 	float currReplicateDelay = 0;
 

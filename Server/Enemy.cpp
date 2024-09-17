@@ -102,16 +102,16 @@ void Enemy::OnComponentBeginOverlap(shared_ptr<SCollider> collider, shared_ptr<S
 	if (other != nullptr) {
 		if (auto missile = dynamic_pointer_cast<SMissile>(other->GetOwner())
 			) {
-			other->GetOwner()->RemoveComponent(other);
-			GET_SINGLE(SCollisionManager)->RemoveCollider(other);
-			GRoom->RemoveObject(other->GetOwner()->GetObjectID());
 			Damaged();
 			if (GetHp() <= 0) {
 				shared_ptr<Player> HitPlayer = dynamic_pointer_cast<Player>(missile->GetOwner());
 				GET_SINGLE(SCollisionManager)->RemoveCollider(collider);
-//				Die(HitPlayer);
+				GRoom->ScoreCalculate(HitPlayer->name, GetKillScore());
 				GRoom->RemoveObject(GetObjectID());
 			}
+			other->GetOwner()->RemoveComponent(other);
+			GET_SINGLE(SCollisionManager)->RemoveCollider(other);
+			GRoom->RemoveObject(other->GetOwner()->GetObjectID());
 		}
 	}
 }

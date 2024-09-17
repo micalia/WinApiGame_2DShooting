@@ -22,6 +22,7 @@ public:
 	void AddObject(ActorRef gameObject);
 	void RemoveObject(uint64 id);
 
+	void ScoreCalculate(string playerName, int addScore);
 	void Broadcast(SendBufferRef& sendBuffer);
 
 	int GetBluePlayerScore(){return _bluePlayerScore;}

@@ -150,6 +150,7 @@ void EnemyManager::HalfEnemySpawn(Protocol::ObjectInfo info)
 	halfMoonEnemy->SetSpeed(info.speed());
 	const Vec2Int size = HalfMoonEnemySprite->GetSize();
 	halfMoonEnemy->SetTarget(target);
+	halfMoonEnemy->SetKillScore(100);
 	{
 		BoxCollider* collider = new BoxCollider();
 		collider->SetShowDebug(true);
@@ -178,6 +179,7 @@ void EnemyManager::WhiteEnemySpawn(Protocol::ObjectInfo info)
 	whiteEnemy->enemyInfo.set_posy(info.posy());
 	whiteEnemy->SetTarget(target);
 	whiteEnemy->SetSpeed(info.speed());
+	whiteEnemy->SetKillScore(500);
 	//{
 	//	BoxCollider* collider = new BoxCollider();
 	//	collider->SetShowDebug(true);

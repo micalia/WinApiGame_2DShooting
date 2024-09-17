@@ -255,6 +255,8 @@ void GameRoom::Handle_C_Projectile(Protocol::C_Projectile& pkt)
 	// TODO : Validation
 	Vector spawnPos = Vector(gameObject->info.posx(), gameObject->info.posy());
 	SMissileRef missileRef = Actor::CreatePlayerMissile(id, spawnPos); 
+	ActorRef missileOwner = FindObject(pkt.info().objectownerid());
+	missileRef->SetOwner(missileOwner);
 	missileRef->info.set_name(gameObject->info.name());
 	{
 		shared_ptr<SBoxCollider> collider = make_shared<SBoxCollider>();
@@ -383,6 +385,25 @@ void GameRoom::RemoveObject(uint64 id)
 		pkt.add_ids(id);
 
 		SendBufferRef sendBuffer = ServerPacketHandler::Make_S_RemoveObject(pkt);
+		Broadcast(sendBuffer);
+	}
+}
+
+void GameRoom::ScoreCalculate(string playerName, int addScore)
+{
+	Protocol::ScoreInfo scoreInfo;
+	scoreInfo.set_playername(playerName);
+	if (playerName == "RedPlayer") {
+		SetRedPlayerScore(addScore);
+		scoreInfo.set_fullscore(GetRedPlayerScore());
+	}
+	else if (playerName == "BluePlayer") {
+		SetBluePlayerScore(addScore);
+		scoreInfo.set_fullscore(GetBluePlayerScore());
+	}
+
+	{
+		SendBufferRef sendBuffer = ServerPacketHandler::Make_S_Score(scoreInfo);
 		Broadcast(sendBuffer);
 	}
 }

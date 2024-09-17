@@ -332,7 +332,9 @@ SendBufferRef ClientPacketHandler::Make_C_Projectile()
 	Protocol::C_Projectile pkt;
 
 	MyPlayer* myPlayer = GET_SINGLE(SceneManager)->GetMyPlayer();
-	*pkt.mutable_info() = myPlayer->info;
+	Protocol::ObjectInfo missileInfo = myPlayer->info;
+	missileInfo.set_objectownerid(myPlayer->GetObjectID());
+	*pkt.mutable_info() = missileInfo;
 
 	return MakeSendBuffer(pkt, C_Projectile);
 }

@@ -54,6 +54,7 @@ EnemyRef Actor::CreateEnemy(Protocol::EnemyType enemyType, Vector spawnPos)
 		float speed = 50;
 		halfEnemy->SetEnemyInfo(halfEnemy, spawnPos, enemyType, speed);
 		halfEnemy->info.set_name("HalfEnemy");
+		halfEnemy->SetKillScore(100);
 		return halfEnemy;
 	}
 		break;
@@ -64,6 +65,7 @@ EnemyRef Actor::CreateEnemy(Protocol::EnemyType enemyType, Vector spawnPos)
 		whiteEnemy->SetEnemyInfo(whiteEnemy, spawnPos, enemyType, speed);
 		whiteEnemy->info.set_name("WhiteEnemy");
 		whiteEnemy->SetHp(3);
+		whiteEnemy->SetKillScore(500);
 		{
 			shared_ptr<SBoxCollider> collider = make_shared<SBoxCollider>();
 			collider->SetSize(Vector(120, 120)); //Enemy Missile Sprite Pixel Size
