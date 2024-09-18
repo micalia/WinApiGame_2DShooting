@@ -30,6 +30,8 @@ public:
 
 	void SetBluePlayerScore(int addScore) {  _bluePlayerScore += addScore; }
 	void SetRedPlayerScore(int addScore) { _redPlayerScore += addScore; }
+
+	map<uint64, PlayerRef> GetPlayerArr(){return _players;}
 private:
 	EnemySpawnMgrRef enemyMgr;
 

@@ -139,7 +139,7 @@ void Scene::Handle_S_AddObject(Protocol::S_AddObject& pkt)
 		{
 			auto EnemySpawnMgr = GET_SINGLE(SceneManager)->GetDevScene()->GetEnemyMgr();
 			if (EnemySpawnMgr) { 
-				if (info.name() == "HalfEnemy") {
+				if (info.name() == "HalfMoonEnemy") {
 					EnemySpawnMgr->HalfEnemySpawn(info);
 				}
 				else if (info.name() == "WhiteEnemy") {

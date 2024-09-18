@@ -83,7 +83,7 @@ void Enemy::SetEnemyInfo(EnemyRef InEnemy, Vector InSpawnPos, Protocol::EnemyTyp
 void Enemy::Move(float deltaTime)
 {
 	currPosY = enemyInfo.posy();
-	if (info.name() == "HalfEnemy") {
+	if (info.name() == "HalfMoonEnemy") {
 		enemyInfo.set_enemytype(Protocol::ENEMY_TYPE_HALF);
 		currPosY += (deltaTime * GetSpeed());
 	}

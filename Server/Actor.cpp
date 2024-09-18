@@ -2,7 +2,7 @@
 #include "Actor.h"
 #include "Player.h"
 #include "Enemy.h"
-#include "HalfEnemy.h"
+#include "HalfMoonEnemy.h"
 #include "WhiteEnemy.h"
 #include "SEnemyMissile.h"
 #include "SComponent.h"
@@ -50,12 +50,13 @@ EnemyRef Actor::CreateEnemy(Protocol::EnemyType enemyType, Vector spawnPos)
 	{
 	case Protocol::ENEMY_TYPE_HALF: 
 	{
-		HalfEnemyRef halfEnemy = make_shared<HalfEnemy>();
-		float speed = 50;
-		halfEnemy->SetEnemyInfo(halfEnemy, spawnPos, enemyType, speed);
-		halfEnemy->info.set_name("HalfEnemy");
-		halfEnemy->SetKillScore(100);
-		return halfEnemy;
+		HalfMoonEnemyRef halfMoonEnemy = make_shared<HalfMoonEnemy>();
+		float speed = 0;
+		halfMoonEnemy->SetEnemyInfo(halfMoonEnemy, spawnPos, enemyType, speed);
+		halfMoonEnemy->info.set_name("HalfMoonEnemy");
+		halfMoonEnemy->SetHp(3);
+		halfMoonEnemy->SetKillScore(100);
+		return halfMoonEnemy;
 	}
 		break;
 	case Protocol::ENEMY_TYPE_WHITE:

@@ -86,7 +86,7 @@
     <ClCompile Include="ServerUtils.cpp">
       <Filter>소스 파일\Headers</Filter>
     </ClCompile>
-    <ClCompile Include="HalfEnemy.cpp">
+    <ClCompile Include="HalfMoonEnemy.cpp">
       <Filter>소스 파일\Game\Object</Filter>
     </ClCompile>
     <ClCompile Include="WhiteEnemy.cpp">
@@ -166,7 +166,7 @@
     <ClInclude Include="ServerUtils.h">
       <Filter>소스 파일\Headers</Filter>
     </ClInclude>
-    <ClInclude Include="HalfEnemy.h">
+    <ClInclude Include="HalfMoonEnemy.h">
       <Filter>소스 파일\Game\Object</Filter>
     </ClInclude>
     <ClInclude Include="WhiteEnemy.h">

@@ -236,8 +236,7 @@ void GameRoom::Handle_C_Move(Protocol::C_Move& pkt)
 
 	// TODO : Validation
 	gameObject->info.set_playerdirtype(pkt.info().playerdirtype());
-	gameObject->info.set_posx(pkt.info().posx());
-	gameObject->info.set_posy(pkt.info().posy());
+	gameObject->SetPos(Vector(pkt.info().posx(), pkt.info().posy()));
 
 	{
 		SendBufferRef sendBuffer = ServerPacketHandler::Make_S_Move(pkt.info());
@@ -323,8 +322,9 @@ void GameRoom::AddObject(ActorRef gameObject)
 				}
 			}
 		}
-		_players[id] = static_pointer_cast<Player>(gameObject);
-		_players[id]->name = playerName;
+		shared_ptr<Player> player = static_pointer_cast<Player>(gameObject);
+		player->name = playerName;
+		_players.insert(make_pair(id, player));
 	}
 	break;
 	case Protocol::OBJECT_TYPE_ENEMY:

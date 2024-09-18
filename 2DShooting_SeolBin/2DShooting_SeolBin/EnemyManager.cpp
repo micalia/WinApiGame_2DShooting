@@ -151,21 +151,21 @@ void EnemyManager::HalfEnemySpawn(Protocol::ObjectInfo info)
 	const Vec2Int size = HalfMoonEnemySprite->GetSize();
 	halfMoonEnemy->SetTarget(target);
 	halfMoonEnemy->SetKillScore(100);
-	{
-		BoxCollider* collider = new BoxCollider();
-		collider->SetShowDebug(true);
-		//나의 콜리전 레이어
-		collider->SetCollisionLayer(CLT_ENEMY);
-		// 모든 콜리전 플래그 제거
-		collider->ResetCollisionFlag();
-		// 내가 충돌하고 싶은 레이어 추가
-		collider->AddCollisionFlagLayer(CLT_WALL);
-		collider->AddCollisionFlagLayer(CLT_MISSILE);
-		collider->AddCollisionFlagLayer(CLT_PLAYER);
-		collider->SetSize(Vec2(size.x, size.y));
-		GET_SINGLE(CollisionManager)->AddCollider(collider);
-		halfMoonEnemy->AddComponent(collider);
-	}
+	//{
+	//	BoxCollider* collider = new BoxCollider();
+	//	collider->SetShowDebug(true);
+	//	//나의 콜리전 레이어
+	//	collider->SetCollisionLayer(CLT_ENEMY);
+	//	// 모든 콜리전 플래그 제거
+	//	collider->ResetCollisionFlag();
+	//	// 내가 충돌하고 싶은 레이어 추가
+	//	collider->AddCollisionFlagLayer(CLT_WALL);
+	//	collider->AddCollisionFlagLayer(CLT_MISSILE);
+	//	collider->AddCollisionFlagLayer(CLT_PLAYER);
+	//	collider->SetSize(Vec2(size.x, size.y));
+	//	GET_SINGLE(CollisionManager)->AddCollider(collider);
+	//	halfMoonEnemy->AddComponent(collider);
+	//}
 }
 
 void EnemyManager::WhiteEnemySpawn(Protocol::ObjectInfo info)
