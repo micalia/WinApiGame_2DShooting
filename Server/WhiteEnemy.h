@@ -7,7 +7,7 @@ public:
 	virtual void Update() override;
 	void Fire();
 
-	virtual void Damaged() override;
+	//virtual void Damaged() override;
 private:
 	void MoveLoopingBullet(
 		float& x, float& y,    // ÅºÀÇ ÁÂÇ¥
@@ -19,7 +19,7 @@ private:
 	);
 
 private:
-	float fireDelayTime = 0.1;//0.1;
+	float fireDelayTime = 0.2;//0.1;
 	float fireDelayCurrTime = 0;//0;
 
 	float theta = 0.0;

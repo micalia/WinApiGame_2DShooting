@@ -12,7 +12,7 @@ private:
 
 private:
 	float currSpawnDelayTime = 0;
-	float SpawnDelayTime = 4;
+	float SpawnDelayTime = 3;
 
 };
 

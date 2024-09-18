@@ -129,6 +129,11 @@ void GameRoom::Update()
 		item.second->Update();
 	}
 
+	for (auto& item : _players)
+	{
+		item.second->Update();
+	}
+
 	GET_SINGLE(SCollisionManager)->Update();
 }
 

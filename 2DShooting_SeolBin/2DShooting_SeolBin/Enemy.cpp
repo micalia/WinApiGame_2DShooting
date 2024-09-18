@@ -80,7 +80,7 @@ void Enemy::Die(Player* WhoHitMe)
 	GET_SINGLE(SceneManager)->GetCurrentScene()->AddActor(explosionEffect);
 	GET_SINGLE(SceneManager)->GetCurrentScene()->RemoveActor(this);
 
-	Server_AddScore(WhoHitMe, GetKillScore());
+	//Server_AddScore(WhoHitMe, GetKillScore());
 }
 
 void Enemy::Die()

@@ -5,6 +5,7 @@
 #include "Enemy.h"
 #include "SCollisionManager.h"
 #include "GameRoom.h"
+#include "SeverTimeManager.h"
 
 Player::Player()
 {
@@ -14,6 +15,27 @@ Player::Player()
 Player::~Player()
 {
 
+}
+
+void Player::Update()
+{
+	Super::Update();
+	
+	float deltaTime = GET_SINGLE(SeverTimeManager)->GetDeltaTime();
+	if(deltaTime > 0.1) return;
+	if(bRespawn) {
+		currBlinkTime += deltaTime;
+		if (currBlinkTime > blinkTime) {
+			currBlinkTime = 0;
+			blinkCurrCount++;
+			bTransparent = (bTransparent == true) ? false : true;
+			if (blinkCurrCount > blinkCount) {
+				blinkCurrCount = 0;
+				bTransparent = false;
+				bRespawn = false;
+			}
+		}
+	}
 }
 
 void Player::Damaged() {
@@ -29,7 +51,7 @@ void Player::OnComponentBeginOverlap(shared_ptr<SCollider> collider, shared_ptr<
 {
 	Super::OnComponentBeginOverlap(collider, other);
 
-	if (other != nullptr) {
+	if (bRespawn == false && other != nullptr) {
 		if (dynamic_pointer_cast<SEnemyMissile>(other->GetOwner())
 			//|| dynamic_pointer_cast<Enemy>(other->GetOwner())
 			) { 
@@ -40,6 +62,7 @@ void Player::OnComponentBeginOverlap(shared_ptr<SCollider> collider, shared_ptr<
 			_pos = GRoom->GetRespawnStartPos();
 			SetPos(_pos);
 			Damaged();
+			bRespawn = true;
 		}
 	}
 }

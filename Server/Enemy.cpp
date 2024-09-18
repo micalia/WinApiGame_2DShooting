@@ -19,7 +19,7 @@ Enemy::~Enemy()
 
 void Enemy::Damaged() {
 	SetHp(--hp);
-	if (GetHp() > 0 && room != nullptr) {
+	if (room != nullptr) {
 		SendBufferRef sendBuffer = ServerPacketHandler::Make_S_EnemyDamaged(enemyInfo);
 		room->Broadcast(sendBuffer);
 	}

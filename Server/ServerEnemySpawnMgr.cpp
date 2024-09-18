@@ -19,25 +19,25 @@ ServerEnemySpawnMgr::~ServerEnemySpawnMgr()
 
 void ServerEnemySpawnMgr::Update()
 {
-	/*float deltaTime = GET_SINGLE(SeverTimeManager)->GetDeltaTime();
+	float deltaTime = GET_SINGLE(SeverTimeManager)->GetDeltaTime();
 	if (deltaTime > 0.1f) return;
 	currSpawnDelayTime += deltaTime;
 	if (currSpawnDelayTime > SpawnDelayTime) {
 		currSpawnDelayTime = 0;
 		RandomEnemySpawn();
-	}*/
+	}
 }
 
 void ServerEnemySpawnMgr::RandomEnemySpawn()
 {
 	int ranPosVal = ServerUtils::RandomIntegerRange(1, 5);
-	//Vector spawnPos = Vector(80 * ranPosVal, 150);
-	Vector spawnPos = Vector(200, 250);
+	Vector spawnPos = Vector(80 * ranPosVal, 130);
+	//Vector spawnPos = Vector(200, 250);
 	
 	EnemyRef enemyRef = nullptr;
 
-	//int ranEnemyVal = ServerUtils::RandomIntegerRange(0,3);
-	int ranEnemyVal = 1; // WhiteEnemy만 스폰
+	int ranEnemyVal = ServerUtils::RandomIntegerRange(0,3);
+	//int ranEnemyVal = 0; // WhiteEnemy만 스폰
 	switch (ranEnemyVal)
 	{
 	case 0: 

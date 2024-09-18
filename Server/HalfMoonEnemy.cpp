@@ -84,3 +84,13 @@ void HalfMoonEnemy::FindPlayer()
 		target = static_pointer_cast<Player>(playerArr[p[0]]);
 	}
 }
+
+//void HalfMoonEnemy::Damaged()
+//{
+//	int currHp = GetHp();
+//	SetHp(--currHp);
+//
+//	Super::Damaged();
+//	/*bDamaged = true;
+//	SetDamagedSprite();*/
+//}

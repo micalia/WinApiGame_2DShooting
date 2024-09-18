@@ -315,7 +315,12 @@ void ClientPacketHandler::Handle_S_EnemyDamaged(ServerSessionRef session, BYTE* 
 		if (enemy)
 		{
 			enemy->SetHp(info.hp());
-			enemy->Damaged();
+			if (enemy->GetHp() <= 0) {
+				enemy->Die();
+			}
+			else {
+				enemy->Damaged();
+			}
 		}
 	}
 }
