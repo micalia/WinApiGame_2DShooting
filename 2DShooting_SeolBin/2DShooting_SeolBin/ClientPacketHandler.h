@@ -24,6 +24,7 @@ enum
 	S_PlayerMissileMove = 18, 
 
 	S_EnemyDamaged = 19,
+	S_PlayerDamaged = 20,
 
 };
 
@@ -47,6 +48,7 @@ public:
 	static void Handle_S_EnemyMissileMove(ServerSessionRef session, BYTE* buffer, int32 len);
 	static void Handle_S_PlayerMissileMove(ServerSessionRef session, BYTE* buffer, int32 len);
 	static void Handle_S_EnemyDamaged(ServerSessionRef session, BYTE* buffer, int32 len);
+	static void Handle_S_PlayerDamaged(ServerSessionRef session, BYTE* buffer, int32 len);
 
 	// º¸³»±â
 	static SendBufferRef Make_C_Move();

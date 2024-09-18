@@ -56,6 +56,9 @@ void ClientPacketHandler::HandlePacket(ServerSessionRef session, BYTE* buffer, i
 	case S_EnemyDamaged:
 		Handle_S_EnemyDamaged(session, buffer, len);
 		break;
+	case S_PlayerDamaged:
+		Handle_S_PlayerDamaged(session, buffer, len);
+		break;
 	}
 }
 
@@ -313,6 +316,28 @@ void ClientPacketHandler::Handle_S_EnemyDamaged(ServerSessionRef session, BYTE* 
 		{
 			enemy->SetHp(info.hp());
 			enemy->Damaged();
+		}
+	}
+}
+
+void ClientPacketHandler::Handle_S_PlayerDamaged(ServerSessionRef session, BYTE* buffer, int32 len)
+{
+	PacketHeader* header = (PacketHeader*)buffer;
+	uint16 size = header->size;
+
+	Protocol::S_PlayerDamaged pkt;
+	pkt.ParseFromArray(&header[1], size - sizeof(PacketHeader));
+	
+	const Protocol::ObjectInfo& info = pkt.info();
+
+	DevScene* scene = GET_SINGLE(SceneManager)->GetDevScene();
+	if (scene)
+	{
+		Player* player = dynamic_cast<Player*>(scene->GetObject(info.objectid()));
+		if (player) {
+			player->SetRespawn(true);
+			player->Damaged();
+			player->SetPos(Vec2{ info.posx(), info.posy() });
 		}
 	}
 }

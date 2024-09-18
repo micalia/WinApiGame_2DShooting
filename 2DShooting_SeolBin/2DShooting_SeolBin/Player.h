@@ -54,6 +54,8 @@ public:
 	PlayerState GetPlayerState(){ return _playerState; }
 
 	Protocol::ScoreInfo scoreInfo;
+
+	void SetRespawn(bool _bRespawn){bRespawn = _bRespawn;}
 protected:
 	void AdjustCollisionPos(BoxCollider* b1, BoxCollider* b2);
 

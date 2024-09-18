@@ -87,3 +87,8 @@ message S_EnemyDamaged
 {
 	EnemyInfo enemyInfo = 1;
 }
+
+message S_PlayerDamaged
+{
+	ObjectInfo info = 1;
+}

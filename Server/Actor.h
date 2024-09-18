@@ -50,9 +50,9 @@ protected:
 
 	SLAYER_TYPE _layer = LAYER_OBJECT;
 	vector<shared_ptr<SComponent>> _components;
+	Vector _pos = { 0, 0 };
 
 private:
-	Vector _pos = { 0, 0 };
 	shared_ptr<Actor> _owner;
 };
 

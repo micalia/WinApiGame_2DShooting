@@ -32,6 +32,9 @@ public:
 	void SetRedPlayerScore(int addScore) { _redPlayerScore += addScore; }
 
 	map<uint64, PlayerRef> GetPlayerArr(){return _players;}
+
+	Vector GetRespawnEndPos() { return respawnEndPos; }
+	Vector GetRespawnStartPos() { return respawnStartPos; }
 private:
 	EnemySpawnMgrRef enemyMgr;
 
@@ -47,6 +50,10 @@ private:
 	int _bluePlayerScore = 0;
 
 	int currUserCount = 0;
+
+private:
+	Vector respawnEndPos = Vector(242, 540);
+	Vector respawnStartPos = Vector(242, 1088);
 };
 
 extern GameRoomRef GRoom;

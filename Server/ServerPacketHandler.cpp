@@ -157,6 +157,15 @@ SendBufferRef ServerPacketHandler::Make_S_PlayerMissileMove(const Protocol::Obje
 	return MakeSendBuffer(pkt, S_PlayerMissileMove);
 }
 
+SendBufferRef ServerPacketHandler::Make_S_PlayerDamaged(const Protocol::ObjectInfo& info)
+{
+	Protocol::S_PlayerDamaged pkt;
+	Protocol::ObjectInfo* objectInfo = pkt.mutable_info();
+	*objectInfo = info;
+
+	return MakeSendBuffer(pkt, S_PlayerDamaged);
+}
+
 SendBufferRef ServerPacketHandler::Make_S_Score(const Protocol::ScoreInfo& scoreInfo)
 {
 	Protocol::S_Score pkt;
