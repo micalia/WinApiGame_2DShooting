@@ -4,6 +4,7 @@
 #include "Actor.h"
 #include "SEnemyMissile.h"
 #include "WhiteEnemy.h"
+#include "SDestroyZone.h"
 
 void SCollisionManager::Init()
 {
@@ -19,10 +20,10 @@ void SCollisionManager::Update()
 		{
 			shared_ptr<SCollider> src = colliders[i];
 			shared_ptr<SCollider> dest = colliders[j];
-			if (dynamic_pointer_cast<WhiteEnemy>(dest->GetOwner())) {
-				int a = 1;
-			}
 			if (dest->GetCollisionFlag() == 0)continue; // NoCollision이면 return
+			auto srcOwner = src->GetOwner();
+			auto destOwner = dest->GetOwner();
+			if (srcOwner == nullptr || destOwner == nullptr) continue;
 			//콜리젼이 켜져있는가?
 			if (src->CheckCollision(dest))
 			{

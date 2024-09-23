@@ -54,6 +54,7 @@ void WhiteEnemy::Fire()
 		collider->SetSize(Vector(17, 17)); //Enemy Missile Sprite Pixel Size
 		GET_SINGLE(SCollisionManager)->AddCollider(collider);
 		missileRef->AddComponent(collider);
+		collider->SetOwner(missileRef);
 	}
 	GRoom->AddObject(missileRef);
 }

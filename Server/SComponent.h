@@ -13,9 +13,9 @@ public:
 	virtual void Render(HDC hdc) { }
 
 	void SetOwner(shared_ptr<Actor> owner) { _owner = owner; }
-	shared_ptr<Actor> GetOwner() { return _owner; }
+	shared_ptr<Actor> GetOwner() { return _owner.lock(); }
 
 protected:
-	shared_ptr<Actor> _owner;
+	weak_ptr<Actor> _owner;
 };
 
