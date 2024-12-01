@@ -53,7 +53,7 @@ void MyPlayer::Tick(float deltaTime)
 		currFireTermTime+=deltaTime;
 		if (currFireTermTime > fireTermTime) {
 			currFireTermTime = 0;
-			return;
+			
 			_dirtyFlag = true;
 			Server_Missile();
 		}

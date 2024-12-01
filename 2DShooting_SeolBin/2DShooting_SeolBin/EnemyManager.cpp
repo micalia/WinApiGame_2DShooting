@@ -47,11 +47,11 @@ void EnemyManager::Tick(float deltaTime)
 {
 	Super::Tick(deltaTime);
 	//
-	/*currSpawnDelayTime += deltaTime;
+	currSpawnDelayTime += deltaTime;
 	if (currSpawnDelayTime > SpawnDelayTime) {
 		currSpawnDelayTime = 0;
 		RandomEnemySpawn();
-	}*/
+	}
 }
 
 void EnemyManager::Render(HDC hdc)

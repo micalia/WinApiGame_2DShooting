@@ -21,13 +21,26 @@ void Missile::BeginPlay()
 {
 	Super::BeginPlay();
 
-
+	startPos = GetPos();
 }
 
 void Missile::Tick(float deltaTime)
 {
 	Super::Tick(deltaTime);
-	
+	return;
+	ClientTimeSinceUpdate += deltaTime;
+	if (ClientTimeBetweenLastUpdate < UE_KINDA_SMALL_NUMBER)
+	{
+		return;
+	}
+	const Vec2 EstimateLocation = GetServerNewLocation() + (Vec2(0, -1) * ClientTimeBetweenLastUpdate);
+	const float LerpRatio = ClientTimeSinceUpdate / ClientTimeBetweenLastUpdate;
+
+	float ClientNewX = lerp(GetServerNewLocation().x, EstimateLocation.x, LerpRatio);
+	float ClientNewY = lerp(GetServerNewLocation().y, EstimateLocation.y, LerpRatio);
+	const Vec2 ClientNewLoc = Vec2(ClientNewX, ClientNewY);
+	SetPos(ClientNewLoc);
+
 	/*if (deltaTime > 0.1f) return;
 	_pos.y -= deltaTime * speed;
 	SetPos(_pos);*/

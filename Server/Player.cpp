@@ -40,6 +40,7 @@ void Player::Update()
 
 void Player::Damaged() {
 	int hp = GetHp();
+	printf("name : %s / hp : %d \n", name, _hp);
 	SetHp(--hp);
 	if (GetHp() > 0 && room != nullptr) {
 		SendBufferRef sendBuffer = ServerPacketHandler::Make_S_PlayerDamaged(info);

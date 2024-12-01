@@ -40,6 +40,7 @@
   pch.cpp
   Actor.cpp
 C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\Player.h(29,20): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\WhiteEnemy.h(22,24): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
   Enemy.cpp
 C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\Player.h(29,20): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
   GameRoom.cpp
@@ -59,10 +60,12 @@ C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\HalfMoonEnemy.cpp(77,
 C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\HalfMoonEnemy.cpp(77,17): warning C4244:         ]
   Player.cpp
 C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\Player.h(29,20): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\Player.cpp(43,9): warning C4477: 'printf' : 서식 문자열 '%s'에 'char *' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'std::string'입니다.
   SBoxCollider.cpp
   SCollider.cpp
 C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\Player.h(29,20): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
   SCollisionManager.cpp
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\WhiteEnemy.h(22,24): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
   SComponent.cpp
   SDestroyZone.cpp
   SEnemyMissile.cpp
@@ -70,16 +73,19 @@ C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\Player.h(29,20): warn
   SSphereCollider.cpp
   Server.cpp
   ServerEnemySpawnMgr.cpp
-C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\ServerEnemySpawnMgr.cpp(35,30): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\ServerEnemySpawnMgr.cpp(34,30): warning C4244: '인수': 'int'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   ServerPacketHandler.cpp
   ServerUtils.cpp
   SeverTimeManager.cpp
   코드를 생성하고 있습니다...
   컴파일하고 있습니다...
   WhiteEnemy.cpp
+C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Server\WhiteEnemy.h(22,24): warning C4305: '초기화 중': 'double'에서 'float'(으)로 잘립니다.
   코드를 생성하고 있습니다...
   Enum.pb.cc
   Protocol.pb.cc
   Struct.pb.cc
   코드를 생성하고 있습니다...
   Server.vcxproj -> C:\ProgramingWorks\WinApiGame\WinApiGame_2DShooting\Binaries\x64\Server.exe
+  'pwsh.exe'은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는
+  배치 파일이 아닙니다.

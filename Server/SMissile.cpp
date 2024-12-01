@@ -36,7 +36,6 @@ void SMissile::Move(float deltaTime)
 	info.set_posx(P.x);
 	info.set_posy(P.y);
 	SetPos(P);
-	//printf("Missile Pos X : %f/ Pos Y : %f \n", enemyMissileInfo.posx(), enemyMissileInfo.posy());
 }
 
 void SMissile::MissileBroadcastMove()

@@ -23,6 +23,7 @@ void EnemyMissile::Tick(float deltaTime)
 	Super::Tick(deltaTime);
 	
 	ClientTimeSinceUpdate += deltaTime;
+	//printf("EnemyM : %d \n", ClientTimeBetweenLastUpdate); 
 	if (ClientTimeBetweenLastUpdate < UE_KINDA_SMALL_NUMBER)
 	{
 		return;

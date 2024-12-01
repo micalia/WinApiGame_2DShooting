@@ -32,7 +32,6 @@ public:
 	}
 
 private:
-	// 삽입 삭제 탐색이 빈번하게 일어나기 때문에 시간 복잡도가 O(1) HashTable자료구조를 사용함
 	unordered_map<int64, EnemyMissile*> enemyMissileHashMap;
 
 	Player* target = nullptr;

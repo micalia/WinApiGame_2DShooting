@@ -59,11 +59,11 @@ void Game::Render()
 	GET_SINGLE(GameManager)->Render(hdcBack);
 
 
-	{
+	/*{
 		POINT mousePos = GET_SINGLE(InputManager)->GetMousePos();
 		wstring str = std::format(L"Mouse({0}, {1})", mousePos.x, mousePos.y);
 		::TextOut(hdcBack, 400, 90, str.c_str(), static_cast<int32>(str.size()));
-	}
+	}*/
 
 	/*uint32 fps = GET_SINGLE(TimeManager)->GetFps();
 	float deltaTime = GET_SINGLE(TimeManager)->GetDeltaTime();*/

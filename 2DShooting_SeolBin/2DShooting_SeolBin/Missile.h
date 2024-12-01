@@ -15,6 +15,7 @@ public:
 protected:
 
 private:
-	float speed = 300;
+	float speed = 80;
+	Vec2 startPos;
 };
 
