@@ -5,4 +5,3 @@
 
 # Point 1. unordered_map을 활용한 미사일 오브젝트 관리
 [EnemyManager.cpp](https://github.com/micalia/WinApiGame_2DShooting/blob/main/2DShooting_SeolBin/2DShooting_SeolBin/EnemyManager.cpp#L201)
-![iocp_unordered_map](https://github.com/user-attachments/assets/9ac06e16-8123-4ece-9091-79fa542e78c8)
